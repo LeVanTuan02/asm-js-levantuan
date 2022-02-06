@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=604378676721357&autoLogAppEvents=1" nonce="0FXlYuOH"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- header -->
+        <header>
+            <!-- header top -->
+            <div class="bg-[#D9A953]">
+                <div class="container max-w-6xl px-3 mx-auto flex justify-between items-center h-10">
+                    <ul class="flex items-center">
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:right-3 after:top-1/2 after:-translate-y-1/2 text-sm uppercase pr-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">
+                                <i class="far fa-envelope"></i>
+                                <span class="pl-1">Contact</span>
+                            </a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:right-3 after:top-1/2 after:-translate-y-1/2 text-sm uppercase pr-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <i class="far fa-clock"></i>
+                            <span class="pl-1">08:00 - 17:00</span>
+                        </li>
+                        <li class="text-sm uppercase text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">
+                                <i class="fas fa-phone-alt"></i>
+                                <span class="pl-1">0347 247 244</span>
+                            </a>
+                        </li>
+                    </ul>
+    
+                    <ul class="flex items-center">
+                        <li class="uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <button class="rounded-full border border-gray-50 w-7 h-7">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">Đăng nhập</a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">Đăng ký</a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-base cursor-pointer pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <div class="relative">
+                                <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </li>
+                        <li class="uppercase text-base pl-4 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="" class="relative">
+                                <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end header top -->
+
+            <!-- header bottom -->
+            <div class="container max-w-6xl mx-auto px-3 flex h-24 items-center border-b">
+                <ul class="flex-1 flex items-center">
+                    <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="">Trang chủ</a>
+                    </li>
+                    <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="">Giới thiệu</a>
+                    </li>
+                    <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="" class="flex items-center">
+                            Sản phẩm
+                            <div class="pl-1 -mt-1">
+                                <i class="fas fa-sort-down"></i>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="h-full">
+                    <a href="" class="block h-full py-2">
+                        <img class="block h-full" src="https://res.cloudinary.com/levantuan/image/upload/v1642588847/fpoly/asm-js/logo_oeo8uq.png" alt="">
+                    </a>
+                </div>
+
+                <ul class="flex-1 flex justify-end">
+                    <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="">Tin tức</a>
+                    </li>
+                    <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="">Liên hệ</a>
+                    </li>
+                    <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                        <a href="">Cửa hàng</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- end header bottom -->
+        </header>
+        <!-- end header -->
+
+        <!-- content -->
+        <main>
+            <section class="container max-w-6xl mx-auto px-3 py-9">
+                <h2 class="uppercase text-[#D9A953] text-2xl font-semibold">Về Yotea</h2>
+                <div class="grid grid-cols-2 gap-5 mt-2">
+                    <div class="text-justify leading-relaxed">
+                        <p class="mb-3">
+                            Thương hiệu trà và cà phê YoTea được thành lập vào năm 2014
+                            với cửa hàng đầu tiên tại Royal City. Với triết lý kinh doanh
+                            không ngừng phát triển và đưa thương hiệu YoTea ngày càng lớn
+                            mạnh bằng hương vị trà và cà phê hảo hạng, quy trình phục vụ
+                            chuyên nghiệp mà còn là không gian đẳng cấp sang trọng. Trong
+                            suốt thời gian qua, YoTea luôn khẳng định vị thế của mình trên
+                            thị trường và không ngừng mở rộng thương hiệu với 15 cửa hàng
+                            mang thương hiệu YoTea tại các thành phố lớn: Hà Nội, Hồ Chí Minh,
+                            Hải Phòng và Bình Dương.
+                        </p>
+
+                        <p class="mb-3">
+                            YoTea mang đến cho khách hàng sự trải nghiệm tuyệt vời chất lượng
+                            đồ uống hảo hạng với những hạt cà phê rang xay được chọn lọc kỹ
+                            càng từ những vùng đất trồng nổi tiếng, khi pha cà phê vẫn giữ
+                            được hương vị đậm đà, thơm ngon và nguyên chất. Hương vị trà của
+                            YoTea luôn làm khách hàng xao xuyến bởi vị chan chát đầu lưỡi,
+                            và vị chua ngọt tự nhiên từ hoa quả hòa quyện làm nên ly đồ uống
+                            thanh thanh mà thực hấp dẫn.
+                        </p>
+
+                        <p>
+                            Với sứ mệnh góp phần tạo nên một thị trường trà – cafe cao cấp từ
+                            sản phẩm cho tới dịch vụ. Trong suốt 5 năm hoạt động và phát triển,
+                            YoTea đã đem tới cho hơn 1.000.000 thực khách những giây phút trải
+                            nghiệm thực sự trong không gian sang trọng và đồ uống hảo hạng
+                        </p>
+                    </div>
+
+                    <div class="my-auto">
+                        <img src="https://res.cloudinary.com/levantuan/image/upload/v1642663052/fpoly/asm-js/tea_odcxma.png" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-[#EFE8DE] py-20">
+                <div class="container max-w-6xl mx-auto">
+                    <h2 class="uppercase text-[#D9A953] text-2xl font-semibold text-center">Tầm nhìn chiến lược</h2>
+
+                    <div class="grid grid-cols-3 gap-14 mt-9 px-16">
+                        <div class="text-center">
+                            <div class="w-24 h-24 inline-flex text-5xl text-[#D9A953] shadow-sm items-center justify-center rounded-full bg-white">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="mt-3">Trở thành thương hiệu F&B yêu thích của mọi đối tượng khách hàng.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-24 h-24 inline-flex text-5xl text-[#D9A953] shadow-sm items-center justify-center rounded-full bg-white">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <p class="mt-3">Đưa thương hiệu Yotea ra nước ngoài và mở rộng thị trường quốc tế.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-24 h-24 inline-flex text-5xl text-[#D9A953] shadow-sm items-center justify-center rounded-full bg-white">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <p class="mt-3">Mang lại giá trị hữu ích cho cộng đồng Việt Nam và Quốc tế.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-14">
+                <div class="container max-w-6xl mx-auto flex">
+                    <div class="w-1/2 bg-cover bg-center bg-no-repeat rounded-l-xl" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642664388/fpoly/asm-js/108162714_1930571577080015_6762857609409971295_n_upoyhj.jpg)"></div>
+                    <div class="w-1/2 px-10 py-16 bg-[#D9A953] text-white rounded-r-xl">
+                        <h2 class="text-2xl font-semibold uppercase">SỨ MỆNH</h2>
+                        <p class="text-justify mt-3">
+                            Với châm ngôn tuyệt đối không sử dụng nguyên liệu
+                            không rõ nguồn gốc xuất xứ, trà sữa Yotea tự hào mang
+                            lại cho khách hàng những sản phẩm chất lượng nhất và Yotea
+                            luôn cảm kích vì sự tin dùng và yêu thương của quý khách hàng.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- end content -->
+
+        <!-- footer -->
+        <footer style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602939/fpoly/asm-js/bg_footer_r0omu5.jpg)" class="bg-cover bg-center bg-no-repeat py-14">
+            <div class="container max-w-6xl mx-auto">
+                <div class="grid grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">KẾT NỐI VỚI CHÚNG TÔI</h3>
+                        <p class="text-gray-300 text-justify">
+                            Chúng tôi mong muốn tạo nên hương vị thức uống tuyệt vời nhất.
+                            Là điểm đến đầu tiên dành cho bạn khi muốn thưởng thức trọn vẹn của tách Coffee
+                        </p>
+                        <ul class="flex text-white">
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">Liên hệ</h3>
+
+                        <ul class="text-white leading-relaxed">
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                25A Trần Nguyên Hãn – Nha Trang
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">Kết nối với chúng tôi</h3>
+                        <div class="fb-page" data-href="https://www.facebook.com/PolyQuiz/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/PolyQuiz/" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/PolyQuiz/">Ở Đây Có Đáp Án Quiz - Fpoly</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-gray-300 mt-9">
+                    Copyright 2022 ©
+                    <strong>
+                        Bản quyền thuộc về
+                        <a href="">TuanDemo</a>
+                    </strong>
+                </div>
+            </div>
+        </footer>
+        <!-- end footer -->
+    </div>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
