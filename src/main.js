@@ -1,6 +1,7 @@
 import Navigo from "navigo";
 import HomePage from "./pages/user/home";
 import IntroPage from "./pages/user/intro";
+import ProductsPage from "./pages/user/products";
 
 const router = new Navigo("/", { linksSelector: "a" });
 
@@ -14,6 +15,9 @@ router.on({
     },
     "/intro": () => {
         print(IntroPage);
+    },
+    "/products": () => {
+        print(ProductsPage);
     },
 });
 
