@@ -164,7 +164,7 @@ const Header = {
                     </ul>
 
                     <div class="h-full">
-                        <a href="" class="block h-full py-2">
+                        <a href="/" class="block h-full py-2">
                             <img class="block h-full" src="https://res.cloudinary.com/levantuan/image/upload/v1642588847/fpoly/asm-js/logo_oeo8uq.png" alt="">
                         </a>
                     </div>
@@ -183,14 +183,14 @@ const Header = {
 
                     <!-- icon mobile -->
                     <ul class="flex flex-1 justify-end md:hidden">
-                        <li class="uppercase text-base cursor-pointer pl-6 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                        <li class="uppercase text-base cursor-pointer pl-6 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-black hover:opacity-100">
                             <div class="relative">
                                 <label for="" class="text-white absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
                                 <i class="fas fa-heart"></i>
                             </div>
                         </li>
-                        <li class="uppercase text-base pl-4 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
-                            <a href="" class="relative">
+                        <li class="uppercase text-base pl-4 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-black hover:opacity-100">
+                            <a href="/cart" class="relative">
                                 <label for="" class="text-white absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
