@@ -1,3 +1,4 @@
+import Banner from "../../components/user/banner";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 
@@ -9,13 +10,7 @@ const HomePage = {
         <!-- content -->
         <main>
             <!-- banner -->
-            <section>
-                <ul>
-                    <li>
-                        <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642589413/fpoly/asm-js/back-to-school-banner_pru0g8.jpg);" class="block pt-[34%] bg-center bg-cover bg-no-repeat"></a>
-                    </li>
-                </ul>
-            </section>
+            ${Banner.render()}
             <!-- end banner -->
 
             <!-- category -->
