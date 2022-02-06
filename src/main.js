@@ -2,6 +2,9 @@ import Navigo from "navigo";
 import FortgotPage from "./pages/auth/forgot";
 import LoginPage from "./pages/auth/login";
 import RegisterPage from "./pages/auth/register";
+import CartPage from "./pages/user/cart";
+import CheckoutPage from "./pages/user/cart/checkout";
+import ThanksPage from "./pages/user/cart/thanks";
 import ContactPage from "./pages/user/contact";
 import HomePage from "./pages/user/home";
 import IntroPage from "./pages/user/intro";
@@ -42,6 +45,15 @@ router.on({
     },
     "/forgot": () => {
         print(FortgotPage);
+    },
+    "/cart": () => {
+        print(CartPage);
+    },
+    "/cart-checkout": () => {
+        print(CheckoutPage);
+    },
+    "/cart-thanks": () => {
+        print(ThanksPage);
     },
 });
 
