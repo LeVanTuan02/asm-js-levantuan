@@ -14,6 +14,7 @@ import MyAccCartDetailsPage from "./pages/user/my-account/cartDetails";
 import MyAccUpdatePass from "./pages/user/my-account/updatePass";
 import NewsPage from "./pages/user/news";
 import NewsDetailsPage from "./pages/user/newsDetails";
+import ProductDetailPage from "./pages/user/productDetails";
 import ProductsPage from "./pages/user/products";
 import StorePage from "./pages/user/store";
 
@@ -32,6 +33,9 @@ router.on({
     },
     "/products": () => {
         print(ProductsPage);
+    },
+    "/product/:id": () => {
+        print(ProductDetailPage);
     },
     "/news": () => {
         print(NewsPage);
