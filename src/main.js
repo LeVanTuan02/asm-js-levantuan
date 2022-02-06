@@ -1,4 +1,5 @@
 import Navigo from "navigo";
+import LoginPage from "./pages/auth/login";
 import ContactPage from "./pages/user/contact";
 import HomePage from "./pages/user/home";
 import IntroPage from "./pages/user/intro";
@@ -30,6 +31,9 @@ router.on({
     },
     "/store": () => {
         print(StorePage);
+    },
+    "/login": () => {
+        print(LoginPage);
     },
 });
 
