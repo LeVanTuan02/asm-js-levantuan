@@ -99,10 +99,10 @@ const Header = {
                             </div>
                         </li>
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
-                            <a href="">Đăng nhập</a>
+                            <a href="/login">Đăng nhập</a>
                         </li>
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
-                            <a href="">Đăng ký</a>
+                            <a href="/register">Đăng ký</a>
                         </li>
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-base cursor-pointer pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
                             <div class="relative">
@@ -133,13 +133,13 @@ const Header = {
 
                     <ul class="flex-1 items-center hidden md:flex">
                         <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="">Trang chủ</a>
+                            <a href="/">Trang chủ</a>
                         </li>
                         <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="">Giới thiệu</a>
+                            <a href="/intro">Giới thiệu</a>
                         </li>
                         <li class="relative pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black group">
-                            <a href="" class="flex items-center">
+                            <a href="/products" class="flex items-center">
                                 Sản phẩm
                                 <div class="pl-1 -mt-1">
                                     <i class="fas fa-sort-down"></i>
@@ -171,13 +171,13 @@ const Header = {
 
                     <ul class="flex-1 justify-end hidden md:flex">
                         <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="">Tin tức</a>
+                            <a href="/news">Tin tức</a>
                         </li>
                         <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="">Liên hệ</a>
+                            <a href="/contact">Liên hệ</a>
                         </li>
                         <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="">Cửa hàng</a>
+                            <a href="/store">Cửa hàng</a>
                         </li>
                     </ul>
 
