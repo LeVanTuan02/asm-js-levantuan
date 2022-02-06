@@ -1,3 +1,5 @@
+import $ from "jquery";
+import "slick-carousel";
 import Banner from "../../components/user/banner";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
@@ -451,6 +453,16 @@ const HomePage = {
 
         ${Footer.render()}
         `;
+    },
+    afterRender() {
+        // slider
+        $(document).ready(() => {
+            $("#banner").slick({
+                autoplay: true,
+                prevArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 left-6 group-hover:left-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-left"></i></button>`,
+                nextArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 right-6 group-hover:right-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-right"></i></button>`,
+            });
+        });
     },
 };
 

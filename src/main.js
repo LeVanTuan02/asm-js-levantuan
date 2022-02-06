@@ -22,6 +22,8 @@ const router = new Navigo("/", { linksSelector: "a" });
 
 const print = (content) => {
     document.querySelector("#app").innerHTML = content.render();
+
+    if (content.afterRender) content.afterRender();
 };
 
 const changeTitle = (title) => {
