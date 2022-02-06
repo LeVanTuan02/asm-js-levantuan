@@ -8,6 +8,10 @@ import ThanksPage from "./pages/user/cart/thanks";
 import ContactPage from "./pages/user/contact";
 import HomePage from "./pages/user/home";
 import IntroPage from "./pages/user/intro";
+import UpdateInfoPage from "./pages/user/my-account";
+import MyAccCartPage from "./pages/user/my-account/cart";
+import MyAccCartDetailsPage from "./pages/user/my-account/cartDetails";
+import MyAccUpdatePass from "./pages/user/my-account/updatePass";
 import NewsPage from "./pages/user/news";
 import ProductsPage from "./pages/user/products";
 import StorePage from "./pages/user/store";
@@ -54,6 +58,19 @@ router.on({
     },
     "/cart-thanks": () => {
         print(ThanksPage);
+    },
+    "/my-account": () => {
+        print(UpdateInfoPage);
+    },
+    "/my-account/update-pass": () => {
+        print(MyAccUpdatePass);
+    },
+    "/my-account/cart": () => {
+        print(MyAccCartPage);
+    },
+    "/my-account/cart/:id": ({ data }) => {
+        const { id } = data;
+        print(MyAccCartDetailsPage);
     },
 });
 
