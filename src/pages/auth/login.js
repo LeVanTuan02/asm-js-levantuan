@@ -29,7 +29,7 @@ const LoginPage = {
 
                     <button class="select-none mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Đăng nhập</button>
 
-                    <a href="" class="block mt-1">Quên mật khẩu?</a>
+                    <a href="/forgot" class="block mt-1">Quên mật khẩu?</a>
                 </form>
             </section>
         </main>
