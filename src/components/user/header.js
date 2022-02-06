@@ -133,7 +133,7 @@ const Header = {
 
                     <ul class="flex-1 items-center hidden md:flex">
                         <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="">Trang chủ</a>
                         </li>
                         <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
                             <a href="">Giới thiệu</a>
