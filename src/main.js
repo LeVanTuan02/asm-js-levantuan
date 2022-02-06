@@ -1,4 +1,5 @@
 import Navigo from "navigo";
+import ContactPage from "./pages/user/contact";
 import HomePage from "./pages/user/home";
 import IntroPage from "./pages/user/intro";
 import NewsPage from "./pages/user/news";
@@ -22,6 +23,9 @@ router.on({
     },
     "/news": () => {
         print(NewsPage);
+    },
+    "/contact": () => {
+        print(ContactPage);
     },
 });
 
