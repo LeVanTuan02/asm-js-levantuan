@@ -111,7 +111,7 @@ const Header = {
                             </div>
                         </li>
                         <li class="uppercase text-base pl-4 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
-                            <a href="" class="relative">
+                            <a href="/cart" class="relative">
                                 <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
