@@ -46,7 +46,7 @@ const RegisterPage = {
 
                     <p>
                         Đã có tài khoản?
-                        <a href="">Đăng nhập ngay</a>
+                        <a href="/login">Đăng nhập ngay</a>
                     </p>
                 </form>
             </section>
