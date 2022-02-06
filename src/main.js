@@ -24,47 +24,63 @@ const print = (content) => {
     document.querySelector("#app").innerHTML = content.render();
 };
 
+const changeTitle = (title) => {
+    document.title = title;
+};
+
 router.on({
     "/": () => {
+        changeTitle("Trang chủ - Trà Sữa Yotea");
         print(HomePage);
     },
     "/intro": () => {
+        changeTitle("Về chúng tôi - Trà Sữa Yotea");
         print(IntroPage);
     },
     "/products": () => {
+        changeTitle("Thực đơn - Trà Sữa Yotea");
         print(ProductsPage);
     },
     "/product/:id": () => {
         print(ProductDetailPage);
     },
     "/news": () => {
+        changeTitle("Tin tức - Trà Sữa Yotea");
         print(NewsPage);
     },
     "/news/:id": () => {
         print(NewsDetailsPage);
     },
     "/contact": () => {
+        changeTitle("Liên hệ - Trà Sữa Yotea");
         print(ContactPage);
     },
     "/store": () => {
+        changeTitle("Hệ thống cửa hàng - Trà Sữa Yotea");
         print(StorePage);
     },
     "/login": () => {
+        changeTitle("Đăng nhập - Trà Sữa Yotea");
         print(LoginPage);
     },
     "/register": () => {
+        changeTitle("Đăng ký - Trà Sữa Yotea");
         print(RegisterPage);
     },
     "/forgot": () => {
+        changeTitle("Quên mật khẩu - Trà Sữa Yotea");
         print(FortgotPage);
     },
     "/cart": () => {
+        changeTitle("Giỏ hàng - Trà Sữa Yotea");
         print(CartPage);
     },
     "/cart-checkout": () => {
+        changeTitle("Thanh toán - Trà Sữa Yotea");
         print(CheckoutPage);
     },
     "/cart-thanks": () => {
+        changeTitle("Thank you - Trà Sữa Yotea");
         print(ThanksPage);
     },
     "/my-account": () => {
