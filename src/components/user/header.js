@@ -123,7 +123,7 @@ const Header = {
 
             <!-- header bottom -->
             <div class="container max-w-6xl mx-auto px-3">
-                <div class="flex h-24 items-center border-b">
+                <div class="flex h-[70px] md:h-24 items-center border-b">
                     <!-- icon mobile -->
                     <div class="flex-1 md:hidden">
                         <button class="pr-3 py-3 text-lg transition duration-200 ease-linear text-gray-400 hover:text-black">
