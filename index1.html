@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=604378676721357&autoLogAppEvents=1" nonce="0FXlYuOH"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- header -->
+        <header>
+            <!-- header top -->
+            <div class="bg-[#D9A953] hidden md:block">
+                <div class="container max-w-6xl px-3 mx-auto flex justify-between items-center h-10">
+                    <ul class="flex items-center">
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:right-3 after:top-1/2 after:-translate-y-1/2 text-sm uppercase pr-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">
+                                <i class="far fa-envelope"></i>
+                                <span class="pl-1">Contact</span>
+                            </a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:right-3 after:top-1/2 after:-translate-y-1/2 text-sm uppercase pr-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <i class="far fa-clock"></i>
+                            <span class="pl-1">08:00 - 17:00</span>
+                        </li>
+                        <li class="text-sm uppercase text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">
+                                <i class="fas fa-phone-alt"></i>
+                                <span class="pl-1">0347 247 244</span>
+                            </a>
+                        </li>
+                    </ul>
+    
+                    <ul class="flex items-center">
+                        <li class="group relative uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <button class="rounded-full border border-gray-50 w-7 h-7">
+                                <i class="fas fa-search"></i>
+                            </button>
+
+                            <div class="hidden group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
+                                <form action="" class="flex">
+                                    <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                                    <button class="px-3 bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+
+                                <ul class="mt-3 grid grid-cols-1 divide-y max-h-[70vh] overflow-y-auto">
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
+                                            <p class="font-medium ml-auto">20,000</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">Đăng nhập</a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="">Đăng ký</a>
+                        </li>
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-base cursor-pointer pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <div class="relative">
+                                <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </li>
+                        <li class="uppercase text-base pl-4 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="" class="relative">
+                                <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end header top -->
+
+            <!-- header bottom -->
+            <div class="container max-w-6xl mx-auto px-3">
+                <div class="flex h-24 items-center border-b">
+                    <!-- icon mobile -->
+                    <div class="flex-1 md:hidden">
+                        <button class="pr-3 py-3 text-lg transition duration-200 ease-linear text-gray-400 hover:text-black">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+    
+                    <ul class="flex-1 items-center hidden md:flex">
+                        <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                        <li class="pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                            <a href="">Giới thiệu</a>
+                        </li>
+                        <li class="relative pr-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black group">
+                            <a href="" class="flex items-center">
+                                Sản phẩm
+                                <div class="pl-1 -mt-1">
+                                    <i class="fas fa-sort-down"></i>
+                                </div>
+    
+                            </a>
+                            <ul class="invisible group-hover:visible absolute top-full left-0 bg-white shadow min-w-[150px] grid grid-cols-1 divide-y px-2 rounded-sm">
+                                <li>
+                                    <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
+                                </li>
+                                <li>
+                                    <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
+                                </li>
+                                <li>
+                                    <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
+                                </li>
+                                <li>
+                                    <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+    
+                    <div class="h-full">
+                        <a href="" class="block h-full py-2">
+                            <img class="block h-full" src="https://res.cloudinary.com/levantuan/image/upload/v1642588847/fpoly/asm-js/logo_oeo8uq.png" alt="">
+                        </a>
+                    </div>
+    
+                    <ul class="flex-1 justify-end hidden md:flex">
+                        <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                            <a href="">Tin tức</a>
+                        </li>
+                        <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                            <a href="">Liên hệ</a>
+                        </li>
+                        <li class="pl-4 font-semibold text-gray-500 transition ease-linear duration-200 hover:text-black">
+                            <a href="">Cửa hàng</a>
+                        </li>
+                    </ul>
+    
+                    <!-- icon mobile -->
+                    <ul class="flex flex-1 justify-end md:hidden">
+                        <li class="uppercase text-base cursor-pointer pl-6 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <div class="relative">
+                                <label for="" class="text-white absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </li>
+                        <li class="uppercase text-base pl-4 text-gray-600 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            <a href="" class="relative">
+                                <label for="" class="text-white absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end header bottom -->
+
+            <!-- nav on mobile -->
+            <section class="hidden">
+                <!-- overlay -->
+                <div class="fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.6)]"></div>
+
+                <nav class="fixed top-0 left-0 bottom-0 min-w-[260px] bg-[rgba(255,255,255,0.95)] shadow py-10">
+                    <form action="" class="flex px-3">
+                        <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                        <button class="px-3 text-white bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                    <ul class="grid grid-cols-1 divide-y mt-5">
+                        <li>
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button class="fixed top-3 right-3 text-3xl text-gray-300 transition duration-200 ease-linear hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </section>
+            <!-- nav on mobile -->
+        </header>
+        <!-- end header -->
+
+        <!-- content -->
+        <main>
+            <!-- banner -->
+            <section>
+                <ul>
+                    <li>
+                        <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642589413/fpoly/asm-js/back-to-school-banner_pru0g8.jpg);" class="block pt-[34%] bg-center bg-cover bg-no-repeat"></a>
+                    </li>
+                </ul>
+            </section>
+            <!-- end banner -->
+
+            <!-- category -->
+            <section class="container max-w-6xl mx-auto py-7 px-3">
+                <h2 class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">DANH MỤC SẢN PHẨM</h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                    <div>
+                        <a href="" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642589839/fpoly/asm-js/s%C6%B0a-tuoi-tr%C3%A2n-chau-%C4%91%C6%B0%E1%BB%9Dng-%C4%91en-1_iy0ckj.png');" class="block bg-cover bg-center pt-[100%]"></a>
+                        <div class="text-center py-2 leading-3">
+                            <h3>
+                                <a href="" class="block uppercase text-lg font-semibold">Tea</a>
+                            </h3>
+                            <span class="uppercase text-xs">10 sản phẩm</span>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642589839/fpoly/asm-js/s%C6%B0a-tuoi-tr%C3%A2n-chau-%C4%91%C6%B0%E1%BB%9Dng-%C4%91en-1_iy0ckj.png');" class="block bg-cover bg-center pt-[100%]"></a>
+                        <div class="text-center py-2 leading-3">
+                            <h3>
+                                <a href="" class="block uppercase text-lg font-semibold">Tea</a>
+                            </h3>
+                            <span class="uppercase text-xs">10 sản phẩm</span>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642589839/fpoly/asm-js/s%C6%B0a-tuoi-tr%C3%A2n-chau-%C4%91%C6%B0%E1%BB%9Dng-%C4%91en-1_iy0ckj.png');" class="block bg-cover bg-center pt-[100%]"></a>
+                        <div class="text-center py-2 leading-3">
+                            <h3>
+                                <a href="" class="block uppercase text-lg font-semibold">Tea</a>
+                            </h3>
+                            <span class="uppercase text-xs">10 sản phẩm</span>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642589839/fpoly/asm-js/s%C6%B0a-tuoi-tr%C3%A2n-chau-%C4%91%C6%B0%E1%BB%9Dng-%C4%91en-1_iy0ckj.png');" class="block bg-cover bg-center pt-[100%]"></a>
+                        <div class="text-center py-2 leading-3">
+                            <h3>
+                                <a href="" class="block uppercase text-lg font-semibold">Tea</a>
+                            </h3>
+                            <span class="uppercase text-xs">10 sản phẩm</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end category -->
+
+            <!-- why -->
+            <section style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642595093/fpoly/asm-js/bg_why_vzvhn6.jpg)" class="bg-cover bg-center bg-no-repeat py-20">
+                <div class="container max-w-6xl mx-auto px-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <h2 class="uppercase text-[#D9A953] text-2xl font-semibold">TẠI SAO CHỌN CHÚNG TÔI</h2>
+                        <p class="text-justify mt-3">YoTea mang đến cho khách hàng sự trải nghiệm tuyệt vời chất
+                            lượng đồ uống hảo hạng với những hạt cà phê rang xay được
+                            chọn lọc kỹ càng từ những vùng đất trồng nổi tiếng, khi
+                            pha cà phê vẫn giữ được hương vị đậm đà, thơm ngon và nguyên chất.
+                        </p>
+        
+                        <ul class="mt-10">
+                            <li class="flex mt-5">
+                                <img src="https://res.cloudinary.com/levantuan/image/upload/v1642595029/fpoly/asm-js/icon_why_1_rc8aau.png" alt="" class="w-14 h-14">
+                                <div class="pl-3">
+                                    <h3 class="font-semibold text-xl text-gray-800">Giá cả phải chăng</h3>
+                                    <p>Cam kết chỉ cung cấp cà phê nguồn gốc được kiểm soát chất lượng</p>
+                                </div>
+                            </li>
+                            <li class="flex mt-5">
+                                <img src="https://res.cloudinary.com/levantuan/image/upload/v1642595029/fpoly/asm-js/icon_why_1_rc8aau.png" alt="" class="w-14 h-14">
+                                <div class="pl-3">
+                                    <h3 class="font-semibold text-xl text-gray-800">Giá cả phải chăng</h3>
+                                    <p>Cam kết chỉ cung cấp cà phê nguồn gốc được kiểm soát chất lượng</p>
+                                </div>
+                            </li>
+                            <li class="flex mt-5">
+                                <img src="https://res.cloudinary.com/levantuan/image/upload/v1642595029/fpoly/asm-js/icon_why_1_rc8aau.png" alt="" class="w-14 h-14">
+                                <div class="pl-3">
+                                    <h3 class="font-semibold text-xl text-gray-800">Giá cả phải chăng</h3>
+                                    <p>Cam kết chỉ cung cấp cà phê nguồn gốc được kiểm soát chất lượng</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div></div>
+                </div>
+            </section>
+            <!-- end why -->
+
+            <!-- product -->
+            <section class="container max-w-6xl mx-auto py-9 px-3">
+                <div class="text-center">
+                    <h2 class="uppercase text-[#D9A953] text-2xl font-semibold">SẢN PHẨM NỔI BẬT</h2>
+                    <p>Chào mừng bạn đến với thiên đường vị giác của Yotea. Menu Yotea rất đa dạng món uống, đủ để đáp ứng khẩu vị “ưa chua chuộng béo” của bạn. Order và thưởng thức ngay nhé.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <div class="relative bg-[#f7f7f7] overflow-hidden">
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png)" class="bg-cover pt-[100%] bg-center block"></a>
+                            <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                            <button class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 text-[#c0c0c0] text-lg border-[#c0c0c0] transition duration-300 hover:text-white hover:bg-red-700 hover:border-red-700 opacity-0 group-hover:opacity-100">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="text-center py-3">
+                            <p class="uppercase text-xs text-gray-400">Trà sữa</p>
+                            <a href="" class="block font-semibold text-lg">Trà sữa ô long bạch kim</a>
+                            <ul class="flex text-yellow-500 text-xs justify-center pt-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </ul>
+                            <div class="text-sm pt-1">
+                                20,000 ₫ <span class="pl-2 line-through text-gray-500">20,000 ₫</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end product -->
+
+            <!-- news -->
+            <section class="bg-[#EFE8DE] py-9">
+                <div class="container max-w-6xl mx-auto px-3">
+                    <h3>
+                        <a href="" class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">TIN TỨC - KHUYẾN MÃI</a>
+                    </h3>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+                        <div>
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl"></a>
+                            <div class="bg-white rounded-b-xl shadow px-3 py-2">
+                                <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
+                                <h3>
+                                    <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
+                                </h3>
+                                <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
+
+                                <a href="">
+                                    <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl"></a>
+                            <div class="bg-white rounded-b-xl shadow px-3 py-2">
+                                <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
+                                <h3>
+                                    <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
+                                </h3>
+                                <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
+
+                                <a href="">
+                                    <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl"></a>
+                            <div class="bg-white rounded-b-xl shadow px-3 py-2">
+                                <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
+                                <h3>
+                                    <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
+                                </h3>
+                                <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
+
+                                <a href="">
+                                    <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl"></a>
+                            <div class="bg-white rounded-b-xl shadow px-3 py-2">
+                                <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
+                                <h3>
+                                    <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
+                                </h3>
+                                <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
+
+                                <a href="">
+                                    <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end news -->
+
+            <!-- feedback -->
+            <section class="py-16 mt-16 bg-center bg-cover bg-no-repeat" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602275/fpoly/asm-js/pizi_coffe_1_r8_clients_say_row_bg_img_vc7e3r.jpg)">
+                <div class="container max-w-6xl mx-auto">
+                    <div>
+                        <h3 class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">KHÁCH HÀNG NÓI GÌ</h3>
+                        <p class="text-center text-sm text-gray-300 font-semibold mt-1">1500+ KHÁCH HÀNG HÀI LÒNG</p>
+                    </div>
+
+                    <ul>
+                        <li class="text-center mt-9">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642602479/fpoly/asm-js/chang-trai-lai-3-dong-mau-va-nhung-bac-si-noi-tieng-tren-mang-4abe91-300x300_uah3ea.jpg" alt="" class="w-24 h-24 object-cover rounded-full mx-auto">
+                            <ul class="flex text-yellow-500 justify-center mt-2">
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                            </ul>
+                            <p class="font-semibold text-gray-300 text-xl italic">Lê Tuân Nek</p>
+                            <p class="mt-1 text-gray-300">
+                                Mình rất thích đưa khách hàng của mình đến đây bởi vì
+                                phong cách rất chuyên nghiệp.Hơn nữa thức uống ở đây rất ngon,
+                                có hương vị rất khác biệt, các vị khách của mình vô cùng thích.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- end feedback -->
+
+            <!-- show -->
+            <section class="px-3 py-9">
+                <div class="text-center">
+                    <h3 class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">#trasuayotea</h3>
+                    <p>Những hình ảnh update từ Instagram.</p>
+                </div>
+
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-4 mt-5">
+                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                </div>
+            </section>
+            <!-- end show -->
+        </main>
+        <!-- end content -->
+
+        <!-- footer -->
+        <footer style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602939/fpoly/asm-js/bg_footer_r0omu5.jpg)" class="bg-cover bg-center bg-no-repeat py-14">
+            <div class="container max-w-6xl mx-auto px-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">KẾT NỐI VỚI CHÚNG TÔI</h3>
+                        <p class="text-gray-300 text-justify">
+                            Chúng tôi mong muốn tạo nên hương vị thức uống tuyệt vời nhất.
+                            Là điểm đến đầu tiên dành cho bạn khi muốn thưởng thức trọn vẹn của tách Coffee
+                        </p>
+                        <ul class="flex text-white">
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="mr-3 mt-3">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">Liên hệ</h3>
+
+                        <ul class="text-white leading-relaxed">
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                25A Trần Nguyên Hãn – Nha Trang
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                            <li class="flex">
+                                <div class="w-5">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                Hotline:
+                                <a href="">091 353 3457 – 09 1425 2542</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="overflow-hidden">
+                        <h3 class="text-white text-xl uppercase font-semibold mb-3">Kết nối với chúng tôi</h3>
+                        <div class="fb-page" data-href="https://www.facebook.com/PolyQuiz/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/PolyQuiz/" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/PolyQuiz/">Ở Đây Có Đáp Án Quiz - Fpoly</a>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-gray-300 mt-9">
+                    Copyright 2022 ©
+                    <strong>
+                        Bản quyền thuộc về
+                        <a href="">TuanDemo</a>
+                    </strong>
+                </div>
+            </div>
+        </footer>
+        <!-- end footer -->
+
+        <!-- wishlist -->
+        <section class="hidden">
+            <div class="fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.6)]"></div>
+
+            <div class="fixed top-0 right-0 bottom-0 min-w-[360px] bg-white shadow">
+                <header class="px-3 h-14 flex justify-between items-center border-b-2">
+                    <h1 class="uppercase font-semibold text-lg">Danh sách yêu thích</h1>
+                    <button class="py-2 font-semibold text-xl text-gray-500 transition duration-200 ease-linear hover:text-black">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </header>
+
+                <div class="h-[calc(100vh-56px)] overflow-y-auto">
+                    <ul class="">
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                        <li class="flex px-2 py-3 items-center">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-16 h-16 object-cover" alt="">
+
+                            <div class="ml-2">
+                                <a href="" class="block uppercase font-semibold">Trà táo</a>
+                                <p class="text-sm font-medium">20,000₫</p>
+                                <p class="text-sm">15/12/2021 14:33</p>
+                            </div>
+
+                            <button class="ml-auto transition ease-linear duration-200 text-gray-500 hover:text-black">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
