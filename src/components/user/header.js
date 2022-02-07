@@ -30,7 +30,7 @@ const Header = {
                                 <i class="fas fa-search"></i>
                             </button>
 
-                            <div class="hidden group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
+                            <div class="hidden z-20 group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
                                 <form action="" class="flex">
                                     <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
                                     <button class="px-3 bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
@@ -146,7 +146,7 @@ const Header = {
                                 </div>
 
                             </a>
-                            <ul class="invisible group-hover:visible absolute top-full left-0 bg-white shadow min-w-[150px] grid grid-cols-1 divide-y px-2 rounded-sm">
+                            <ul class="z-20 invisible group-hover:visible absolute top-full left-0 bg-white shadow min-w-[150px] grid grid-cols-1 divide-y px-2 rounded-sm">
                                 <li>
                                     <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
                                 </li>
