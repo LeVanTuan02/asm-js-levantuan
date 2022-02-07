@@ -21,6 +21,7 @@ import NewsDetailsPage from "./pages/user/newsDetails";
 import ProductDetailPage from "./pages/user/productDetails";
 import ProductsPage from "./pages/user/products";
 import StorePage from "./pages/user/store";
+import DashboardPage from "./pages/admin/dashboard";
 
 const router = new Navigo("/", { linksSelector: "a" });
 
@@ -101,6 +102,9 @@ router.on({
     "/my-account/cart/:id": ({ data }) => {
         const { id } = data;
         print(MyAccCartDetailsPage);
+    },
+    "/admin/dashboard": () => {
+        print(DashboardPage);
     },
 });
 
