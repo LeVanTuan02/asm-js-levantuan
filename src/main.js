@@ -1,4 +1,8 @@
 import Navigo from "navigo";
+import "slick-carousel/slick/slick.css";
+import "@fortawesome/fontawesome-free/js/brands";
+import "@fortawesome/fontawesome-free/js/solid";
+import "@fortawesome/fontawesome-free/js/fontawesome";
 import FortgotPage from "./pages/auth/forgot";
 import LoginPage from "./pages/auth/login";
 import RegisterPage from "./pages/auth/register";
