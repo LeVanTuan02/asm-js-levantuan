@@ -1,5 +1,7 @@
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
+import Nav from "../../components/user/news/nav";
+import Related from "../../components/user/news/related";
 
 const NewsDetailsPage = {
     render() {
@@ -54,103 +56,11 @@ const NewsDetailsPage = {
                     <div class="border-t border-dashed">
                         <h2 class="uppercase text-lg font-bold my-3">Bài viết liên quan</h2>
 
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            <div>
-                                <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl relative">
-                                    <button class="absolute top-2 left-2 bg-[#D9A953] rounded-full w-10 h-10 text-white text-lg">
-                                        <i class="fas fa-newspaper"></i>
-                                    </button>
-                                </a>
-                                <div class="bg-white rounded-b-xl shadow px-3 py-2">
-                                    <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
-                                    <h3>
-                                        <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
-                                    </h3>
-                                    <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl relative">
-                                    <button class="absolute top-2 left-2 bg-[#D9A953] rounded-full w-10 h-10 text-white text-lg">
-                                        <i class="fas fa-newspaper"></i>
-                                    </button>
-                                </a>
-                                <div class="bg-white rounded-b-xl shadow px-3 py-2">
-                                    <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
-                                    <h3>
-                                        <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
-                                    </h3>
-                                    <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl relative">
-                                    <button class="absolute top-2 left-2 bg-[#D9A953] rounded-full w-10 h-10 text-white text-lg">
-                                        <i class="fas fa-newspaper"></i>
-                                    </button>
-                                </a>
-                                <div class="bg-white rounded-b-xl shadow px-3 py-2">
-                                    <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
-                                    <h3>
-                                        <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
-                                    </h3>
-                                    <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <a href="" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642600643/fpoly/asm-js/tocotoco-thi-truong-my_vh0u5j.png);" class="block bg-cover bg-center pt-[70%] rounded-t-xl relative">
-                                    <button class="absolute top-2 left-2 bg-[#D9A953] rounded-full w-10 h-10 text-white text-lg">
-                                        <i class="fas fa-newspaper"></i>
-                                    </button>
-                                </a>
-                                <div class="bg-white rounded-b-xl shadow px-3 py-2">
-                                    <p class="text-sm text-gray-500">Tháng Mười 3, 2021</p>
-                                    <h3>
-                                        <a href="" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">Vì sao khách hàng tại thị trường Mỹ ưa thích vị đậm đà khác biệt của Yo</a>
-                                    </h3>
-                                    <p class="text-gray-500 text-sm text-justify">Theo vietbao.vn – Yotea – thương hiệu trà sữa đã quen mặt với giới […]</p>
-                                </div>
-                            </div>
-                        </div>
+                        ${Related.render()}
                     </div>
                 </div>
 
-                <aside class="hidden lg:block lg:col-span-3 pl-6 border-l">
-                    <section>
-                        <h2 class="uppercase font-bold pb-2 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">CHUYÊN MỤC</h2>
-
-                        <ul class="mt-4 grid grid-cols-1 divide-y">
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section class="mt-5">
-                        <h2 class="uppercase font-bold pb-2 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Bài viết mới</h2>
-
-                        <ul class="mt-4 grid grid-cols-1 divide-y">
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                            <li>
-                                <a href="" class="block py-1 leading-7 text-gray-500 transition duration-200 hover:text-black">Tin tức</a>
-                            </li>
-                        </ul>
-                    </section>
-                </aside>
+                ${Nav.render()}
             </section>
         </main>
         <!-- end content -->
