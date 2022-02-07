@@ -393,14 +393,66 @@ const HomePage = {
             <!-- end news -->
 
             <!-- feedback -->
-            <section class="py-16 mt-16 bg-center bg-cover bg-no-repeat" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602275/fpoly/asm-js/pizi_coffe_1_r8_clients_say_row_bg_img_vc7e3r.jpg)">
+            <section class="py-16 mt-16 bg-center bg-cover bg-no-repeat group" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602275/fpoly/asm-js/pizi_coffe_1_r8_clients_say_row_bg_img_vc7e3r.jpg)">
                 <div class="container max-w-6xl mx-auto">
                     <div>
                         <h3 class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">KHÁCH HÀNG NÓI GÌ</h3>
                         <p class="text-center text-sm text-gray-300 font-semibold mt-1">1500+ KHÁCH HÀNG HÀI LÒNG</p>
                     </div>
 
-                    <ul>
+                    <ul id="home__feedback">
+                        <li class="text-center mt-9">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642602479/fpoly/asm-js/chang-trai-lai-3-dong-mau-va-nhung-bac-si-noi-tieng-tren-mang-4abe91-300x300_uah3ea.jpg" alt="" class="w-24 h-24 object-cover rounded-full mx-auto">
+                            <ul class="flex text-yellow-500 justify-center mt-2">
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                            </ul>
+                            <p class="font-semibold text-gray-300 text-xl italic">Lê Tuân Nek</p>
+                            <p class="mt-1 text-gray-300">
+                                Mình rất thích đưa khách hàng của mình đến đây bởi vì
+                                phong cách rất chuyên nghiệp.Hơn nữa thức uống ở đây rất ngon,
+                                có hương vị rất khác biệt, các vị khách của mình vô cùng thích.
+                            </p>
+                        </li>
+                        <li class="text-center mt-9">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642602479/fpoly/asm-js/chang-trai-lai-3-dong-mau-va-nhung-bac-si-noi-tieng-tren-mang-4abe91-300x300_uah3ea.jpg" alt="" class="w-24 h-24 object-cover rounded-full mx-auto">
+                            <ul class="flex text-yellow-500 justify-center mt-2">
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                                <li>
+                                    <i class="fas fa-star"></i>
+                                </li>
+                            </ul>
+                            <p class="font-semibold text-gray-300 text-xl italic">Lê Tuân Nek</p>
+                            <p class="mt-1 text-gray-300">
+                                Mình rất thích đưa khách hàng của mình đến đây bởi vì
+                                phong cách rất chuyên nghiệp.Hơn nữa thức uống ở đây rất ngon,
+                                có hương vị rất khác biệt, các vị khách của mình vô cùng thích.
+                            </p>
+                        </li>
                         <li class="text-center mt-9">
                             <img src="https://res.cloudinary.com/levantuan/image/upload/v1642602479/fpoly/asm-js/chang-trai-lai-3-dong-mau-va-nhung-bac-si-noi-tieng-tren-mang-4abe91-300x300_uah3ea.jpg" alt="" class="w-24 h-24 object-cover rounded-full mx-auto">
                             <ul class="flex text-yellow-500 justify-center mt-2">
@@ -439,12 +491,31 @@ const HomePage = {
                     <p>Những hình ảnh update từ Instagram.</p>
                 </div>
 
-                <div class="grid grid-cols-3 md:grid-cols-5 gap-4 mt-5">
-                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
-                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
-                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
-                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
-                    <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                <div class="mt-5 group" id="home__show">
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
+                    <div class="px-1">
+                        <div style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642602026/fpoly/asm-js/188771575_2218613684942468_2579336373501724462_n_xalanv.jpg);" class="bg-cover bg-center bg-no-repeat pt-[100%] rounded-xl"></div>
+                    </div>
                 </div>
             </section>
             <!-- end show -->
@@ -458,6 +529,33 @@ const HomePage = {
         // slider
         $(document).ready(() => {
             $("#banner").slick({
+                autoplay: true,
+                prevArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 left-6 group-hover:left-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-left"></i></button>`,
+                nextArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 right-6 group-hover:right-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-right"></i></button>`,
+            });
+
+            $("#home__show").slick({
+                slidesToShow: 6,
+                autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 5,
+                        },
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 3,
+                        },
+                    },
+                ],
+                prevArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 left-6 group-hover:left-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-left"></i></button>`,
+                nextArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 right-6 group-hover:right-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-right"></i></button>`,
+            });
+
+            $("#home__feedback").slick({
                 autoplay: true,
                 prevArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 left-6 group-hover:left-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-left"></i></button>`,
                 nextArrow: /* html */ `<button class="invisible group-hover:visible w-9 h-9 absolute top-1/2 -translate-y-1/2 z-10 right-6 group-hover:right-4 transition-all ease-linear duration-200 hover:bg-[#D9A953] hover:text-white hover:border-[#D9A953] rounded-full border-2 border-gray-400 text-gray-400"><i class="fas fa-chevron-right"></i></button>`,
