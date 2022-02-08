@@ -21,7 +21,7 @@ const AdminCategoryList = {
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 ${cateList.map((cate) => `
-                    <tr>
+                    <tr class="cate__list-item-${cate.id}">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             ${cate.id}
                         </td>

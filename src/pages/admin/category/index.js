@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import AdminCategoryList from "../../../components/admin/categoryList";
@@ -90,11 +91,27 @@ const AdminCateListPage = {
             btn.addEventListener("click", (e) => {
                 const { id } = e.target.dataset;
 
-                const isConfirmed = confirm("Bạn có chắc muốn xóa không?");
-                if (isConfirmed) {
-                    remove(id)
-                        .then(() => alert("Đã xóa thành công"));
-                }
+                Swal.fire({
+                    title: "Bạn có chắc chắn muốn xóa không?",
+                    text: "Bạn không thể hoàn tác sau khi xóa!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        remove(id)
+                            .then(() => {
+                                Swal.fire(
+                                    "Thành công",
+                                    "Đã xóa danh mục.",
+                                    "success",
+                                );
+                            })
+                            .then(() => document.querySelector(`.cate__list-item-${id}`).remove());
+                    }
+                });
             });
         });
     },
