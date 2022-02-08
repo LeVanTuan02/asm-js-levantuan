@@ -6,6 +6,12 @@
     @apply translate-x-0;
 }
 
-.dashboard.active .dashboard__overlay {
+.dashboard.active .dashboard__overlay,
+.sidebar__item.active ~ .sidebar__submenu,
+.sidebar__item.active .sidebar__item-icon--down {
     @apply block;
+}
+
+.sidebar__item.active .sidebar__item-icon--right {
+    @apply hidden;
 }

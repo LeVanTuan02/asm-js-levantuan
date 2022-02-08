@@ -22,6 +22,9 @@ import ProductDetailPage from "./pages/user/productDetails";
 import ProductsPage from "./pages/user/products";
 import StorePage from "./pages/user/store";
 import DashboardPage from "./pages/admin/dashboard";
+import AdminAddNewsPage from "./pages/admin/news/add";
+import AdminNewsListPage from "./pages/admin/news";
+import AdminEditNewsPage from "./pages/admin/news/edit";
 
 const router = new Navigo("/", { linksSelector: "a" });
 
@@ -105,6 +108,15 @@ router.on({
     },
     "/admin/dashboard": () => {
         print(DashboardPage);
+    },
+    "/admin/news": () => {
+        print(AdminNewsListPage);
+    },
+    "/admin/news/add": () => {
+        print(AdminAddNewsPage);
+    },
+    "/admin/news/:id/edit": () => {
+        print(AdminEditNewsPage);
     },
 });
 
