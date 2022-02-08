@@ -28,6 +28,9 @@ import AdminEditNewsPage from "./pages/admin/news/edit";
 import AdminProductListPage from "./pages/admin/product";
 import AdminAddProductPage from "./pages/admin/product/add";
 import AdminEditProductPage from "./pages/admin/product/edit";
+import AdminCateListPage from "./pages/admin/category";
+import AdminAddCatePage from "./pages/admin/category/add";
+import AdminEditCatePage from "./pages/admin/category/edit";
 
 const router = new Navigo("/", { linksSelector: "a" });
 
@@ -129,6 +132,15 @@ router.on({
     },
     "/admin/product/:id/edit": () => {
         print(AdminEditProductPage);
+    },
+    "/admin/category": () => {
+        print(AdminCateListPage);
+    },
+    "/admin/category/add": () => {
+        print(AdminAddCatePage);
+    },
+    "/admin/category/:id/edit": () => {
+        print(AdminEditCatePage);
     },
 });
 
