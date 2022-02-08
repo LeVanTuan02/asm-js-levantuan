@@ -3,6 +3,7 @@ import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import AdminCategoryList from "../../../components/admin/categoryList";
 import { remove } from "../../../api/category";
+import reRender from "../../../utils";
 
 const AdminCateListPage = {
     async render() {
@@ -43,7 +44,9 @@ const AdminCateListPage = {
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                ${await AdminCategoryList.render()}
+                                <table class="min-w-full divide-y divide-gray-200" id="cate__list-table">
+                                    ${await AdminCategoryList.render()}
+                                </table>
 
                                 <!-- pagination -->
                                 <div class="border-t px-5 bg-white py-3 flex flex-col xs:flex-row items-center xs:justify-between">
@@ -109,7 +112,9 @@ const AdminCateListPage = {
                                     "success",
                                 );
                             })
-                            .then(() => document.querySelector(`.cate__list-item-${id}`).remove());
+                            .then(() => {
+                                reRender(AdminCategoryList, "#cate__list-table");
+                            });
                     }
                 });
             });
