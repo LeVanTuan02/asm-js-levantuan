@@ -2,9 +2,20 @@
   "category": [
     {
       "id": 1,
-      "name": "Trà sữa",
+      "name": "Trà sữa nek",
       "createdAt": "2022-03-13T05:07:46.346Z",
-      "image": "http://placeimg.com/640/480"
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644321850/assignment-js/rcrn1kjp2tyimk9spck5.jpg"
+    },
+    {
+      "name": "Tuân nek 1",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644315559/assignment-js/nc8iknwcvpw2krpnsns7.jpg",
+      "id": 2
+    },
+    {
+      "name": "ab hi",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644322409/assignment-js/mlnynhmpjwkaykz8uxe6.png",
+      "createdAt": "2022-02-08T12:06:48.706Z",
+      "id": 3
     }
   ]
 }

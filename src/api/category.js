@@ -22,7 +22,7 @@ export const remove = (id) => {
     return instance.delete(url);
 };
 
-export const update = (data) => {
-    const url = `/${TABLE_NAME}/${data.id}`;
+export const update = (id, data) => {
+    const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
 };

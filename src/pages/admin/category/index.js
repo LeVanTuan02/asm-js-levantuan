@@ -3,7 +3,7 @@ import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import AdminCategoryList from "../../../components/admin/categoryList";
 import { remove } from "../../../api/category";
-import reRender from "../../../utils";
+import { reRender } from "../../../utils";
 
 const AdminCateListPage = {
     async render() {
@@ -113,7 +113,7 @@ const AdminCateListPage = {
                                 );
                             })
                             .then(() => {
-                                reRender(AdminCategoryList, "#cate__list-table");
+                                reRender(AdminCateListPage, "#app");
                             });
                     }
                 });

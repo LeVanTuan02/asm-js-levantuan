@@ -36,8 +36,8 @@ import AdminEditCatePage from "./pages/admin/category/edit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
-const print = async (content) => {
-    document.querySelector("#app").innerHTML = await content.render();
+const print = async (content, id) => {
+    document.querySelector("#app").innerHTML = await content.render(id);
 
     if (content.afterRender) content.afterRender();
 };
@@ -141,8 +141,8 @@ router.on({
     "/admin/category/add": () => {
         print(AdminAddCatePage);
     },
-    "/admin/category/:id/edit": () => {
-        print(AdminEditCatePage);
+    "/admin/category/:id/edit": ({ data }) => {
+        print(AdminEditCatePage, data.id);
     },
 });
 
