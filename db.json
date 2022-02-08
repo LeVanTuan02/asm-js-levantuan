@@ -1,10 +1,16 @@
 {
-    "category": [
-        {
-            "id": 1,
-            "name": "Trà sữa",
-            "createdAt": "2022-03-13T05:07:46.346Z",
-            "image": "http://placeimg.com/640/480"
-        }
-    ]
+  "category": [
+    {
+      "id": 1,
+      "name": "Trà sữa",
+      "createdAt": "2022-03-13T05:07:46.346Z",
+      "image": "http://placeimg.com/640/480"
+    },
+    {
+      "id": 2,
+      "name": "Trà sữa",
+      "createdAt": "2022-03-13T05:07:46.346Z",
+      "image": "http://placeimg.com/640/480"
+    }
+  ]
 }

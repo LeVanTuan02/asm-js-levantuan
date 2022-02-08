@@ -32,10 +32,10 @@ import AdminCateListPage from "./pages/admin/category";
 import AdminAddCatePage from "./pages/admin/category/add";
 import AdminEditCatePage from "./pages/admin/category/edit";
 
-const router = new Navigo("/", { linksSelector: "a" });
+const router = new Navigo("/", { linksSelector: "a", hash: true });
 
-const print = (content) => {
-    document.querySelector("#app").innerHTML = content.render();
+const print = async (content) => {
+    document.querySelector("#app").innerHTML = await content.render();
 
     if (content.afterRender) content.afterRender();
 };

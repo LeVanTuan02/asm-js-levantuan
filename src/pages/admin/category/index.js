@@ -1,9 +1,10 @@
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import AdminCategoryList from "../../../components/admin/categoryList";
+import { remove } from "../../../api/category";
 
 const AdminCateListPage = {
-    render() {
+    async render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
             ${AdminNav.render()}
@@ -20,7 +21,7 @@ const AdminCateListPage = {
                             <span>DS danh mục</span>
                         </div>
 
-                        <a href="/admin/category/add">
+                        <a href="/#/admin/category/add">
                             <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Thêm danh mục
                             </button>
@@ -41,7 +42,7 @@ const AdminCateListPage = {
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                ${AdminCategoryList.render()}
+                                ${await AdminCategoryList.render()}
 
                                 <!-- pagination -->
                                 <div class="border-t px-5 bg-white py-3 flex flex-col xs:flex-row items-center xs:justify-between">
@@ -80,6 +81,22 @@ const AdminCateListPage = {
             <div class="fixed inset-0 z-10 w-screen h-screen bg-black bg-opacity-25 hidden dashboard__overlay"></div>
         </section>
         `;
+    },
+    afterRender() {
+        const btnsDelete = document.querySelectorAll(".cate__list-btn-delete");
+
+        // xóa danh mục
+        btnsDelete.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const { id } = e.target.dataset;
+
+                const isConfirmed = confirm("Bạn có chắc muốn xóa không?");
+                if (isConfirmed) {
+                    remove(id)
+                        .then(() => alert("Đã xóa thành công"));
+                }
+            });
+        });
     },
 };
 
