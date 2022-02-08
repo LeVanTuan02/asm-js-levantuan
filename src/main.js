@@ -33,6 +33,7 @@ import AdminEditProductPage from "./pages/admin/product/edit";
 import AdminCateListPage from "./pages/admin/category";
 import AdminAddCatePage from "./pages/admin/category/add";
 import AdminEditCatePage from "./pages/admin/category/edit";
+import NotFoundPage from "./pages/user/notFound";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -110,8 +111,7 @@ router.on({
     "/my-account/cart": () => {
         print(MyAccCartPage);
     },
-    "/my-account/cart/:id": ({ data }) => {
-        const { id } = data;
+    "/my-account/cart/:id": () => {
         print(MyAccCartDetailsPage);
     },
     "/admin/dashboard": () => {
@@ -144,6 +144,11 @@ router.on({
     "/admin/category/:id/edit": ({ data }) => {
         print(AdminEditCatePage, data.id);
     },
+});
+
+router.notFound(() => {
+    changeTitle("Trang này không tồn tại");
+    print(NotFoundPage);
 });
 
 router.resolve();
