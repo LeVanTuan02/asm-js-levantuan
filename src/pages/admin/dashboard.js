@@ -5,7 +5,7 @@ const DashboardPage = {
     render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
-            ${AdminNav.render()}
+            ${AdminNav.render("dashboard")}
 
             <div class="ml-0 transition md:ml-60">
                 <header>
