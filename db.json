@@ -24,8 +24,12 @@
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415273/assignment-js/ogvmmual09hjnotqlsir.jpg",
       "price": 20000,
       "description": "Trà tranh mô tả",
-      "cate_id": 1,
+      "cate_id": 3,
       "status": 0,
+      "view": 0,
+      "favorites": 0,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-09T15:00:50.038Z",
       "id": 1
     },
     {
@@ -35,6 +39,10 @@
       "description": "123",
       "cate_id": 2,
       "status": 1,
+      "view": 0,
+      "favorites": 0,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-09T15:00:50.038Z",
       "id": 2
     },
     {
@@ -44,7 +52,24 @@
       "description": "123",
       "cate_id": 3,
       "status": 1,
+      "view": 0,
+      "favorites": 0,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-09T15:00:50.038Z",
       "id": 3
+    },
+    {
+      "name": "Trà tranh nek1",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644418736/assignment-js/p8xwzdkyodjyc7qphxmz.jpg",
+      "price": 1,
+      "description": "1",
+      "cate_id": 3,
+      "status": 1,
+      "view": 0,
+      "favorites": 0,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-09T15:00:50.038Z",
+      "id": 4
     }
   ],
   "users": [

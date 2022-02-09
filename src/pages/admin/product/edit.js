@@ -181,12 +181,14 @@ const AdminEditProductPage = {
             const isValid = validate();
 
             if (isValid) {
+                const date = new Date();
                 let productData = {
                     name: proName.value,
                     price: +proPrice.value,
                     description: proDesc.value,
                     cate_id: +proCate.value,
                     status: +proStt.value,
+                    updatedAt: date.toISOString(),
                 };
 
                 if (proImage.files.length) {
@@ -199,6 +201,7 @@ const AdminEditProductPage = {
                         description: proDesc.value,
                         cate_id: +proCate.value,
                         status: +proStt.value,
+                        updatedAt: date.toISOString(),
                     };
                 }
 

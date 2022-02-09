@@ -186,6 +186,7 @@ const AdminAddProductPage = {
             const isValid = validate();
             if (isValid) {
                 const response = await uploadFile(proImage.files[0]);
+                const date = new Date();
 
                 add({
                     name: proName.value,
@@ -194,6 +195,10 @@ const AdminAddProductPage = {
                     description: proDesc.value,
                     cate_id: +proCate.value,
                     status: +proStt.value,
+                    view: 0,
+                    favorites: 0,
+                    createdAt: date.toISOString(),
+                    updatedAt: date.toISOString(),
                 })
                     .then(() => toastr.success("Thêm sản phẩm thành công"))
                     .then(() => reRender(AdminAddProductPage, "#app"));
