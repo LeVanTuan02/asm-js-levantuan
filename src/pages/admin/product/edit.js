@@ -1,6 +1,6 @@
 import toastr from "toastr";
 import AdminProductListPage from ".";
-import { getAll as getAllCate } from "../../../api/category";
+import { getAll } from "../../../api/category";
 import { get, update } from "../../../api/product";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -8,7 +8,7 @@ import { reRender, uploadFile } from "../../../utils";
 
 const AdminEditProductPage = {
     async render(id) {
-        const { data: cateList } = await getAllCate();
+        const { data: cateList } = await getAll();
         const { data: productDetail } = await get(id);
 
         return /* html */ `
