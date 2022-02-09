@@ -72,6 +72,41 @@
       "id": 4
     }
   ],
+  "news": [
+    {
+      "title": "tiêu đề1",
+      "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
+      "description": "mô tả1",
+      "content": "nội dung1",
+      "cateId": 1,
+      "status": 1,
+      "createdAt": "2022-02-09T15:42:22.570Z",
+      "updatedAt": "2022-02-09T16:02:21.196Z",
+      "id": 1
+    },
+    {
+      "title": "tiêu đề1",
+      "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
+      "description": "mô tả1",
+      "content": "nội dung1",
+      "cateId": 1,
+      "status": 1,
+      "createdAt": "2022-02-09T15:42:22.570Z",
+      "updatedAt": "2022-02-09T16:02:21.196Z",
+      "id": 2
+    },
+    {
+      "title": "tiêu đề1",
+      "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
+      "description": "mô tả1",
+      "content": "nội dung1",
+      "cateId": 1,
+      "status": 1,
+      "createdAt": "2022-02-09T15:42:22.570Z",
+      "updatedAt": "2022-02-09T16:02:21.196Z",
+      "id": 3
+    }
+  ],
   "users": [
     {
       "email": "admin@gmail.com",
