@@ -31,7 +31,7 @@
     {
       "name": "Trà tranh nek",
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
-      "price": 12,
+      "price": 1231,
       "description": "123",
       "cate_id": 2,
       "status": 1,
@@ -39,10 +39,10 @@
     },
     {
       "name": "Trà tranh nek",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644418284/assignment-js/mfg2uls1i5owz6xohkrw.jpg",
       "price": 12,
       "description": "123",
-      "cate_id": 2,
+      "cate_id": 3,
       "status": 1,
       "id": 3
     }

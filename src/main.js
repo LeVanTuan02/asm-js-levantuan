@@ -132,8 +132,8 @@ router.on({
     "/admin/product/add": () => {
         print(AdminAddProductPage);
     },
-    "/admin/product/:id/edit": () => {
-        print(AdminEditProductPage);
+    "/admin/product/:id/edit": ({ data }) => {
+        print(AdminEditProductPage, data.id);
     },
     "/admin/category": () => {
         print(AdminCateListPage);
