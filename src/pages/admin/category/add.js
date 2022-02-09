@@ -85,11 +85,8 @@ const AdminAddCatePage = {
     },
     afterRender() {
         const formAdd = document.querySelector("#form__add-cate");
-
         const cateName = formAdd.querySelector("#form__add-cate-title");
         const cateImg = formAdd.querySelector("#form__add-cate-img");
-        const errorTitle = formAdd.querySelector(".form__add-cate-error-title");
-        const errorImg = formAdd.querySelector(".form__add-cate-error-img");
         const imgPreview = formAdd.querySelector("#form__add-cate-preview");
 
         // validate
@@ -97,17 +94,18 @@ const AdminAddCatePage = {
             let isValid = true;
 
             if (!cateName.value) {
-                errorTitle.innerText = "Vui lòng nhập tên danh mục";
+                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
                 isValid = false;
             } else {
-                errorTitle.innerText = "";
+                cateName.nextElementSibling.innerText = "";
             }
 
+            const parent = cateImg.parentElement.parentElement.parentElement.parentElement;
             if (!cateImg.files.length) {
-                errorImg.innerText = "Vui lòng chọn ảnh";
+                parent.nextElementSibling.innerText = "Vui lòng chọn ảnh danh mục";
                 isValid = false;
             } else {
-                errorImg.innerText = "";
+                parent.nextElementSibling.innerText = "";
             }
 
             return isValid;

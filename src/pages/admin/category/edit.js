@@ -91,7 +91,6 @@ const AdminEditCatePage = {
 
         const cateName = formEdit.querySelector("#form__edit-cate-title");
         const cateImg = formEdit.querySelector("#form__edit-cate-img");
-        const errorTitle = formEdit.querySelector(".form__edit-cate-error-title");
         const imgPreview = formEdit.querySelector("#form__edit-cate-preview");
 
         // validate
@@ -99,10 +98,10 @@ const AdminEditCatePage = {
             let isValid = true;
 
             if (!cateName.value) {
-                errorTitle.innerText = "Vui lòng nhập tên danh mục";
+                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
                 isValid = false;
             } else {
-                errorTitle.innerText = "";
+                cateName.nextElementSibling.innerText = "";
             }
 
             return isValid;

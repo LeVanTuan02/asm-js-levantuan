@@ -2,7 +2,8 @@ import { getAll } from "../../api/category";
 
 const AdminCategoryList = {
     async render() {
-        const { data: cateList } = await getAll();
+        const { data } = await getAll();
+        const cateList = data.sort((a, b) => b.id - a.id);
 
         return /* html */`
         <thead class="bg-gray-50">
