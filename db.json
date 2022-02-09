@@ -18,6 +18,35 @@
       "id": 3
     }
   ],
+  "products": [
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415273/assignment-js/ogvmmual09hjnotqlsir.jpg",
+      "price": 20000,
+      "description": "Trà tranh mô tả",
+      "cate_id": 1,
+      "status": 0,
+      "id": 1
+    },
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "price": 12,
+      "description": "123",
+      "cate_id": 2,
+      "status": 1,
+      "id": 2
+    },
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "price": 12,
+      "description": "123",
+      "cate_id": 2,
+      "status": 1,
+      "id": 3
+    }
+  ],
   "users": [
     {
       "email": "admin@gmail.com",
