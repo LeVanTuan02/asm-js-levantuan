@@ -21,10 +21,10 @@
   "users": [
     {
       "email": "admin@gmail.com",
-      "password": "$2a$10$rxLIq6ozP1vHD9DEHOXPYehX/5sfwdy3cG5dAB07Dq3VsEE7nykcu",
+      "password": "$2a$10$d2PpTTfVt/tLFNlr8RPgDuSTDYfu93epUjay7bxI7zpsQeHqc84r6",
       "username": "admin",
-      "fullName": "Lê Văn Tuân",
-      "phone": "0347563255",
+      "fullName": "admin",
+      "phone": "0347562365",
       "id": 1
     }
   ]
