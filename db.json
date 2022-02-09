@@ -106,7 +106,7 @@
       "cateId": 1,
       "status": 1,
       "createdAt": "2022-02-09T15:42:22.570Z",
-      "updatedAt": "2022-02-09T16:02:21.196Z",
+      "updatedAt": "2022-02-09T16:33:32.863Z",
       "id": 2
     },
     {
@@ -114,10 +114,10 @@
       "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
       "description": "mô tả1",
       "content": "nội dung1",
-      "cateId": 1,
+      "cateId": 2,
       "status": 1,
       "createdAt": "2022-02-09T15:42:22.570Z",
-      "updatedAt": "2022-02-09T16:02:21.196Z",
+      "updatedAt": "2022-02-09T16:33:12.807Z",
       "id": 3
     }
   ],

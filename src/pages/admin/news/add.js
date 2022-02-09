@@ -3,9 +3,12 @@ import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 import { add } from "../../../api/news";
+import { getAll } from "../../../api/cateNews";
 
 const AdminAddNewsPage = {
-    render() {
+    async render() {
+        const { data: cateList } = await getAll();
+
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
             ${AdminNav.render("news")}
@@ -58,8 +61,9 @@ const AdminAddNewsPage = {
                                         <label for="form__add-news-cate" class="block text-sm font-medium text-gray-700">Danh mục bài viết</label>
                                         <select id="form__add-news-cate" name="form__add-news-cate" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn danh mục bài viết --</option>
-                                            <option value="1">Tin tức học tập</option>
-                                            <option value="2">Hoạt động sinh viên</option>
+                                            ${cateList.map((cate) => `
+                                                <option value="${cate.id}">${cate.name}</option>
+                                                `)}
                                         </select>
                                         <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>

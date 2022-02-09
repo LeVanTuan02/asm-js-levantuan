@@ -4,10 +4,12 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 import { get, update } from "../../../api/news";
 import AdminNewsListPage from ".";
+import { getAll } from "../../../api/cateNews";
 
 const AdminEditNewsPage = {
     async render(id) {
         const { data: newsData } = await get(id);
+        const { data: cateData } = await getAll();
 
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
@@ -61,8 +63,8 @@ const AdminEditNewsPage = {
                                         <label for="form__edit-news-cate" class="block text-sm font-medium text-gray-700">Danh mục bài viết</label>
                                         <select id="form__edit-news-cate" name="form__edit-news-cate" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn danh mục bài viết --</option>
-                                            <option value="1">Tin tức học tập</option>
-                                            <option value="2">Hoạt động sinh viên</option>
+                                            ${cateData.map((cate) => `
+                                                <option value="${cate.id}" ${newsData.cateId === cate.id ? "selected" : ""}>${cate.name}</option>`)}
                                         </select>
                                         <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>

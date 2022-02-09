@@ -30,7 +30,7 @@ const AdminNewsList = {
                             ${post.id}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            <a href="" class="hover:underline">${post.description}</a>
+                            <a href="" class="hover:underline">${post.title}</a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.status ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">
