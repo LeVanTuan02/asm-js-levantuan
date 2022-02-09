@@ -123,8 +123,8 @@ router.on({
     "/admin/news/add": () => {
         print(AdminAddNewsPage);
     },
-    "/admin/news/:id/edit": () => {
-        print(AdminEditNewsPage);
+    "/admin/news/:id/edit": ({ data }) => {
+        print(AdminEditNewsPage, data.id);
     },
     "/admin/product": () => {
         print(AdminProductListPage);
