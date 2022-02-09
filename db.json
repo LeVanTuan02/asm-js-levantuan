@@ -18,6 +18,20 @@
       "id": 3
     }
   ],
+  "cateNews": [
+    {
+      "id": 1,
+      "name": "Trà sữa nek1",
+      "createdAt": "2022-03-13T05:07:46.346Z",
+      "updatedAt": "2022-02-09T16:22:04.662Z"
+    },
+    {
+      "id": 2,
+      "name": "news cate",
+      "createdAt": "2022-03-13T05:07:46.346Z",
+      "updatedAt": "2022-02-09T16:21:55.020Z"
+    }
+  ],
   "products": [
     {
       "name": "Trà tranh nek",

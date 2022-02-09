@@ -34,6 +34,9 @@ import AdminCateListPage from "./pages/admin/category";
 import AdminAddCatePage from "./pages/admin/category/add";
 import AdminEditCatePage from "./pages/admin/category/edit";
 import NotFoundPage from "./pages/user/notFound";
+import AdminCateNewsListPage from "./pages/admin/categoryNews";
+import AdminEditCateNewsPage from "./pages/admin/categoryNews/edit";
+import AdminAddCateNewsPage from "./pages/admin/categoryNews/add";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -143,6 +146,15 @@ router.on({
     },
     "/admin/category/:id/edit": ({ data }) => {
         print(AdminEditCatePage, data.id);
+    },
+    "/admin/category-news": () => {
+        print(AdminCateNewsListPage);
+    },
+    "/admin/category-news/add": () => {
+        print(AdminAddCateNewsPage);
+    },
+    "/admin/category-news/:id/edit": ({ data }) => {
+        print(AdminEditCateNewsPage, data.id);
     },
 });
 

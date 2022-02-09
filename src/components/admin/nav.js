@@ -31,6 +31,27 @@ const AdminNav = {
                         <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/admin/news/add">Thêm mới</a>
                     </div>
                 </div>
+
+                <div>
+                    <div class="sidebar__item ${pageName === "categoryNews" ? "text-gray-200 bg-gray-800" : ""} flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+                        <div class="flex items-center">
+                            <div class="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                                <i class="fas fa-th-list"></i>
+                            </div>
+                            <a href="/#/admin/category-news">Categories News</a>
+                        </div>
+                        <svg class="sidebar__item-icon--right shrink-0 w-4 h-4 ml-2 transition transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentcolor">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414.0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg class="sidebar__item-icon--down hidden shrink-0 w-4 h-4 ml-2 transition transform rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentcolor">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414.0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="mb-4 hidden sidebar__submenu">
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category">Danh sách</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category/add">Thêm mới</a>
+                    </div>
+                </div>
                 
                 <div>
                     <div class="sidebar__item ${pageName === "product" ? "text-gray-200 bg-gray-800" : ""} flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
