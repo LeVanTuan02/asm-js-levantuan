@@ -48,6 +48,9 @@ import AdminAddToppingPage from "./pages/admin/topping/add";
 import AdminEditToppingPage from "./pages/admin/topping/edit";
 import AdminContactListPage from "./pages/admin/contact";
 import AdminDetailContactPage from "./pages/admin/contact/details";
+import AdminVoucherListPage from "./pages/admin/voucher";
+import AdminAddVoucherPage from "./pages/admin/voucher/add";
+import AdminEditVoucherPage from "./pages/admin/voucher/edit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -199,6 +202,15 @@ router.on({
     },
     "/admin/contact/:id/detail": ({ data }) => {
         print(AdminDetailContactPage, data.id);
+    },
+    "/admin/voucher": () => {
+        print(AdminVoucherListPage);
+    },
+    "/admin/voucher/add": () => {
+        print(AdminAddVoucherPage);
+    },
+    "/admin/voucher/:id/edit": ({ data }) => {
+        print(AdminEditVoucherPage, data.id);
     },
 });
 

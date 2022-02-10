@@ -198,6 +198,32 @@
       "createdAt": "2022-02-09T15:42:22"
     }
   ],
+  "voucher": [
+    {
+      "id": 1,
+      "code": "COVID",
+      "quantity": 1000,
+      "condition": 1,
+      "conditionNumber": 10,
+      "status": 1,
+      "timeStart": "2022-02-09T15:42:22",
+      "timeEnd": "2022-02-09T15:42:22",
+      "createdAt": "2022-02-08T12:06:48.706Z",
+      "updatedAt": "2022-02-10T10:39:53.563Z"
+    },
+    {
+      "code": "COVID10",
+      "quantity": 10,
+      "condition": 1,
+      "conditionNumber": 10000,
+      "status": 0,
+      "timeStart": "2022-02-10T17:22",
+      "timeEnd": "2022-02-10T17:22",
+      "createdAt": "2022-02-10T10:22:46.553Z",
+      "updatedAt": "2022-02-10T10:46:22.588Z",
+      "id": 2
+    }
+  ],
   "users": [
     {
       "email": "admin@gmail.com",
