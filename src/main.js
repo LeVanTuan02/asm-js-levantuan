@@ -46,6 +46,8 @@ import AdminSizeListPage from "./pages/admin/size";
 import AdminToppingListPage from "./pages/admin/topping";
 import AdminAddToppingPage from "./pages/admin/topping/add";
 import AdminEditToppingPage from "./pages/admin/topping/edit";
+import AdminContactListPage from "./pages/admin/contact";
+import AdminDetailContactPage from "./pages/admin/contact/details";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -191,6 +193,12 @@ router.on({
     },
     "/admin/topping/:id/edit": ({ data }) => {
         print(AdminEditToppingPage, data.id);
+    },
+    "/admin/contact": () => {
+        print(AdminContactListPage);
+    },
+    "/admin/contact/:id/detail": ({ data }) => {
+        print(AdminDetailContactPage, data.id);
     },
 });
 
