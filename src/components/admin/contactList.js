@@ -4,6 +4,13 @@ const AdminContactList = {
     async render() {
         const { data } = await getAll();
         const contactList = data.sort((a, b) => b.id - a.id);
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            return `
+                ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}
+                ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
+            `;
+        };
 
         return /* html */`
         <thead class="bg-gray-50">
@@ -16,6 +23,9 @@ const AdminContactList = {
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nội dung
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Ngày gửi
                 </th>
                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
@@ -34,6 +44,9 @@ const AdminContactList = {
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${item.content}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                        ${formatDate(item.createdAt)}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="/#/admin/contact/${item.id}/detail" class="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Detail</a>
