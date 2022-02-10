@@ -145,6 +145,29 @@
       "id": 2
     }
   ],
+  "size": [
+    {
+      "name": "SS",
+      "priceIncrease": 12112,
+      "createdAt": "2022-02-10T07:16:51.577Z",
+      "updatedAt": "2022-02-10T07:24:26.135Z",
+      "id": 4
+    },
+    {
+      "name": "A",
+      "priceIncrease": 1,
+      "createdAt": "2022-02-10T07:24:35.457Z",
+      "updatedAt": "2022-02-10T07:24:35.457Z",
+      "id": 5
+    },
+    {
+      "name": "A",
+      "priceIncrease": 2,
+      "createdAt": "2022-02-10T07:24:38.651Z",
+      "updatedAt": "2022-02-10T07:24:38.651Z",
+      "id": 6
+    }
+  ],
   "users": [
     {
       "email": "admin@gmail.com",
