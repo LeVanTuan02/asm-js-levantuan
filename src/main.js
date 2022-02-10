@@ -43,6 +43,9 @@ import AdminAddSliderPage from "./pages/admin/slider/add";
 import AdminAddSizePage from "./pages/admin/size/add";
 import AdminEditSizePage from "./pages/admin/size/edit";
 import AdminSizeListPage from "./pages/admin/size";
+import AdminToppingListPage from "./pages/admin/topping";
+import AdminAddToppingPage from "./pages/admin/topping/add";
+import AdminEditToppingPage from "./pages/admin/topping/edit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -179,6 +182,15 @@ router.on({
     },
     "/admin/size/:id/edit": ({ data }) => {
         print(AdminEditSizePage, data.id);
+    },
+    "/admin/topping": () => {
+        print(AdminToppingListPage);
+    },
+    "/admin/topping/add": () => {
+        print(AdminAddToppingPage);
+    },
+    "/admin/topping/:id/edit": ({ data }) => {
+        print(AdminEditToppingPage, data.id);
     },
 });
 

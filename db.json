@@ -84,11 +84,11 @@
       "price": 1,
       "description": "1",
       "cate_id": 2,
-      "status": 1,
+      "status": 0,
       "view": 0,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
-      "updatedAt": "2022-02-10T05:59:42.388Z",
+      "updatedAt": "2022-02-10T07:56:57.531Z",
       "id": 4
     }
   ],
@@ -166,6 +166,18 @@
       "createdAt": "2022-02-10T07:24:38.651Z",
       "updatedAt": "2022-02-10T07:24:38.651Z",
       "id": 6
+    }
+  ],
+  "toppings": [
+    {
+      "name": "a1",
+      "price": 1,
+      "id": 1
+    },
+    {
+      "name": "2b",
+      "price": 2,
+      "id": 2
     }
   ],
   "users": [
