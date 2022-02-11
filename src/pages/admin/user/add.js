@@ -11,7 +11,7 @@ const AdminAddUserPage = {
 
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
-            ${AdminNav.render("size")}
+            ${AdminNav.render("user")}
             
             <div class="ml-0 transition md:ml-60">
                 <header class="left-0 md:left-60 fixed right-0 top-0">
