@@ -56,7 +56,7 @@ import AdminAddUserPage from "./pages/admin/user/add";
 import AdminEditUserPage from "./pages/admin/user/edit";
 import AdminProfilePage from "./pages/admin/profile";
 import AdminUpdatePassPage from "./pages/admin/profile/updatePass";
-import { getUser } from "./utils";
+import { getUser, logout } from "./utils";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -80,6 +80,10 @@ router.on("/admin/*", () => {}, {
             document.location.href = "/#/";
         }
     },
+});
+
+router.on("/logout", () => {
+    logout();
 });
 
 router.on({

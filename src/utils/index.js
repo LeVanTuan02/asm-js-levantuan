@@ -46,3 +46,8 @@ export const getUser = () => {
 export const saveUser = (uesr) => {
     localStorage.setItem("auth", JSON.stringify(uesr));
 };
+
+export const logout = () => {
+    localStorage.removeItem("auth", "");
+    document.location.href = "/#/login";
+};

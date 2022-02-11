@@ -1,5 +1,9 @@
+import { getUser } from "../../utils";
+
 const Header = {
     render() {
+        const userLogged = getUser();
+
         return /* html */ `
         <header>
             <!-- header top -->
@@ -98,12 +102,19 @@ const Header = {
                                 </ul>
                             </div>
                         </li>
+                        ${userLogged ? `
+                        <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            Xin chào, <a href="${userLogged.role ? "/#/admin/dashboard" : "/#/my-account"}">${userLogged.fullName}</a>
+                        </li>
+                        ` : `
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
                             <a href="/#/login">Đăng nhập</a>
                         </li>
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-sm pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
                             <a href="/#/register">Đăng ký</a>
                         </li>
+                        `}
+                        
                         <li class="relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-base cursor-pointer pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
                             <div class="relative">
                                 <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
