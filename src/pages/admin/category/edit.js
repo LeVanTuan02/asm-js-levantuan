@@ -114,17 +114,13 @@ const AdminEditCatePage = {
             const isValid = validate();
 
             if (isValid) {
-                let cateData = {
+                const cateData = {
                     name: cateName.value,
                 };
 
                 if (cateImg.files.length) {
                     const response = await uploadFile(cateImg.files[0]);
-
-                    cateData = {
-                        name: cateName.value,
-                        image: response.data.url,
-                    };
+                    cateData.image = response.data.url;
                 }
 
                 update(id, cateData)
