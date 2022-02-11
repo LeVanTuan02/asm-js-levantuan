@@ -57,6 +57,9 @@ import AdminEditUserPage from "./pages/admin/user/edit";
 import AdminProfilePage from "./pages/admin/profile";
 import AdminUpdatePassPage from "./pages/admin/profile/updatePass";
 import { getUser, logout } from "./utils";
+import AdminStoreListPage from "./pages/admin/store";
+import AdminAddStorePage from "./pages/admin/store/add";
+import AdminEditStorePage from "./pages/admin/store/edit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -248,6 +251,15 @@ router.on({
     },
     "/admin/profile/change-password": () => {
         print(AdminUpdatePassPage);
+    },
+    "/admin/store": () => {
+        print(AdminStoreListPage);
+    },
+    "/admin/store/add": () => {
+        print(AdminAddStorePage);
+    },
+    "/admin/store/:id/edit": ({ data }) => {
+        print(AdminEditStorePage, data.id);
     },
 });
 

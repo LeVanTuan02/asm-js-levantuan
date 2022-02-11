@@ -231,9 +231,9 @@
       "username": "admin",
       "fullName": "admin",
       "phone": "0347562365",
-      "wardsCode": 0,
-      "districtCode": 0,
-      "provinceCode": 0,
+      "wardsCode": 7375,
+      "districtCode": 217,
+      "provinceCode": 24,
       "address": "Bắc Giang",
       "avatar": "http://res.cloudinary.com/levantuan/image/upload/v1644475492/assignment-js/ywfzd7w5wwgniskxr6e4.png",
       "role": 1,
@@ -288,6 +288,38 @@
       "active": 0,
       "createdAt": "2022-02-11T07:49:26.200Z",
       "id": 4
+    }
+  ],
+  "store": [
+    {
+      "id": 1,
+      "name": "Yotea Bắc Giang",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644322409/assignment-js/mlnynhmpjwkaykz8uxe6.png",
+      "address": "Abc",
+      "phone": "113",
+      "timeStart": "8:00",
+      "timeEnd": "21:00",
+      "map": ""
+    },
+    {
+      "id": 2,
+      "name": "Yotea Bắc Ninh",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644322409/assignment-js/mlnynhmpjwkaykz8uxe6.png",
+      "address": "Abc",
+      "phone": "113",
+      "timeStart": "8:00",
+      "timeEnd": "21:00",
+      "map": ""
+    },
+    {
+      "name": "Yotea Hà Nội",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644593922/assignment-js/qvdxovkvvfwr23rsercw.png",
+      "address": "HN edit",
+      "phone": "0345632563",
+      "timeStart": "08:30",
+      "timeEnd": "22:00",
+      "map": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863981044331!2d105.74459841501292!3d21.038127785993407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b991d80fd5%3A0x53cefc99d6b0bf6f!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1644592988353!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "id": 3
     }
   ]
 }
