@@ -8,6 +8,7 @@ export const reRender = async (component, domElement) => {
     if (component.afterRender) await component.afterRender();
 };
 
+// hàm upload image
 export const uploadFile = (file) => {
     const CLOUDINARY_NAME = "levantuan";
     const CLOUDINARY_API = `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`;
@@ -24,4 +25,15 @@ export const uploadFile = (file) => {
     });
 
     return res;
+};
+
+// check login
+export const checkLogin = (role) => {
+    const user = JSON.parse(localStorage.getItem("auth"));
+
+    if (!user || user.role !== 1 || user.role !== role) {
+        window.location.href = "/#/";
+    } else {
+        window.location.href = "/#/admin/dashboard";
+    }
 };

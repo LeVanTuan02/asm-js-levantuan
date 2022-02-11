@@ -2,6 +2,7 @@ import toastr from "toastr";
 import { login } from "../../api/user";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
+import { checkLogin } from "../../utils";
 
 const LoginPage = {
     render() {
@@ -74,12 +75,20 @@ const LoginPage = {
 
             const isValid = validate();
             if (isValid) {
-                login({
-                    email: username.value,
-                    password: password.value,
-                })
-                    .then(() => toastr.success("Thành công"))
-                    .catch(() => toastr.error("Tài khoản hoặc mật khẩu không chính xác"));
+                try {
+                    const { data } = await login({
+                        email: username.value,
+                        password: password.value,
+                    });
+
+                    // lưu thông tin vào localStorage
+                    localStorage.setItem("auth", JSON.stringify(data.user));
+
+                    // check quyền
+                    checkLogin(data.user.role);
+                } catch {
+                    toastr.error("Tài khoản hoặc mật khẩu không chính xác");
+                }
             }
         });
     },
