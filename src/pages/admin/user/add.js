@@ -14,7 +14,7 @@ const AdminAddUserPage = {
             ${AdminNav.render("user")}
             
             <div class="ml-0 transition md:ml-60">
-                <header class="left-0 md:left-60 fixed right-0 top-0">
+                <header class="left-0 md:left-60 fixed right-0 top-0 z-20">
                     ${HeaderTop.render()}
 
                     <div class="px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
