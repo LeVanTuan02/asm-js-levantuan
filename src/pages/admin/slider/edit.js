@@ -145,7 +145,7 @@ const AdminEditSliderPage = {
             const isValid = validate();
 
             if (isValid) {
-                let sliderData = {
+                const sliderData = {
                     title: title.value,
                     url: url.value,
                     status: +status.value,
@@ -153,13 +153,7 @@ const AdminEditSliderPage = {
 
                 if (imgSlider.files.length) {
                     const response = await uploadFile(imgSlider.files[0]);
-
-                    sliderData = {
-                        title: title.value,
-                        url: url.value,
-                        status: +status.value,
-                        image: response.data.url,
-                    };
+                    sliderData.image = response.data.url;
                 }
 
                 update(id, sliderData)
