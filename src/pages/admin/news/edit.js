@@ -181,7 +181,7 @@ const AdminEditNewsPage = {
 
             if (isValid) {
                 const date = new Date();
-                let postData = {
+                const postData = {
                     title: title.value,
                     description: description.value,
                     content: content.value,
@@ -192,16 +192,7 @@ const AdminEditNewsPage = {
 
                 if (thumbnail.files.length) {
                     const response = await uploadFile(thumbnail.files[0]);
-
-                    postData = {
-                        title: title.value,
-                        description: description.value,
-                        thumbnail: response.data.url,
-                        content: content.value,
-                        cateId: +cateId.value,
-                        status: +newsStt.value,
-                        updatedAt: date.toISOString(),
-                    };
+                    postData.thumbnail = response.data.url;
                 }
 
                 update(id, postData)
