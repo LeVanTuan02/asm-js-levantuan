@@ -54,6 +54,8 @@ import AdminEditVoucherPage from "./pages/admin/voucher/edit";
 import AdminUserListPage from "./pages/admin/user";
 import AdminAddUserPage from "./pages/admin/user/add";
 import AdminEditUserPage from "./pages/admin/user/edit";
+import AdminProfilePage from "./pages/admin/profile";
+import AdminUpdatePassPage from "./pages/admin/profile/updatePass";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -223,6 +225,12 @@ router.on({
     },
     "/admin/user/:id/edit": ({ data }) => {
         print(AdminEditUserPage, data.id);
+    },
+    "/admin/profile": () => {
+        print(AdminProfilePage);
+    },
+    "/admin/profile/change-password": () => {
+        print(AdminUpdatePassPage);
     },
 });
 
