@@ -182,7 +182,7 @@ const AdminEditProductPage = {
 
             if (isValid) {
                 const date = new Date();
-                let productData = {
+                const productData = {
                     name: proName.value,
                     price: +proPrice.value,
                     description: proDesc.value,
@@ -193,16 +193,7 @@ const AdminEditProductPage = {
 
                 if (proImage.files.length) {
                     const response = await uploadFile(proImage.files[0]);
-
-                    productData = {
-                        name: proName.value,
-                        image: response.data.url,
-                        price: +proPrice.value,
-                        description: proDesc.value,
-                        cate_id: +proCate.value,
-                        status: +proStt.value,
-                        updatedAt: date.toISOString(),
-                    };
+                    productData.image = response.data.url;
                 }
 
                 update(id, productData)
