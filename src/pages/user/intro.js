@@ -4,7 +4,7 @@ import Footer from "../../components/user/footer";
 const IntroPage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("intro")}
 
         <!-- content -->
         <main>

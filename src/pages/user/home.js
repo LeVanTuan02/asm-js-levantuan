@@ -13,7 +13,7 @@ import Why from "../../components/user/home/why";
 const HomePage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("home")}
 
         <!-- content -->
         <main>

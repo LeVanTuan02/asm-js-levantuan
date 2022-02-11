@@ -4,7 +4,7 @@ import Header from "../../components/user/header";
 const StorePage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("store")}
 
         <!-- content -->
         <main>

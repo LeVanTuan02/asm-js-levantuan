@@ -4,7 +4,7 @@ import Header from "../../components/user/header";
 const NewsPage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("news")}
 
         <!-- content -->
         <main>

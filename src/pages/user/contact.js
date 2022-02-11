@@ -4,7 +4,7 @@ import Header from "../../components/user/header";
 const ContactPage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("contact")}
 
         <!-- content -->
         <main>

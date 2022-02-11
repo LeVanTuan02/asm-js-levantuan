@@ -5,7 +5,7 @@ import Sidebar from "../../components/user/products/sidebar";
 const ProductsPage = {
     render() {
         return /* html */ `
-        ${Header.render()}
+        ${Header.render("products")}
 
         <!-- content -->
         <main>
