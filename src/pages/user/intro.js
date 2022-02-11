@@ -10,7 +10,7 @@ const IntroPage = {
         <main>
             <section class="container max-w-6xl mx-auto px-3 py-9">
                 <h2 class="uppercase text-[#D9A953] text-2xl font-semibold">Về Yotea</h2>
-                <div class="grid grid-cols-2 gap-5 mt-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
                     <div class="text-justify leading-relaxed">
                         <p class="mb-3">
                             Thương hiệu trà và cà phê YoTea được thành lập vào năm 2014
@@ -42,7 +42,7 @@ const IntroPage = {
                         </p>
                     </div>
 
-                    <div class="my-auto">
+                    <div class="my-auto text-center">
                         <img src="https://res.cloudinary.com/levantuan/image/upload/v1642663052/fpoly/asm-js/tea_odcxma.png" alt="">
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const IntroPage = {
                 <div class="container max-w-6xl mx-auto">
                     <h2 class="uppercase text-[#D9A953] text-2xl font-semibold text-center">Tầm nhìn chiến lược</h2>
 
-                    <div class="grid grid-cols-3 gap-14 mt-9 px-16">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-14 mt-9 px-16">
                         <div class="text-center">
                             <div class="w-24 h-24 inline-flex text-5xl text-[#D9A953] shadow-sm items-center justify-center rounded-full bg-white">
                                 <i class="fas fa-star"></i>
@@ -76,9 +76,9 @@ const IntroPage = {
             </section>
 
             <section class="py-14">
-                <div class="container max-w-6xl mx-auto flex">
-                    <div class="w-1/2 bg-cover bg-center bg-no-repeat rounded-l-xl" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642664388/fpoly/asm-js/108162714_1930571577080015_6762857609409971295_n_upoyhj.jpg)"></div>
-                    <div class="w-1/2 px-10 py-16 bg-[#D9A953] text-white rounded-r-xl">
+                <div class="container max-w-6xl mx-auto flex flex-wrap">
+                    <div class="w-full min-h-60 md:w-1/2 bg-cover bg-center bg-no-repeat md:rounded-l-xl" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642664388/fpoly/asm-js/108162714_1930571577080015_6762857609409971295_n_upoyhj.jpg)"></div>
+                    <div class="w-full md:w-1/2 px-10 py-16 bg-[#D9A953] text-white md:rounded-r-xl">
                         <h2 class="text-2xl font-semibold uppercase">SỨ MỆNH</h2>
                         <p class="text-justify mt-3">
                             Với châm ngôn tuyệt đối không sử dụng nguyên liệu

@@ -12,7 +12,7 @@ const StorePage = {
                 <h1 class="text-2xl font-semibold text-center text-[#D9A953] my-5 uppercase">Cửa hàng Yotea</h1>
 
                 <div class="grid grid-cols-12 gap-8">
-                    <div class="col-span-5">
+                    <div class="col-span-12 md:col-span-5">
                         <p>Vui lòng chọn khu vực bạn muốn tìm kiếm, chúng tôi sẽ hiển thị danh sách các cửa hàng phù hợp nhất</p>
 
                         <form action="" class="flex mt-3">
@@ -65,7 +65,7 @@ const StorePage = {
                             </li>
                         </ul>
                     </div>
-                    <div class="col-span-7">
+                    <div class="col-span-12 md:col-span-7 min-h-[450px]">
                         <iframe class="rounded-xl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.396458214383!2d105.74261531501334!3d21.05682198598322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313455d9c6ae3fd3%3A0x6b7361cdfbe5772c!2sTu%C3%A2n%20Poly!5e0!3m2!1svi!2s!4v1642844067947!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>

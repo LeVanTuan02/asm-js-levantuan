@@ -8,33 +8,33 @@ const ContactPage = {
 
         <!-- content -->
         <main>
-            <section class="container max-w-6xl mx-auto py-8 text-center">
+            <section class="container max-w-6xl mx-auto px-3 py-8 text-center">
                 <h1 class="text-2xl font-semibold text-[#D9A953] mb-2">Liên hệ với Yotea</h1>
                 <p>Từng ngày Yotea trở nên hoàn thiện hơn về diện mạo, chất lượng sản phẩm dịch vụ là nhờ sự đóng góp ý kiến của quý khách hàng. Để cảm nhận được sự thay đổi ấy, đừng ngần ngại nói với Yotea nhé.</p>
             </section>
 
             <section class="bg-[#EEE8DF] py-16">
-                <form action="" class="container max-w-6xl mx-auto">
+                <form action="" class="container max-w-6xl mx-auto px-3">
                     <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-6">
+                        <div class="col-span-12 md:col-span-6">
                             <input type="text" placeholder="Họ và tên" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
-                        <div class="col-span-6">
+                        <div class="col-span-12 md:col-span-6">
                             <input type="text" placeholder="Email" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
-                        <div class="col-span-4">
+                        <div class="col-span-12 md:col-span-4">
                             <input type="text" placeholder="Số điện thoại" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
-                        <div class="col-span-4">
+                        <div class="col-span-12 md:col-span-4">
                             <select name="" id="" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
                                 <option value="">Tỉnh/Thành</option>
                             </select>
                         </div>
 
-                        <div class="col-span-4">
+                        <div class="col-span-12 md:col-span-4">
                             <select name="" id="" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
                                 <option value="">Cửa hàng phản hồi</option>
                                 <option value="">Teahouse HN</option>
@@ -56,7 +56,7 @@ const ContactPage = {
                 </form>
             </section>
 
-            <section class="container max-w-6xl mx-auto py-10 leading-relaxed">
+            <section class="container max-w-6xl mx-auto px-3 py-10 leading-relaxed">
                 <h2 class="text-xl font-semibold text-[#D9A953] mb-1">Thỏa thuận bảo mật thông tin</h2>
                 <p>
                     Yotea cam kết giữ bí mật hoàn toàn thông tin của Quý khách hàng theo đúng quy định 
