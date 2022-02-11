@@ -15,3 +15,7 @@
 .sidebar__item.active .sidebar__item-icon--right {
     @apply hidden;
 }
+
+.form-control[disabled] {
+    @apply bg-gray-50;
+}

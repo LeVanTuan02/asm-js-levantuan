@@ -51,13 +51,16 @@ import AdminDetailContactPage from "./pages/admin/contact/details";
 import AdminVoucherListPage from "./pages/admin/voucher";
 import AdminAddVoucherPage from "./pages/admin/voucher/add";
 import AdminEditVoucherPage from "./pages/admin/voucher/edit";
+import AdminUserListPage from "./pages/admin/user";
+import AdminAddUserPage from "./pages/admin/user/add";
+import AdminEditUserPage from "./pages/admin/user/edit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
 const print = async (content, id) => {
     document.querySelector("#app").innerHTML = await content.render(id);
 
-    if (content.afterRender) content.afterRender();
+    if (content.afterRender) content.afterRender(id);
 };
 
 const changeTitle = (title) => {
@@ -211,6 +214,15 @@ router.on({
     },
     "/admin/voucher/:id/edit": ({ data }) => {
         print(AdminEditVoucherPage, data.id);
+    },
+    "/admin/user": () => {
+        print(AdminUserListPage);
+    },
+    "/admin/user/add": () => {
+        print(AdminAddUserPage);
+    },
+    "/admin/user/:id/edit": ({ data }) => {
+        print(AdminEditUserPage, data.id);
     },
 });
 
