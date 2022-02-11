@@ -56,6 +56,7 @@ import AdminAddUserPage from "./pages/admin/user/add";
 import AdminEditUserPage from "./pages/admin/user/edit";
 import AdminProfilePage from "./pages/admin/profile";
 import AdminUpdatePassPage from "./pages/admin/profile/updatePass";
+import { getUser } from "./utils";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -68,6 +69,18 @@ const print = async (content, id) => {
 const changeTitle = (title) => {
     document.title = title;
 };
+
+router.on("/admin/*", () => {}, {
+    before(done) {
+        const userInfo = getUser();
+
+        if (userInfo.role) {
+            done();
+        } else {
+            document.location.href = "/#/";
+        }
+    },
+});
 
 router.on({
     "/": () => {
