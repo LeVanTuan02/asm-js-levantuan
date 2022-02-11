@@ -37,3 +37,12 @@ export const checkLogin = (role) => {
         window.location.href = "/#/admin/dashboard";
     }
 };
+
+export const getUser = () => {
+    const user = JSON.parse(localStorage.getItem("auth"));
+    return user;
+};
+
+export const saveUser = (uesr) => {
+    localStorage.setItem("auth", JSON.stringify(uesr));
+};

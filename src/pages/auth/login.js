@@ -2,7 +2,7 @@ import toastr from "toastr";
 import { login } from "../../api/user";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
-import { checkLogin } from "../../utils";
+import { checkLogin, saveUser } from "../../utils";
 
 const LoginPage = {
     render() {
@@ -82,7 +82,7 @@ const LoginPage = {
                     });
 
                     // lưu thông tin vào localStorage
-                    localStorage.setItem("auth", JSON.stringify(data.user));
+                    saveUser(data.user);
 
                     // check quyền
                     checkLogin(data.user.role);
