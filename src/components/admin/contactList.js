@@ -25,6 +25,9 @@ const AdminContactList = {
                     Nội dung
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Chi nhánh feedback
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Ngày gửi
                 </th>
                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -44,6 +47,9 @@ const AdminContactList = {
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${item.content}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        ${item.store.name}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
                         ${formatDate(item.createdAt)}

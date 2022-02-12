@@ -196,7 +196,7 @@
       "name": "Tuân",
       "email": "admin@gmail.com",
       "phone": "0347856325",
-      "storeId": 1,
+      "storeId": 2,
       "createdAt": "2022-02-09T15:42:22"
     },
     {
@@ -204,7 +204,7 @@
       "name": "Lê Văn Tuân",
       "email": "tuanlv@gmail.com",
       "phone": "0345632563",
-      "storeId": 1,
+      "storeId": 3,
       "createdAt": "2022-02-12T10:28:55.185Z",
       "id": 3
     }

@@ -54,3 +54,9 @@ export const logout = () => {
 
 // hàm format money
 export const formatCurrency = (currency) => currency.toLocaleString("it-IT", { style: "currency", currency: "VND" });
+
+// format date
+export const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+};

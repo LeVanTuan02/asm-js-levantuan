@@ -1,6 +1,7 @@
 import { get } from "../../../api/contact";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
+import { formatDate } from "../../../utils";
 
 const AdminDetailContactPage = {
     async render(id) {
@@ -49,6 +50,16 @@ const AdminDetailContactPage = {
                                     <div class="col-span-6">
                                         <label for="customer-phone" class="block text-sm font-medium text-gray-700">Email khách hàng</label>
                                         <input type="text" disabled name="customer-phone" class="py-2 px-3 mt-1 border block w-full outline-none shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 text-gray-500 text-sm" value="${contactDetail.email}">
+                                    </div>
+
+                                    <div class="col-span-6 md:col-span-3">
+                                        <label for="customer-name" class="block text-sm font-medium text-gray-700">Chi nhánh feedback</label>
+                                        <input type="text" disabled name="customer-name" class="py-2 px-3 mt-1 border block w-full outline-none shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 text-gray-500 text-sm" value="${contactDetail.store.name}">
+                                    </div>
+
+                                    <div class="col-span-6 md:col-span-3">
+                                        <label for="customer-phone" class="block text-sm font-medium text-gray-700">Ngày gửi</label>
+                                        <input type="text" disabled name="customer-phone" class="py-2 px-3 mt-1 border block w-full outline-none shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-50 text-gray-500 text-sm" value="${formatDate(contactDetail.createdAt)}">
                                     </div>
 
                                     <div class="col-span-6">

@@ -3,12 +3,12 @@ import instance from "./config";
 const TABLE_NAME = "contact";
 
 export const getAll = () => {
-    const url = `/${TABLE_NAME}`;
+    const url = `/${TABLE_NAME}/?_expand=store`;
     return instance.get(url);
 };
 
 export const get = (id) => {
-    const url = `/${TABLE_NAME}/${id}`;
+    const url = `/${TABLE_NAME}/${id}/?_expand=store`;
     return instance.get(url);
 };
 
