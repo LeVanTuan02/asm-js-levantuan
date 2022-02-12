@@ -40,7 +40,7 @@ const AdminProductList = {
                                 <div class="flex-shrink-0 h-10 w-10">
                                     <img class="h-10 w-10 rounded-full" src="${item.image}" alt="">
                                 </div>
-                                <a href="" class="text-sm font-medium text-gray-900 ml-4 hover:underline">${item.name}</a>
+                                <a href="/#/product/${item.id}" class="text-sm font-medium text-gray-900 ml-4 hover:underline">${item.name}</a>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">

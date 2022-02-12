@@ -1,4 +1,5 @@
 import { getAll } from "../../api/news";
+import { formatDate } from "../../utils";
 
 const AdminNewsList = {
     async render() {
@@ -16,6 +17,9 @@ const AdminNewsList = {
                         Tiêu đề
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Ngày tạo
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Trạng thái
                     </th>
                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -30,7 +34,10 @@ const AdminNewsList = {
                             ${post.id}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            <a href="" class="hover:underline">${post.title}</a>
+                            <a href="/#/news/${post.id}" class="hover:underline">${post.title}</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                            ${formatDate(post.createdAt)}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.status ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">
