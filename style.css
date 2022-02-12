@@ -46,3 +46,11 @@
         transform: translateY(0)
     }
 }
+
+.cate-news-item.active .cate-news-icon {
+    @apply bg-[#D9A953] text-white
+}
+
+.cate-news-item.active .cate-news-name {
+    @apply text-[#D9A953]
+}

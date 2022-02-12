@@ -62,6 +62,7 @@ import AdminAddStorePage from "./pages/admin/store/add";
 import AdminEditStorePage from "./pages/admin/store/edit";
 import SearchProductPage from "./pages/user/searchProduct";
 import ProductByCatePage from "./pages/user/productByCate";
+import NewsByCatePage from "./pages/user/newsByCate";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -117,8 +118,11 @@ router.on({
         changeTitle("Tin tức - Trà Sữa Yotea");
         print(NewsPage);
     },
-    "/news/:id": () => {
-        print(NewsDetailsPage);
+    "/news/:id": ({ data }) => {
+        print(NewsDetailsPage, data.id);
+    },
+    "/category-news/:id": ({ data }) => {
+        print(NewsByCatePage, data.id);
     },
     "/contact": () => {
         changeTitle("Liên hệ - Trà Sữa Yotea");

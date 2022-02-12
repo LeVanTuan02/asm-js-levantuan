@@ -27,15 +27,21 @@
   "cateNews": [
     {
       "id": 1,
-      "name": "Trà sữa nek1",
+      "name": "Tin tức",
       "createdAt": "2022-03-13T05:07:46.346Z",
-      "updatedAt": "2022-02-09T16:22:04.662Z"
+      "updatedAt": "2022-02-12T14:13:17.404Z"
     },
     {
       "id": 2,
-      "name": "news cate",
+      "name": "Khuyến mãi",
       "createdAt": "2022-03-13T05:07:46.346Z",
-      "updatedAt": "2022-02-09T16:21:55.020Z"
+      "updatedAt": "2022-02-12T14:13:29.413Z"
+    },
+    {
+      "name": "Yotea Story",
+      "createdAt": "2022-02-12T14:13:41.269Z",
+      "updatedAt": "2022-02-12T14:13:41.269Z",
+      "id": 3
     }
   ],
   "products": [
