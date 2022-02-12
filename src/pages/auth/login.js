@@ -84,10 +84,12 @@ const LoginPage = {
                     // lưu thông tin vào localStorage
                     saveUser(data.user);
 
-                    // check quyền
-                    checkLogin(data.user.role);
-                } catch {
-                    toastr.error("Tài khoản hoặc mật khẩu không chính xác");
+                    // show message
+                    toastr.success("Đăng nhập thành công, hệ thống tự động chuyển hướng sau 3s");
+
+                    setTimeout(() => checkLogin(data.user.role), 3000);
+                } catch (error) {
+                    toastr.error(error.response.data);
                 }
             }
         });
