@@ -13,23 +13,23 @@ const Footer = {
                         </p>
                         <ul class="flex text-white">
                             <li class="mr-3 mt-3">
-                                <a href="">
+                                <a href="https://www.facebook.com/LeVanTuan.Info/" target="_blank">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             </li>
                             <li class="mr-3 mt-3">
-                                <a href="">
-                                    <i class="fab fa-facebook-f"></i>
+                                <a href="https://www.youtube.com/c/L%C3%AAV%C4%83nTu%C3%A2n02/" target="_blank">
+                                    <i class="fab fa-youtube"></i>
                                 </a>
                             </li>
                             <li class="mr-3 mt-3">
-                                <a href="">
-                                    <i class="fab fa-facebook-f"></i>
+                                <a href="https://www.instagram.com/_tuan02/" target="_blank">
+                                    <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
                             <li class="mr-3 mt-3">
-                                <a href="">
-                                    <i class="fab fa-facebook-f"></i>
+                                <a href="https://www.tiktok.com/@tuandemo" target="_blank">
+                                    <i class="fab fa-tiktok"></i>
                                 </a>
                             </li>
                         </ul>
@@ -40,31 +40,31 @@ const Footer = {
 
                         <ul class="text-white leading-relaxed">
                             <li class="flex">
-                                <div class="w-5">
-                                    <i class="fab fa-facebook-f"></i>
+                                <div class="min-w-[25px]">
+                                    <i class="fas fa-home"></i>
                                 </div>
-                                25A Trần Nguyên Hãn – Nha Trang
+                                Lạng Giang, Bắc Giang
                             </li>
                             <li class="flex">
-                                <div class="w-5">
-                                    <i class="fab fa-facebook-f"></i>
+                                <div class="min-w-[25px]">
+                                    <i class="fas fa-phone-alt"></i>
                                 </div>
                                 Hotline:
-                                <a href="">091 353 3457 – 09 1425 2542</a>
+                                <a href="tel:0347247244">&nbsp 0347247244</a>
                             </li>
                             <li class="flex">
-                                <div class="w-5">
-                                    <i class="fab fa-facebook-f"></i>
+                                <div class="min-w-[25px]">
+                                    <i class="fas fa-envelope"></i>
                                 </div>
-                                Hotline:
-                                <a href="">091 353 3457 – 09 1425 2542</a>
+                                Email:
+                                <a href="mailto:tuanlvph14271@fpt.edu.vn">&nbsp tuanlvph14271@fpt.edu.vn</a>
                             </li>
                             <li class="flex">
-                                <div class="w-5">
+                                <div class="min-w-[25px]">
                                     <i class="fab fa-facebook-f"></i>
                                 </div>
-                                Hotline:
-                                <a href="">091 353 3457 – 09 1425 2542</a>
+                                Facebook:
+                                <a href="https://www.facebook.com/LeVanTuan.Info/" target="_blank">&nbsp Lê Văn Tuân</a>
                             </li>
                         </ul>
                     </div>
@@ -83,7 +83,7 @@ const Footer = {
                     Copyright 2022 ©
                     <strong>
                         Bản quyền thuộc về
-                        <a href="">TuanDemo</a>
+                        <a href="https://www.facebook.com/LeVanTuan.Info/" target="_blank">TuanDemo</a>
                     </strong>
                 </div>
             </div>
