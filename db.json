@@ -187,6 +187,7 @@
       "name": "Tuân",
       "email": "admin@gmail.com",
       "phone": "0347856325",
+      "storeId": 1,
       "createdAt": "2022-02-09T15:42:22"
     },
     {
@@ -195,7 +196,17 @@
       "name": "Tuân",
       "email": "admin@gmail.com",
       "phone": "0347856325",
+      "storeId": 1,
       "createdAt": "2022-02-09T15:42:22"
+    },
+    {
+      "content": "Bắc Giang 98",
+      "name": "Lê Văn Tuân",
+      "email": "tuanlv@gmail.com",
+      "phone": "0345632563",
+      "storeId": 1,
+      "createdAt": "2022-02-12T10:28:55.185Z",
+      "id": 3
     }
   ],
   "voucher": [
@@ -290,7 +301,7 @@
       "id": 4
     }
   ],
-  "store": [
+  "stores": [
     {
       "id": 1,
       "name": "Yotea Bắc Giang",

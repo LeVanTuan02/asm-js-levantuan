@@ -1,8 +1,14 @@
+import toastr from "toastr";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
+import { getAll } from "../../api/store";
+import { add } from "../../api/contact";
+import { reRender } from "../../utils";
 
 const ContactPage = {
     async render() {
+        const { data: storeList } = await getAll();
+
         return /* html */ `
         ${await Header.render("contact")}
 
@@ -14,41 +20,43 @@ const ContactPage = {
             </section>
 
             <section class="bg-[#EEE8DF] py-16">
-                <form action="" class="container max-w-6xl mx-auto px-3">
+                <form action="" class="container max-w-6xl mx-auto px-3" id="contact__form">
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 md:col-span-6">
-                            <input type="text" placeholder="Họ và tên" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                            <input type="text" placeholder="Họ và tên" id="contact__form-name" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <input type="text" placeholder="Email" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                            <input type="text" placeholder="Email" id="contact__form-email" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
-                        <div class="col-span-12 md:col-span-4">
-                            <input type="text" placeholder="Số điện thoại" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                        <div class="col-span-12 md:col-span-6">
+                            <input type="text" placeholder="Số điện thoại" id="contact__form-phone" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
-                        <div class="col-span-12 md:col-span-4">
-                            <select name="" id="" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
-                                <option value="">Tỉnh/Thành</option>
-                            </select>
-                        </div>
-
-                        <div class="col-span-12 md:col-span-4">
-                            <select name="" id="" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
+                        <div class="col-span-12 md:col-span-6">
+                            <select name="" id="contact__form-store" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
                                 <option value="">Cửa hàng phản hồi</option>
-                                <option value="">Teahouse HN</option>
+                                ${storeList.map((store) => `<option value="${store.id}">${store.name}</option>`).join("")}
                             </select>
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
                         <div class="col-span-12">
                             <label for="contact__form-content" class="text-[#D9A953] font-semibold mb-1 text-lg block">Nội dung phản hồi</label>
                             <textarea name="" id="contact__form-content" cols="30" rows="10" placeholder="Nội dung phản hồi" class="w-full rounded-xl outline-none py-2 px-3 shadow-sm"></textarea>
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
-                        <div class="col-span-12 flex items-center">
-                            <input type="checkbox" name="" id="contact-checkbox">
-                            <label for="contact-checkbox" class="ml-2">Tôi xác nhận các thông tin cá nhân cung cấp ở trên là hoàn toàn chính xác và đồng ý để Yotea sử dụng các thông tin đó cho mục đích giải quyết phản hồi.</label>
+                        <div class="col-span-12">
+                            <div class="flex items-center">
+                                <input type="checkbox" name="" id="contact__form-checkbox">
+                                <label for="contact__form-checkbox" class="ml-2">Tôi xác nhận các thông tin cá nhân cung cấp ở trên là hoàn toàn chính xác và đồng ý để Yotea sử dụng các thông tin đó cho mục đích giải quyết phản hồi.</label>
+                            </div>
+                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
                     </div>
 
@@ -120,6 +128,91 @@ const ContactPage = {
     afterRender() {
         Header.afterRender();
         Footer.afterRender();
+
+        const formContact = document.querySelector("#contact__form");
+        const fullName = formContact.querySelector("#contact__form-name");
+        const phone = formContact.querySelector("#contact__form-phone");
+        const email = formContact.querySelector("#contact__form-email");
+        const storeId = formContact.querySelector("#contact__form-store");
+        const content = formContact.querySelector("#contact__form-content");
+        const checkbox = formContact.querySelector("#contact__form-checkbox");
+
+        const validate = () => {
+            let isValid = true;
+
+            if (!fullName.value) {
+                fullName.nextElementSibling.innerText = "Vui lòng nhập tên";
+                isValid = false;
+            } else {
+                fullName.nextElementSibling.innerText = "";
+            }
+
+            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+            if (!phone.value) {
+                phone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
+                isValid = false;
+            } else if (!regexPhone.test(phone.value)) {
+                phone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
+                isValid = false;
+            } else {
+                phone.nextElementSibling.innerText = "";
+            }
+
+            const regexEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            if (!email.value) {
+                email.nextElementSibling.innerText = "Vui lòng nhập email";
+                isValid = false;
+            } else if (!regexEmail.test(email.value)) {
+                email.nextElementSibling.innerText = "Email không đúng định dạng";
+                isValid = false;
+            } else {
+                email.nextElementSibling.innerText = "";
+            }
+
+            if (!storeId.value) {
+                storeId.nextElementSibling.innerText = "Vui lòng chọn cửa hàng phản hồi";
+                isValid = false;
+            } else {
+                storeId.nextElementSibling.innerText = "";
+            }
+
+            if (!content.value) {
+                content.nextElementSibling.innerText = "Vui lòng nhập nội dung feedback";
+                isValid = false;
+            } else {
+                content.nextElementSibling.innerText = "";
+            }
+
+            if (!checkbox.checked) {
+                checkbox.parentElement.nextElementSibling.innerText = "Vui lòng đồng ý với điều khoản của chúng tôi";
+                isValid = false;
+            } else {
+                checkbox.parentElement.nextElementSibling.innerText = "";
+            }
+
+            return isValid;
+        };
+
+        formContact.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const isValid = validate();
+
+            if (isValid) {
+                const date = new Date();
+
+                add({
+                    content: content.value,
+                    name: fullName.value,
+                    email: email.value,
+                    phone: phone.value,
+                    storeId: +storeId.value,
+                    createdAt: date.toISOString(),
+                })
+                    .then(() => toastr.success("Gửi thành công"))
+                    .then(() => reRender(ContactPage, "#app"));
+            }
+        });
     },
 };
 
