@@ -60,6 +60,7 @@ import { getUser, logout } from "./utils";
 import AdminStoreListPage from "./pages/admin/store";
 import AdminAddStorePage from "./pages/admin/store/add";
 import AdminEditStorePage from "./pages/admin/store/edit";
+import SearchProductPage from "./pages/user/searchProduct";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -104,6 +105,9 @@ router.on({
     },
     "/product/:id": () => {
         print(ProductDetailPage);
+    },
+    "/product/search/:keyword": ({ data }) => {
+        print(SearchProductPage, data.keyword);
     },
     "/news": () => {
         changeTitle("Tin tức - Trà Sữa Yotea");

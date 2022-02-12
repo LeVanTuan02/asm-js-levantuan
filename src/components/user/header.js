@@ -1,4 +1,5 @@
-import { getUser } from "../../utils";
+import { search } from "../../api/product";
+import { formatCurrency, getUser } from "../../utils";
 import Nav from "./nav";
 
 const Header = {
@@ -36,71 +37,14 @@ const Header = {
                             </button>
 
                             <div class="hidden z-20 group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
-                                <form action="" class="flex">
-                                    <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                                <form action="" class="flex" id="form-search-product">
+                                    <input type="text" id="form-search-control" class="text-black shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
                                     <button class="px-3 bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </form>
 
-                                <ul class="mt-3 grid grid-cols-1 divide-y max-h-[70vh] overflow-y-auto">
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
-                                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                                            <p class="ml-1 normal-case font-normal">Trà sữa</p>
-                                            <p class="font-medium ml-auto">20,000</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <ul class="mt-3 grid grid-cols-1 divide-y max-h-[70vh] overflow-y-auto" id="search-product-result"></ul>
                             </div>
                         </li>
                         ${userLogged ? `
@@ -188,6 +132,25 @@ const Header = {
             } else {
                 headerElement.classList.remove("active");
             }
+        });
+
+        // tìm kiếm sp
+        // const formSearch = document.querySelector("#form-search-product");
+        const formControlSearch = document.querySelector("#form-search-control");
+        const searchResult = document.querySelector("#search-product-result");
+        formControlSearch.addEventListener("input", async (e) => {
+            const keyword = e.target.value;
+
+            const { data: listProduct } = await search(keyword);
+            searchResult.innerHTML = listProduct.map((item) => `
+                <li>
+                    <a href="/#/product/${item.id}" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
+                        <img src="${item.image}" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
+                        <p class="ml-1 normal-case font-normal">${item.name}</p>
+                        <p class="font-medium ml-auto">${formatCurrency(item.price)}</p>
+                    </a>
+                </li>
+                `).join("");
         });
     },
 };
