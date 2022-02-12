@@ -193,7 +193,7 @@ const AdminAddProductPage = {
                     image: response.data.url,
                     price: +proPrice.value,
                     description: proDesc.value,
-                    cate_id: +proCate.value,
+                    categoryId: +proCate.value,
                     status: +proStt.value,
                     view: 0,
                     favorites: 0,

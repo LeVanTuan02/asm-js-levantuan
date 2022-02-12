@@ -64,7 +64,7 @@ const AdminEditNewsPage = {
                                         <select id="form__edit-news-cate" name="form__edit-news-cate" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn danh mục bài viết --</option>
                                             ${cateData.map((cate) => `
-                                                <option value="${cate.id}" ${newsData.cateId === cate.id ? "selected" : ""}>${cate.name}</option>`)}
+                                                <option value="${cate.id}" ${newsData.cateNewId === cate.id ? "selected" : ""}>${cate.name}</option>`)}
                                         </select>
                                         <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
@@ -185,7 +185,7 @@ const AdminEditNewsPage = {
                     title: title.value,
                     description: description.value,
                     content: content.value,
-                    cateId: +cateId.value,
+                    cateNewId: +cateId.value,
                     status: +newsStt.value,
                     updatedAt: date.toISOString(),
                 };

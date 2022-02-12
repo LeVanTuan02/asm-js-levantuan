@@ -193,7 +193,7 @@ const AdminAddNewsPage = {
                     thumbnail: response.data.url,
                     description: description.value,
                     content: content.value,
-                    cateId: +cateId.value,
+                    cateNewId: +cateId.value,
                     status: +newsStt.value,
                     createdAt: date.toISOString(),
                     updatedAt: date.toISOString(),

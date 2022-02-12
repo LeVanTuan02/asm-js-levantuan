@@ -1,6 +1,6 @@
 import instance from "./config";
 
-const TABLE_NAME = "category";
+const TABLE_NAME = "categories";
 
 export const getAll = () => {
     const url = `/${TABLE_NAME}`;

@@ -64,7 +64,7 @@ const AdminEditProductPage = {
                                         <select id="form__edit-product-cate" name="form__edit-product-cate" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn danh mục sản phẩm --</option>
                                             ${cateList.map((cate) => `
-                                                <option value="${cate.id}" ${cate.id === productDetail.cate_id ? "selected" : ""}>${cate.name}</option>
+                                                <option value="${cate.id}" ${cate.id === productDetail.categoryId ? "selected" : ""}>${cate.name}</option>
                                                 `)}
                                         </select>
                                         <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
@@ -186,7 +186,7 @@ const AdminEditProductPage = {
                     name: proName.value,
                     price: +proPrice.value,
                     description: proDesc.value,
-                    cate_id: +proCate.value,
+                    categoryId: +proCate.value,
                     status: +proStt.value,
                     updatedAt: date.toISOString(),
                 };

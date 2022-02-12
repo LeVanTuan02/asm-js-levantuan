@@ -1,5 +1,5 @@
 {
-  "category": [
+  "categories": [
     {
       "id": 1,
       "name": "Trà sữa nek",
@@ -44,52 +44,52 @@
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415273/assignment-js/ogvmmual09hjnotqlsir.jpg",
       "price": 20000,
       "description": "Trà tranh mô tả",
-      "cate_id": 3,
       "status": 0,
       "view": 0,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-09T15:00:50.038Z",
-      "id": 1
+      "id": 1,
+      "categoryId": 1
     },
     {
       "name": "Trà tranh nek",
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
       "price": 1231,
       "description": "123",
-      "cate_id": 2,
       "status": 1,
       "view": 0,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-09T15:00:50.038Z",
-      "id": 2
+      "id": 2,
+      "categoryId": 1
     },
     {
       "name": "Trà tranh nek",
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644418284/assignment-js/mfg2uls1i5owz6xohkrw.jpg",
       "price": 12,
       "description": "123",
-      "cate_id": 3,
       "status": 1,
       "view": 0,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-09T15:00:50.038Z",
-      "id": 3
+      "id": 3,
+      "categoryId": 1
     },
     {
       "name": "Trà tranh nek1",
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644418736/assignment-js/p8xwzdkyodjyc7qphxmz.jpg",
       "price": 1,
       "description": "1",
-      "cate_id": 2,
       "status": 0,
       "view": 0,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-10T07:56:57.531Z",
-      "id": 4
+      "id": 4,
+      "categoryId": 1
     }
   ],
   "news": [
@@ -98,7 +98,7 @@
       "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
       "description": "mô tả1",
       "content": "nội dung1",
-      "cateId": 1,
+      "cateNewId": 1,
       "status": 1,
       "createdAt": "2022-02-09T15:42:22.570Z",
       "updatedAt": "2022-02-09T16:02:21.196Z",
@@ -109,7 +109,7 @@
       "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
       "description": "mô tả1",
       "content": "nội dung1",
-      "cateId": 1,
+      "cateNewId": 1,
       "status": 1,
       "createdAt": "2022-02-09T15:42:22.570Z",
       "updatedAt": "2022-02-09T16:33:32.863Z",
@@ -120,7 +120,7 @@
       "thumbnail": "http://res.cloudinary.com/levantuan/image/upload/v1644421341/assignment-js/u2hj1ij15kwbyrscc7cw.jpg",
       "description": "mô tả1",
       "content": "nội dung1",
-      "cateId": 2,
+      "cateNewId": 2,
       "status": 1,
       "createdAt": "2022-02-09T15:42:22.570Z",
       "updatedAt": "2022-02-09T16:33:12.807Z",
