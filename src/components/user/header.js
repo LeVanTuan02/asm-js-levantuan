@@ -134,7 +134,7 @@ const Header = {
             <!-- end header top -->
 
             <!-- header bottom -->
-            <div class="container max-w-6xl mx-auto px-3">
+            <div class="md:h-24 bg-white" id="header-bottom">
                 ${Nav.render(pageName)}
             </div>
             <!-- end header bottom -->
@@ -177,6 +177,18 @@ const Header = {
             <!-- nav on mobile -->
         </header>
         `;
+    },
+    afterRender() {
+        const headerElement = document.querySelector("#header-bottom");
+        window.addEventListener("scroll", () => {
+            const scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if (scrollHeight >= 600) {
+                headerElement.classList.add("active");
+            } else {
+                headerElement.classList.remove("active");
+            }
+        });
     },
 };
 

@@ -95,6 +95,10 @@ const IntroPage = {
         ${Footer.render()}
         `;
     },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+    },
 };
 
 export default IntroPage;

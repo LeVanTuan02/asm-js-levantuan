@@ -206,6 +206,10 @@ const NewsPage = {
         ${Footer.render()}
         `;
     },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+    },
 };
 
 export default NewsPage;

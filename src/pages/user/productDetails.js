@@ -335,6 +335,10 @@ const ProductDetailPage = {
         ${Footer.render()}
         `;
     },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+    },
 };
 
 export default ProductDetailPage;

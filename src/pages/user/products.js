@@ -431,6 +431,10 @@ const ProductsPage = {
         ${Footer.render()}
         `;
     },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+    },
 };
 
 export default ProductsPage;

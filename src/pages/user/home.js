@@ -51,6 +51,9 @@ const HomePage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+
         // slider
         $(document).ready(() => {
             $("#banner").slick({

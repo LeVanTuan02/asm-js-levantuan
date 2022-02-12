@@ -68,6 +68,10 @@ const NewsDetailsPage = {
         ${Footer.render()}
         `;
     },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+    },
 };
 
 export default NewsDetailsPage;

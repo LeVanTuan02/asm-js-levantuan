@@ -87,9 +87,31 @@ const Footer = {
                     </strong>
                 </div>
             </div>
+
+            <!-- btn scroll top -->
+            <button class="btn__scroll-top invisible w-9 h-9 rounded-full border-2 border-gray-400 text-gray-400 fixed right-5 bottom-3 transition-all ease-linear duration-400 hover:text-white hover:bg-[#D9A953] hover:border-[#D9A953]">
+                <i class="fas fa-chevron-up"></i>
+            </button>
         </footer>
         <!-- end footer -->
         `;
+    },
+    afterRender() {
+        const btnScrollTop = document.querySelector(".btn__scroll-top");
+        window.addEventListener("scroll", () => {
+            const scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if (scrollHeight >= 1000) {
+                btnScrollTop.classList.add("active");
+            } else {
+                btnScrollTop.classList.remove("active");
+            }
+        });
+
+        btnScrollTop.addEventListener("click", () => {
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        });
     },
 };
 

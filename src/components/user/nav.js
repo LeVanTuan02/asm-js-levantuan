@@ -1,7 +1,7 @@
 const Nav = {
     render(pageName) {
         return /* html */`
-        <div class="flex h-[70px] md:h-24 items-center border-b">
+        <div class="flex items-center border-b min-h-[70px] md:h-full container max-w-6xl mx-auto px-3">
             <!-- icon mobile -->
             <div class="flex-1 md:hidden">
                 <button class="pr-3 py-3 text-lg transition duration-200 ease-linear text-gray-400 hover:text-black">

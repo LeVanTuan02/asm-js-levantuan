@@ -27,3 +27,22 @@
 .store__list-item.active {
     @apply bg-gray-50;
 }
+
+#header-bottom.active {
+    @apply fixed top-0 left-0 right-0 opacity-95 h-[70px] shadow-md z-20;
+    animation: slideDown 0.6s ease-in-out;
+}
+
+.btn__scroll-top.active {
+    @apply bottom-5 visible;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}

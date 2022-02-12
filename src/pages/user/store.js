@@ -52,6 +52,9 @@ const StorePage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+
         const formSearchControl = document.querySelector("#store__form-search-control");
 
         // đổi google map khi chọn chi nhánh
@@ -93,6 +96,7 @@ const StorePage = {
             tabMap();
         });
     },
+
 };
 
 export default StorePage;
