@@ -1,3 +1,4 @@
+import toastr from "toastr";
 import { search } from "../../api/product";
 import { formatCurrency, getUser } from "../../utils";
 import Nav from "./nav";
@@ -135,9 +136,10 @@ const Header = {
         });
 
         // tìm kiếm sp
-        // const formSearch = document.querySelector("#form-search-product");
+        const formSearch = document.querySelector("#form-search-product");
         const formControlSearch = document.querySelector("#form-search-control");
         const searchResult = document.querySelector("#search-product-result");
+
         formControlSearch.addEventListener("input", async (e) => {
             const keyword = e.target.value;
 
@@ -151,6 +153,17 @@ const Header = {
                     </a>
                 </li>
                 `).join("");
+        });
+
+        formSearch.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const keyword = formControlSearch.value;
+
+            if (!keyword) {
+                toastr.info("Vui lòng nhập tên sản phẩm");
+            } else {
+                document.location.href = `/#/product/search/${keyword}`;
+            }
         });
     },
 };
