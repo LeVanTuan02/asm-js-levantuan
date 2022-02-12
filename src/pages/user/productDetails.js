@@ -1,4 +1,4 @@
-import { get } from "../../api/product";
+import { get, updateView } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
@@ -6,7 +6,11 @@ import { formatCurrency } from "../../utils";
 
 const ProductDetailPage = {
     async render(id) {
+        // update view
         const { data: productDetail } = await get(id);
+        updateView(id, {
+            view: +(productDetail.view + 1),
+        });
 
         return /* html */ `
         ${await Header.render()}
@@ -29,7 +33,7 @@ const ProductDetailPage = {
                         <div>
                             <div class="flex">
                                 <a href="/#/" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm block pr-4 relative after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:right-2 after:w-[1px] after:h-3 after:rotate-12 after:bg-gray-400">Home</a>
-                                <a href="" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm">${productDetail.category.name}</a>
+                                <a href="/#/category/${productDetail.category.id}" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm">${productDetail.category.name}</a>
                             </div>
 
                             <h1 class="font-semibold text-[28px] text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">${productDetail.name}</h1>
@@ -152,7 +156,7 @@ const ProductDetailPage = {
     
                             <p class="mt-1 text-gray-500">
                                 Danh mục:
-                                <a href="" class="transition hover:text-black">${productDetail.category.name}</a>
+                                <a href="/#/category/${productDetail.category.id}" class="transition hover:text-black">${productDetail.category.name}</a>
                             </p>
 
                             <ul class="flex mt-3">
@@ -325,7 +329,7 @@ const ProductDetailPage = {
 
             <section class="container max-w-6xl px-3 mx-auto my-6 border-t">
                 <h2 class="text-2xl font-semibold mt-2">Sản phẩm tương tự</h2>
-                ${Related.render()}
+                ${await Related.render(id, productDetail.categoryId)}
             </section>
         </main>
         <!-- end content -->

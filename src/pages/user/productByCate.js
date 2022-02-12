@@ -7,7 +7,7 @@ import { formatCurrency } from "../../utils";
 const ProductByCatePage = {
     async render(cateId) {
         const { data: categoryData } = await getProductByCate(cateId);
-        const { products: productList } = categoryData;
+        const productList = categoryData.products.filter((category) => category.status !== 0);
 
         return /* html */ `
         ${await Header.render("products")}

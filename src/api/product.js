@@ -19,6 +19,17 @@ export const search = (keyword) => {
     return instance.get(url);
 };
 
+// bài viết liên quan
+export const getRelated = (id, cateId) => {
+    const url = `/${TABLE_NAME}/?status_ne=0&id_ne=${id}&categoryId=${cateId}&_expand=category`;
+    return instance.get(url);
+};
+
+export const updateView = (id, data) => {
+    const url = `/${TABLE_NAME}/${id}`;
+    return instance.patch(url, data);
+};
+
 export const get = (id) => {
     const url = `/${TABLE_NAME}/${id}/?_expand=category`;
     return instance.get(url);

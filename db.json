@@ -64,12 +64,12 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 0,
+      "view": 5,
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
-      "updatedAt": "2022-02-09T15:00:50.038Z",
+      "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 2,
-      "categoryId": 1
+      "categoryId": 2
     },
     {
       "name": "Trà tranh nek1",
