@@ -12,10 +12,10 @@ const Category = {
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 ${cateList.map((cate) => `
                     <div>
-                        <a href="" style="background-image: url(${cate.image});" class="block bg-cover bg-center pt-[100%]"></a>
+                        <a href="/#/category/${cate.id}" style="background-image: url(${cate.image});" class="block bg-cover bg-center pt-[100%]"></a>
                         <div class="text-center py-2 leading-3">
                             <h3>
-                                <a href="" class="block uppercase text-lg font-semibold">${cate.name}</a>
+                                <a href="/#/category/${cate.id}" class="block uppercase text-lg font-semibold">${cate.name}</a>
                             </h3>
                             <span class="uppercase text-xs">${cate.products.length} sản phẩm</span>
                         </div>

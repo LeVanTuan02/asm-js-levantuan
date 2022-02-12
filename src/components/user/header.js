@@ -79,7 +79,7 @@ const Header = {
             <!-- end header top -->
 
             <!-- header bottom -->
-            <div class="md:h-24 bg-white" id="header-bottom">
+            <div class="md:h-24 h-[70px] bg-white" id="header-bottom">
                 ${await Nav.render(pageName)}
             </div>
             <!-- end header bottom -->
