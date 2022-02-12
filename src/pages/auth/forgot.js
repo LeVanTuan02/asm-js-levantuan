@@ -2,9 +2,9 @@ import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 
 const FortgotPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render()}
+        ${await Header.render()}
 
         <!-- content -->
         <main>

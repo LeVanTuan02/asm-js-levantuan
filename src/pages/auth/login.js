@@ -5,9 +5,9 @@ import Header from "../../components/user/header";
 import { checkLogin, saveUser } from "../../utils";
 
 const LoginPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render()}
+        ${await Header.render()}
 
         <!-- content -->
         <main>
