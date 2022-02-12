@@ -31,7 +31,7 @@ const Nav = {
                     <ul class="z-20 invisible group-hover:visible absolute top-full left-0 bg-white shadow min-w-[150px] grid grid-cols-1 divide-y px-2 rounded-sm">
                         ${cateList.map((cate) => `
                             <li>
-                                <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">${cate.name}</a>
+                                <a href="/#/category/${cate.id}" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">${cate.name}</a>
                             </li>
                             `).join("")}
                     </ul>

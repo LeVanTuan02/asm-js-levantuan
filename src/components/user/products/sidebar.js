@@ -1,7 +1,7 @@
 import { getAll } from "../../../api/category";
 
 const Sidebar = {
-    async render() {
+    async render(cateId) {
         const { data: cateList } = await getAll();
 
         return `
@@ -12,7 +12,7 @@ const Sidebar = {
                 <ul class="grid grid-cols-1 divide-y mt-3">
                     ${cateList.map((item) => `
                         <li>
-                            <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">${item.name}</a>
+                            <a href="/#/category/${item.id}" class="${item.id === cateId ? "text-black font-semibold" : "text-[#D9A953]"} block uppercase py-2 transition duration-300 ease-linear hover:text-black">${item.name}</a>
                         </li>
                         `).join("")}
                 </ul>

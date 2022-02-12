@@ -12,6 +12,12 @@ export const getAllJoinProduct = () => {
     return instance.get(url);
 };
 
+// sp theo danh mục
+export const getProductByCate = (cateId) => {
+    const url = `/${TABLE_NAME}/${cateId}/?_embed=products`;
+    return instance.get(url);
+};
+
 export const get = (id) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.get(url);
