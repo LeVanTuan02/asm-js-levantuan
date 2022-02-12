@@ -11,18 +11,18 @@ import Show from "../../components/user/home/show";
 import Why from "../../components/user/home/why";
 
 const HomePage = {
-    render() {
+    async render() {
         return /* html */ `
         ${Header.render("home")}
 
         <!-- content -->
         <main>
             <!-- banner -->
-            ${Banner.render()}
+            ${await Banner.render()}
             <!-- end banner -->
 
             <!-- category -->
-            ${Category.render()}
+            ${await Category.render()}
             <!-- end category -->
 
             <!-- why -->
@@ -34,7 +34,7 @@ const HomePage = {
             <!-- end product -->
 
             <!-- news -->
-            ${News.render()}
+            ${await News.render()}
             <!-- end news -->
 
             <!-- feedback -->

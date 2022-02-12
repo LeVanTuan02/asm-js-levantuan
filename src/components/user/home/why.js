@@ -20,17 +20,17 @@ const Why = {
                             </div>
                         </li>
                         <li class="flex mt-5">
-                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642595029/fpoly/asm-js/icon_why_1_rc8aau.png" alt="" class="w-14 h-14">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1644636006/assignment-js/icon_why_2_gy4ky6.png" alt="" class="w-14 h-14">
                             <div class="pl-3">
-                                <h3 class="font-semibold text-xl text-gray-800">Giá cả phải chăng</h3>
-                                <p>Cam kết chỉ cung cấp cà phê nguồn gốc được kiểm soát chất lượng</p>
+                                <h3 class="font-semibold text-xl text-gray-800">Hương vị tuyệt hảo</h3>
+                                <p>Những đợt trà được lựa chọn cẩn thận ngay từ lúc đang ngâm mình trong sương</p>
                             </div>
                         </li>
                         <li class="flex mt-5">
-                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1642595029/fpoly/asm-js/icon_why_1_rc8aau.png" alt="" class="w-14 h-14">
+                            <img src="https://res.cloudinary.com/levantuan/image/upload/v1644636006/assignment-js/icon_why_3_lerehz.png" alt="" class="w-14 h-14">
                             <div class="pl-3">
-                                <h3 class="font-semibold text-xl text-gray-800">Giá cả phải chăng</h3>
-                                <p>Cam kết chỉ cung cấp cà phê nguồn gốc được kiểm soát chất lượng</p>
+                                <h3 class="font-semibold text-xl text-gray-800">Sản phẩm tự nhiên</h3>
+                                <p>Cam kết chỉ cung cấp lá trà có nguồn gốc được kiểm soát chất lượng chặt</p>
                             </div>
                         </li>
                     </ul>
