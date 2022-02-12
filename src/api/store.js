@@ -26,3 +26,8 @@ export const update = (id, data) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
 };
+
+export const search = (keyword) => {
+    const url = `/${TABLE_NAME}/?name_like=${keyword}`;
+    return instance.get(url);
+};
