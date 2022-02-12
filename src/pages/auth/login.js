@@ -81,13 +81,18 @@ const LoginPage = {
                         password: password.value,
                     });
 
-                    // lưu thông tin vào localStorage
-                    saveUser(data.user);
+                    // nếu tài khoản bị khóa
+                    if (!data.user.active) {
+                        toastr.error("Tài khoản của bạn đang bị khóa, liên hệ QTV");
+                    } else {
+                        // lưu thông tin vào localStorage
+                        saveUser(data.user);
 
-                    // show message
-                    toastr.success("Đăng nhập thành công, hệ thống tự động chuyển hướng sau 3s");
+                        // show message
+                        toastr.success("Đăng nhập thành công, hệ thống tự động chuyển hướng sau 3s");
 
-                    setTimeout(() => checkLogin(data.user.role), 3000);
+                        setTimeout(() => checkLogin(data.user.role), 3000);
+                    }
                 } catch (error) {
                     toastr.error(error.response.data);
                 }
