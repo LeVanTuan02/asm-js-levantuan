@@ -7,6 +7,12 @@ export const getAll = () => {
     return instance.get(url);
 };
 
+// ds bài viết ở trạng thái hiển thị
+export const getAllShow = () => {
+    const url = `/${TABLE_NAME}/?status_ne=0`;
+    return instance.get(url);
+};
+
 export const get = (id) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.get(url);

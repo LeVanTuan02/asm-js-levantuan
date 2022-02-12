@@ -1,8 +1,8 @@
-import { getAll } from "../../../api/slider";
+import { getAllShow } from "../../../api/slider";
 
 const Banner = {
     async render() {
-        const { data: bannerList } = await getAll();
+        const { data: bannerList } = await getAllShow();
 
         return /* html */ `
         <section>

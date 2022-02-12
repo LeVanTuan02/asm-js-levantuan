@@ -1,8 +1,8 @@
-import { getAll } from "../../../api/news";
+import { getAllShow } from "../../../api/news";
 
 const News = {
     async render() {
-        const { data } = await getAll();
+        const { data } = await getAllShow();
         const newsList = data.sort((a, b) => b.id - a.id).splice(0, 5);
         const formatDate = (dateString) => {
             const date = new Date(dateString);

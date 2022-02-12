@@ -30,7 +30,7 @@ const HomePage = {
             <!-- end why -->
 
             <!-- product -->
-            ${Products.render()}
+            ${await Products.render()}
             <!-- end product -->
 
             <!-- news -->

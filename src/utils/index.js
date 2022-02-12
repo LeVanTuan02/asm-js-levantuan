@@ -51,3 +51,6 @@ export const logout = () => {
     localStorage.removeItem("auth", "");
     document.location.href = "/#/login";
 };
+
+// hàm format money
+export const formatCurrency = (currency) => currency.toLocaleString("it-IT", { style: "currency", currency: "VND" });

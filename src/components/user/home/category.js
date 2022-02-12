@@ -1,8 +1,10 @@
-import { getAll } from "../../../api/category";
+import { getAllJoinProduct } from "../../../api/category";
 
 const Category = {
     async render() {
-        const { data: cateList } = await getAll();
+        const { data } = await getAllJoinProduct();
+        const cateList = data.sort((a, b) => b.id - a.id).slice(0, 5);
+
         return `
         <section class="container max-w-6xl mx-auto py-7 px-3">
             <h2 class="uppercase text-center block text-[#D9A953] text-2xl font-semibold">DANH MỤC SẢN PHẨM</h2>
@@ -15,7 +17,7 @@ const Category = {
                             <h3>
                                 <a href="" class="block uppercase text-lg font-semibold">${cate.name}</a>
                             </h3>
-                            <span class="uppercase text-xs">10 sản phẩm</span>
+                            <span class="uppercase text-xs">${cate.products.length} sản phẩm</span>
                         </div>
                     </div>
                     `).join("")}
