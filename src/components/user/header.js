@@ -2,7 +2,7 @@ import { getUser } from "../../utils";
 import Nav from "./nav";
 
 const Header = {
-    render(pageName) {
+    async render(pageName) {
         const userLogged = getUser();
 
         return /* html */ `
@@ -135,7 +135,7 @@ const Header = {
 
             <!-- header bottom -->
             <div class="md:h-24 bg-white" id="header-bottom">
-                ${Nav.render(pageName)}
+                ${await Nav.render(pageName)}
             </div>
             <!-- end header bottom -->
 

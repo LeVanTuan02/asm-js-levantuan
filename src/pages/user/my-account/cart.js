@@ -3,9 +3,9 @@ import Header from "../../../components/user/header";
 import MyAccNav from "../../../components/user/myAccNav";
 
 const MyAccCartPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render()}
+        ${await Header.render()}
 
         <!-- content -->
         <main>

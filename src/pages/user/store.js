@@ -7,7 +7,7 @@ const StorePage = {
         const { data: storeList } = await getAll();
 
         return /* html */ `
-        ${Header.render("store")}
+        ${await Header.render("store")}
 
         <!-- content -->
         <main>

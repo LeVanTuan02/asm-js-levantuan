@@ -2,9 +2,9 @@ import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 
 const NewsPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render("news")}
+        ${await Header.render("news")}
 
         <!-- content -->
         <main>

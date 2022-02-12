@@ -4,9 +4,9 @@ import Nav from "../../components/user/news/nav";
 import Related from "../../components/user/news/related";
 
 const NewsDetailsPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render()}
+        ${await Header.render()}
 
         <!-- content -->
         <main>

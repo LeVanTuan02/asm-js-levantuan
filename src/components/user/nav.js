@@ -1,5 +1,9 @@
+import { getAll } from "../../api/category";
+
 const Nav = {
-    render(pageName) {
+    async render(pageName) {
+        const { data: cateList } = await getAll();
+
         return /* html */`
         <div class="flex items-center border-b min-h-[70px] md:h-full container max-w-6xl mx-auto px-3">
             <!-- icon mobile -->
@@ -25,18 +29,11 @@ const Nav = {
 
                     </a>
                     <ul class="z-20 invisible group-hover:visible absolute top-full left-0 bg-white shadow min-w-[150px] grid grid-cols-1 divide-y px-2 rounded-sm">
-                        <li>
-                            <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
-                        </li>
-                        <li>
-                            <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
-                        </li>
-                        <li>
-                            <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
-                        </li>
-                        <li>
-                            <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">Trà</a>
-                        </li>
+                        ${cateList.map((cate) => `
+                            <li>
+                                <a href="" class="block py-1.5 text-gray-500 transition ease-linear duration-200 hover:text-[#D9A953]">${cate.name}</a>
+                            </li>
+                            `).join("")}
                     </ul>
                 </li>
             </ul>

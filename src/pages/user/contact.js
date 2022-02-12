@@ -2,9 +2,9 @@ import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 
 const ContactPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render("contact")}
+        ${await Header.render("contact")}
 
         <!-- content -->
         <main>

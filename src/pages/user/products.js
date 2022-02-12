@@ -3,9 +3,9 @@ import Header from "../../components/user/header";
 import Sidebar from "../../components/user/products/sidebar";
 
 const ProductsPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render("products")}
+        ${await Header.render("products")}
 
         <!-- content -->
         <main>

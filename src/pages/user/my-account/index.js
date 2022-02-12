@@ -3,9 +3,9 @@ import Footer from "../../../components/user/footer";
 import MyAccNav from "../../../components/user/myAccNav";
 
 const UpdateInfoPage = {
-    render() {
+    async render() {
         return /* html */ `
-        ${Header.render()}
+        ${await Header.render()}
 
         <!-- content -->
         <main>
