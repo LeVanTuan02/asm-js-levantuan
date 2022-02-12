@@ -20,7 +20,7 @@ export const search = (keyword) => {
 };
 
 export const get = (id) => {
-    const url = `/${TABLE_NAME}/${id}`;
+    const url = `/${TABLE_NAME}/${id}/?_expand=category`;
     return instance.get(url);
 };
 

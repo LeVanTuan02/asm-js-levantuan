@@ -1,23 +1,20 @@
+import { getAll } from "../../../api/category";
+
 const Sidebar = {
-    render() {
+    async render() {
+        const { data: cateList } = await getAll();
+
         return `
         <aside class="hidden lg:block lg:col-span-3 pt-3">
             <div>
                 <h2 class="uppercase font-bold pb-2 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Danh mục sản phẩm</h2>
 
                 <ul class="grid grid-cols-1 divide-y mt-3">
-                    <li>
-                        <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">Trà sữa</a>
-                    </li>
-                    <li>
-                        <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">Trà sữa</a>
-                    </li>
-                    <li>
-                        <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">Trà sữa</a>
-                    </li>
-                    <li>
-                        <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">Trà sữa</a>
-                    </li>
+                    ${cateList.map((item) => `
+                        <li>
+                            <a href="" class="block uppercase py-2 text-[#D9A953] transition duration-300 ease-linear hover:text-black">${item.name}</a>
+                        </li>
+                        `).join("")}
                 </ul>
             </div>
 

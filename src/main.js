@@ -103,8 +103,8 @@ router.on({
         changeTitle("Thực đơn - Trà Sữa Yotea");
         print(ProductsPage);
     },
-    "/product/:id": () => {
-        print(ProductDetailPage);
+    "/product/:id": ({ data }) => {
+        print(ProductDetailPage, data.id);
     },
     "/product/search/:keyword": ({ data }) => {
         print(SearchProductPage, data.keyword);

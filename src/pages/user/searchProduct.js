@@ -15,14 +15,14 @@ const SearchProductPage = {
         <main>
             <section class="container max-w-6xl mx-auto px-3 pt-8 mb-5 text-center">
                 <div class="flex justify-center">
-                    <a href="" class="transition duration-300 ease-linear hover:text-[#D9A953] block pr-6 font-semibold relative after:content-[''] after:absolute after:right-3 after:bg-gray-500 after:w-[1px] after:h-4 after:rotate-12 after:top-1/2 after:-translate-y-1/2">Trang chủ</a>
-                    <a href="" class="transition duration-300 ease-linear hover:text-[#D9A953] font-semibold">Sản phẩm</a>
+                    <a href="/#/" class="transition duration-300 ease-linear hover:text-[#D9A953] block pr-6 font-semibold relative after:content-[''] after:absolute after:right-3 after:bg-gray-500 after:w-[1px] after:h-4 after:rotate-12 after:top-1/2 after:-translate-y-1/2">Trang chủ</a>
+                    <a href="/#/products" class="transition duration-300 ease-linear hover:text-[#D9A953] font-semibold">Sản phẩm</a>
                 </div>
-                <h1 class="text-[#D9A953] font-semibold text-3xl mt-1">Trà sữa</h1>
+                <h1 class="text-[#D9A953] font-semibold text-3xl mt-1">Kết quả tìm kiếm "${keyword}"</h1>
             </section>
 
             <section class="container max-w-6xl mx-auto px-3 grid grid-cols-12 gap-6 mb-8">
-                ${Sidebar.render()}
+                ${await Sidebar.render()}
 
                 <div class="col-span-12 lg:col-span-9">
                     <!-- filter -->
@@ -76,7 +76,7 @@ const SearchProductPage = {
 
                     <div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
-                            ${listProduct.map((item) => `
+                            ${listProduct.map((item) => /* html */`
                                 <div class="group">
                                     <div class="relative bg-[#f7f7f7] overflow-hidden">
                                         <a href="/#/product/${item.id}" style="background-image: url(${item.image})" class="bg-cover pt-[100%] bg-center block"></a>
@@ -105,186 +105,41 @@ const SearchProductPage = {
                         </div>
 
                         <div class="grid grid-cols-1 divide-y">
-                            <div class="grid grid-cols-12 py-4 gap-3">
-                                <div class="col-span-3 relative group overflow-hidden">
-                                    <a href="" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png')"></a>
-                                    <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <div class="col-span-9">
-                                    <h3>
-                                        <a href="" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</a>
-                                    </h3>
-                                    <ul class="flex items-center mt-4">
-                                        <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                        <li>10 Đã bán</li>
-                                    </ul>
-                                    <div class="mt-1 mb-2">
-                                        <span class="text-xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                        <span class="pl-2 line-through">10,000 ₫</span>
+                            ${listProduct.map((item) => /* html */`
+                                <div class="grid grid-cols-12 py-4 gap-3">
+                                    <div class="col-span-3 relative group overflow-hidden">
+                                        <a href="/#/product/${item.id}" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url(${item.image})"></a>
+                                        <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
+                                        <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
                                     </div>
-                                    <p>
-                                        Hãy bổ sung dâu tây vào thực đơn khi mang thai để tạo tiền đề tốt cho
-                                        sự phát triển em bé. Ăn dâu tây sẽ giúp cung cấp cho hai mẹ con các
-                                        vitamin và chất khoáng cần thiết.
-                                    </p>
-                                    <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-12 py-4 gap-3">
-                                <div class="col-span-3 relative group overflow-hidden">
-                                    <a href="" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png')"></a>
-                                    <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
 
-                                <div class="col-span-9">
-                                    <h3>
-                                        <a href="" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</a>
-                                    </h3>
-                                    <ul class="flex items-center mt-4">
-                                        <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                        <li>10 Đã bán</li>
-                                    </ul>
-                                    <div class="mt-1 mb-2">
-                                        <span class="text-xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                        <span class="pl-2 line-through">10,000 ₫</span>
+                                    <div class="col-span-9">
+                                        <h3>
+                                            <a href="/#/product/${item.id}" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">${item.name}</a>
+                                        </h3>
+                                        <ul class="flex items-center mt-4">
+                                            <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </li>
+                                            <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
+                                            <li>10 Đã bán</li>
+                                        </ul>
+                                        <div class="mt-1 mb-2">
+                                            <span class="text-xl text-[#D9A953] font-semibold">${formatCurrency(item.price)}</span>
+                                        </div>
+                                        <p>
+                                            ${item.description}
+                                        </p>
+                                        <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
                                     </div>
-                                    <p>
-                                        Hãy bổ sung dâu tây vào thực đơn khi mang thai để tạo tiền đề tốt cho
-                                        sự phát triển em bé. Ăn dâu tây sẽ giúp cung cấp cho hai mẹ con các
-                                        vitamin và chất khoáng cần thiết.
-                                    </p>
-                                    <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
                                 </div>
-                            </div>
-                            <div class="grid grid-cols-12 py-4 gap-3">
-                                <div class="col-span-3 relative group overflow-hidden">
-                                    <a href="" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png')"></a>
-                                    <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <div class="col-span-9">
-                                    <h3>
-                                        <a href="" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</a>
-                                    </h3>
-                                    <ul class="flex items-center mt-4">
-                                        <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                        <li>10 Đã bán</li>
-                                    </ul>
-                                    <div class="mt-1 mb-2">
-                                        <span class="text-xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                        <span class="pl-2 line-through">10,000 ₫</span>
-                                    </div>
-                                    <p>
-                                        Hãy bổ sung dâu tây vào thực đơn khi mang thai để tạo tiền đề tốt cho
-                                        sự phát triển em bé. Ăn dâu tây sẽ giúp cung cấp cho hai mẹ con các
-                                        vitamin và chất khoáng cần thiết.
-                                    </p>
-                                    <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-12 py-4 gap-3">
-                                <div class="col-span-3 relative group overflow-hidden">
-                                    <a href="" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png')"></a>
-                                    <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <div class="col-span-9">
-                                    <h3>
-                                        <a href="" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</a>
-                                    </h3>
-                                    <ul class="flex items-center mt-4">
-                                        <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                        <li>10 Đã bán</li>
-                                    </ul>
-                                    <div class="mt-1 mb-2">
-                                        <span class="text-xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                        <span class="pl-2 line-through">10,000 ₫</span>
-                                    </div>
-                                    <p>
-                                        Hãy bổ sung dâu tây vào thực đơn khi mang thai để tạo tiền đề tốt cho
-                                        sự phát triển em bé. Ăn dâu tây sẽ giúp cung cấp cho hai mẹ con các
-                                        vitamin và chất khoáng cần thiết.
-                                    </p>
-                                    <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-12 py-4 gap-3">
-                                <div class="col-span-3 relative group overflow-hidden">
-                                    <a href="" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url('https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png')"></a>
-                                    <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <div class="col-span-9">
-                                    <h3>
-                                        <a href="" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</a>
-                                    </h3>
-                                    <ul class="flex items-center mt-4">
-                                        <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                        <li>10 Đã bán</li>
-                                    </ul>
-                                    <div class="mt-1 mb-2">
-                                        <span class="text-xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                        <span class="pl-2 line-through">10,000 ₫</span>
-                                    </div>
-                                    <p>
-                                        Hãy bổ sung dâu tây vào thực đơn khi mang thai để tạo tiền đề tốt cho
-                                        sự phát triển em bé. Ăn dâu tây sẽ giúp cung cấp cho hai mẹ con các
-                                        vitamin và chất khoáng cần thiết.
-                                    </p>
-                                    <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
-                                </div>
-                            </div>
+                                `).join("")}
                         </div>
                     </div>
 

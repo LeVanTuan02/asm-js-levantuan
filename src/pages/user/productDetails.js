@@ -1,9 +1,13 @@
+import { get } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
+import { formatCurrency } from "../../utils";
 
 const ProductDetailPage = {
-    async render() {
+    async render(id) {
+        const { data: productDetail } = await get(id);
+
         return /* html */ `
         ${await Header.render()}
 
@@ -11,7 +15,7 @@ const ProductDetailPage = {
         <main>
             <section class="container max-w-6xl mx-auto px-3 grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pb-8">
                 <div class="relative group min-h-[500px]">
-                    <div class="h-full absolute w-full bg-contain bg-center bg-no-repeat" style="background-image: url(https://res.cloudinary.com/levantuan/image/upload/v1642596048/fpoly/asm-js/d%C3%A2u-n%E1%BB%AF-ho%C3%A0ng_t4r4ce.png);"></div>
+                    <div class="h-full absolute w-full bg-contain bg-center bg-no-repeat" style="background-image: url(${productDetail.image});"></div>
                     <button class="absolute bottom-2 left-2 rounded-full border-2 border-gray-400 w-9 h-9 text-gray-400 text-lg transition ease-linear duration-300 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </button>
@@ -24,11 +28,11 @@ const ProductDetailPage = {
                     <div class="flex justify-between">
                         <div>
                             <div class="flex">
-                                <a href="" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm block pr-4 relative after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:right-2 after:w-[1px] after:h-3 after:rotate-12 after:bg-gray-400">Home</a>
-                                <a href="" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm">Trà sữa</a>
+                                <a href="/#/" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm block pr-4 relative after:content-[''] after:absolute after:top-1/2 after:-translate-y-1/2 after:right-2 after:w-[1px] after:h-3 after:rotate-12 after:bg-gray-400">Home</a>
+                                <a href="" class="text-gray-500 transition hover:text-black uppercase font-semibold text-sm">${productDetail.category.name}</a>
                             </div>
 
-                            <h1 class="font-semibold text-[28px] text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">Trà sữa trân châu đường đen</h1>
+                            <h1 class="font-semibold text-[28px] text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">${productDetail.name}</h1>
 
                             <ul class="flex items-center mt-4">
                                 <li class="flex text-yellow-400 text-xs pr-4 relative after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
@@ -42,8 +46,7 @@ const ProductDetailPage = {
                                 <li>10 Đã bán</li>
                             </ul>
                             <div class="mt-1 my-2">
-                                <span class="text-3xl text-[#D9A953] font-semibold">10,000 ₫</span>
-                                <span class="pl-2 line-through">10,000 ₫</span>
+                                <span class="text-3xl text-[#D9A953] font-semibold">${formatCurrency(productDetail.price)}</span>
                             </div>
                         </div>
                         <ul class="flex">
@@ -149,28 +152,23 @@ const ProductDetailPage = {
     
                             <p class="mt-1 text-gray-500">
                                 Danh mục:
-                                <a href="" class="transition hover:text-black">Trà sữa</a>
+                                <a href="" class="transition hover:text-black">${productDetail.category.name}</a>
                             </p>
 
                             <ul class="flex mt-3">
                                 <li class="mr-1.5">
-                                    <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}/" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </li>
                                 <li class="mr-1.5">
-                                    <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
-                                        <i class="fab fa-facebook-f"></i>
+                                    <a href="https://twitter.com/share?url=${window.location.href}/" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                        <i class="fab fa-twitter"></i>
                                     </a>
                                 </li>
                                 <li class="mr-1.5">
-                                    <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="mr-1.5">
-                                    <a href="" class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
-                                        <i class="fab fa-facebook-f"></i>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}/" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"  class="w-8 h-8 border-2 border-gray-400 rounded-full flex items-center justify-center text-gray-400 transition duration-300 hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                                        <i class="fab fa-linkedin"></i>
                                     </a>
                                 </li>
                             </ul>
