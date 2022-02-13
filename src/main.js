@@ -88,6 +88,18 @@ router.on("/admin/*", () => {}, {
     },
 });
 
+router.on("/my-account/*", () => {}, {
+    before(done) {
+        const userInfo = getUser();
+
+        if (userInfo) {
+            done();
+        } else {
+            document.location.href = "/#/";
+        }
+    },
+});
+
 router.on("/logout", () => {
     logout();
 });

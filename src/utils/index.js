@@ -48,7 +48,7 @@ export const saveUser = (uesr) => {
 };
 
 export const logout = () => {
-    localStorage.removeItem("auth", "");
+    localStorage.removeItem("auth");
     document.location.href = "/#/login";
 };
 
