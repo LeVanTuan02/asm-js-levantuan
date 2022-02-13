@@ -2,24 +2,24 @@
   "categories": [
     {
       "id": 1,
-      "name": "Trà sữa nek",
+      "name": "Tea",
       "createdAt": "2022-03-13T05:07:46.346Z",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644321850/assignment-js/rcrn1kjp2tyimk9spck5.jpg"
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757211/assignment-js/dydnuwy6d0f7man8fbsn.png"
     },
     {
-      "name": "Tuân nek 1",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644315559/assignment-js/nc8iknwcvpw2krpnsns7.jpg",
+      "name": "Milk Tea",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
       "id": 2
     },
     {
-      "name": "ab hi",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644322409/assignment-js/mlnynhmpjwkaykz8uxe6.png",
+      "name": "Coffee",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757260/assignment-js/q9gmm4aneutfvgxtzxqf.png",
       "createdAt": "2022-02-08T12:06:48.706Z",
       "id": 3
     },
     {
-      "name": "a",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644424689/assignment-js/utfdnpeh8ndvgvqocpwd.png",
+      "name": "Bakery",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757277/assignment-js/hdp664y2nsbeeycxjrgm.jpg",
       "createdAt": "2022-02-09T16:38:10.591Z",
       "id": 4
     }
@@ -65,14 +65,14 @@
       "description": "123",
       "status": 1,
       "view": 31,
-      "favorites": 9,
+      "favorites": 10,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 2,
       "categoryId": 2,
       "category": {
-        "name": "Tuân nek 1",
-        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644315559/assignment-js/nc8iknwcvpw2krpnsns7.jpg",
+        "name": "Milk Tea",
+        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
         "id": 2
       }
     },
@@ -82,15 +82,15 @@
       "price": 10000,
       "description": "123",
       "status": 1,
-      "view": 6,
-      "favorites": 15,
+      "view": 7,
+      "favorites": 16,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T07:24:59.844Z",
       "id": 3,
       "categoryId": 2,
       "category": {
-        "name": "Tuân nek 1",
-        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644315559/assignment-js/nc8iknwcvpw2krpnsns7.jpg",
+        "name": "Milk Tea",
+        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
         "id": 2
       }
     },
@@ -146,19 +146,27 @@
   "slider": [
     {
       "id": 1,
-      "title": "a",
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644476284/assignment-js/nimqxobbfnn94iiqq24m.png",
-      "url": "/",
+      "title": "Slider 1",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757428/assignment-js/hsamkkerv4d1ff4xocml.jpg",
+      "url": "https://www.facebook.com/LeVanTuan.Info/",
       "status": 1,
       "createdAt": "2022-02-09T15:42:22"
     },
     {
-      "title": "tên",
-      "url": "url",
+      "title": "Slider 2",
+      "url": "https://www.facebook.com/LeVanTuan.Info/",
       "status": 1,
-      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644475492/assignment-js/ywfzd7w5wwgniskxr6e4.png",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757521/assignment-js/ohju4wdp6pkrv34gdoyw.png",
       "createdAt": "2022-02-10T06:44:52.008Z",
       "id": 2
+    },
+    {
+      "title": "Slider 3",
+      "url": "https://www.facebook.com/LeVanTuan.Info/",
+      "status": 1,
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757540/assignment-js/bcrpldnvh7gqp8bsmpp4.jpg",
+      "createdAt": "2022-02-13T13:04:39.364Z",
+      "id": 3
     }
   ],
   "size": [
@@ -371,6 +379,18 @@
       "productId": 3,
       "createdAt": "2022-02-13T12:43:55.173Z",
       "id": 2
+    },
+    {
+      "userId": 1,
+      "productId": 2,
+      "createdAt": "2022-02-13T13:09:40.690Z",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "productId": 3,
+      "createdAt": "2022-02-13T13:09:51.528Z",
+      "id": 4
     }
   ]
 }
