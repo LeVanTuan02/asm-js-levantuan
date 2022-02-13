@@ -27,8 +27,8 @@ const AdminNav = {
                         </svg>
                     </div>
                     <div class="mb-4 hidden sidebar__submenu">
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/admin/user">Danh sách</a>
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/admin/user/add">Thêm mới</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/user">Danh sách</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/user/add">Thêm mới</a>
                     </div>
                 </div>
 
@@ -48,8 +48,8 @@ const AdminNav = {
                         </svg>
                     </div>
                     <div class="mb-4 hidden sidebar__submenu">
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/admin/news">Danh sách</a>
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/admin/news/add">Thêm mới</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/news">Danh sách</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/news/add">Thêm mới</a>
                     </div>
                 </div>
 
@@ -69,8 +69,8 @@ const AdminNav = {
                         </svg>
                     </div>
                     <div class="mb-4 hidden sidebar__submenu">
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category">Danh sách</a>
-                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category/add">Thêm mới</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category-news">Danh sách</a>
+                        <a class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200" href="/#/admin/category-news/add">Thêm mới</a>
                     </div>
                 </div>
                 
@@ -241,6 +241,26 @@ const AdminNav = {
             </nav>
         </nav>
         `;
+    },
+    afterRender() {
+        const btnBars = document.querySelector("#btn-bars");
+        const dashboardElement = document.querySelector(".dashboard");
+        const dashboardOverlay = document.querySelector(".dashboard__overlay");
+        const sidebarItem = document.querySelectorAll(".sidebar__item");
+
+        // đóng mở sidebar
+        function toggleSidebar() {
+            dashboardElement.classList.toggle("active");
+        }
+        btnBars.addEventListener("click", () => toggleSidebar());
+        dashboardOverlay.addEventListener("click", () => toggleSidebar());
+
+        // đóng mở submenu sidebar
+        sidebarItem.forEach((item) => {
+            item.addEventListener("click", (e) => {
+                e.target.classList.toggle("active");
+            });
+        });
     },
 };
 

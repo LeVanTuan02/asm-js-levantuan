@@ -70,6 +70,9 @@ const AdminUpdatePassPage = {
         `;
     },
     async afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__change-pass");
         const currentPass = formEdit.querySelector("#form__change-pass-current-pass");
         const newPass = formEdit.querySelector("#form__change-pass-new-pass");

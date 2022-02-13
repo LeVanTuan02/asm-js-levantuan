@@ -120,6 +120,9 @@ const AdminAddNewsPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-news");
         const title = formAdd.querySelector("#form__add-news-title");
         const description = formAdd.querySelector("#form__add-news-desc");

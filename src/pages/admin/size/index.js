@@ -87,6 +87,9 @@ const AdminSizeListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".size__list-btn-delete");
 
         // xóa danh mục

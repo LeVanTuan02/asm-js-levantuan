@@ -76,6 +76,10 @@ const AdminDetailContactPage = {
         </section>
         `;
     },
+    afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+    },
 };
 
 export default AdminDetailContactPage;

@@ -66,6 +66,9 @@ const AdminEditToppingPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-topping");
         const toppingName = formEdit.querySelector("#form__edit-topping-name");
         const toppingPrice = formEdit.querySelector("#form__edit-topping-price");

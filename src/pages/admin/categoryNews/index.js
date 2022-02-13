@@ -87,6 +87,9 @@ const AdminCateNewsListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".cate__list-btn-delete");
 
         // xóa danh mục

@@ -1,4 +1,4 @@
-import { getUser } from "../../utils";
+import { getUser, logout } from "../../utils";
 
 const HeaderTop = {
     render() {
@@ -36,12 +36,16 @@ const HeaderTop = {
                     
                     <div class="hidden group-hover:block absolute right-0 top-[calc(100%+10px)] w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none before:content-[''] before:absolute before:top-[-10px] before:right-0 before:left-0 before:h-4">
                         <a href="/#/admin/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                        <a href="/#/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng xuất</a>
+                        <p id="btn-logout" class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng xuất</p>
                     </div>
                 </div>
             </div>
         </div>
         `;
+    },
+    afterRender() {
+        const btnLogout = document.querySelector("#btn-logout");
+        btnLogout.addEventListener("click", () => logout());
     },
 };
 

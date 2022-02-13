@@ -63,6 +63,9 @@ const AdminAddToppingPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-topping");
         const toppingName = formAdd.querySelector("#form__add-topping-name");
         const toppingPrice = formAdd.querySelector("#form__add-topping-price");

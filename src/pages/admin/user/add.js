@@ -168,6 +168,9 @@ const AdminAddUserPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-user");
         const fullName = formAdd.querySelector("#form__add-user-fullname");
         const username = formAdd.querySelector("#form__add-user-username");

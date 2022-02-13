@@ -100,6 +100,9 @@ const AdminAddSliderPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-slider");
         const title = formAdd.querySelector("#form__add-slider-title");
         const url = formAdd.querySelector("#form__add-slider-url");

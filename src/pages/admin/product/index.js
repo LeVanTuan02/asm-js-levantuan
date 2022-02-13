@@ -85,6 +85,9 @@ const AdminProductListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btns = document.querySelectorAll(".product__list-btn-delete");
 
         btns.forEach((btn) => {

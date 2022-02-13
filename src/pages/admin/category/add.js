@@ -84,6 +84,9 @@ const AdminAddCatePage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-cate");
         const cateName = formAdd.querySelector("#form__add-cate-title");
         const cateImg = formAdd.querySelector("#form__add-cate-img");

@@ -60,6 +60,9 @@ const AdminEditCateNewsPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-cate");
         const cateName = formEdit.querySelector("#form__edit-cate-title");
 

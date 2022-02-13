@@ -87,8 +87,10 @@ const AdminEditCatePage = {
         `;
     },
     afterRender() {
-        const formEdit = document.querySelector("#form__edit-cate");
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
 
+        const formEdit = document.querySelector("#form__edit-cate");
         const cateName = formEdit.querySelector("#form__edit-cate-title");
         const cateImg = formEdit.querySelector("#form__edit-cate-img");
         const imgPreview = formEdit.querySelector("#form__edit-cate-preview");

@@ -66,6 +66,9 @@ const AdminEditSizePage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-size");
         const sizeName = formEdit.querySelector("#form__edit-size-name");
         const priceIncrease = formEdit.querySelector("#form__edit-size-price");

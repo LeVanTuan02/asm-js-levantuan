@@ -85,6 +85,9 @@ const AdminContactListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".contact__list-btn-delete");
 
         // xóa danh mục

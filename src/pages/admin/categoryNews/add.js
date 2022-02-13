@@ -57,6 +57,9 @@ const AdminAddCateNewsPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-cate");
         const cateName = formAdd.querySelector("#form__add-cate-title");
 

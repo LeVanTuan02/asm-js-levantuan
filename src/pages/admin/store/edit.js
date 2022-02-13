@@ -117,6 +117,9 @@ const AdminEditStorePage = {
         `;
     },
     afterRender(id) {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-store");
         const storeName = formEdit.querySelector("#form__edit-store-name");
         const storeAdd = formEdit.querySelector("#form__edit-store-address");

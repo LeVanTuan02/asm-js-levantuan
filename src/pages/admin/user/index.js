@@ -85,6 +85,9 @@ const AdminUserListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".user__list-btn-delete");
 
         // xóa danh mục

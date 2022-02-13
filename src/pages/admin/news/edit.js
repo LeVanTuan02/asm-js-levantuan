@@ -121,6 +121,9 @@ const AdminEditNewsPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__edit-news");
         const title = formAdd.querySelector("#form__edit-news-title");
         const description = formAdd.querySelector("#form__edit-news-desc");

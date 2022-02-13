@@ -122,6 +122,9 @@ const AdminEditProductPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAddProduct = document.querySelector("#form__edit-product");
         const proName = formAddProduct.querySelector("#form__edit-product-name");
         const proPrice = formAddProduct.querySelector("#form__edit-product-price");

@@ -63,6 +63,9 @@ const AdminAddSizePage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-size");
         const sizeName = formAdd.querySelector("#form__add-size-name");
         const priceIncrease = formAdd.querySelector("#form__add-size-price");

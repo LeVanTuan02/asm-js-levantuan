@@ -166,6 +166,9 @@ const AdminProfilePage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__update-account");
         const fullName = formAdd.querySelector("#form__update-account-fullname");
         const username = formAdd.querySelector("#form__update-account-username");

@@ -114,6 +114,9 @@ const AdminAddStorePage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-store");
         const storeName = formAdd.querySelector("#form__add-store-name");
         const storeAdd = formAdd.querySelector("#form__add-store-address");

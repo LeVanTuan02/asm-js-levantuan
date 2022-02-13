@@ -33,24 +33,8 @@ const DashboardPage = {
         `;
     },
     afterRender() {
-        const btnBars = document.querySelector("#btn-bars");
-        const dashboardElement = document.querySelector(".dashboard");
-        const dashboardOverlay = document.querySelector(".dashboard__overlay");
-        const sidebarItem = document.querySelectorAll(".sidebar__item");
-
-        // đóng mở sidebar
-        function toggleSidebar() {
-            dashboardElement.classList.toggle("active");
-        }
-        btnBars.addEventListener("click", () => toggleSidebar());
-        dashboardOverlay.addEventListener("click", () => toggleSidebar());
-
-        // đóng mở submenu sidebar
-        sidebarItem.forEach((item) => {
-            item.addEventListener("click", (e) => {
-                e.target.classList.toggle("active");
-            });
-        });
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
     },
 };
 

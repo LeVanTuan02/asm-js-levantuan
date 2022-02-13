@@ -79,14 +79,15 @@ const AdminSliderListPage = {
                         </div>
                     </div>
                 </div>
-
-                
             </div>
             <div class="fixed inset-0 z-10 w-screen h-screen bg-black bg-opacity-25 hidden dashboard__overlay"></div>
         </section>
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".slider__list-btn-delete");
 
         // xóa danh mục

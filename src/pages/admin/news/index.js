@@ -85,6 +85,9 @@ const AdminNewsListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".post__list-btn-delete");
 
         // xóa danh mục

@@ -87,6 +87,9 @@ const AdminToppingListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".topping__list-btn-delete");
 
         // xóa danh mục

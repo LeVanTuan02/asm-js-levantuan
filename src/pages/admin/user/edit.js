@@ -174,6 +174,9 @@ const AdminEditUserPage = {
         `;
     },
     async afterRender(id) {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__edit-user");
         const fullName = formAdd.querySelector("#form__edit-user-fullname");
         const username = formAdd.querySelector("#form__edit-user-username");

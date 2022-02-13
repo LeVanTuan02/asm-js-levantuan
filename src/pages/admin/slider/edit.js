@@ -103,6 +103,9 @@ const AdminEditSliderPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-slider");
         const title = formEdit.querySelector("#form__edit-slider-title");
         const url = formEdit.querySelector("#form__edit-slider-url");

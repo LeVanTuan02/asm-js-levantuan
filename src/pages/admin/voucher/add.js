@@ -101,6 +101,9 @@ const AdminAddVoucherPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formAdd = document.querySelector("#form__add-voucher");
         const voucherCode = formAdd.querySelector("#form__add-voucher-code");
         const voucherQuantity = formAdd.querySelector("#form__add-voucher-quantity");

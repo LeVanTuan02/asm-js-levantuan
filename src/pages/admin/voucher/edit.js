@@ -104,6 +104,9 @@ const AdminEditVoucherPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const formEdit = document.querySelector("#form__edit-voucher");
         const voucherCode = formEdit.querySelector("#form__edit-voucher-code");
         const voucherQuantity = formEdit.querySelector("#form__edit-voucher-quantity");

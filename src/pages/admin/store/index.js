@@ -87,6 +87,9 @@ const AdminStoreListPage = {
         `;
     },
     afterRender() {
+        HeaderTop.afterRender();
+        AdminNav.afterRender();
+
         const btnsDelete = document.querySelectorAll(".store__list-btn-delete");
 
         // xóa danh mục
