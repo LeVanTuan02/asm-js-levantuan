@@ -50,7 +50,7 @@ const NewsByCatePage = {
                                 </h3>
                                 <p class="text-gray-500 text-sm text-justify">${item.description}</p>
 
-                                <a href="">
+                                <a href="/#/news/${item.id}">
                                     <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
                                         <i class="fas fa-arrow-right"></i>
                                     </button>
