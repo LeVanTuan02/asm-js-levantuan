@@ -49,3 +49,9 @@ export const update = (id, data) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
 };
+
+// sản phẩm yêu thích
+export const getFavorites = () => {
+    const url = `/${TABLE_NAME}/?_sort=favorites&_order=desc&_start=0&_limit=10&status_ne=0`;
+    return instance.get(url);
+};
