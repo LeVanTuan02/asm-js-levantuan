@@ -54,3 +54,15 @@
 .cate-news-item.active .cate-news-name {
     @apply text-[#D9A953]
 }
+
+.btn-heart.active {
+    @apply bg-red-700 border-red-700 text-white
+}
+
+.wishlist.active .wishlist__content {
+    @apply translate-x-0
+}
+
+.wishlist.active .wishlist__overlay {
+    @apply visible opacity-100
+}

@@ -1,8 +1,12 @@
-import { get, updateView } from "../../api/product";
+import toastr from "toastr";
+import { get, updateView, update } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
-import { formatCurrency } from "../../utils";
+import { formatCurrency, getUser, reRender } from "../../utils";
+import { add, checkHeart } from "../../api/favoritesProduct";
+import WishList from "../../components/user/wishlist";
+import WishListLabel from "../../components/user/wishlistLabel";
 
 const ProductDetailPage = {
     async render(id) {
@@ -23,7 +27,7 @@ const ProductDetailPage = {
                     <button class="absolute bottom-2 left-2 rounded-full border-2 border-gray-400 w-9 h-9 text-gray-400 text-lg transition ease-linear duration-300 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </button>
-                    <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
+                    <button data-id="${productDetail.id}" class="btn-heart opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
                         <i class="fas fa-heart"></i>
                     </button>
                 </div>
@@ -340,6 +344,40 @@ const ProductDetailPage = {
     afterRender() {
         Header.afterRender();
         Footer.afterRender();
+
+        const btnHeart = document.querySelector(".btn-heart");
+        btnHeart.addEventListener("click", async () => {
+            const { id } = btnHeart.dataset;
+            const userLogged = getUser();
+
+            if (!userLogged) {
+                toastr.info("Vui lòng đăng nhập để yêu thích sản phẩm");
+            } else {
+                const { data: heartList } = await checkHeart(userLogged.id, id);
+
+                if (heartList.length) {
+                    toastr.info("Sản phẩm đã tồn tại trong danh sách yêu thích");
+                } else {
+                    const { data: productInfo } = await get(id);
+                    productInfo.favorites += 1;
+
+                    // cập nhật số lượt yêu thích
+                    update(id, productInfo);
+
+                    // lưu thông tin
+                    const date = new Date();
+                    add({
+                        userId: userLogged.id,
+                        productId: +id,
+                        createdAt: date.toISOString(),
+                    })
+                        .then(() => toastr.success("Đã thêm vào danh sách yêu thích"))
+                        .then(() => reRender(WishListLabel, ".header-icon-heart"))
+                        .then(() => reRender(WishList, "#wishlist"))
+                        .then(() => document.querySelector("#wishlist").classList.add("active"));
+                }
+            }
+        });
     },
 };
 

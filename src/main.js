@@ -56,7 +56,7 @@ import AdminAddUserPage from "./pages/admin/user/add";
 import AdminEditUserPage from "./pages/admin/user/edit";
 import AdminProfilePage from "./pages/admin/profile";
 import AdminUpdatePassPage from "./pages/admin/profile/updatePass";
-import { getUser, logout } from "./utils";
+import { getUser } from "./utils";
 import AdminStoreListPage from "./pages/admin/store";
 import AdminAddStorePage from "./pages/admin/store/add";
 import AdminEditStorePage from "./pages/admin/store/edit";
@@ -98,10 +98,6 @@ router.on("/my-account/*", () => {}, {
             document.location.href = "/#/";
         }
     },
-});
-
-router.on("/logout", () => {
-    logout();
 });
 
 router.on({

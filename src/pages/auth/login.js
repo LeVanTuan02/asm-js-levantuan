@@ -44,6 +44,7 @@ const LoginPage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
         const formLogin = document.querySelector("#form__login");
         const username = formLogin.querySelector("#form__login-user");
         const password = formLogin.querySelector("#form__login-password");

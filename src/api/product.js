@@ -9,7 +9,7 @@ export const getAll = () => {
 
 // ds sp trạng thái hiển thị
 export const getAllJoinCategory = () => {
-    const url = `/${TABLE_NAME}/?_expand=category&status_ne=0`;
+    const url = `/${TABLE_NAME}/?_expand=category&status_ne=0&_sort=id&_order=desc`;
     return instance.get(url);
 };
 

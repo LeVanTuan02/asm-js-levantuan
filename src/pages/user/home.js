@@ -53,6 +53,7 @@ const HomePage = {
     afterRender() {
         Header.afterRender();
         Footer.afterRender();
+        Products.afterRender();
 
         // slider
         $(document).ready(() => {
