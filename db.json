@@ -64,7 +64,7 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 36,
+      "view": 37,
       "favorites": 10,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
@@ -82,7 +82,7 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 35,
+      "view": 36,
       "favorites": 10,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
@@ -101,7 +101,7 @@
       "description": "123",
       "status": 1,
       "view": 35,
-      "favorites": 10,
+      "favorites": 11,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 4,
@@ -118,8 +118,8 @@
       "price": 3432,
       "description": "123",
       "status": 1,
-      "view": 35,
-      "favorites": 10,
+      "view": 36,
+      "favorites": 11,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 5,
@@ -136,8 +136,8 @@
       "price": 10000,
       "description": "123",
       "status": 1,
-      "view": 15,
-      "favorites": 16,
+      "view": 19,
+      "favorites": 18,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T07:24:59.844Z",
       "id": 6,
@@ -436,15 +436,9 @@
     },
     {
       "userId": 1,
-      "productId": 2,
-      "createdAt": "2022-02-13T13:09:40.690Z",
+      "productId": 6,
+      "createdAt": "2022-02-14T11:35:33.030Z",
       "id": 3
-    },
-    {
-      "userId": 1,
-      "productId": 3,
-      "createdAt": "2022-02-13T13:09:51.528Z",
-      "id": 4
     }
   ]
 }

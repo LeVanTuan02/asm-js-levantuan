@@ -1,4 +1,9 @@
-import { renderFilterProduct } from "../../../api/product";
+import toastr from "toastr";
+import { add, checkHeart } from "../../../api/favoritesProduct";
+import { get, renderFilterProduct, update } from "../../../api/product";
+import { getUser, reRender } from "../../../utils";
+import WishList from "../wishlist";
+import WishListLabel from "../wishlistLabel";
 
 const FilterProduct = {
     render(totalProduct, start, limit) {
@@ -36,6 +41,47 @@ const FilterProduct = {
         `;
     },
     afterRender() {
+        const afterRenderProduct = () => {
+            // yêu thích sp
+            const btnsHeart = document.querySelectorAll(".btn-heart");
+            btnsHeart.forEach((btn) => {
+                const { id } = btn.dataset;
+
+                btn.addEventListener("click", async () => {
+                    const userLogged = getUser();
+
+                    if (!userLogged) {
+                        toastr.info("Vui lòng đăng nhập để yêu thích sản phẩm");
+                    } else {
+                        const { data: heartList } = await checkHeart(userLogged.id, id);
+
+                        if (heartList.length) {
+                            toastr.info("Sản phẩm đã tồn tại trong danh sách yêu thích");
+                        } else {
+                            const { data: productInfo } = await get(id);
+                            productInfo.favorites += 1;
+
+                            // cập nhật số lượt yêu thích
+                            update(id, productInfo);
+
+                            // lưu thông tin
+                            const date = new Date();
+                            add({
+                                userId: userLogged.id,
+                                productId: +id,
+                                createdAt: date.toISOString(),
+                            })
+                                .then(() => toastr.success("Đã thêm vào danh sách yêu thích"))
+                                .then(() => reRender(WishListLabel, ".header-icon-heart"))
+                                .then(() => reRender(WishList, "#wishlist"))
+                                .then(() => document.querySelector("#wishlist").classList.add("active"));
+                        }
+                    }
+                });
+            });
+        };
+        afterRenderProduct();
+
         const productsElement = document.querySelector("#product-list");
 
         // lấy ds id sp
@@ -58,6 +104,8 @@ const FilterProduct = {
             // render ra màn hình
             const html = await renderFilterProduct(view, sort, listId);
             productsElement.innerHTML = html;
+
+            afterRenderProduct();
         });
 
         // đổi kiểu hiển thị sp
@@ -75,6 +123,8 @@ const FilterProduct = {
                 // render ra màn hình
                 const html = await renderFilterProduct(typeView, sortBy, listId);
                 productsElement.innerHTML = html;
+
+                afterRenderProduct();
             });
         });
     },
