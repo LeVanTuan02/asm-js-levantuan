@@ -1,13 +1,8 @@
-import toastr from "toastr";
-import { getProductByCate, get, update } from "../../api/product";
+import { getProductByCate } from "../../api/product";
 import { get as getCate } from "../../api/category";
-import { add, checkHeart } from "../../api/favoritesProduct";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Sidebar from "../../components/user/products/sidebar";
-import WishList from "../../components/user/wishlist";
-import WishListLabel from "../../components/user/wishlistLabel";
-import { getUser, reRender } from "../../utils";
 import ProductContent from "../../components/user/products/productContent";
 
 const ProductByCatePage = {
@@ -61,44 +56,6 @@ const ProductByCatePage = {
         Header.afterRender();
         Footer.afterRender();
         ProductContent.afterRender();
-
-        // yêu thích sp
-        const btnsHeart = document.querySelectorAll(".btn-heart");
-        btnsHeart.forEach((btn) => {
-            const { id } = btn.dataset;
-
-            btn.addEventListener("click", async () => {
-                const userLogged = getUser();
-
-                if (!userLogged) {
-                    toastr.info("Vui lòng đăng nhập để yêu thích sản phẩm");
-                } else {
-                    const { data: heartList } = await checkHeart(userLogged.id, id);
-
-                    if (heartList.length) {
-                        toastr.info("Sản phẩm đã tồn tại trong danh sách yêu thích");
-                    } else {
-                        const { data: productInfo } = await get(id);
-                        productInfo.favorites += 1;
-
-                        // cập nhật số lượt yêu thích
-                        update(id, productInfo);
-
-                        // lưu thông tin
-                        const date = new Date();
-                        add({
-                            userId: userLogged.id,
-                            productId: +id,
-                            createdAt: date.toISOString(),
-                        })
-                            .then(() => toastr.success("Đã thêm vào danh sách yêu thích"))
-                            .then(() => reRender(WishListLabel, ".header-icon-heart"))
-                            .then(() => reRender(WishList, "#wishlist"))
-                            .then(() => document.querySelector("#wishlist").classList.add("active"));
-                    }
-                }
-            });
-        });
     },
 };
 
