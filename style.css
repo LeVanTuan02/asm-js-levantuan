@@ -66,3 +66,7 @@
 .wishlist.active .wishlist__overlay {
     @apply visible opacity-100
 }
+
+.filter__btn-view.active {
+    @apply text-[#D9A953]
+}

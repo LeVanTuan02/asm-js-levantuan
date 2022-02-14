@@ -64,11 +64,65 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 31,
+      "view": 36,
       "favorites": 10,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 2,
+      "categoryId": 2,
+      "category": {
+        "name": "Milk Tea",
+        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
+        "id": 2
+      }
+    },
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "price": 1231,
+      "description": "123",
+      "status": 1,
+      "view": 35,
+      "favorites": 10,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-12T15:51:00.167Z",
+      "id": 3,
+      "categoryId": 2,
+      "category": {
+        "name": "Milk Tea",
+        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
+        "id": 2
+      }
+    },
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "price": 1231,
+      "description": "123",
+      "status": 1,
+      "view": 35,
+      "favorites": 10,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-12T15:51:00.167Z",
+      "id": 4,
+      "categoryId": 2,
+      "category": {
+        "name": "Milk Tea",
+        "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
+        "id": 2
+      }
+    },
+    {
+      "name": "Trà tranh nek",
+      "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
+      "price": 3432,
+      "description": "123",
+      "status": 1,
+      "view": 35,
+      "favorites": 10,
+      "createdAt": "2022-02-09T14:58:57.401Z",
+      "updatedAt": "2022-02-12T15:51:00.167Z",
+      "id": 5,
       "categoryId": 2,
       "category": {
         "name": "Milk Tea",
@@ -82,11 +136,11 @@
       "price": 10000,
       "description": "123",
       "status": 1,
-      "view": 10,
+      "view": 11,
       "favorites": 16,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T07:24:59.844Z",
-      "id": 3,
+      "id": 6,
       "categoryId": 2,
       "category": {
         "name": "Milk Tea",
@@ -104,7 +158,7 @@
       "favorites": 0,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-10T07:56:57.531Z",
-      "id": 4,
+      "id": 7,
       "categoryId": 1
     }
   ],

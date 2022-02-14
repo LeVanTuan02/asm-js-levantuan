@@ -3,14 +3,41 @@ import { add, checkHeart } from "../../api/favoritesProduct";
 import { get, getAllJoinCategory, update } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
+import FilterProduct from "../../components/user/products/filter";
 import Sidebar from "../../components/user/products/sidebar";
 import WishList from "../../components/user/wishlist";
 import WishListLabel from "../../components/user/wishlistLabel";
 import { formatCurrency, getUser, reRender } from "../../utils";
 
 const ProductsPage = {
-    async render() {
-        const { data: productList } = await getAllJoinCategory();
+    async render(pageNumber) {
+        let currentPage = pageNumber;
+        const { data } = await getAllJoinCategory();
+
+        // phân trang
+        const limit = 3;
+        const total = data.length;
+        const totalPage = Math.ceil(total / limit);
+        currentPage = pageNumber ?? 1;
+        if (currentPage >= totalPage) {
+            currentPage = totalPage;
+        } else if (currentPage < 0) {
+            currentPage = 1;
+        }
+        const start = (currentPage - 1) * limit;
+
+        // lấy dữ liệu sp
+        const { data: productList } = await getAllJoinCategory(start, limit);
+
+        let htmlPagination = "";
+        // eslint-disable-next-line no-plusplus
+        for (let i = 1; i <= totalPage; i++) {
+            htmlPagination += `
+            <li class="">
+                <a href="/#/products/page/${i}" class="${+currentPage === i ? "border-[#D9A953] bg-[#D9A953] text-white" : "border-gray-500"} w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold  text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">${i}</a>
+            </li>
+            `;
+        }
 
         return /* html */ `
         ${await Header.render("products")}
@@ -30,58 +57,13 @@ const ProductsPage = {
 
                 <div class="col-span-12 lg:col-span-9">
                     <!-- filter -->
-                    <div class="border-b pb-2 flex justify-between items-center">
-                        <div class="flex items-center">
-                            <ul class="flex">
-                                <li class="text-xl cursor-pointer mr-2 text-gray-600 transition ease-linear duration-150 hover:text-[#D9A953]">
-                                    <i class="fas fa-th"></i>
-                                </li>
-                                <li class="text-xl cursor-pointer mr-2 text-gray-600 transition ease-linear duration-150 hover:text-[#D9A953]">
-                                    <i class="fas fa-th-list"></i>
-                                </li>
-                            </ul>
-
-                            <span>Hiển thị 1 - 12 trong 36 kết quả</span>
-                        </div>
-
-                        <form action="" class="flex items-center">
-                            <label for="">Sắp xếp theo</label>
-
-                            <div class="flex ml-2 relative group">
-                                <div class="text-gray-600 flex items-center justify-between px-2 py-2 min-w-[130px] rounded-md border cursor-pointer group-hover:rounded-b-none">
-                                    <span class="mr-4">Mặc định</span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-
-                                <ul class="hidden group-hover:block absolute top-full left-0 right-0 bg-white border z-10 px-2 py-1">
-                                    <li class="flex justify-between items-center py-1 text-gray-600 hover:text-[#D9A953] cursor-pointer">
-                                        <span>Mặc định</span>
-                                        <div class="">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    </li>
-                                    <li class="flex justify-between items-center py-1 text-gray-600 hover:text-[#D9A953] cursor-pointer">
-                                        <span>Mặc định</span>
-                                        <div class="">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    </li>
-                                    <li class="flex justify-between items-center py-1 text-gray-600 hover:text-[#D9A953] cursor-pointer">
-                                        <span>Mặc định</span>
-                                        <div class="">
-                                            <i class="fas fa-check"></i>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
+                    ${FilterProduct.render(total, start, limit)}
                     <!-- end filter -->
 
-                    <div>
+                    <div id="product-list">
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
                             ${productList.map((item) => /* html */`
-                                <div class="group">
+                                <div class="group product-item" data-id="${item.id}">
                                     <div class="relative bg-[#f7f7f7] overflow-hidden">
                                         <a href="/#/product/${item.id}" style="background-image: url(${item.image})" class="bg-cover pt-[100%] bg-center block"></a>
                                         <button class="absolute w-full bottom-0 h-9 bg-[#D9A953] text-center text-gray-50 opacity-95 uppercase font-semibold text-sm transition ease-linear duration-300 hover:opacity-100 hover:text-white translate-y-full group-hover:translate-y-0">Xem nhanh</button>
@@ -107,62 +89,30 @@ const ProductsPage = {
                                 </div>
                                 `).join("")}
                         </div>
-
-                        <div class="grid grid-cols-1 divide-y">
-                            ${productList.map((item) => /* html */`
-                                <div class="grid grid-cols-12 py-4 gap-3">
-                                    <div class="col-span-3 relative group overflow-hidden">
-                                        <a href="/#/product/${item.id}" class="bg-no-repeat bg-cover bg-center block h-full bg-[#f7f7f7] absolute w-full" style="background-image: url(${item.image})"></a>
-                                        <button class="absolute w-full h-8 bottom-0 bg-[#D9A953] opacity-90 transition ease-linear duration-300 text-white font-semibold uppercase text-sm hover:opacity-100 translate-y-full group-hover:translate-y-0">Xem nhanh</button>
-                                        <button class="opacity-0 group-hover:opacity-100 absolute top-3 right-3 border-2 border-gray-400 rounded-full w-8 h-8 text-gray-400 transition ease-linear duration-300 hover:bg-red-700 hover:text-white hover:border-red-700">
-                                            <i class="fas fa-heart"></i>
-                                        </button>
-                                    </div>
-
-                                    <div class="col-span-9">
-                                        <h3>
-                                            <a href="/#/product/${item.id}" class="block font-semibold text-xl text-gray-800 pb-1 mb-3 relative after:content-[''] after:absolute after:top-[100%] after:left-0 after:w-8 after:h-1 after:bg-gray-300">${item.name}</a>
-                                        </h3>
-                                        <ul class="flex items-center mt-4">
-                                            <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
-                                            <li>10 Đã bán</li>
-                                        </ul>
-                                        <div class="mt-1 mb-2">
-                                            <span class="text-xl text-[#D9A953] font-semibold">${formatCurrency(item.price)}</span>
-                                        </div>
-                                        <p>
-                                            ${item.description}
-                                        </p>
-                                        <button class="mt-4 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
-                                    </div>
-                                </div>
-                                `).join("")}
-                            
-                        </div>
                     </div>
 
                     <!-- pagination -->
                     <ul class="flex justify-center mt-5">
-                        <li class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
-                            <button>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
+                        ${currentPage > 1 ? `
+                        <li>
+                            <a href="/#/products/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                                <button>
+                                    <i class="fas fa-angle-left"></i>
+                                </button>
+                            </a>
                         </li>
-                        <li class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">1</li>
-                        <li class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">2</li>
-                        <li class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">3</li>
-                        <li class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
-                            <button>
-                                <i class="fas fa-angle-right"></i>
-                            </button>
+                        ` : ""}
+                        ${htmlPagination}
+                        
+                        ${!currentPage || currentPage <= totalPage - 1 ? `
+                        <li>
+                            <a href="/#/products/page/${+currentPage + 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                                <button>
+                                    <i class="fas fa-angle-right"></i>
+                                </button>
+                            </a>
                         </li>
+                        ` : ""}
                     </ul>
                 </div>
             </section>
@@ -175,6 +125,7 @@ const ProductsPage = {
     afterRender() {
         Header.afterRender();
         Footer.afterRender();
+        FilterProduct.afterRender();
 
         // yêu thích sp
         const btnsHeart = document.querySelectorAll(".btn-heart");
