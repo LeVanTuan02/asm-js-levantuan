@@ -66,8 +66,8 @@ import NewsByCatePage from "./pages/user/newsByCate";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
-const print = async (content, id) => {
-    document.querySelector("#app").innerHTML = await content.render(id);
+const print = async (content, id, pageNumber) => {
+    document.querySelector("#app").innerHTML = await content.render(id, pageNumber);
 
     if (content.afterRender) content.afterRender(id);
 };
@@ -122,8 +122,14 @@ router.on({
     "/product/search/:keyword": ({ data }) => {
         print(SearchProductPage, data.keyword);
     },
+    "/product/search/:keyword/page/:page": ({ data }) => {
+        print(SearchProductPage, data.keyword, data.page);
+    },
     "/category/:id": ({ data }) => {
         print(ProductByCatePage, data.id);
+    },
+    "/category/:id/page/:page": ({ data }) => {
+        print(ProductByCatePage, data.id, data.page);
     },
     "/news": () => {
         changeTitle("Tin tức - Trà Sữa Yotea");

@@ -16,8 +16,9 @@ export const getAllJoinCategory = (start, limit = 0) => {
 };
 
 // tìm kiếm
-export const search = (keyword) => {
-    const url = `/${TABLE_NAME}/?q=${keyword}&status_ne=0&_expand=category`;
+export const search = (keyword, start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?q=${keyword}&status_ne=0&_expand=category`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
 
@@ -160,4 +161,11 @@ export const renderFilterProduct = async (typeView, sort, listId) => {
     }
 
     return html;
+};
+
+// sp theo danh mục
+export const getProductByCate = (cateId, start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?categoryId=${cateId}&status_ne=0`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
+    return instance.get(url);
 };

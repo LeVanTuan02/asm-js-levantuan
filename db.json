@@ -113,7 +113,7 @@
       }
     },
     {
-      "name": "Trà tranh nek",
+      "name": "Trà tranh nek1",
       "image": "http://res.cloudinary.com/levantuan/image/upload/v1644415350/assignment-js/qlcsgytn7wuoyzsimev6.jpg",
       "price": 3432,
       "description": "123",
@@ -136,7 +136,7 @@
       "price": 10000,
       "description": "123",
       "status": 1,
-      "view": 11,
+      "view": 15,
       "favorites": 16,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T07:24:59.844Z",

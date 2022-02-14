@@ -14,7 +14,7 @@ const FilterProduct = {
                     </li>
                 </ul>
 
-                <span>Hiển thị ${start + 1} - ${(start + limit) < totalProduct ? (start + limit) : totalProduct} trong ${totalProduct} kết quả</span>
+                <span>Hiển thị ${(start + 1) > 0 ? (start + 1) : 0} - ${(start + limit) < totalProduct ? (start + limit) : totalProduct} trong ${totalProduct} kết quả</span>
             </div>
 
             <form action="" class="flex items-center">

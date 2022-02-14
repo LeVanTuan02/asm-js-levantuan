@@ -2,13 +2,13 @@ import { formatCurrency } from "../../../utils";
 import FilterProduct from "./filter";
 
 const ProductContent = {
-    render(productList, currentPage, total, totalPage, start, limit) {
+    render(productList, currentPage, total, totalPage, start, limit, url) {
         let htmlPagination = "";
         // eslint-disable-next-line no-plusplus
         for (let i = 1; i <= totalPage; i++) {
             htmlPagination += `
             <li class="">
-                <a href="/#/products/page/${i}"class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white ${+currentPage === i ? "border-[#D9A953] bg-[#D9A953] text-white" : "border-gray-500 text-gray-500"}">${i}</a>
+                <a href="/#/${url}/page/${i}"class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white ${+currentPage === i ? "border-[#D9A953] bg-[#D9A953] text-white" : "border-gray-500 text-gray-500"}">${i}</a>
             </li>
             `;
         }
@@ -54,7 +54,7 @@ const ProductContent = {
             <ul class="flex justify-center mt-5">
                 ${currentPage > 1 ? `
                 <li>
-                    <a href="/#/products/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                    <a href="/#/${url}/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
                         <button>
                             <i class="fas fa-angle-left"></i>
                         </button>
@@ -65,7 +65,7 @@ const ProductContent = {
                 
                 ${currentPage <= totalPage - 1 ? `
                 <li>
-                    <a href="/#/products/page/${+currentPage + 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                    <a href="/#/${url}/page/${+currentPage + 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
                         <button>
                             <i class="fas fa-angle-right"></i>
                         </button>
@@ -75,6 +75,9 @@ const ProductContent = {
             </ul>
         </div>
         `;
+    },
+    afterRender() {
+        FilterProduct.afterRender();
     },
 };
 
