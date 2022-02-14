@@ -7,8 +7,7 @@ import WishListLabel from "../wishlistLabel";
 
 const Products = {
     async render() {
-        const { data } = await getAllJoinCategory();
-        const listProduct = data.slice(0, 8);
+        const { data: listProduct } = await getAllJoinCategory(0, 8);
 
         return /* html */ `
         <section class="container max-w-6xl mx-auto py-9 px-3">
