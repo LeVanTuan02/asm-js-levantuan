@@ -1,17 +1,7 @@
-import { getAll } from "../../api/contact";
+import { formatDate } from "../../utils";
 
 const AdminContactList = {
-    async render() {
-        const { data } = await getAll();
-        const contactList = data.sort((a, b) => b.id - a.id);
-        const formatDate = (dateString) => {
-            const date = new Date(dateString);
-            return `
-                ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}
-                ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
-            `;
-        };
-
+    async render(contactList) {
         return /* html */`
         <thead class="bg-gray-50">
             <tr>

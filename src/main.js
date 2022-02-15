@@ -279,6 +279,9 @@ router.on({
     "/admin/contact": () => {
         print(AdminContactListPage);
     },
+    "/admin/contact/page/:page": ({ data }) => {
+        print(AdminContactListPage, data.page);
+    },
     "/admin/contact/:id/detail": ({ data }) => {
         print(AdminDetailContactPage, data.id);
     },
