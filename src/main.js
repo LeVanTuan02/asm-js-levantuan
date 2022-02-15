@@ -198,6 +198,9 @@ router.on({
     "/admin/news": () => {
         print(AdminNewsListPage);
     },
+    "/admin/news/page/:page": ({ data }) => {
+        print(AdminNewsListPage, data.page);
+    },
     "/admin/news/add": () => {
         print(AdminAddNewsPage);
     },

@@ -1,11 +1,7 @@
-import { getAll } from "../../api/news";
 import { formatDate } from "../../utils";
 
 const AdminNewsList = {
-    async render() {
-        const { data } = await getAll();
-        const newsList = data.sort((a, b) => b.id - a.id);
-
+    async render(newsList) {
         return /* html */`
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
