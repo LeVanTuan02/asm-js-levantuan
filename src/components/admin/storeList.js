@@ -1,10 +1,5 @@
-import { getAll } from "../../api/store";
-
 const AdminStoreList = {
-    async render() {
-        const { data } = await getAll();
-        const storeList = data.sort((a, b) => b.id - a.id);
-
+    async render(storeList) {
         return /* html */`
         <thead class="bg-gray-50">
             <tr>

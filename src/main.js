@@ -312,6 +312,9 @@ router.on({
     "/admin/store": () => {
         print(AdminStoreListPage);
     },
+    "/admin/store/page/:page": ({ data }) => {
+        print(AdminStoreListPage, data.page);
+    },
     "/admin/store/add": () => {
         print(AdminAddStorePage);
     },
