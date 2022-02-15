@@ -1,10 +1,5 @@
-import { getAll } from "../../api/slider";
-
 const AdminSliderList = {
-    async render() {
-        const { data } = await getAll();
-        const sliderList = data.sort((a, b) => b.id - a.id);
-
+    async render(sliderList) {
         return /* html */`
         <thead class="bg-gray-50">
             <tr>
