@@ -276,6 +276,9 @@ router.on({
     "/admin/user": () => {
         print(AdminUserListPage);
     },
+    "/admin/user/page/:page": ({ data }) => {
+        print(AdminUserListPage, data.page);
+    },
     "/admin/user/add": () => {
         print(AdminAddUserPage);
     },

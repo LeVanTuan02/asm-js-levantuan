@@ -12,8 +12,9 @@ export const login = (user) => {
     return instance.post(url, user);
 };
 
-export const getAll = () => {
-    const url = `/${TABLE_NAME}`;
+export const getAll = (page, limit = 0) => {
+    let url = `/${TABLE_NAME}/?_sort=id&_order=desc`;
+    if (limit) url += `&_page=${page}&_limit=${limit}`;
     return instance.get(url);
 };
 
