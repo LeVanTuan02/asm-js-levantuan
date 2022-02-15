@@ -2,8 +2,9 @@ import instance from "./config";
 
 const TABLE_NAME = "news";
 
-export const getAll = () => {
-    const url = `/${TABLE_NAME}/?_sort=id&_order=desc`;
+export const getAll = (start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?_sort=id&_order=desc`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
 
@@ -36,4 +37,11 @@ export const remove = (id) => {
 export const update = (id, data) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
+};
+
+// tin tức theo danh mục
+export const getAllByCate = (cateId, start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?cateNewId=${cateId}`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
+    return instance.get(url);
 };

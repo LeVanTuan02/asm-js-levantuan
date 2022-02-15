@@ -135,11 +135,18 @@ router.on({
         changeTitle("Tin tức - Trà Sữa Yotea");
         print(NewsPage);
     },
+    "/news/page/:page": ({ data }) => {
+        changeTitle("Tin tức - Trà Sữa Yotea");
+        print(NewsPage, data.page);
+    },
     "/news/:id": ({ data }) => {
         print(NewsDetailsPage, data.id);
     },
     "/category-news/:id": ({ data }) => {
         print(NewsByCatePage, data.id);
+    },
+    "/category-news/:id/page/:page": ({ data }) => {
+        print(NewsByCatePage, data.id, data.page);
     },
     "/contact": () => {
         changeTitle("Liên hệ - Trà Sữa Yotea");

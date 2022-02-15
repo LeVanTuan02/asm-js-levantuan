@@ -12,12 +12,6 @@ export const get = (id) => {
     return instance.get(url);
 };
 
-// ds bài viết theo danh mục
-export const getAllJoinNews = (cateId) => {
-    const url = `/${TABLE_NAME}/${cateId}/?_embed=news`;
-    return instance.get(url);
-};
-
 export const add = (data) => {
     const url = `/${TABLE_NAME}`;
     return instance.post(url, data);
