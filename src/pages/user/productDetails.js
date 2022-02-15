@@ -1,12 +1,11 @@
 import toastr from "toastr";
-import { get, updateView, update } from "../../api/product";
+import { get, updateView, getPrice } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
-import { formatCurrency, getUser, reRender } from "../../utils";
-import { add, checkHeart } from "../../api/favoritesProduct";
-import WishList from "../../components/user/wishlist";
-import WishListLabel from "../../components/user/wishlistLabel";
+import { formatCurrency } from "../../utils";
+import { getAll } from "../../api/topping";
+import { getAll as getAllSize } from "../../api/size";
 
 const ProductDetailPage = {
     async render(id) {
@@ -15,6 +14,12 @@ const ProductDetailPage = {
         updateView(id, {
             view: +(productDetail.view + 1),
         });
+
+        // ds topping
+        const { data: toppingList } = await getAll();
+
+        // ds size
+        const { data: sizeList } = await getAllSize();
 
         return /* html */ `
         ${await Header.render()}
@@ -73,25 +78,30 @@ const ProductDetailPage = {
 
                     <div class="flex justify-between">
                         <div>
-                            <form action="">
+                            <form action="" id="form__add-cart" data-id="${id}">
                                 <div class="flex items-center mt-2">
                                     <label for="" class="min-w-[80px] font-bold text-sm">Đá</label>
     
                                     <ul class="flex">
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</button>
+                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-0">
+                                            <label for="ice-0" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</button>
+                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-30">
+                                            <label for="ice-30" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</button>
+                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-50">
+                                            <label for="ice-50" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</button>
+                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-70">
+                                            <label for="ice-70" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</button>
+                                            <input type="radio" checked class="form__add-cart-ice" hidden name="ice" id="ice-100">
+                                            <label for="ice-100" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -100,19 +110,24 @@ const ProductDetailPage = {
     
                                     <ul class="flex">
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</button>
+                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-0">
+                                            <label for="sugar-0" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</button>
+                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-30">
+                                            <label for="sugar-30" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</button>
+                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-50">
+                                            <label for="sugar-50" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</button>
+                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-70">
+                                            <label for="sugar-70" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</label>
                                         </li>
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</button>
+                                            <input type="radio" checked name="sugar" hidden class="form__add-cart-sugar" id="sugar-100">
+                                            <label for="sugar-100" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -121,37 +136,35 @@ const ProductDetailPage = {
     
                                     <ul class="flex">
                                         <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-500 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-700">S</button>
+                                            <input hidden checked  value="" type="radio" name="size" class="form__add-cart-size" id="size-s">
+                                            <label for="size-s" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">S</label>
                                         </li>
-                                        <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">M</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">L</button>
-                                        </li>
+                                        ${sizeList.map((size) => `
+                                            <li>
+                                                <input hidden type="radio" value="${size.id}" name="size" class="form__add-cart-size" id="size-${size.name.toLowerCase()}">
+                                                <label for="size-${size.name.toLowerCase()}" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">${size.name.toUpperCase()}</label>
+                                            </li>
+                                            `).join("")}
                                     </ul>
                                 </div>
                                 <div class="flex items-center mt-2">
                                     <label for="" class="min-w-[80px] font-bold text-sm">Topping</label>
-                                    <select name="" id="" class="px-3 py-1 outline-none border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">
+                                    <select name="" id="form__add-cart-topping" class="px-3 py-1 outline-none border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">
                                         <option value="">Chọn topping</option>
-                                        <option value="">Topping 1</option>
-                                        <option value="">Topping 1</option>
-                                        <option value="">Topping 1</option>
-                                        <option value="">Topping 1</option>
+                                        ${toppingList.map((item) => `<option value="${item.id}">${item.name} +${formatCurrency(item.price)}</option>`)}
                                     </select>
                                 </div>
     
                                 <div class="border-b border-dashed pb-4 mt-6">
-                                    <p class="mt-6 border-t border-dashed pt-2 text-xl font-semibold">
-                                        Giá: 30,000
+                                    <p class="form__add-cart-total-price h-0 overflow-hidden transition-all ease-linear duration-100 mt-6 border-t border-dashed pt-2 text-xl font-semibold">
+                                        
                                     </p>
     
                                     <div class="flex mt-2 items-center">
                                         <div class="flex items-center h-9">
-                                            <button type="button" class="px-2 bg-gray-100 border-gray-200 h-full border-l border-y transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">-</button>
-                                            <input type="text" class="border border-gray-200 h-full w-10 text-center outline-none shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc]" value="1">
-                                            <button type="button" class="px-2 bg-gray-100 border-gray-200 h-full border-r border-y transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">+</button>
+                                            <button type="button" id="form__add-cart-qnt-minus" class="px-2 bg-gray-100 border-gray-200 h-full border-l border-y transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">-</button>
+                                            <input type="text" id="form__add-cart-qnt" class="border border-gray-200 h-full w-10 text-center outline-none shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc]" value="1">
+                                            <button type="button" id="form__add-cart-qnt-plus" class="px-2 bg-gray-100 border-gray-200 h-full border-r border-y transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">+</button>
                                         </div>
                                         <button class="ml-2 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
                                     </div>
@@ -183,7 +196,7 @@ const ProductDetailPage = {
                         </div>
                         
                         <div>
-                            <button class="text-gray-400 transition hover:text-black">Xóa</button>
+                            <button type="button" class="hidden form__add-cart-btn-clear text-gray-400 transition hover:text-black">Xóa</button>
                         </div>
                     </div>
                 </div>
@@ -341,42 +354,64 @@ const ProductDetailPage = {
         ${Footer.render()}
         `;
     },
-    afterRender() {
+    afterRender(id) {
         Header.afterRender();
         Footer.afterRender();
+        Related.afterRender();
 
-        const btnHeart = document.querySelector(".btn-heart");
-        btnHeart.addEventListener("click", async () => {
-            const { id } = btnHeart.dataset;
-            const userLogged = getUser();
+        const formAddCart = document.querySelector("#form__add-cart");
+        const qntElement = formAddCart.querySelector("#form__add-cart-qnt");
+        const toppingElement = formAddCart.querySelector("#form__add-cart-topping");
+        const totalPriceElement = formAddCart.querySelector(".form__add-cart-total-price");
+        const btnResetForm = document.querySelector(".form__add-cart-btn-clear");
 
-            if (!userLogged) {
-                toastr.info("Vui lòng đăng nhập để yêu thích sản phẩm");
+        // render tổng tiền
+        const renderTotalPrice = async () => {
+            const sizeElement = formAddCart.querySelector(".form__add-cart-size:checked");
+
+            let toppingId = toppingElement.value;
+            toppingId = +toppingId || 0;
+            const sizeId = +sizeElement.value || 0;
+            const qnt = qntElement.value;
+
+            const totalPrice = await getPrice(id, toppingId, sizeId, qnt);
+            totalPriceElement.classList.add("active");
+            totalPriceElement.innerHTML = `Giá: ${formatCurrency(totalPrice)}`;
+        };
+
+        // add cart
+        formAddCart.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+
+        // tăng giảm số lượng
+        const btnMinus = formAddCart.querySelector("#form__add-cart-qnt-minus");
+        const btnPlus = formAddCart.querySelector("#form__add-cart-qnt-plus");
+
+        btnMinus.addEventListener("click", () => {
+            if (qntElement.value <= 0) {
+                toastr.info("Vui lòng chọn số lượng lớn hơn 0");
             } else {
-                const { data: heartList } = await checkHeart(userLogged.id, id);
-
-                if (heartList.length) {
-                    toastr.info("Sản phẩm đã tồn tại trong danh sách yêu thích");
-                } else {
-                    const { data: productInfo } = await get(id);
-                    productInfo.favorites += 1;
-
-                    // cập nhật số lượt yêu thích
-                    update(id, productInfo);
-
-                    // lưu thông tin
-                    const date = new Date();
-                    add({
-                        userId: userLogged.id,
-                        productId: +id,
-                        createdAt: date.toISOString(),
-                    })
-                        .then(() => toastr.success("Đã thêm vào danh sách yêu thích"))
-                        .then(() => reRender(WishListLabel, ".header-icon-heart"))
-                        .then(() => reRender(WishList, "#wishlist"))
-                        .then(() => document.querySelector("#wishlist").classList.add("active"));
-                }
+                qntElement.value -= 1;
+                renderTotalPrice();
             }
+        });
+
+        btnPlus.addEventListener("click", () => {
+            qntElement.value = Number(qntElement.value) + 1;
+            renderTotalPrice();
+        });
+
+        formAddCart.addEventListener("change", async () => {
+            renderTotalPrice();
+            btnResetForm.classList.remove("hidden");
+        });
+
+        // reset form add cart
+        btnResetForm.addEventListener("click", () => {
+            formAddCart.reset();
+            totalPriceElement.classList.remove("active");
+            btnResetForm.classList.add("hidden");
         });
     },
 };
