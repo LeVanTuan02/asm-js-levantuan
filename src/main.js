@@ -246,6 +246,9 @@ router.on({
     "/admin/slider": () => {
         print(AdminSliderListPage);
     },
+    "/admin/slider/page/:page": ({ data }) => {
+        print(AdminSliderListPage, data.page);
+    },
     "/admin/slider/add": () => {
         print(AdminAddSliderPage);
     },
