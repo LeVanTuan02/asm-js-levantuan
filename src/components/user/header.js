@@ -84,37 +84,40 @@ const Header = {
             <!-- end header bottom -->
 
             <!-- nav on mobile -->
-            <section class="hidden">
+            <section class="nav__mobile invisible transition-all duration-500 ease-linear fixed top-0 right-0 bottom-0 left-0 z-20">
                 <!-- overlay -->
-                <div class="fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.6)]"></div>
+                <div class="nav__mobile-overlay invisible transition-all duration-400 ease-linear relative w-screen h-screen bg-[rgba(0,0,0,0.6)]"></div>
 
-                <nav class="fixed top-0 left-0 bottom-0 min-w-[260px] bg-[rgba(255,255,255,0.95)] shadow py-10">
-                    <form action="" class="flex px-3">
-                        <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                <nav class="nav__mobile-content -translate-x-full transition duration-500 ease absolute top-0 left-0 bottom-0 min-w-[260px] bg-[rgba(255,255,255,0.95)] shadow py-10">
+                    <form action="" class="flex px-3" id="nav__mobile-search">
+                        <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên sản phẩm tìm kiếm">
                         <button class="px-3 text-white bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
                     <ul class="grid grid-cols-1 divide-y mt-5">
                         <li>
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="/#/" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="/#/intro" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Giới thiệu</a>
                         </li>
                         <li>
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="/#/products" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Sản phẩm</a>
                         </li>
                         <li>
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="/#/news" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Tin tức</a>
                         </li>
                         <li>
-                            <a href="" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Trang chủ</a>
+                            <a href="/#/contact" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Liên hệ</a>
+                        </li>
+                        <li>
+                            <a href="/#/store" class="px-3 py-3.5 transition ease-linear duration-200 hover:bg-gray-200 text-sm font-semibold text-gray-500 hover:text-black uppercase block">Cửa hàng</a>
                         </li>
                     </ul>
                 </nav>
 
-                <button class="fixed top-3 right-3 text-3xl text-gray-300 transition duration-200 ease-linear hover:text-white">
+                <button class="nav__mobile-close fixed top-3 right-3 text-3xl text-gray-300 transition duration-200 ease-linear hover:text-white">
                     <i class="fas fa-times"></i>
                 </button>
             </section>
@@ -127,6 +130,7 @@ const Header = {
     },
     async afterRender() {
         WishListLabel.afterRender();
+        Nav.afterRender();
 
         const headerElement = document.querySelector("#header-bottom");
         window.addEventListener("scroll", () => {
@@ -141,6 +145,7 @@ const Header = {
 
         // tìm kiếm sp
         const formSearch = document.querySelector("#form-search-product");
+        const formSearchMobile = document.querySelector("#nav__mobile-search");
         const formControlSearch = document.querySelector("#form-search-control");
         const searchResult = document.querySelector("#search-product-result");
 
@@ -162,6 +167,18 @@ const Header = {
         formSearch.addEventListener("submit", (e) => {
             e.preventDefault();
             const keyword = formControlSearch.value;
+
+            if (!keyword) {
+                toastr.info("Vui lòng nhập tên sản phẩm");
+            } else {
+                document.location.href = `/#/product/search/${keyword}`;
+            }
+        });
+
+        formSearchMobile.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const keyword = formSearchMobile.querySelector("input").value;
 
             if (!keyword) {
                 toastr.info("Vui lòng nhập tên sản phẩm");

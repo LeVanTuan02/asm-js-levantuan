@@ -9,7 +9,7 @@ const Nav = {
             <div class="border-b flex items-center h-full">
                 <!-- icon mobile -->
                 <div class="flex-1 md:hidden">
-                    <button class="pr-3 py-3 text-lg transition duration-200 ease-linear text-gray-400 hover:text-black">
+                    <button class="btn-toggle-nav cursor-pointer pr-3 py-3 text-lg transition duration-200 ease-linear text-gray-400 hover:text-black">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -75,6 +75,16 @@ const Nav = {
             </div>
         </div>
         `;
+    },
+    afterRender() {
+        const btnBar = document.querySelector(".btn-toggle-nav");
+        const navMobile = document.querySelector(".nav__mobile");
+        const navMobileOverlay = navMobile.querySelector(".nav__mobile-overlay");
+        const navMobileClose = navMobile.querySelector(".nav__mobile-close");
+
+        btnBar.addEventListener("click", () => navMobile.classList.toggle("active"));
+        navMobileOverlay.addEventListener("click", () => navMobile.classList.toggle("active"));
+        navMobileClose.addEventListener("click", () => navMobile.classList.toggle("active"));
     },
 };
 

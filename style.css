@@ -59,14 +59,30 @@
     @apply bg-red-700 border-red-700 text-white
 }
 
-.wishlist.active .wishlist__content {
+.wishlist.active .wishlist__content,
+.nav__mobile.active .nav__mobile-content {
     @apply translate-x-0
 }
 
-.wishlist.active .wishlist__overlay {
+.nav__mobile.active {
+    @apply visible
+}
+
+.wishlist.active .wishlist__overlay,
+.nav__mobile.active .nav__mobile-overlay {
     @apply visible opacity-100
 }
 
 .filter__btn-view.active {
     @apply text-[#D9A953]
+}
+
+.form__add-cart-ice:checked ~ label,
+.form__add-cart-sugar:checked ~ label,
+.form__add-cart-size:checked ~ label{
+    @apply shadow-md border-gray-500 text-black
+}
+
+.form__add-cart-total-price.active {
+    @apply h-10
 }
