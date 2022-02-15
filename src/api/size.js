@@ -3,7 +3,7 @@ import instance from "./config";
 const TABLE_NAME = "size";
 
 export const getAll = () => {
-    const url = `/${TABLE_NAME}`;
+    const url = `/${TABLE_NAME}/?_sort=name&_order=desc`;
     return instance.get(url);
 };
 
