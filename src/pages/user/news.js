@@ -1,6 +1,6 @@
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
-import { getAll as getAllNews } from "../../api/news";
+import { getAllShow } from "../../api/news";
 import NewsHeader from "../../components/user/news/newsHeader";
 
 const NewsPage = {
@@ -12,7 +12,7 @@ const NewsPage = {
         };
 
         // ds tất cả bài viết
-        const { data } = await getAllNews();
+        const { data } = await getAllShow();
 
         // phân trang
         const limit = 8; // limit
@@ -27,7 +27,7 @@ const NewsPage = {
         const start = (currentPage - 1) * limit;
 
         // get sp dựa trên limit
-        const { data: newsList } = await getAllNews(start, limit);
+        const { data: newsList } = await getAllShow(start, limit);
 
         let htmlPagination = "";
         // eslint-disable-next-line no-plusplus

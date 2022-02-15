@@ -7,7 +7,7 @@ const Nav = {
         const { data: cateNewsList } = await getAll();
 
         // bài viết mới nhất
-        const { data: newsList } = await getAllShow();
+        const { data: newsList } = await getAllShow(0, 10);
 
         return `
         <aside class="hidden lg:block lg:col-span-3 pl-6 border-l">

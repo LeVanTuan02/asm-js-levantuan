@@ -11,7 +11,7 @@ export const getAll = (page, limit) => {
 // ds bài viết ở trạng thái hiển thị
 export const getAllShow = (start, limit = 0) => {
     let url = `/${TABLE_NAME}/?status_ne=0&_sort=id&_order=desc`;
-    if (url) url += `&_start=${start}&_limit=${limit}`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
 
