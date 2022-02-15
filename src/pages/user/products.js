@@ -40,7 +40,7 @@ const ProductsPage = {
             <section class="container max-w-6xl mx-auto px-3 grid grid-cols-12 gap-6 mb-8">
                 ${await Sidebar.render()}
 
-                ${ProductContent.render(productList, currentPage, total, totalPage, start, limit.toExponential, "products")}
+                ${ProductContent.render(productList, currentPage, total, totalPage, start, limit, "products")}
             </section>
         </main>
         <!-- end content -->
