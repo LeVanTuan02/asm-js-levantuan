@@ -207,6 +207,9 @@ router.on({
     "/admin/product": () => {
         print(AdminProductListPage);
     },
+    "/admin/product/page/:page": ({ data }) => {
+        print(AdminProductListPage, data.page);
+    },
     "/admin/product/add": () => {
         print(AdminAddProductPage);
     },

@@ -1,9 +1,13 @@
 import instance from "./config";
 
+import { get as getTopping } from "./topping";
+import { get as getSize } from "./size";
+
 const TABLE_NAME = "products";
 
-export const getAll = () => {
-    const url = `/${TABLE_NAME}`;
+export const getAll = (page, limit) => {
+    let url = `/${TABLE_NAME}/?_sort=id&_order=desc`;
+    if (limit) url += `&_page=${page}&_limit=${limit}`;
     return instance.get(url);
 };
 
@@ -82,7 +86,33 @@ export const getAllByFilter = async (sort, listId) => {
 
 // sp theo danh mục
 export const getProductByCate = (cateId, start, limit = 0) => {
-    let url = `/${TABLE_NAME}/?categoryId=${cateId}&status_ne=0`;
+    let url = `/${TABLE_NAME}/?categoryId=${cateId}&status_ne=0&_sort=id&_order=desc`;
     if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
+};
+
+export const getPrice = async (productId, toppingId, sizeId, qnt) => {
+    let totalPrice = 0;
+    // get giá sp
+    const { data: { price } } = await get(productId);
+
+    if (qnt) {
+        totalPrice += price * qnt;
+    } else {
+        totalPrice += price;
+    }
+
+    // get giá topping
+    if (toppingId) {
+        const { data: { price: toppingPrice } } = await getTopping(toppingId);
+        totalPrice += toppingPrice;
+    }
+
+    // get giá size
+    if (sizeId) {
+        const { data: { priceIncrease: sizePrice } } = await getSize(sizeId);
+        totalPrice += sizePrice;
+    }
+
+    return totalPrice;
 };
