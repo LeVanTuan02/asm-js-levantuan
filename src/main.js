@@ -267,6 +267,9 @@ router.on({
     "/admin/topping": () => {
         print(AdminToppingListPage);
     },
+    "/admin/topping/page/:page": ({ data }) => {
+        print(AdminToppingListPage, data.page);
+    },
     "/admin/topping/add": () => {
         print(AdminAddToppingPage);
     },

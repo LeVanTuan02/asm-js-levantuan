@@ -1,9 +1,5 @@
-import { getAll } from "../../api/topping";
-
 const AdminToppingList = {
-    async render() {
-        const { data: toppingList } = await getAll();
-
+    async render(toppingList) {
         return /* html */`
         <thead class="bg-gray-50">
             <tr>
