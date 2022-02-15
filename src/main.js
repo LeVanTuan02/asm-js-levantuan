@@ -288,6 +288,9 @@ router.on({
     "/admin/voucher": () => {
         print(AdminVoucherListPage);
     },
+    "/admin/voucher/page/:page": ({ data }) => {
+        print(AdminVoucherListPage, data.page);
+    },
     "/admin/voucher/add": () => {
         print(AdminAddVoucherPage);
     },
