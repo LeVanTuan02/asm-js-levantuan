@@ -222,6 +222,9 @@ router.on({
     "/admin/category": () => {
         print(AdminCateListPage);
     },
+    "/admin/category/page/:page": ({ data }) => {
+        print(AdminCateListPage, data.page);
+    },
     "/admin/category/add": () => {
         print(AdminAddCatePage);
     },
@@ -230,6 +233,9 @@ router.on({
     },
     "/admin/category-news": () => {
         print(AdminCateNewsListPage);
+    },
+    "/admin/category-news/page/:page": ({ data }) => {
+        print(AdminCateNewsListPage, data.page);
     },
     "/admin/category-news/add": () => {
         print(AdminAddCateNewsPage);

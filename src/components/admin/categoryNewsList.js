@@ -1,10 +1,5 @@
-import { getAll } from "../../api/cateNews";
-
 const AdminCategoryNewsList = {
-    async render() {
-        const { data } = await getAll();
-        const cateList = data.sort((a, b) => b.id - a.id);
-
+    async render(cateList) {
         return /* html */`
         <thead class="bg-gray-50">
             <tr>
