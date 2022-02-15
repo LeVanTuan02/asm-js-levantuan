@@ -2,8 +2,7 @@ import { getAllJoinProduct } from "../../../api/category";
 
 const Category = {
     async render() {
-        const { data } = await getAllJoinProduct();
-        const cateList = data.sort((a, b) => b.id - a.id).slice(0, 5);
+        const { data: cateList } = await getAllJoinProduct(0, 4);
 
         return `
         <section class="container max-w-6xl mx-auto py-7 px-3">

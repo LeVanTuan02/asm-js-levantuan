@@ -7,8 +7,9 @@ export const getAll = () => {
     return instance.get(url);
 };
 
-export const getAllJoinProduct = () => {
-    const url = `/${TABLE_NAME}/?_embed=products`;
+export const getAllJoinProduct = (start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?_embed=products`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
 
