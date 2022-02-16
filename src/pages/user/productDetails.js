@@ -3,9 +3,11 @@ import { get, updateView, getPrice } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
-import { formatCurrency } from "../../utils";
-import { getAll } from "../../api/topping";
-import { getAll as getAllSize } from "../../api/size";
+import { formatCurrency, reRender } from "../../utils";
+import { getAll, get as getTopping } from "../../api/topping";
+import { getAll as getAllSize, get as getSize } from "../../api/size";
+import { addToCart } from "../../utils/cart";
+import CartLabel from "../../components/user/cartLabel";
 
 const ProductDetailPage = {
     async render(id) {
@@ -84,23 +86,23 @@ const ProductDetailPage = {
     
                                     <ul class="flex">
                                         <li>
-                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-0">
+                                            <input type="radio" value="0" class="form__add-cart-ice" hidden name="ice" id="ice-0">
                                             <label for="ice-0" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-30">
+                                            <input type="radio" value="30" class="form__add-cart-ice" hidden name="ice" id="ice-30">
                                             <label for="ice-30" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-50">
+                                            <input type="radio" value="50" class="form__add-cart-ice" hidden name="ice" id="ice-50">
                                             <label for="ice-50" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" class="form__add-cart-ice" hidden name="ice" id="ice-70">
+                                            <input type="radio" value="70" class="form__add-cart-ice" hidden name="ice" id="ice-70">
                                             <label for="ice-70" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" checked class="form__add-cart-ice" hidden name="ice" id="ice-100">
+                                            <input type="radio" value="100" checked class="form__add-cart-ice" hidden name="ice" id="ice-100">
                                             <label for="ice-100" class="block cursor-pointer px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</label>
                                         </li>
                                     </ul>
@@ -110,23 +112,23 @@ const ProductDetailPage = {
     
                                     <ul class="flex">
                                         <li>
-                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-0">
+                                            <input type="radio" value="0" name="sugar" hidden class="form__add-cart-sugar" id="sugar-0">
                                             <label for="sugar-0" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">0%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-30">
+                                            <input type="radio" value="30" name="sugar" hidden class="form__add-cart-sugar" id="sugar-30">
                                             <label for="sugar-30" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">30%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-50">
+                                            <input type="radio" value="50" name="sugar" hidden class="form__add-cart-sugar" id="sugar-50">
                                             <label for="sugar-50" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">50%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" name="sugar" hidden class="form__add-cart-sugar" id="sugar-70">
+                                            <input type="radio" value="70" name="sugar" hidden class="form__add-cart-sugar" id="sugar-70">
                                             <label for="sugar-70" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">70%</label>
                                         </li>
                                         <li>
-                                            <input type="radio" checked name="sugar" hidden class="form__add-cart-sugar" id="sugar-100">
+                                            <input type="radio" value="100" checked name="sugar" hidden class="form__add-cart-sugar" id="sugar-100">
                                             <label for="sugar-100" class="cursor-pointer block px-3 py-1 border-2 border-gray-300 transition duration-300 hover:shadow-md rounded-[4px] mr-1 shadow-sm text-gray-500">100%</label>
                                         </li>
                                     </ul>
@@ -166,7 +168,7 @@ const ProductDetailPage = {
                                             <input type="text" id="form__add-cart-qnt" class="border border-gray-200 h-full w-10 text-center outline-none shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc]" value="1">
                                             <button type="button" id="form__add-cart-qnt-plus" class="px-2 bg-gray-100 border-gray-200 h-full border-r border-y transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">+</button>
                                         </div>
-                                        <button class="ml-2 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
+                                        <button id="form__add-cart-btn" class="ml-2 px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
                             </form>
@@ -365,6 +367,9 @@ const ProductDetailPage = {
         const totalPriceElement = formAddCart.querySelector(".form__add-cart-total-price");
         const btnResetForm = document.querySelector(".form__add-cart-btn-clear");
 
+        // generate id
+        const generateId = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
+
         // render tổng tiền
         const renderTotalPrice = async () => {
             const sizeElement = formAddCart.querySelector(".form__add-cart-size:checked");
@@ -380,8 +385,71 @@ const ProductDetailPage = {
         };
 
         // add cart
-        formAddCart.addEventListener("submit", (e) => {
+        formAddCart.addEventListener("submit", async (e) => {
             e.preventDefault();
+
+            const sizeElement = formAddCart.querySelector(".form__add-cart-size:checked");
+            const iceElement = formAddCart.querySelector(".form__add-cart-ice:checked");
+            const sugarElement = formAddCart.querySelector(".form__add-cart-sugar:checked");
+
+            // get số lượng sp
+            const quantity = +qntElement.value;
+            if (!quantity) {
+                toastr.info("Vui lòng nhập lại số lượng sản phẩm");
+            } else {
+                // get data product
+                const { data: product } = await get(id);
+                const productData = {
+                    productId: +id,
+                    productName: product.name,
+                    productPrice: product.price,
+                    productImage: product.image,
+                };
+
+                // get thông tin size
+                const sizeId = +sizeElement.value || 0;
+                const sizeData = {
+                    sizeId,
+                    sizeName: "S",
+                    sizePrice: 0,
+                };
+
+                if (sizeId) {
+                    const { data } = await getSize(sizeId);
+                    sizeData.sizeName = data.name;
+                    sizeData.sizePrice = data.priceIncrease;
+                }
+
+                // get thông tin topping
+                const toppingId = +toppingElement.value || 0;
+                const toppingData = {
+                    toppingId,
+                    toppingName: "",
+                    toppingPrice: 0,
+                };
+
+                if (toppingId) {
+                    const { data } = await getTopping(toppingId);
+                    toppingData.toppingName = data.name;
+                    toppingData.toppingPrice = data.price;
+                }
+
+                // data cart
+                const cartData = {
+                    id: generateId(),
+                    ...productData,
+                    ...sizeData,
+                    ...toppingData,
+                    quantity,
+                    ice: +iceElement.value,
+                    sugar: +sugarElement.value,
+                };
+
+                addToCart(cartData, () => {
+                    toastr.success(`Thêm sản phẩm ${productData.productName} vào giỏ hàng thành công`);
+                    reRender(CartLabel, "#header-cart-label");
+                });
+            }
         });
 
         // tăng giảm số lượng
