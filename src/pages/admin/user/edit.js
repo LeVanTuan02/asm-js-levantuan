@@ -10,8 +10,13 @@ const AdminEditUserPage = {
     async render(id) {
         const { data: userDetail } = await get(id);
         const { data: listProvince } = await getAllProvince();
-        const listDistrict = await getDistrict(userDetail.provinceCode);
-        const listWard = await getWard(userDetail.districtCode);
+
+        let listDistrict;
+        let listWard;
+        if (userDetail.provinceCode) {
+            listDistrict = await getDistrict(userDetail.provinceCode);
+            listWard = await getWard(userDetail.districtCode);
+        }
 
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">
@@ -87,6 +92,7 @@ const AdminEditUserPage = {
                                         <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                     
+                                    ${userDetail.provinceCode ? /* html */`
                                     <div class="col-span-6 md:col-span-2">
                                         <label for="form__edit-user-province" class="block text-sm font-medium text-gray-700">Tỉnh/TP</label>
                                         <select id="form__edit-user-province" name="form__edit-user-province" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -113,6 +119,32 @@ const AdminEditUserPage = {
                                         </select>
                                         <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
+                                    ` : /* html */`
+                                    <div class="col-span-6 md:col-span-2">
+                                        <label for="form__edit-user-province" class="block text-sm font-medium text-gray-700">Tỉnh/TP</label>
+                                        <select id="form__edit-user-province" name="form__edit-user-province" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">-- Chọn Tỉnh/TP --</option>
+                                            ${listProvince.map((item) => `<option value="${item.code}"</option>`).join("")}
+                                        </select>
+                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                    </div>
+
+                                    <div class="col-span-6 md:col-span-2">
+                                        <label for="form__edit-user-district" class="block text-sm font-medium text-gray-700">Quận/Huyện</label>
+                                        <select id="form__edit-user-district" name="form__edit-user-district" class="form-control mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">-- Chọn Quận/Huyện --</option>
+                                        </select>
+                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                    </div>
+
+                                    <div class="col-span-6 md:col-span-2">
+                                        <label for="form__edit-user-ward" class="block text-sm font-medium text-gray-700">Xã/Phường</label>
+                                        <select id="form__edit-user-ward" name="form__edit-user-ward" class="form-control mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">-- Chọn Xã/Phường --</option>
+                                        </select>
+                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                    </div>
+                                    `}
 
                                     <div class="col-span-6">
                                         <label for="form__edit-user-address" class="block text-sm font-medium text-gray-700">Địa chỉ hiện tại</label>
