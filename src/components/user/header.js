@@ -1,6 +1,7 @@
 import toastr from "toastr";
 import { search } from "../../api/product";
 import { formatCurrency, getUser, reRender } from "../../utils";
+import CartLabel from "./cartLabel";
 import Nav from "./nav";
 import WishList from "./wishlist";
 import WishListLabel from "./wishlistLabel";
@@ -66,11 +67,8 @@ const Header = {
                         <li class="header-icon-heart relative after:content-[''] after:absolute after:w-[1px] after:h-3.5 after:bg-gray-50 after:left-3 after:top-1/2 after:-translate-y-1/2 uppercase text-base cursor-pointer pl-6 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
                             ${await WishListLabel.render()}
                         </li>
-                        <li class="uppercase text-base pl-4 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
-                            <a href="/#/cart" class="relative">
-                                <label for="" class="absolute w-4 h-4 bg-green-700 text-xs text-center rounded-full -right-3 -top-1">10</label>
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
+                        <li id="header-cart-label" class="uppercase text-base pl-4 text-gray-50 font-light opacity-80 transition ease-linear duration-200 hover:text-white hover:opacity-100">
+                            ${CartLabel.render()}
                         </li>
                     </ul>
                 </div>
