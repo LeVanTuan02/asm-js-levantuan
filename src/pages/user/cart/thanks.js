@@ -1,3 +1,4 @@
+import CartNav from "../../../components/user/cartNav";
 import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
 
@@ -9,23 +10,7 @@ const ThanksPage = {
         <!-- content -->
         <main class="min-h-[calc(100vh-518px)]">
             <section class="container max-w-6xl mx-auto px-3 mt-10">
-                <ul class="flex justify-center items-center">
-                    <li class="text-2xl px-2 hidden md:block">
-                        <span class="uppercase text-gray-400 cursor-default">SHOPPING CART</span>
-                    </li>
-                    <li class="text-md text-gray-400 px-2 hidden md:block">
-                        <i class="fas fa-chevron-right"></i>
-                    </li>
-                    <li class="text-2xl px-2 hidden md:block">
-                        <span class="uppercase text-gray-400 cursor-default">Checkout details</span>
-                    </li>
-                    <li class="text-md text-gray-400 px-2 hidden md:block">
-                        <i class="fas fa-chevron-right"></i>
-                    </li>
-                    <li class="text-2xl px-2">
-                        <span class="uppercase text-black">Order Complete</span>
-                    </li>
-                </ul>
+                ${CartNav.render()}
             </section>
 
             <section class="container max-w-6xl mx-auto">

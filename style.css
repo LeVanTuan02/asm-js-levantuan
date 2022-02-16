@@ -86,3 +86,7 @@
 .form__add-cart-total-price.active {
     @apply h-10
 }
+
+#btn-cart-update[disabled] {
+    @apply opacity-60
+}

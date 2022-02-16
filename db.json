@@ -64,8 +64,8 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 37,
-      "favorites": 13,
+      "view": 241,
+      "favorites": 14,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 2,
@@ -82,8 +82,8 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 36,
-      "favorites": 11,
+      "view": 44,
+      "favorites": 12,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 3,
@@ -100,12 +100,12 @@
       "price": 1231,
       "description": "123",
       "status": 1,
-      "view": 36,
-      "favorites": 13,
+      "view": 61,
+      "favorites": 15,
       "createdAt": "2022-02-09T14:58:57.401Z",
-      "updatedAt": "2022-02-12T15:51:00.167Z",
+      "updatedAt": "2022-02-15T06:56:10.812Z",
       "id": 4,
-      "categoryId": 2,
+      "categoryId": 1,
       "category": {
         "name": "Milk Tea",
         "image": "http://res.cloudinary.com/levantuan/image/upload/v1644757239/assignment-js/sjh5kfx67ixrpav4rwet.png",
@@ -118,8 +118,8 @@
       "price": 3432,
       "description": "123",
       "status": 1,
-      "view": 36,
-      "favorites": 12,
+      "view": 68,
+      "favorites": 13,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T15:51:00.167Z",
       "id": 5,
@@ -136,8 +136,8 @@
       "price": 10000,
       "description": "123",
       "status": 1,
-      "view": 21,
-      "favorites": 19,
+      "view": 202,
+      "favorites": 20,
       "createdAt": "2022-02-09T14:58:57.401Z",
       "updatedAt": "2022-02-12T07:24:59.844Z",
       "id": 6,
@@ -225,37 +225,45 @@
   ],
   "size": [
     {
-      "name": "SS",
-      "priceIncrease": 12112,
-      "createdAt": "2022-02-10T07:16:51.577Z",
-      "updatedAt": "2022-02-10T07:24:26.135Z",
-      "id": 4
+      "name": "M",
+      "priceIncrease": 7000,
+      "createdAt": "2022-02-14T13:08:17.543Z",
+      "updatedAt": "2022-02-14T13:08:17.543Z",
+      "id": 1
     },
     {
-      "name": "A",
-      "priceIncrease": 1,
-      "createdAt": "2022-02-10T07:24:35.457Z",
-      "updatedAt": "2022-02-10T07:24:35.457Z",
-      "id": 5
-    },
-    {
-      "name": "A",
-      "priceIncrease": 2,
-      "createdAt": "2022-02-10T07:24:38.651Z",
-      "updatedAt": "2022-02-10T07:24:38.651Z",
-      "id": 6
+      "name": "L",
+      "priceIncrease": 10000,
+      "createdAt": "2022-02-14T13:08:22.518Z",
+      "updatedAt": "2022-02-14T13:08:22.518Z",
+      "id": 2
     }
   ],
   "toppings": [
     {
-      "name": "a1",
-      "price": 1,
+      "name": "Kem sữa Macchiato",
+      "price": 5000,
       "id": 1
     },
     {
-      "name": "2b",
-      "price": 2,
+      "name": "Pudding trứng",
+      "price": 6000,
       "id": 2
+    },
+    {
+      "name": "Thạch nha đam",
+      "price": 7000,
+      "id": 3
+    },
+    {
+      "name": "Trân châu đen",
+      "price": 6000,
+      "id": 4
+    },
+    {
+      "name": "Trân châu trắng",
+      "price": 7000,
+      "id": 5
     }
   ],
   "contact": [
@@ -292,13 +300,14 @@
       "id": 1,
       "code": "COVID",
       "quantity": 1000,
-      "condition": 1,
+      "condition": 0,
       "conditionNumber": 10,
       "status": 1,
-      "timeStart": "2022-02-09T15:42:22",
-      "timeEnd": "2022-02-09T15:42:22",
+      "timeStart": "2022-02-16T15:42:22",
+      "timeEnd": "2022-02-18T15:42:22",
       "createdAt": "2022-02-08T12:06:48.706Z",
-      "updatedAt": "2022-02-10T10:39:53.563Z"
+      "updatedAt": "2022-02-16T16:03:50.588Z",
+      "user_ids": "[2]"
     },
     {
       "code": "COVID10",
@@ -310,6 +319,7 @@
       "timeEnd": "2022-02-10T17:22",
       "createdAt": "2022-02-10T10:22:46.553Z",
       "updatedAt": "2022-02-10T10:46:22.588Z",
+      "user_ids": "",
       "id": 2
     }
   ],
@@ -328,6 +338,7 @@
       "role": 1,
       "active": 1,
       "createdAt": "2022-02-10T10:46:22.588Z",
+      "user_ids": "",
       "id": 1
     },
     {
@@ -377,6 +388,22 @@
       "active": 0,
       "createdAt": "2022-02-11T07:49:26.200Z",
       "id": 4
+    },
+    {
+      "email": "quyetlv@gmail.com",
+      "password": "$2a$10$xaQUpmH5XqA4bxNOvUB1iOy9JPR9jdpsnL5rg6T9D/Xo9aczwm3fm",
+      "username": "quyetlv",
+      "fullName": "Lê Quyết",
+      "phone": "0345623656",
+      "wardsCode": 0,
+      "districtCode": 0,
+      "provinceCode": 0,
+      "address": "",
+      "avatar": "https://res.cloudinary.com/levantuan/image/upload/v1644302455/assignment-js/thumbnail-image-vector-graphic-vector-id1147544807_ochvyr.jpg",
+      "role": 0,
+      "active": 1,
+      "createdAt": "2022-02-16T13:07:35.999Z",
+      "id": 5
     }
   ],
   "stores": [
@@ -436,21 +463,33 @@
     },
     {
       "userId": 1,
-      "productId": 4,
-      "createdAt": "2022-02-14T11:52:20.431Z",
-      "id": 3
+      "productId": 6,
+      "createdAt": "2022-02-15T02:27:58.897Z",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "productId": 5,
+      "createdAt": "2022-02-15T02:38:00.859Z",
+      "id": 7
     },
     {
       "userId": 1,
       "productId": 3,
-      "createdAt": "2022-02-14T11:52:22.793Z",
-      "id": 4
+      "createdAt": "2022-02-15T02:38:05.908Z",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "productId": 4,
+      "createdAt": "2022-02-15T02:39:09.203Z",
+      "id": 9
     },
     {
       "userId": 1,
       "productId": 2,
-      "createdAt": "2022-02-14T11:53:20.291Z",
-      "id": 5
+      "createdAt": "2022-02-15T05:32:05.980Z",
+      "id": 10
     }
   ]
 }
