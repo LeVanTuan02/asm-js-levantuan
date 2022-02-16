@@ -191,6 +191,7 @@ const AdminAddVoucherPage = {
                     status: +voucherStt.value,
                     timeStart: voucherTimeStart.value,
                     timeEnd: voucherTimeEnd.value,
+                    user_ids: "",
                     createdAt: date.toISOString(),
                     updatedAt: date.toISOString(),
                 };

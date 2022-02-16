@@ -27,3 +27,9 @@ export const update = (id, data) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
 };
+
+// get voucher theo mã
+export const getByCode = (voucher) => {
+    const url = `/${TABLE_NAME}/?code=${voucher}`;
+    return instance.get(url);
+};
