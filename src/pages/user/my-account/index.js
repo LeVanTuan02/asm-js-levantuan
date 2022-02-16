@@ -12,8 +12,13 @@ const UpdateInfoPage = {
     async render() {
         const userInfo = getUser();
         const { data: listProvince } = await getAllProvince();
-        const listDistrict = await getDistrict(userInfo.provinceCode);
-        const listWard = await getWard(userInfo.districtCode);
+
+        let listDistrict;
+        let listWard;
+        if (userInfo && userInfo.provinceCode) {
+            listDistrict = await getDistrict(userInfo.provinceCode);
+            listWard = await getWard(userInfo.districtCode);
+        }
 
         return /* html */ `
         ${await Header.render()}
@@ -62,6 +67,8 @@ const UpdateInfoPage = {
                                 <input type="text" id="form__update-account-email" value="${userInfo.email}" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none" placeholder="Nhập địa chỉ email">
                                 <div class="text-sm mt-0.5 text-red-500"></div>
                             </div>
+                            
+                            ${userInfo && userInfo.provinceCode ? /* html */`
                             <div class="col-span-12 md:col-span-4 mb-3 relative">
                                 <label for="form__update-account-province" class="font-semibold mb-1 block">Tỉnh/Thành phố *</label>
                                 <select id="form__update-account-province" class="shadow-[inset_0_-1.4em_1em_0_rgba(0,0,0,0.02)] hover:shadow-none hover:cursor-default focus:shadow-none focus:cursor-text w-full border px-2 h-10 text-sm outline-none">
@@ -86,9 +93,34 @@ const UpdateInfoPage = {
                                 </select>
                                 <div class="text-sm mt-0.5 text-red-500"></div>
                             </div>
+                            ` : /* html */`
+                            <div class="col-span-12 md:col-span-4 mb-3 relative">
+                                <label for="form__update-account-province" class="font-semibold mb-1 block">Tỉnh/Thành phố *</label>
+                                <select id="form__update-account-province" class="shadow-[inset_0_-1.4em_1em_0_rgba(0,0,0,0.02)] hover:shadow-none hover:cursor-default focus:shadow-none focus:cursor-text w-full border px-2 h-10 text-sm outline-none">
+                                    <option value="">-- Chọn Tỉnh/TP --</option>
+                                    ${listProvince.map((item) => `<option value="${item.code}">${item.name}</option>`).join("")}
+                                </select>
+                                <div class="text-sm mt-0.5 text-red-500"></div>
+                            </div>
+                            <div class="col-span-12 md:col-span-4 mb-3 relative">
+                                <label for="form__update-account-district" class="font-semibold mb-1 block">Quận/Huyện *</label>
+                                <select id="form__update-account-district" class="shadow-[inset_0_-1.4em_1em_0_rgba(0,0,0,0.02)] hover:shadow-none hover:cursor-default focus:shadow-none focus:cursor-text w-full border px-2 h-10 text-sm outline-none">
+                                    <option value="">-- Chọn Quận/Huyện --</option>
+                                </select>
+                                <div class="text-sm mt-0.5 text-red-500"></div>
+                            </div>
+                            <div class="col-span-12 md:col-span-4 mb-3 relative">
+                                <label for="form__update-account-ward" class="font-semibold mb-1 block">Xã/Phường *</label>
+                                <select id="form__update-account-ward" class="shadow-[inset_0_-1.4em_1em_0_rgba(0,0,0,0.02)] hover:shadow-none hover:cursor-default focus:shadow-none focus:cursor-text w-full border px-2 h-10 text-sm outline-none">
+                                    <option value="">-- Chọn Xã/Phường --</option>
+                                </select>
+                                <div class="text-sm mt-0.5 text-red-500"></div>
+                            </div>
+                            `}
+
                             <div class="col-span-12 mb-3">
                                 <label for="form__update-account-add" class="font-semibold mb-1 block">Địa chỉ cụ thể *</label>
-                                <input type="text" id="form__update-account-add" value="${userInfo.address}" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none">
+                                <input type="text" id="form__update-account-add" value="${userInfo.address}" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none" placeholder="Nhập Thôn/Xóm/TDP">
                                 <div class="text-sm mt-0.5 text-red-500"></div>
                             </div>
                         </div>
@@ -104,6 +136,8 @@ const UpdateInfoPage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
         MyAccNav.afterRender();
 
         const formUpdate = document.querySelector("#form__update-account");
