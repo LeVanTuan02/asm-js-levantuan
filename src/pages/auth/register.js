@@ -148,8 +148,17 @@ const RegisterPage = {
                     email: email.value,
                     phone: phone.value,
                     password: password.value,
+                    wardsCode: 0,
+                    districtCode: 0,
+                    provinceCode: 0,
+                    address: "",
+                    avatar: "https://res.cloudinary.com/levantuan/image/upload/v1644302455/assignment-js/thumbnail-image-vector-graphic-vector-id1147544807_ochvyr.jpg",
+                    role: 0,
+                    active: 0,
+                    createdAt: new Date().toISOString(),
                 })
-                    .then(() => toastr.success("Đăng ký thành công"));
+                    .then(() => toastr.success("Đăng ký thành công"))
+                    .then(() => { window.location.href = "/#/login"; });
             }
         });
     },
