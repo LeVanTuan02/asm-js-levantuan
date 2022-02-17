@@ -91,3 +91,21 @@ export const totalPriceDerease = () => {
 
     return totalDecrease;
 };
+
+// lấy ds id voucher
+export const getIdsVoucher = () => {
+    let voucherIds = [];
+
+    if (voucher.length) {
+        voucherIds = voucher.map((item) => item.id);
+    }
+
+    return voucherIds;
+};
+
+export const finishOrder = (next) => {
+    localStorage.removeItem("cart");
+    localStorage.removeItem("voucher");
+
+    next();
+};

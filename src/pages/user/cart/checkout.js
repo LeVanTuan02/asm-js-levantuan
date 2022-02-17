@@ -1,9 +1,15 @@
+import toastr from "toastr";
 import { getAllProvince, getDistrict, getWard } from "../../../api/location";
 import CartNav from "../../../components/user/cartNav";
 import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
 import { formatCurrency, getUser } from "../../../utils";
-import { getTotalPrice, totalPriceDerease } from "../../../utils/cart";
+import {
+    finishOrder, getIdsVoucher, getTotalPrice, totalPriceDerease,
+} from "../../../utils/cart";
+import { add } from "../../../api/order";
+import { update as updateVoucher, get } from "../../../api/voucher";
+import { add as addOrderDetail } from "../../../api/orderDetail";
 
 const CheckoutPage = {
     async render() {
@@ -113,8 +119,8 @@ const CheckoutPage = {
                     <h3 class="uppercase text-gray-500 font-semibold my-2 text-lg">Thông tin bổ sung</h3>
                     <div class="grid grid-cols-12">
                         <div class="col-span-12 mb-3">
-                            <label for="" class="font-semibold mb-1 block">Ghi chú đơn hàng (tuỳ chọn)</label>
-                            <textarea name="" id="" cols="30" rows="5" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border p-2 text-sm outline-none" placeholder="Ghi chú về đơn hàng"></textarea>
+                            <label for="cart__checkout-form-msg" class="font-semibold mb-1 block">Ghi chú đơn hàng (tuỳ chọn)</label>
+                            <textarea name="cart__checkout-form-msg" id="cart__checkout-form-msg" cols="30" rows="5" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border p-2 text-sm outline-none" placeholder="Ghi chú về đơn hàng"></textarea>
                         </div>
                     </div>
                 </div>
@@ -182,6 +188,9 @@ const CheckoutPage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+
         const provinceElement = document.querySelector("#cart__checkout-province");
         const districtElement = document.querySelector("#cart__checkout-district");
         const wardElement = document.querySelector("#cart__checkout-ward");
@@ -190,6 +199,7 @@ const CheckoutPage = {
         const phone = formCheckout.querySelector("#cart__checkout-form-phone");
         const email = formCheckout.querySelector("#cart__checkout-form-email");
         const address = formCheckout.querySelector("#cart__checkout-form-add");
+        const message = formCheckout.querySelector("#cart__checkout-form-msg");
 
         const validate = () => {
             let isValid = true;
@@ -254,13 +264,78 @@ const CheckoutPage = {
             return isValid;
         };
 
-        formCheckout.addEventListener("submit", (e) => {
+        formCheckout.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const isValid = validate();
 
             if (isValid) {
-                console.log(123);
+                const district = districtElement.options[districtElement.selectedIndex].text;
+                const province = provinceElement.options[provinceElement.selectedIndex].text;
+                const ward = wardElement.options[wardElement.selectedIndex].text;
+                const customerAdd = `${address.value}, ${ward}, ${district}, ${province}`;
+
+                const date = new Date();
+                const currentUserId = getUser() ? getUser().id : 0;
+                const listIdVoucher = getIdsVoucher();
+
+                const orderData = {
+                    userId: currentUserId,
+                    customer_name: fullName.value,
+                    address: customerAdd,
+                    phone: phone.value,
+                    email: email.value,
+                    total_price: getTotalPrice(),
+                    price_decrease: totalPriceDerease(),
+                    message: message.value,
+                    status: 0,
+                    voucher: listIdVoucher,
+                    createdAt: date.toISOString(),
+                    updatedAt: date.toISOString(),
+                };
+
+                // lưu id user sử dụng voucher, giảm số lượng voucher
+                listIdVoucher.forEach(async (id) => {
+                    const { data: curentVoucher } = await get(id);
+
+                    // add id user
+                    const userUsed = curentVoucher.user_ids;
+                    userUsed.push(currentUserId);
+                    curentVoucher.user_ids = userUsed;
+
+                    // giảm quantity
+                    // eslint-disable-next-line no-plusplus
+                    curentVoucher.quantity--;
+
+                    updateVoucher(id, curentVoucher);
+                });
+
+                // lưu thông tin cart
+                const { data } = await add(orderData);
+                const orderId = data.id;
+
+                // lưu cart detail
+                const cartList = JSON.parse(localStorage.getItem("cart")) || [];
+                cartList.forEach(async (cart) => {
+                    addOrderDetail({
+                        orderId,
+                        productId: cart.productId,
+                        productPrice: cart.productPrice,
+                        sizeId: cart.sizeId,
+                        sizePrice: cart.sizePrice,
+                        quantity: cart.quantity,
+                        ice: cart.ice,
+                        sugar: cart.sugar,
+                        toppingId: cart.toppingId,
+                        toppingPrice: cart.toppingPrice,
+                    });
+                });
+
+                // xóa cart khỏi local storage
+                finishOrder(() => {
+                    toastr.success("Đặt hàng thành công");
+                    window.location.href = "/#/cart-thanks";
+                });
             }
         });
 

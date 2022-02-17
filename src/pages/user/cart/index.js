@@ -249,45 +249,51 @@ const CartPage = {
             formAddVoucher.addEventListener("submit", async (e) => {
                 e.preventDefault();
 
-                if (!voucherElement.value) {
-                    toastr.info("Vui lòng nhập mã Voucher");
-                } else {
-                    const voucherCode = voucherElement.value.toUpperCase();
-                    // check voucher
-                    const { data } = await getByCode(voucherCode);
+                const userLogged = getUser();
 
-                    if (!data.length) {
-                        toastr.info("Mã voucher không tồn tại");
+                if (userLogged) {
+                    if (!voucherElement.value) {
+                        toastr.info("Vui lòng nhập mã Voucher");
                     } else {
-                        const [voucherData] = data;
-                        const timeStart = new Date(voucherData.timeStart);
-                        const timeEnd = new Date(voucherData.timeEnd);
+                        const voucherCode = voucherElement.value.toUpperCase();
+                        // check voucher
+                        const { data } = await getByCode(voucherCode);
 
-                        const now = new Date();
-
-                        if (timeStart > now) {
-                            toastr.info("Voucher chưa đến thời gian sử dụng");
-                        } else if (timeEnd < now) {
-                            toastr.info("Voucher đã quá hạn sử dụng");
-                        } else if (!voucherData.quantity) {
-                            toastr.info("Voucher đã hết lượt sử dụng");
-                        } else if (!voucherData.status) {
-                            toastr.info("Voucher đã bị khóa");
+                        if (!data.length) {
+                            toastr.info("Mã voucher không tồn tại");
                         } else {
-                            // check user đã sử dụng voucher chưa
-                            const userLogged = getUser();
-                            const listIdUsed = JSON.parse(voucherData.user_ids);
+                            const [voucherData] = data;
+                            const timeStart = new Date(voucherData.timeStart);
+                            const timeEnd = new Date(voucherData.timeEnd);
 
-                            const isUsed = listIdUsed.some((id) => id === userLogged.id);
-                            if (isUsed) {
-                                toastr.info("Bạn đã sử dụng Voucher này trước đó");
+                            const now = new Date();
+
+                            if (timeStart > now) {
+                                toastr.info("Voucher chưa đến thời gian sử dụng");
+                            } else if (timeEnd < now) {
+                                toastr.info("Voucher đã quá hạn sử dụng");
+                            } else if (!voucherData.quantity) {
+                                toastr.info("Voucher đã hết lượt sử dụng");
+                            } else if (!voucherData.status) {
+                                toastr.info("Voucher đã bị khóa");
                             } else {
-                                addVoucher(voucherData, () => {
-                                    reRender(CartPage, "#app");
-                                });
+                                // check user đã sử dụng voucher chưa
+
+                                const listIdUsed = voucherData.user_ids;
+
+                                const isUsed = listIdUsed.some((id) => id === userLogged.id);
+                                if (isUsed) {
+                                    toastr.info("Bạn đã sử dụng Voucher này trước đó");
+                                } else {
+                                    addVoucher(voucherData, () => {
+                                        reRender(CartPage, "#app");
+                                    });
+                                }
                             }
                         }
                     }
+                } else {
+                    toastr.info("Vui lòng đăng nhập để sử dụng Voucher");
                 }
             });
 
