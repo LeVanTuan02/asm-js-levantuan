@@ -1,5 +1,5 @@
 import toastr from "toastr";
-import { add, getByCode } from "../../../api/voucher";
+import { add } from "../../../api/voucher";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
@@ -114,21 +114,14 @@ const AdminAddVoucherPage = {
         const voucherTimeEnd = formAdd.querySelector("#form__add-voucher-end");
 
         // validate
-        const validate = async () => {
+        const validate = () => {
             let isValid = true;
 
             if (!voucherCode.value) {
                 voucherCode.nextElementSibling.innerText = "Vui lòng nhập mã voucher";
                 isValid = false;
             } else {
-                const { data } = await getByCode(voucherCode.value.toUpperCase());
-
-                if (data.length) {
-                    voucherCode.nextElementSibling.innerText = "Mã Voucher đã tồn tại";
-                    isValid = false;
-                } else {
-                    voucherCode.nextElementSibling.innerText = "";
-                }
+                voucherCode.nextElementSibling.innerText = "";
             }
 
             if (!voucherQuantity.value) {
@@ -185,7 +178,7 @@ const AdminAddVoucherPage = {
         // bắt sự kiện submit form
         formAdd.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const isValid = await validate();
+            const isValid = validate();
 
             if (isValid) {
                 const date = new Date();
@@ -198,7 +191,7 @@ const AdminAddVoucherPage = {
                     status: +voucherStt.value,
                     timeStart: voucherTimeStart.value,
                     timeEnd: voucherTimeEnd.value,
-                    user_ids: [],
+                    user_ids: "",
                     createdAt: date.toISOString(),
                     updatedAt: date.toISOString(),
                 };
