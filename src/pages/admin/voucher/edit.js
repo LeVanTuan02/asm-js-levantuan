@@ -1,6 +1,6 @@
 import toastr from "toastr";
 import AdminSizeListPage from ".";
-import { get, update } from "../../../api/voucher";
+import { get, getByCode, update } from "../../../api/voucher";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
@@ -103,7 +103,7 @@ const AdminEditVoucherPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
@@ -117,14 +117,21 @@ const AdminEditVoucherPage = {
         const voucherTimeEnd = formEdit.querySelector("#form__edit-voucher-end");
 
         // validate
-        const validate = () => {
+        const validate = async () => {
             let isValid = true;
 
             if (!voucherCode.value) {
                 voucherCode.nextElementSibling.innerText = "Vui lòng nhập mã voucher";
                 isValid = false;
             } else {
-                voucherCode.nextElementSibling.innerText = "";
+                const { data } = await getByCode(voucherCode.value.toUpperCase());
+
+                if (data.length && data[0].id !== +id) {
+                    voucherCode.nextElementSibling.innerText = "Mã Voucher đã tồn tại";
+                    isValid = false;
+                } else {
+                    voucherCode.nextElementSibling.innerText = "";
+                }
             }
 
             if (!voucherQuantity.value) {
@@ -181,8 +188,7 @@ const AdminEditVoucherPage = {
         // bắt sự kiện submit form
         formEdit.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
+            const isValid = await validate();
             const date = new Date();
 
             if (isValid) {
