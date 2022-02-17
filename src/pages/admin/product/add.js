@@ -1,4 +1,5 @@
 import toastr from "toastr";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { getAll as getAllCate } from "../../../api/category";
 import { add } from "../../../api/product";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -14,7 +15,7 @@ const AdminAddProductPage = {
             ${AdminNav.render("product")}
             
             <div class="ml-0 transition md:ml-60">
-                <header class="left-0 md:left-60 fixed right-0 top-0">
+                <header class="left-0 md:left-60 fixed right-0 top-0 z-20">
                     ${HeaderTop.render()}
 
                     <div class="px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
@@ -52,7 +53,7 @@ const AdminAddProductPage = {
                                     </div>
         
                                     <div class="col-span-6">
-                                        <label for="form__add-product-description" class="block text-sm font-medium text-gray-700">Mô tả</label>
+                                        <label for="form__add-product-description" class="mb-1 block text-sm font-medium text-gray-700">Mô tả</label>
                                         <textarea id="form__add-product-description" name="form__add-product-description" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả sản phẩm"></textarea>
                                         <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
@@ -151,10 +152,10 @@ const AdminAddProductPage = {
             }
 
             if (!proDesc.value) {
-                proDesc.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
+                proDesc.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
                 isValid = false;
             } else {
-                proDesc.nextElementSibling.innerText = "";
+                proDesc.nextElementSibling.nextElementSibling.innerText = "";
             }
 
             if (!proCate.value) {
@@ -182,6 +183,13 @@ const AdminAddProductPage = {
             return isValid;
         };
 
+        // ck editor
+        let productDesc;
+        ClassicEditor
+            .create(proDesc)
+            .then((newEditor) => { productDesc = newEditor; })
+            .catch((error) => toastr.error(error));
+
         // bắt sự kiện submit form
         formAddProduct.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -195,7 +203,7 @@ const AdminAddProductPage = {
                     name: proName.value,
                     image: response.data.url,
                     price: +proPrice.value,
-                    description: proDesc.value,
+                    description: productDesc.getData(),
                     categoryId: +proCate.value,
                     status: +proStt.value,
                     view: 0,

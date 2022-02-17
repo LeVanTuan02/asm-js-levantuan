@@ -1,4 +1,5 @@
 import toastr from "toastr";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import AdminProductListPage from ".";
 import { getAll } from "../../../api/category";
 import { get, update } from "../../../api/product";
@@ -54,7 +55,7 @@ const AdminEditProductPage = {
                                     </div>
         
                                     <div class="col-span-6">
-                                        <label for="form__edit-product-description" class="block text-sm font-medium text-gray-700">Mô tả</label>
+                                        <label for="form__edit-product-description" class="mb-1 block text-sm font-medium text-gray-700">Mô tả</label>
                                         <textarea id="form__edit-product-description" name="form__edit-product-description" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả sản phẩm">${productDetail.description}</textarea>
                                         <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
@@ -153,10 +154,10 @@ const AdminEditProductPage = {
             }
 
             if (!proDesc.value) {
-                proDesc.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
+                proDesc.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
                 isValid = false;
             } else {
-                proDesc.nextElementSibling.innerText = "";
+                proDesc.nextElementSibling.nextElementSibling.innerText = "";
             }
 
             if (!proCate.value) {
@@ -176,6 +177,13 @@ const AdminEditProductPage = {
             return isValid;
         };
 
+        // ck editor
+        let productDesc;
+        ClassicEditor
+            .create(proDesc)
+            .then((newEditor) => { productDesc = newEditor; })
+            .catch((error) => toastr.error(error));
+
         // bắt sự kiện submit form
         formAddProduct.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -188,7 +196,7 @@ const AdminEditProductPage = {
                 const productData = {
                     name: proName.value,
                     price: +proPrice.value,
-                    description: proDesc.value,
+                    description: productDesc.getData(),
                     categoryId: +proCate.value,
                     status: +proStt.value,
                     updatedAt: date.toISOString(),
