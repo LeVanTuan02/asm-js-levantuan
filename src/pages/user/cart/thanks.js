@@ -10,7 +10,7 @@ const ThanksPage = {
         <!-- content -->
         <main class="min-h-[calc(100vh-518px)]">
             <section class="container max-w-6xl mx-auto px-3 mt-10">
-                ${CartNav.render()}
+                ${CartNav.render("cart-thanks")}
             </section>
 
             <section class="container max-w-6xl mx-auto">
@@ -42,6 +42,10 @@ const ThanksPage = {
 
         ${Footer.render()}
         `;
+    },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
     },
 };
 

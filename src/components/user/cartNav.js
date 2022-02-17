@@ -15,7 +15,7 @@ const CartNav = {
                 <i class="fas fa-chevron-right"></i>
             </li>
             <li class="text-2xl px-2 ${page !== "cart-thanks" ? "hidden md:block" : ""}">
-                <span class="uppercase text-gray-400 cursor-default">Order Complete</span>
+                <span class="${page === "cart-thanks" ? "text-black" : ""} uppercase text-gray-400 cursor-default">Order Complete</span>
             </li>
         </ul>
         `;
