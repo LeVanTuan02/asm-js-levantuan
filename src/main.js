@@ -63,6 +63,8 @@ import AdminEditStorePage from "./pages/admin/store/edit";
 import SearchProductPage from "./pages/user/searchProduct";
 import ProductByCatePage from "./pages/user/productByCate";
 import NewsByCatePage from "./pages/user/newsByCate";
+import AdminCartListPage from "./pages/admin/cart";
+import AdminCartDetailPage from "./pages/admin/cart/detail";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -326,6 +328,15 @@ router.on({
     },
     "/admin/store/:id/edit": ({ data }) => {
         print(AdminEditStorePage, data.id);
+    },
+    "/admin/cart": () => {
+        print(AdminCartListPage);
+    },
+    "/admin/cart/:id/detail": ({ data }) => {
+        print(AdminCartDetailPage, data.id);
+    },
+    "/admin/cart/page/:page": ({ data }) => {
+        print(AdminCartListPage, data.page);
     },
 });
 
