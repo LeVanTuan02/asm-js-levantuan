@@ -11,6 +11,13 @@ const AdminNav = {
                     <span>Dashboard</span>
                 </a>
 
+                <a href="/#/admin/cart" class="${pageName === "cart" ? "text-gray-200 bg-gray-800" : ""} flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
+                    <div class="shrink-0 w-5 h-5 mr-2 text-gray-300 transition group-hover:text-gray-300">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <span>Cart</span>
+                </a>
+
                 <div>
                     <div class="sidebar__item ${pageName === "user" ? "text-gray-200 bg-gray-800" : ""} flex items-center justify-between px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200">
                         <div class="flex items-center">
