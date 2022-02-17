@@ -1,4 +1,5 @@
 import toastr from "toastr";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
@@ -14,7 +15,7 @@ const AdminAddNewsPage = {
             ${AdminNav.render("news")}
             
             <div class="ml-0 transition md:ml-60">
-                <header class="left-0 md:left-60 fixed right-0 top-0">
+                <header class="left-0 md:left-60 fixed right-0 top-0 z-20">
                     ${HeaderTop.render()}
 
                     <div class="px-4 py-1.5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.1)] flex items-center justify-between">
@@ -46,13 +47,13 @@ const AdminAddNewsPage = {
                                     </div>
         
                                     <div class="col-span-6">
-                                        <label for="form__add-news-desc" class="block text-sm font-medium text-gray-700">Mô tả ngắn</label>
+                                        <label for="form__add-news-desc" class="mb-1 block text-sm font-medium text-gray-700">Mô tả ngắn</label>
                                         <textarea id="form__add-news-desc" name="form__add-news-desc" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả bài viết"></textarea>
                                         <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
-                                        <label for="form__add-news-content" class="block text-sm font-medium text-gray-700">Nội dung</label>
+                                        <label for="form__add-news-content" class="mb-1 block text-sm font-medium text-gray-700">Nội dung</label>
                                         <textarea id="form__add-news-content" name="form__add-news-content" rows="10" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả bài viết"></textarea>
                                         <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
@@ -144,17 +145,17 @@ const AdminAddNewsPage = {
             }
 
             if (!description.value) {
-                description.nextElementSibling.innerText = "Vui lòng nhập mô tả bài viết";
+                description.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả bài viết";
                 isValid = false;
             } else {
-                description.nextElementSibling.innerText = "";
+                description.nextElementSibling.nextElementSibling.innerText = "";
             }
 
             if (!content.value) {
-                content.nextElementSibling.innerText = "Vui lòng nhập nội dung bài viết";
+                content.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập nội dung bài viết";
                 isValid = false;
             } else {
-                content.nextElementSibling.innerText = "";
+                content.nextElementSibling.nextElementSibling.innerText = "";
             }
 
             if (!cateId.value) {
@@ -182,6 +183,19 @@ const AdminAddNewsPage = {
             return isValid;
         }
 
+        // ck editor
+        let contentNews;
+        ClassicEditor
+            .create(content)
+            .then((newEditor) => { contentNews = newEditor; })
+            .catch((error) => toastr.error(error));
+
+        let descriptionNews;
+        ClassicEditor
+            .create(description)
+            .then((newEditor) => { descriptionNews = newEditor; })
+            .catch((error) => toastr.error(error));
+
         // bắt sự kiện submit form
         formAdd.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -194,8 +208,8 @@ const AdminAddNewsPage = {
                 const newsData = {
                     title: title.value,
                     thumbnail: response.data.url,
-                    description: description.value,
-                    content: content.value,
+                    description: descriptionNews.getData(),
+                    content: contentNews.getData(),
                     cateNewId: +cateId.value,
                     status: +newsStt.value,
                     createdAt: date.toISOString(),
