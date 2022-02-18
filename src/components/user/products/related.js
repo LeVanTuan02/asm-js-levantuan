@@ -7,8 +7,7 @@ import WishListLabel from "../wishlistLabel";
 
 const Related = {
     async render(id, cateId) {
-        const { data } = await getRelated(id, cateId);
-        const productList = data.slice(0, 5);
+        const { data: productList } = await getRelated(id, cateId, 0, 4);
 
         return `
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">

@@ -238,9 +238,11 @@ const ProductDetailPage = {
                 <button class="bg-[#D9A953] px-2 py-0.5 rounded text-white text-sm font-semibold block mx-auto transition duration-200 ease-linear hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Xem tất cả</button>
             </section>
 
-            <section class="container max-w-6xl px-3 mx-auto my-6 border-t">
-                <h2 class="text-2xl font-semibold mt-2">Sản phẩm tương tự</h2>
-                ${await Related.render(id, productDetail.categoryId)}
+            <section class="container max-w-6xl px-3 mx-auto my-6">
+                <div class="border-t">
+                    <h2 class="text-2xl font-semibold mt-2">Sản phẩm tương tự</h2>
+                    ${await Related.render(id, productDetail.categoryId)}
+                </div>
             </section>
         </main>
         <!-- end content -->
