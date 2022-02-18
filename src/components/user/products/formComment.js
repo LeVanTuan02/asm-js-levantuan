@@ -3,7 +3,8 @@ import { add as addComment, get } from "../../../api/comment";
 import { checkUserRating, add as addRating, update as updateRating } from "../../../api/rating";
 import { getUser, reRender } from "../../../utils";
 import { get as getProduct } from "../../../api/product";
-import CommentList from "./commentList";
+// eslint-disable-next-line import/no-cycle
+import ProductDetailPage from "../../../pages/user/productDetails";
 
 const FormComment = {
     async render(productId) {
@@ -77,11 +78,11 @@ const FormComment = {
                     const { data: ratingData } = await checkUserRating(userLogged.id, productId);
 
                     if (ratingData.length) {
-                        updateRating(ratingData[0].id, {
+                        await updateRating(ratingData[0].id, {
                             ratingNumber: +starNumber.value,
                         });
                     } else {
-                        addRating({
+                        await addRating({
                             userId: userLogged.id,
                             productId,
                             ratingNumber: +starNumber.value,
@@ -97,7 +98,7 @@ const FormComment = {
                         createdAt: new Date().toISOString(),
                     })
                         .then(() => formComment.reset())
-                        .then(() => reRender(CommentList, "#list-comment", productId))
+                        .then(() => reRender(ProductDetailPage, "#app", productId))
                         .then(() => toastr.success("Gửi bình luận thành công"));
                 }
             });
