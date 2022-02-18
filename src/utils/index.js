@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const reRender = async (component, domElement) => {
+export const reRender = async (component, domElement, id) => {
     if (component) {
-        document.querySelector(domElement).innerHTML = await component.render();
+        document.querySelector(domElement).innerHTML = await component.render(id);
     }
 
-    if (component.afterRender) await component.afterRender();
+    if (component.afterRender) await component.afterRender(id);
 };
 
 // hàm upload image
