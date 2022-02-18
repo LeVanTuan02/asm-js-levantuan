@@ -65,6 +65,9 @@ const RegisterPage = {
         `;
     },
     afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+
         const formRegister = document.querySelector("#form__reg");
         const username = formRegister.querySelector("#form__reg-username");
         const fullName = formRegister.querySelector("#form__reg-fullname");
