@@ -191,8 +191,11 @@ router.on({
     "/my-account/cart": () => {
         print(MyAccCartPage);
     },
-    "/my-account/cart/:id": () => {
-        print(MyAccCartDetailsPage);
+    "/my-account/cart/page/:page": ({ data }) => {
+        print(MyAccCartPage, data.page);
+    },
+    "/my-account/cart/:id/detail": ({ data }) => {
+        print(MyAccCartDetailsPage, data.id);
     },
     "/admin/dashboard": () => {
         print(DashboardPage);

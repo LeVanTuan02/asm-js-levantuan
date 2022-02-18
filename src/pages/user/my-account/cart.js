@@ -1,9 +1,35 @@
+/* eslint-disable no-nested-ternary */
+import { getByUserId } from "../../../api/order";
 import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
 import MyAccNav from "../../../components/user/myAccNav";
+import { formatCurrency, formatDate, getUser } from "../../../utils";
 
 const MyAccCartPage = {
-    async render() {
+    async render(pageNumber) {
+        const userLogged = getUser();
+        const { data } = await getByUserId(userLogged.id);
+
+        const total = data.length; // tổng số order
+        const limit = 10;
+        const currentPage = pageNumber ?? 1; // lấy số trang hiện tại
+
+        // ds theo limit
+        const { data: cartList } = await getByUserId(userLogged.id, currentPage, limit);
+
+        // tính tổng số trang
+        const totalPage = Math.ceil(total / limit);
+        let htmlPagination = "";
+
+        // eslint-disable-next-line no-plusplus
+        for (let i = 1; i <= totalPage; i++) {
+            htmlPagination += `
+            <li class="">
+                <a href="/#/my-account/cart/page/${i}"class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white ${+currentPage === i ? "border-[#D9A953] bg-[#D9A953] text-white" : "border-gray-500 text-gray-500"}">${i}</a>
+            </li>
+            `;
+        }
+
         return /* html */ `
         ${await Header.render()}
 
@@ -17,9 +43,9 @@ const MyAccCartPage = {
             </section>
 
             <section class="container max-w-6xl mx-auto px-3 grid grid-cols-12 gap-5 my-8">
-                ${MyAccNav.render()}
+                ${MyAccNav.render("cart")}
 
-                <div class="col-span-9">
+                <div class="col-span-12 lg:col-span-9">
                     <!-- search -->
                     <div class="flex">
                         <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] flex-1 border px-2 h-10 text-sm outline-none" placeholder="Nhập mã đơn hàng hoặc tên khách hàng">
@@ -47,81 +73,48 @@ const MyAccCartPage = {
                         </thead>
 
                         <tbody>
-                            <tr class="border-b">
-                                <td>#100</td>
-                                <td class="py-2">Lê Tuân</td>
-                                <td class="py-2">19/12/2021 15:09</td>
-                                <td class="py-2">43,000 VNĐ</td>
-                                <td class="py-2">
-                                    <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium bg-[#FFE2E5] text-[#F64E60]">Đã hủy</label>
-                                </td>
-                                <td class="py-2 text-right">
-                                    <a href="/my-account/cart/1">
-                                        <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td>#100</td>
-                                <td class="py-2">Lê Tuân</td>
-                                <td class="py-2">19/12/2021 15:09</td>
-                                <td class="py-2">43,000 VNĐ</td>
-                                <td class="py-2">
-                                    <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium bg-[#FFE2E5] text-[#F64E60]">Đã hủy</label>
-                                </td>
-                                <td class="py-2 text-right">
-                                    <a href="/my-account/cart/1">
-                                        <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="border-b">
-                                <td>#100</td>
-                                <td class="py-2">Lê Tuân</td>
-                                <td class="py-2">19/12/2021 15:09</td>
-                                <td class="py-2">43,000 VNĐ</td>
-                                <td class="py-2">
-                                    <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium bg-[#FFE2E5] text-[#F64E60]">Đã hủy</label>
-                                </td>
-                                <td class="py-2 text-right">
-                                    <a href="/my-account/cart/1">
-                                        <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <td>#100</td>
-                                <td class="py-2">Lê Tuân</td>
-                                <td class="py-2">19/12/2021 15:09</td>
-                                <td class="py-2">43,000 VNĐ</td>
-                                <td class="py-2">
-                                    <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium bg-[#E1F0FF] text-[#3699FF]">Đã xác nhận</label>
-                                </td>
-                                <td class="py-2 text-right">
-                                    <a href="/my-account/cart/1">
-                                        <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
-                                    </a>
-                                </td>
-                            </tr>
+                            ${cartList.map((item) => /* html */`
+                                <tr class="border-b">
+                                    <td>#${item.id}</td>
+                                    <td class="py-2">${item.customer_name}</td>
+                                    <td class="py-2">${formatDate(item.createdAt)}</td>
+                                    <td class="py-2">${formatCurrency(item.total_price - item.price_decrease)}</td>
+                                    <td class="py-2">
+                                        <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium  ${item.status === 4 ? "bg-[#FFE2E5] text-[#F64E60]" : "bg-[#E1F0FF] text-[#3699FF]"}">${item.status === 0 ? "Chờ xác nhận" : item.status === 1 ? "Đã xác nhận" : item.status === 2 ? "Đang giao hàng" : item.status === 3 ? "Đã giao hàng" : item.status === 4 ? "Đã hủy" : ""}</label>
+                                    </td>
+                                    <td class="py-2 text-right">
+                                        <a href="/#/my-account/cart/${item.id}/detail">
+                                            <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                `).join("")}
                         </tbody>
                     </table>
                     <!-- end table -->
 
                     <!-- pagination -->
                     <ul class="flex justify-center mt-5">
-                        <li class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
-                            <button>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
+                        ${currentPage > 1 ? `
+                        <li>
+                            <a href="/#/my-account/cart/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                                <button>
+                                    <i class="fas fa-angle-left"></i>
+                                </button>
+                            </a>
                         </li>
-                        <li class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">1</li>
-                        <li class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">2</li>
-                        <li class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">3</li>
-                        <li class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
-                            <button>
-                                <i class="fas fa-angle-right"></i>
-                            </button>
+                        ` : ""}
+                        ${htmlPagination}
+                        
+                        ${currentPage <= totalPage - 1 ? `
+                        <li>
+                            <a href="/#/my-account/cart/page/${+currentPage + 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                                <button>
+                                    <i class="fas fa-angle-right"></i>
+                                </button>
+                            </a>
                         </li>
+                        ` : ""}
                     </ul>
                 </div>
             </section>
@@ -130,6 +123,11 @@ const MyAccCartPage = {
 
         ${Footer.render()}
         `;
+    },
+    afterRender() {
+        Header.afterRender();
+        Footer.afterRender();
+        MyAccNav.afterRender();
     },
 };
 

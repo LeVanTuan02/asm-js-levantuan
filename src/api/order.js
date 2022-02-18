@@ -27,3 +27,9 @@ export const update = (id, data) => {
     const url = `/${TABLE_NAME}/${id}`;
     return instance.patch(url, data);
 };
+
+export const getByUserId = (userId, page, limit = 0) => {
+    let url = `/${TABLE_NAME}/?userId=${userId}&_sort=id&_order=desc`;
+    if (limit) url += `&_page=${page}&_limit=${limit}`;
+    return instance.get(url);
+};
