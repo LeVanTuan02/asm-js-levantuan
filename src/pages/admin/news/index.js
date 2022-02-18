@@ -10,7 +10,7 @@ const AdminNewsListPage = {
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số bài viết
-        const limit = 10;
+        const limit = 8;
         const currentPage = pageNumber ?? 1; // lấy số trang hiện tại
 
         // ds theo limit
