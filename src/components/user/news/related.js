@@ -2,7 +2,7 @@ import { getRelated } from "../../../api/news";
 
 const Related = {
     async render(id, cateId) {
-        const { data: newsRelated } = await getRelated(id, cateId);
+        const { data: newsRelated } = await getRelated(id, cateId, 0, 4);
         const formatDate = (dateString) => {
             const date = new Date(dateString);
             return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
