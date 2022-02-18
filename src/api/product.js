@@ -26,8 +26,9 @@ export const search = (keyword, start, limit = 0) => {
 };
 
 // bài viết liên quan
-export const getRelated = (id, cateId) => {
-    const url = `/${TABLE_NAME}/?status_ne=0&id_ne=${id}&categoryId=${cateId}&_expand=category`;
+export const getRelated = (id, cateId, start, limit = 0) => {
+    let url = `/${TABLE_NAME}/?status_ne=0&id_ne=${id}&categoryId=${cateId}&_expand=category&_sort=id&_order=desc`;
+    if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
 
@@ -80,13 +81,13 @@ export const getAllByFilter = async (sort, listId) => {
         queryString += "&_sort=id&_order=desc";
     }
 
-    const url = `/${TABLE_NAME}/${queryString}`;
+    const url = `/${TABLE_NAME}/${queryString}&_expand=category`;
     return instance.get(url);
 };
 
 // sp theo danh mục
 export const getProductByCate = (cateId, start, limit = 0) => {
-    let url = `/${TABLE_NAME}/?categoryId=${cateId}&status_ne=0&_sort=id&_order=desc`;
+    let url = `/${TABLE_NAME}/?categoryId=${cateId}&status_ne=0&_sort=id&_order=desc&_expand=category`;
     if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
