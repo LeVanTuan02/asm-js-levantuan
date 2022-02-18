@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
+import Swal from "sweetalert2";
 import { get } from "../../../api/orderDetail";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { formatCurrency, formatDate } from "../../../utils";
-import { get as getCart } from "../../../api/order";
+import { get as getCart, update } from "../../../api/order";
 import { get as getVoucher } from "../../../api/voucher";
 
 const AdminCartDetailPage = {
@@ -41,15 +43,40 @@ const AdminCartDetailPage = {
                             <span>Chi tiết đơn hàng</span>
                         </div>
 
-                        <a href="/#/admin/cart">
-                            <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                DS đơn hàng
+                        <div data-id="${cartData.id}" id="update-status">
+                            ${cartData.status === 0 ? /* html */`
+                            <button type="button" data-status="1" class="btn-update-stt btn-update-stt-confirm inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Xác nhận ĐH
                             </button>
-                        </a>
+                            ` : cartData.status === 1 ? /* html */`
+                            <button type="button" data-status="2" class="btn-update-stt btn-update-stt-process inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Đang giao hàng
+                            </button>
+                            ` : cartData.status === 2 ? /* html */`
+                            <button type="button" data-status="3" class="btn-update-stt btn-update-stt-success inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Đã giao hàng
+                            </button>
+                            ` : ""}
+
+                            ${cartData.status !== 4 && cartData.status !== 3 ? /* html */`
+                            <button type="button" data-status="4" class="btn-update-stt btn-update-stt-cancel inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Hủy ĐH
+                            </button>
+                            ` : ""}
+                            <a href="/#/admin/cart">
+                                <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    DS đơn hàng
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </header>
                 <div class="p-6 mt-24">
                     <div class="shadow sm:rounded-md bg-white p-5">
+                        <div>
+                            Đơn hàng #<mark>${cartData.id}</mark> đặt lúc <mark>${formatDate(cartData.createdAt)}</mark> hiện tại <mark>${cartData.status === 0 ? "Đang chờ xác nhận" : cartData.status === 1 ? `Đã xác nhận lúc ${formatDate(cartData.updatedAt)}` : cartData.status === 2 ? `Đang giao hàng lúc ${formatDate(cartData.updatedAt)}` : cartData.status === 3 ? `Đã giao thành công lúc ${formatDate(cartData.updatedAt)}` : cartData.status === 4 ? `Đã bị hủy lúc ${formatDate(cartData.updatedAt)}` : ""}</mark>
+                        </div>
+
                         <section>
                             <h2 class="font-semibold text-gray-600 text-2xl">Chi tiết đơn hàng</h2>
 
@@ -160,6 +187,50 @@ const AdminCartDetailPage = {
     afterRender() {
         HeaderTop.afterRender();
         AdminNav.afterRender();
+
+        // eslint-disable-next-line consistent-return
+        const getParent = (element, selector) => {
+            while (element.parentElement) {
+                if (element.parentElement.matches(selector)) {
+                    return element.parentElement;
+                }
+                // eslint-disable-next-line no-param-reassign
+                element = element.parentElement;
+            }
+        };
+
+        const btnsUpdateStt = document.querySelectorAll(".btn-update-stt");
+        btnsUpdateStt.forEach((btn) => {
+            const { id } = getParent(btn, "#update-status").dataset;
+            const { status } = btn.dataset;
+
+            btn.addEventListener("click", () => {
+                Swal.fire({
+                    title: "Xác nhận cập nhật trạng thái đơn hàng?",
+                    text: "Bạn không thể hoàn tác sau khi cập nhật!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        update(id, {
+                            status: +status,
+                            updatedAt: new Date().toISOString(),
+                        })
+                            .then(() => {
+                                Swal.fire(
+                                    "Thành công!",
+                                    "Cập nhật trạng thái đơn hàng thành công.",
+                                    "success",
+                                );
+                            })
+                            .then(() => { window.location.href = `/#/admin/cart/${id}/detail`; });
+                    }
+                });
+            });
+        });
     },
 };
 
