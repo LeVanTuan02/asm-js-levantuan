@@ -49,6 +49,8 @@ export const saveUser = (uesr) => {
 
 export const logout = () => {
     localStorage.removeItem("auth");
+    localStorage.removeItem("cart");
+    localStorage.removeItem("voucher");
     document.location.href = "/#/login";
 };
 
@@ -58,5 +60,10 @@ export const formatCurrency = (currency) => currency.toLocaleString("it-IT", { s
 // format date
 export const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+    const hours = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+    const seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
+
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
 };
