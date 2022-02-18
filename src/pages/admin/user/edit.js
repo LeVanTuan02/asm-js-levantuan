@@ -124,7 +124,7 @@ const AdminEditUserPage = {
                                         <label for="form__edit-user-province" class="block text-sm font-medium text-gray-700">Tỉnh/TP</label>
                                         <select id="form__edit-user-province" name="form__edit-user-province" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn Tỉnh/TP --</option>
-                                            ${listProvince.map((item) => `<option value="${item.code}"</option>`).join("")}
+                                            ${listProvince.map((item) => `<option value="${item.code}">${item.name}</option>`).join("")}
                                         </select>
                                         <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
