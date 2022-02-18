@@ -17,7 +17,7 @@ const LoginPage = {
                 <form action="" class="mb-14" method="POST" id="form__login">
                     <div class="mt-3">
                         <label for="form__login-user" class="font-semibold block mb-1">Địa chỉ email *</label>
-                        <input type="text" id="form__login-user" name="form__login-user" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                        <input type="text" id="form__login-user" name="form__login-user" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none" placeholder="Nhập địa chỉ email">
                         <div class="form__reg-message text-sm text-red-500 mt-0.5"></div>
                     </div>
 
