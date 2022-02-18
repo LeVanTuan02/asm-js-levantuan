@@ -109,3 +109,19 @@ input[name="star"]:checked ~ .star__item,
 .star__item--active {
     color: #FFBA01;
 }
+
+.limit-line-3 {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.limit-line-2 {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}

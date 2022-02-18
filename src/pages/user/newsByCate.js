@@ -58,9 +58,9 @@ const NewsByCatePage = {
                             <div class="bg-white rounded-b-xl shadow px-3 py-2">
                                 <p class="text-sm text-gray-500">${formatDate(item.createdAt)}</p>
                                 <h3>
-                                    <a href="/#/news/${item.id}" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${item.title}</a>
+                                    <a href="/#/news/${item.id}" class="limit-line-2 block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${item.title}</a>
                                 </h3>
-                                <p class="text-gray-500 text-sm text-justify">${item.description}</p>
+                                <div class="limit-line-3 text-gray-500 text-sm text-justify">${item.description}</div>
 
                                 <a href="/#/news/${item.id}">
                                     <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">

@@ -20,9 +20,9 @@ const Related = {
                     <div class="bg-white rounded-b-xl shadow px-3 py-2">
                         <p class="text-sm text-gray-500">${formatDate(item.createdAt)}</p>
                         <h3>
-                            <a href="/#/news/${item.id}" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${item.title}</a>
+                            <a href="/#/news/${item.id}" class="limit-line-2 block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${item.title}</a>
                         </h3>
-                        <p class="text-gray-500 text-sm text-justify">${item.description} […]</p>
+                        <div class="limit-line-3 text-gray-500 text-sm text-justify">${item.description}</div>
                     </div>
                 </div>
                 `).join("")}

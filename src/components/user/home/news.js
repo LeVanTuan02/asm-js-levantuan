@@ -22,9 +22,9 @@ const News = {
                             <div class="bg-white rounded-b-xl shadow px-3 py-2">
                                 <p class="text-sm text-gray-500">${formatDate(post.createdAt)}</p>
                                 <h3>
-                                    <a href="/#/news/${post.id}" class="block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${post.title}</a>
+                                    <a href="/#/news/${post.id}" class="limit-line-2 block py-1 font-semibold text-justify leading-tight transition duration-300 text-gray-600 hover:text-black">${post.title}</a>
                                 </h3>
-                                <p class="text-gray-500 text-sm text-justify">${post.description}</p>
+                                <div class="limit-line-3 text-gray-500 text-sm text-justify">${post.description}</div>
 
                                 <a href="/#/news/${post.id}">
                                     <button class="block mx-auto w-9 h-9 rounded-full border-2 border-[#D9A953] text-[#D9A953] transition duration-300 hover:bg-[#D9A953] hover:text-white mt-5 mb-2">
