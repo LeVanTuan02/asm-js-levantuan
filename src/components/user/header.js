@@ -40,9 +40,9 @@ const Header = {
                                 <i class="fas fa-search"></i>
                             </button>
 
-                            <div class="hidden z-20 group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
+                            <div class="hidden min-w-[280px] z-20 group-hover:block absolute top-full -right-[100px] bg-white shadow p-3 opacity-100">
                                 <form action="" class="flex" id="form-search-product">
-                                    <input type="text" id="form-search-control" class="text-black shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] min-w-[80px] border px-2 h-8 text-sm outline-none" placeholder="Nhập tên đăng nhập hoặc email">
+                                    <input type="text" id="form-search-control" class="text-black shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] flex-1 border px-2 h-8 text-sm outline-none" placeholder="Nhập tên sản phẩm">
                                     <button class="px-3 bg-red-500 transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -155,7 +155,7 @@ const Header = {
                 <li>
                     <a href="/#/product/${item.id}" class="flex py-2 transition duration-200 hover:bg-gray-50 hover:text-[#D9A953] text-black items-center px-2">
                         <img src="${item.image}" class="w-10 h-10 object-cover rounded-full bg-[#f7f7f7]" alt="">
-                        <p class="ml-1 normal-case font-normal">${item.name}</p>
+                        <p class="pl-1 pr-2 normal-case font-normal">${item.name}</p>
                         <p class="font-medium ml-auto">${formatCurrency(item.price)}</p>
                     </a>
                 </li>
