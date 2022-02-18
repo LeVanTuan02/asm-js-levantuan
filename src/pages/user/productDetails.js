@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import toastr from "toastr";
 import { get, updateView, getPrice } from "../../api/product";
 import Footer from "../../components/user/footer";
@@ -29,6 +30,51 @@ const ProductDetailPage = {
         // get info current user
         const userLogged = getUser();
 
+        const renderRating = (listRating) => {
+            let htmlRating = "";
+
+            if (listRating) {
+                const sum = listRating.reduce((total, rating) => total + rating.ratingNumber, 0);
+                const ratingAvg = sum / listRating.length;
+
+                for (let i = 0; i < Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+
+                for (let i = 0; i < 5 - Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-gray-300">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+            } else {
+                htmlRating = `
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                `;
+            }
+
+            return htmlRating;
+        };
+
         return /* html */ `
         ${await Header.render()}
 
@@ -57,13 +103,9 @@ const ProductDetailPage = {
 
                             <ul class="flex items-center mt-4">
                                 <li class="flex text-yellow-400 text-xs pr-4 relative after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    ${renderRating(productDetail.ratings.length ? productDetail.ratings : 0)}
                                 </li>
-                                <li class="pr-4 relative after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
+                                <li class="pr-4 relative after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">${productDetail.ratings.length} Đánh giá</li>
                                 <li>10 Đã bán</li>
                             </ul>
                             <div class="mt-1 my-2">

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import toastr from "toastr";
 import { add, checkHeart } from "../../../api/favoritesProduct";
 import {
@@ -84,6 +85,52 @@ const FilterProduct = {
         };
         afterRenderProduct();
 
+        // render rating
+        const renderRating = (listRating) => {
+            let htmlRating = "";
+
+            if (listRating) {
+                const sum = listRating.reduce((total, rating) => total + rating.ratingNumber, 0);
+                const ratingAvg = sum / listRating.length;
+
+                for (let i = 0; i < Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+
+                for (let i = 0; i < 5 - Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-gray-300">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+            } else {
+                htmlRating = `
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                `;
+            }
+
+            return htmlRating;
+        };
+
         // render sp
         const productsElement = document.querySelector("#product-list");
         const renderByFilter = (typeView, productList) => {
@@ -105,11 +152,7 @@ const FilterProduct = {
                                 <p class="uppercase text-xs text-gray-400">${item.category.name}</p>
                                 <a href="/#/product/${item.id}" class="block font-semibold text-lg">${item.name}</a>
                                 <ul class="flex text-yellow-500 text-xs justify-center pt-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    ${renderRating(item.ratings.length ? item.ratings : 0)}
                                 </ul>
                                 <div class="text-sm pt-1">
                                     ${formatCurrency(item.price)}
@@ -139,13 +182,9 @@ const FilterProduct = {
                             </h3>
                             <ul class="flex items-center mt-4">
                                 <li class="flex text-yellow-400 text-xs pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                    ${renderRating(item.ratings.length ? item.ratings : 0)}
                                 </li>
-                                <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">4 Đánh giá</li>
+                                <li class="pr-6 relative after:content-[''] after:absolute after:right-3 after:top-1/2 after:-translate-y-1/2 after:w-[1px] after:bg-gray-300 after:h-4">${item.ratings.length} Đánh giá</li>
                                 <li>10 Đã bán</li>
                             </ul>
                             <div class="mt-1 mb-2">

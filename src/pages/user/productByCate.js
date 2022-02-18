@@ -14,7 +14,7 @@ const ProductByCatePage = {
         const { data } = await getProductByCate(cateId);
 
         // phân trang
-        const limit = 12; // limit
+        const limit = 9; // limit
         const total = data.length; // tổng số sp
         const totalPage = Math.ceil(total / limit); // tổng số page
         let currentPage = pageNumber ?? 1; // lấy số trang hiện tại

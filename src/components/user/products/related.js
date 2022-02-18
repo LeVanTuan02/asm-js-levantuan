@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import toastr from "toastr";
 import { add, checkHeart } from "../../../api/favoritesProduct";
 import { get, getRelated, update } from "../../../api/product";
@@ -8,6 +9,50 @@ import WishListLabel from "../wishlistLabel";
 const Related = {
     async render(id, cateId) {
         const { data: productList } = await getRelated(id, cateId, 0, 4);
+        const renderRating = (listRating) => {
+            let htmlRating = "";
+
+            if (listRating) {
+                const sum = listRating.reduce((total, rating) => total + rating.ratingNumber, 0);
+                const ratingAvg = sum / listRating.length;
+
+                for (let i = 0; i < Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+
+                for (let i = 0; i < 5 - Math.ceil(ratingAvg); i++) {
+                    htmlRating += /* html */`
+                    <div class="text-gray-300">
+                        <i class="fas fa-star"></i>
+                    </div>
+                `;
+                }
+            } else {
+                htmlRating = `
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="text-gray-300">
+                    <i class="fas fa-star"></i>
+                </div>
+                `;
+            }
+
+            return htmlRating;
+        };
 
         return `
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
@@ -25,11 +70,7 @@ const Related = {
                         <p class="uppercase text-xs text-gray-400">${item.category.name}</p>
                         <a href="/#/product/${item.id}" class="block font-semibold text-lg">${item.name}</a>
                         <ul class="flex text-yellow-500 text-xs justify-center pt-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                        ${renderRating(item.ratings.length ? item.ratings : 0)}
                         </ul>
                         <div class="text-sm pt-1">
                             ${formatCurrency(item.price)}
