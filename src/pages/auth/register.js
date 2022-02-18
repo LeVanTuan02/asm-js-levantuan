@@ -157,7 +157,7 @@ const RegisterPage = {
                     address: "",
                     avatar: "https://res.cloudinary.com/levantuan/image/upload/v1644302455/assignment-js/thumbnail-image-vector-graphic-vector-id1147544807_ochvyr.jpg",
                     role: 0,
-                    active: 0,
+                    active: 1,
                     createdAt: new Date().toISOString(),
                 })
                     .then(() => toastr.success("Đăng ký thành công"))
