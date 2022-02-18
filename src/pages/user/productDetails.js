@@ -3,11 +3,14 @@ import { get, updateView, getPrice } from "../../api/product";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import Related from "../../components/user/products/related";
-import { formatCurrency, reRender } from "../../utils";
+import { formatCurrency, getUser, reRender } from "../../utils";
 import { getAll, get as getTopping } from "../../api/topping";
 import { getAll as getAllSize, get as getSize } from "../../api/size";
 import { addToCart } from "../../utils/cart";
 import CartLabel from "../../components/user/cartLabel";
+import CommentList from "../../components/user/products/commentList";
+
+import FormComment from "../../components/user/products/formComment";
 
 const ProductDetailPage = {
     async render(id) {
@@ -22,6 +25,9 @@ const ProductDetailPage = {
 
         // ds size
         const { data: sizeList } = await getAllSize();
+
+        // get info current user
+        const userLogged = getUser();
 
         return /* html */ `
         ${await Header.render()}
@@ -208,141 +214,27 @@ const ProductDetailPage = {
             <section class="container max-w-6xl mx-auto px-3">
                 <ul class="flex border-t">
                     <li class="transition ease-linear duration-200 font-bold cursor-pointer hover:border-t-[#D9A953] hover:text-black uppercase pt-2 border-t-2 border-t-transparent pr-2 text-gray-400 text-xs">Mô tả</li>
-                    <li class="transition ease-linear duration-200 font-bold cursor-pointer hover:border-t-[#D9A953] hover:text-black uppercase pt-2 border-t-2 border-t-[#D9A953] pr-2 text-black text-xs">Đánh giá (0)</li>
+                    <li class="transition ease-linear duration-200 font-bold cursor-pointer hover:border-t-[#D9A953] hover:text-black uppercase pt-2 border-t-2 border-t-[#D9A953] pr-2 text-black text-xs">Đánh giá</li>
                 </ul>
             </section>
 
             <!-- panel -->
             <section class="container max-w-6xl mx-auto px-3">
-                <div>
-                    <h2 class="mt-3 font-semibold text-xl">Đánh giá</h2>
-                    <p>Chưa có đánh giá nào</p>
 
-                    <form action="" class="px-3 py-2 border-2 border-[#D9A953] mt-3">
-                        <h2 class="font-semibold text-xl">Hãy là người đầu tiên nhận xét "Trà xoài"</h2>
+                ${userLogged ? await FormComment.render(id) : /* html */`
+                <div class="mt-5">
+                    Vui lòng
+                    <a href="/#/login">
+                        <button class="bg-[#D9A953] px-2 py-1 rounded text-white text-sm font-semibold transition duration-200 ease-linear hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">đăng nhập</button>
+                    </a>
+                    để nhận xét
+                </div>
+                `}
 
-                        <div class="mt-2">
-                            <label for="" class="block text-sm font-semibold">Đánh giá của bạn *</label>
-
-                        </div>
-
-                        <div class="mt-2">
-                            <label for="" class="block text-sm font-semibold">Nhận xét của bạn</label>
-                            <textarea name="" id="" cols="30" rows="10" class="w-full outline-none border mt-1 px-3 py-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc]"></textarea>
-                        </div>
-
-                        <button class="my-3 px-4 py-2 bg-[#D9A953] font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Gửi đi</button>
-                    </form>
+                <div id="list-comment">
+                    ${await CommentList.render(id)}
                 </div>
 
-                <ul class="mt-4 grid grid-cols-1 divide-y divide-dashed">
-                    <li class="flex py-4">
-                        <img src="https://res.cloudinary.com/levantuan/image/upload/v1643019137/fpoly/asm-js/SonTung_-_MTP_m9lxgi.jpg" alt="" class="w-16 h-16 rounded-full">
-                        <div class="ml-2 flex-1">
-                            <div class="flex text-yellow-400 text-xs mb-0.5">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-
-                            <div>
-                                <span class="font-semibold">Nguyễn Thanh Tùng</span>
-                                <span class="text-sm text-gray-500">(16 Tháng 12, 2021)</span>
-                            </div>
-                            <p class="text-gray-500">Mlem quá</p>
-
-                            <ul class="text-gray-500 flex text-sm mt-1">
-                                <li class="mr-2 transition hover:text-black cursor-pointer">Xóa</li>
-                                <li class="transition hover:text-black cursor-pointer">Trả lời</li>
-                            </ul>
-
-                            <ul>
-                                <li class="flex pt-3">
-                                    <img src="https://res.cloudinary.com/levantuan/image/upload/v1643019137/fpoly/asm-js/SonTung_-_MTP_m9lxgi.jpg" alt="" class="w-12 h-12 rounded-full">
-                                    <div class="ml-2">
-                                        <div class="flex text-yellow-400 text-xs mb-0.5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-
-                                        <div>
-                                            <span class="font-semibold">Nguyễn Thanh Tùng</span>
-                                            <span class="text-sm text-gray-500">(16 Tháng 12, 2021)</span>
-                                        </div>
-                                        <p class="text-gray-500">Mlem quá</p>
-
-                                        <ul class="text-gray-500 flex text-sm mt-1">
-                                            <li class="mr-2 transition hover:text-black cursor-pointer">Xóa</li>
-                                            <li class="transition hover:text-black cursor-pointer">Trả lời</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="flex pt-3">
-                                    <img src="https://res.cloudinary.com/levantuan/image/upload/v1643019137/fpoly/asm-js/SonTung_-_MTP_m9lxgi.jpg" alt="" class="w-12 h-12 rounded-full">
-                                    <div class="ml-2">
-                                        <div class="flex text-yellow-400 text-xs mb-0.5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-
-                                        <div>
-                                            <span class="font-semibold">Nguyễn Thanh Tùng</span>
-                                            <span class="text-sm text-gray-500">(16 Tháng 12, 2021)</span>
-                                        </div>
-                                        <p class="text-gray-500">Mlem quá</p>
-
-                                        <ul class="text-gray-500 flex text-sm mt-1">
-                                            <li class="mr-2 transition hover:text-black cursor-pointer">Xóa</li>
-                                            <li class="transition hover:text-black cursor-pointer">Trả lời</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-
-                            <!-- form rep cmt -->
-                            <form action="" class="flex mt-4 items-center">
-                                <img src="https://res.cloudinary.com/levantuan/image/upload/v1643019137/fpoly/asm-js/SonTung_-_MTP_m9lxgi.jpg" class="w-8 h-8 rounded-full object-cover" alt="">
-                                <div class="flex h-9 bg-gray-200 ml-2 rounded-full w-full">
-                                    <input type="text" name="" id="" placeholder="Nhập nội dung trả lời" class="w-full text-sm bg-gray-200 px-4 rounded-l-full outline-none">
-                                    <button class="px-4">
-                                        <i class="fas fa-reply"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="flex py-4">
-                        <img src="https://res.cloudinary.com/levantuan/image/upload/v1643019137/fpoly/asm-js/SonTung_-_MTP_m9lxgi.jpg" alt="" class="w-16 h-16 rounded-full">
-                        <div class="ml-2">
-                            <div class="flex text-yellow-400 text-xs mb-0.5">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-
-                            <div>
-                                <span class="font-semibold">Nguyễn Thanh Tùng</span>
-                                <span class="text-sm text-gray-500">(16 Tháng 12, 2021)</span>
-                            </div>
-                            <p class="text-gray-500">Mlem quá</p>
-
-                            <ul class="text-gray-500 flex text-sm mt-1">
-                                <li class="mr-2 transition hover:text-black cursor-pointer">Xóa</li>
-                                <li class="transition hover:text-black cursor-pointer">Trả lời</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
                 <button class="bg-[#D9A953] px-2 py-0.5 rounded text-white text-sm font-semibold block mx-auto transition duration-200 ease-linear hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Xem tất cả</button>
             </section>
 
@@ -360,6 +252,8 @@ const ProductDetailPage = {
         Header.afterRender();
         Footer.afterRender();
         Related.afterRender();
+        FormComment.afterRender(+id);
+        CommentList.afterRender(+id);
 
         const formAddCart = document.querySelector("#form__add-cart");
         const qntElement = formAddCart.querySelector("#form__add-cart-qnt");
