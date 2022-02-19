@@ -1,10 +1,12 @@
 import toastr from "toastr";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import $ from "jquery";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 import { get, update } from "../../../api/news";
 import AdminNewsListPage from ".";
+// eslint-disable-next-line no-unused-vars
 import { getAll } from "../../../api/cateNews";
 
 const AdminEditNewsPage = {
@@ -45,19 +47,18 @@ const AdminEditNewsPage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-news-title" class="block text-sm font-medium text-gray-700">Tiêu đề bài viết</label>
                                         <input type="text" name="form__edit-news-title" id="form__edit-news-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tiêu đề bài viết" value="${newsData.title}">
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6">
                                         <label for="form__edit-news-desc" class="mb-1 block text-sm font-medium text-gray-700">Mô tả ngắn</label>
-                                        <textarea id="form__edit-news-desc" name="form__edit-news-desc" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả bài viết">${newsData.description}</textarea>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
+                                        <textarea id="form__edit-news-desc" data-error=".error-desc" name="form__edit-news-desc" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả bài viết">${newsData.description}</textarea>
+                                        <div class="error-desc text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__edit-news-content" class="mb-1 block text-sm font-medium text-gray-700">Nội dung</label>
-                                        <textarea id="form__edit-news-content" name="form__edit-news-content" rows="10" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập nội dung bài viết">${newsData.content}</textarea>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
+                                        <textarea data-error=".error-content" id="form__edit-news-content" name="form__edit-news-content" rows="10" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập nội dung bài viết">${newsData.content}</textarea>
+                                        <div class="error-content text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6 md:col-span-3">
@@ -67,7 +68,6 @@ const AdminEditNewsPage = {
                                             ${cateData.map((cate) => `
                                                 <option value="${cate.id}" ${newsData.cateNewId === cate.id ? "selected" : ""}>${cate.name}</option>`)}
                                         </select>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6 md:col-span-3">
@@ -77,7 +77,6 @@ const AdminEditNewsPage = {
                                             <option value="0" ${!newsData.status ? "selected" : ""}>Ẩn</option>
                                             <option value="1" ${newsData.status ? "selected" : ""}>Hiển thị</option>
                                         </select>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -97,14 +96,14 @@ const AdminEditNewsPage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__edit-news-image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__edit-news-image" name="form__edit-news-image" type="file" class="sr-only">
+                                                        <input id="form__edit-news-image" data-error=".error-image" name="form__edit-news-image" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -121,60 +120,17 @@ const AdminEditNewsPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__edit-news");
-        const title = formAdd.querySelector("#form__edit-news-title");
-        const description = formAdd.querySelector("#form__edit-news-desc");
-        const content = formAdd.querySelector("#form__edit-news-content");
-        const cateId = formAdd.querySelector("#form__edit-news-cate");
-        const thumbnail = formAdd.querySelector("#form__edit-news-image");
-        const imgPreview = formAdd.querySelector("#form__edit-news-preview");
-        const newsStt = formAdd.querySelector("#form__edit-news-stt");
-
-        // validate
-        const validate = () => {
-            let isValid = true;
-
-            if (!title.value) {
-                title.nextElementSibling.innerText = "Vui lòng nhập tiêu đề bài viết";
-                isValid = false;
-            } else {
-                title.nextElementSibling.innerText = "";
-            }
-
-            if (!description.value) {
-                description.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả bài viết";
-                isValid = false;
-            } else {
-                description.nextElementSibling.nextElementSibling.innerText = "";
-            }
-
-            if (!content.value) {
-                content.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập nội dung bài viết";
-                isValid = false;
-            } else {
-                content.nextElementSibling.nextElementSibling.innerText = "";
-            }
-
-            if (!cateId.value) {
-                cateId.nextElementSibling.innerText = "Vui lòng chọn danh mục bài viết";
-                isValid = false;
-            } else {
-                cateId.nextElementSibling.innerText = "";
-            }
-
-            if (!newsStt.value) {
-                newsStt.nextElementSibling.innerText = "Vui lòng chọn trạng thái bài viết";
-                isValid = false;
-            } else {
-                newsStt.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
+        const title = $("#form__edit-news-title");
+        const description = document.querySelector("#form__edit-news-desc");
+        const content = document.querySelector("#form__edit-news-content");
+        const cateId = $("#form__edit-news-cate");
+        const thumbnail = document.querySelector("#form__edit-news-image");
+        const imgPreview = $("#form__edit-news-preview");
+        const newsStt = $("#form__edit-news-stt");
 
         let contentNews;
         ClassicEditor
@@ -188,39 +144,68 @@ const AdminEditNewsPage = {
             .then((newEditor) => { descriptionNews = newEditor; })
             .catch((error) => toastr.error(error));
 
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const { id } = e.target.dataset;
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-                const postData = {
-                    title: title.value,
-                    description: descriptionNews.getData(),
-                    content: contentNews.getData(),
-                    cateNewId: +cateId.value,
-                    status: +newsStt.value,
-                    updatedAt: date.toISOString(),
-                };
-
-                if (thumbnail.files.length) {
-                    const response = await uploadFile(thumbnail.files[0]);
-                    postData.thumbnail = response.data.url;
+        $("#form__edit-news").validate({
+            ignore: [],
+            rules: {
+                "form__edit-news-title": "required",
+                "form__edit-news-desc": "desc",
+                "form__edit-news-content": "content",
+                "form__edit-news-cate": "required",
+                "form__edit-news-stt": "required",
+            },
+            messages: {
+                "form__edit-news-title": "Vui lòng nhập tiêu đề bài viết",
+                "form__edit-news-desc": "Vui lòng nhập mô tả bài viết",
+                "form__edit-news-content": "Vui lòng nhập nội dung bài viết",
+                "form__edit-news-cate": "Vui lòng nhập danh mục bài viết",
+                "form__edit-news-stt": "Vui lòng chọn trạng thái bài viết",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
                 }
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
+                    const postData = {
+                        title: title.val(),
+                        description: descriptionNews.getData(),
+                        content: contentNews.getData(),
+                        cateNewId: +cateId.val(),
+                        status: +newsStt.val(),
+                        updatedAt: date.toISOString(),
+                    };
 
-                update(id, postData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/news"; })
-                    .then(() => reRender(AdminNewsListPage, "#app"));
-            }
+                    if (thumbnail.files.length) {
+                        const response = await uploadFile(thumbnail.files[0]);
+                        postData.thumbnail = response.data.url;
+                    }
+
+                    update(id, postData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/news"; })
+                        .then(() => reRender(AdminNewsListPage, "#app"));
+                })();
+            },
+        });
+
+        $.validator.addMethod("desc", () => {
+            const contentLength = descriptionNews.getData().trim().length;
+            return contentLength > 0;
+        });
+
+        $.validator.addMethod("content", () => {
+            const contentLength = contentNews.getData().trim().length;
+            return contentLength > 0;
         });
 
         // bắt sự kiện chọn ảnh => preview
         thumbnail.addEventListener("change", (e) => {
-            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+            imgPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };

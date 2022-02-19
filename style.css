@@ -125,3 +125,19 @@ input[name="star"]:checked ~ .star__item,
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
+#modal.active {
+    @apply visible;
+}
+
+#modal.active #modal__overlay {
+    @apply opacity-100
+}
+
+#modal.active #modal__body {
+    @apply translate-y-0
+}
+
+label.error {
+    @apply text-sm mt-0.5 text-red-500
+}
