@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminSizeListPage from ".";
 import { get, update } from "../../../api/size";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -33,7 +36,7 @@ const AdminEditSizePage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" method="POST" id="form__edit-size" data-id="${sizeDetail.id}">
+                    <form action="" method="POST" id="form__edit-size">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết size:</span>
@@ -42,13 +45,11 @@ const AdminEditSizePage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-size-name" class="block text-sm font-medium text-gray-700">Tên size</label>
                                         <input type="text" name="form__edit-size-name" id="form__edit-size-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên size" value="${sizeDetail.name}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__edit-size-price" class="block text-sm font-medium text-gray-700">Giá thêm</label>
                                         <input type="number" name="form__edit-size-price" id="form__edit-size-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá thêm của size" value="${sizeDetail.priceIncrease}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -65,54 +66,43 @@ const AdminEditSizePage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-size");
-        const sizeName = formEdit.querySelector("#form__edit-size-name");
-        const priceIncrease = formEdit.querySelector("#form__edit-size-price");
+        const sizeName = $("#form__edit-size-name");
+        const priceIncrease = $("#form__edit-size-price");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__edit-size").validate({
+            rules: {
+                "form__edit-size-name": "required",
+                "form__edit-size-price": {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                "form__edit-size-name": "Vui lòng nhập tên size",
+                "form__edit-size-price": {
+                    required: "Vui lòng nhập giá thêm",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
+                    const cateData = {
+                        name: sizeName.val().toUpperCase(),
+                        priceIncrease: +priceIncrease.val(),
+                        updatedAt: date.toISOString(),
+                    };
 
-            if (!sizeName.value) {
-                sizeName.nextElementSibling.innerText = "Vui lòng nhập tên size";
-                isValid = false;
-            } else {
-                sizeName.nextElementSibling.innerText = "";
-            }
-
-            if (!priceIncrease.value) {
-                priceIncrease.nextElementSibling.innerText = "Vui lòng nhập giá thêm";
-                isValid = false;
-            } else {
-                priceIncrease.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
-            const date = new Date();
-
-            if (isValid) {
-                const cateData = {
-                    name: sizeName.value.toUpperCase(),
-                    priceIncrease: +priceIncrease.value,
-                    updatedAt: date.toISOString(),
-                };
-
-                update(id, cateData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/size"; })
-                    .then(() => reRender(AdminSizeListPage, "#app"));
-            }
+                    update(id, cateData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/size"; })
+                        .then(() => reRender(AdminSizeListPage, "#app"));
+                })();
+            },
         });
     },
 };

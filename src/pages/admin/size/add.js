@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/size";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,13 +42,11 @@ const AdminAddSizePage = {
                                     <div class="col-span-6">
                                         <label for="form__add-size-name" class="block text-sm font-medium text-gray-700">Tên size</label>
                                         <input type="text" name="form__add-size-name" id="form__add-size-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên size">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-size-price" class="block text-sm font-medium text-gray-700">Giá thêm</label>
                                         <input type="number" name="form__add-size-price" id="form__add-size-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá thêm của size">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -66,50 +67,40 @@ const AdminAddSizePage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-size");
-        const sizeName = formAdd.querySelector("#form__add-size-name");
-        const priceIncrease = formAdd.querySelector("#form__add-size-price");
+        const sizeName = $("#form__add-size-name");
+        const priceIncrease = $("#form__add-size-price");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__add-size").validate({
+            rules: {
+                "form__add-size-name": "required",
+                "form__add-size-price": {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                "form__add-size-name": "Vui lòng nhập tên size",
+                "form__add-size-price": {
+                    required: "Vui lòng nhập giá thêm",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
 
-            if (!sizeName.value) {
-                sizeName.nextElementSibling.innerText = "Vui lòng nhập tên size";
-                isValid = false;
-            } else {
-                sizeName.nextElementSibling.innerText = "";
-            }
+                    const sizeData = {
+                        name: sizeName.val().toUpperCase(),
+                        priceIncrease: +priceIncrease.val(),
+                        createdAt: date.toISOString(),
+                        updatedAt: date.toISOString(),
+                    };
 
-            if (!priceIncrease.value) {
-                priceIncrease.nextElementSibling.innerText = "Vui lòng nhập giá thêm";
-                isValid = false;
-            } else {
-                priceIncrease.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-
-                const sizeData = {
-                    name: sizeName.value.toUpperCase(),
-                    priceIncrease: +priceIncrease.value,
-                    createdAt: date.toISOString(),
-                    updatedAt: date.toISOString(),
-                };
-
-                add(sizeData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddSizePage, "#app"));
-            }
+                    add(sizeData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddSizePage, "#app"));
+                })();
+            },
         });
     },
 };
