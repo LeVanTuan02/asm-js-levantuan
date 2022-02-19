@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/topping";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,13 +42,11 @@ const AdminAddToppingPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-topping-name" class="block text-sm font-medium text-gray-700">Tên topping</label>
                                         <input type="text" name="form__add-topping-name" id="form__add-topping-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên topping">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-topping-price" class="block text-sm font-medium text-gray-700">Giá topping</label>
                                         <input type="number" name="form__add-topping-price" id="form__add-topping-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá topping">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -66,46 +67,36 @@ const AdminAddToppingPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-topping");
-        const toppingName = formAdd.querySelector("#form__add-topping-name");
-        const toppingPrice = formAdd.querySelector("#form__add-topping-price");
+        const toppingName = $("#form__add-topping-name");
+        const toppingPrice = $("#form__add-topping-price");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__add-topping").validate({
+            rules: {
+                "form__add-topping-name": "required",
+                "form__add-topping-price": {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                "form__add-topping-name": "Vui lòng nhập tên topping",
+                "form__add-topping-price": {
+                    required: "Vui lòng nhập giá topping",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+            },
+            submitHandler() {
+                (async () => {
+                    const toppingData = {
+                        name: toppingName.val(),
+                        price: +toppingPrice.val(),
+                    };
 
-            if (!toppingName.value) {
-                toppingName.nextElementSibling.innerText = "Vui lòng nhập tên topping";
-                isValid = false;
-            } else {
-                toppingName.nextElementSibling.innerText = "";
-            }
-
-            if (!toppingPrice.value) {
-                toppingPrice.nextElementSibling.innerText = "Vui lòng nhập giá topping";
-                isValid = false;
-            } else {
-                toppingPrice.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                const toppingData = {
-                    name: toppingName.value,
-                    price: +toppingPrice.value,
-                };
-
-                add(toppingData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddToppingPage, "#app"));
-            }
+                    add(toppingData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddToppingPage, "#app"));
+                })();
+            },
         });
     },
 };

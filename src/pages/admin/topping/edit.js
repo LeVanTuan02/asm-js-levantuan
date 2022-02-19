@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminToppingListPage from ".";
 import { get, update } from "../../../api/topping";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -33,7 +36,7 @@ const AdminEditToppingPage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" method="POST" id="form__edit-topping" data-id="${toppingDetail.id}">
+                    <form action="" method="POST" id="form__edit-topping">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết topping:</span>
@@ -42,13 +45,11 @@ const AdminEditToppingPage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-topping-name" class="block text-sm font-medium text-gray-700">Tên topping</label>
                                         <input type="text" name="form__edit-topping-name" id="form__edit-topping-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên topping" value="${toppingDetail.name}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__edit-topping-price" class="block text-sm font-medium text-gray-700">Giá topping</label>
                                         <input type="number" name="form__edit-topping-price" id="form__edit-topping-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá topping" value="${toppingDetail.price}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -65,52 +66,41 @@ const AdminEditToppingPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-topping");
-        const toppingName = formEdit.querySelector("#form__edit-topping-name");
-        const toppingPrice = formEdit.querySelector("#form__edit-topping-price");
+        const toppingName = $("#form__edit-topping-name");
+        const toppingPrice = $("#form__edit-topping-price");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__edit-topping").validate({
+            rules: {
+                "form__edit-topping-name": "required",
+                "form__edit-topping-price": {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                "form__edit-topping-name": "Vui lòng nhập tên topping",
+                "form__edit-topping-price": {
+                    required: "Vui lòng nhập giá topping",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+            },
+            submitHandler() {
+                (async () => {
+                    const cateData = {
+                        name: toppingName.val(),
+                        price: +toppingPrice.val(),
+                    };
 
-            if (!toppingName.value) {
-                toppingName.nextElementSibling.innerText = "Vui lòng nhập tên topping";
-                isValid = false;
-            } else {
-                toppingName.nextElementSibling.innerText = "";
-            }
-
-            if (!toppingPrice.value) {
-                toppingPrice.nextElementSibling.innerText = "Vui lòng nhập giá topping";
-                isValid = false;
-            } else {
-                toppingPrice.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
-
-            if (isValid) {
-                const cateData = {
-                    name: toppingName.value,
-                    price: +toppingPrice.value,
-                };
-
-                update(id, cateData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/topping"; })
-                    .then(() => reRender(AdminToppingListPage, "#app"));
-            }
+                    update(id, cateData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/topping"; })
+                        .then(() => reRender(AdminToppingListPage, "#app"));
+                })();
+            },
         });
     },
 };
