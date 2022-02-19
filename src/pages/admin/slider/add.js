@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 import toastr from "toastr";
+import $ from "jquery";
+import validate from "jquery-validation";
 import { add } from "../../../api/slider";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,13 +42,11 @@ const AdminAddSliderPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-slider-title" class="block text-sm font-medium text-gray-700">Tên slider</label>
                                         <input type="text" name="form__add-slider-title" id="form__add-slider-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên slide">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-slider-url" class="block text-sm font-medium text-gray-700">Url slider</label>
                                         <input type="text" name="form__add-slider-url" id="form__add-slider-url" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập url slide">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -55,7 +56,6 @@ const AdminAddSliderPage = {
                                             <option value="0" selected="">Ẩn</option>
                                             <option value="1">Hiển thị</option>
                                         </select>
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -75,14 +75,14 @@ const AdminAddSliderPage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__add-slider-img" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__add-slider-img" name="form__add-slider-img" type="file" class="sr-only">
+                                                        <input id="form__add-slider-img" data-error=".error-image" name="form__add-slider-img" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -103,75 +103,62 @@ const AdminAddSliderPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-slider");
-        const title = formAdd.querySelector("#form__add-slider-title");
-        const url = formAdd.querySelector("#form__add-slider-url");
-        const status = formAdd.querySelector("#form__add-slider-stt");
-        const slider = formAdd.querySelector("#form__add-slider-img");
-        const imgPreview = formAdd.querySelector("#form__add-slider-preview");
+        const title = $("#form__add-slider-title");
+        const url = $("#form__add-slider-url");
+        const status = $("#form__add-slider-stt");
+        const slider = document.querySelector("#form__add-slider-img");
+        const imgPreview = $("#form__add-slider-preview");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__add-slider").validate({
+            rules: {
+                "form__add-slider-title": "required",
+                "form__add-slider-url": {
+                    required: true,
+                    url: true,
+                },
+                "form__add-slider-stt": "required",
+                "form__add-slider-img": "required",
+            },
+            messages: {
+                "form__add-slider-title": "Vui lòng nhập tên slide",
+                "form__add-slider-url": {
+                    required: "Vui lòng nhập url slide",
+                    url: "Url không đúng định dạng",
+                },
+                "form__add-slider-stt": "Vui lòng chọn trạng thái bài viết",
+                "form__add-slider-img": "Vui lòng chọn ảnh",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
+                }
+            },
+            submitHandler() {
+                (async () => {
+                    const response = await uploadFile(slider.files[0]);
+                    const date = new Date();
 
-            if (!title.value) {
-                title.nextElementSibling.innerText = "Vui lòng nhập tên slider";
-                isValid = false;
-            } else {
-                title.nextElementSibling.innerText = "";
-            }
+                    const sliderData = {
+                        title: title.val(),
+                        url: url.val(),
+                        status: +status.val(),
+                        image: response.data.url,
+                        createdAt: date.toISOString(),
+                    };
 
-            if (!url.value) {
-                url.nextElementSibling.innerText = "Vui lòng nhập url slider";
-                isValid = false;
-            } else {
-                url.nextElementSibling.innerText = "";
-            }
-
-            if (!status.value) {
-                status.nextElementSibling.innerText = "Vui lòng chọn trạng thái slider";
-                isValid = false;
-            } else {
-                status.nextElementSibling.innerText = "";
-            }
-
-            const parent = slider.parentElement.parentElement.parentElement.parentElement;
-            if (!slider.files.length) {
-                parent.nextElementSibling.innerText = "Vui lòng chọn ảnh slider";
-                isValid = false;
-            } else {
-                parent.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const isValid = validate();
-            if (isValid) {
-                const response = await uploadFile(slider.files[0]);
-                const date = new Date();
-
-                const sliderData = {
-                    title: title.value,
-                    url: url.value,
-                    status: +status.value,
-                    image: response.data.url,
-                    createdAt: date.toISOString(),
-                };
-
-                add(sliderData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddSliderPage, "#app"));
-            }
+                    add(sliderData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddSliderPage, "#app"));
+                })();
+            },
         });
 
         // bắt sự kiện chọn ảnh => preview
         slider.addEventListener("change", (e) => {
-            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+            imgPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };

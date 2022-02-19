@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminSliderListPage from ".";
 import { get, update } from "../../../api/slider";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -33,7 +36,7 @@ const AdminEditSliderPage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" method="POST" id="form__edit-slider" data-id="${sliderDetail.id}">
+                    <form action="" method="POST" id="form__edit-slider">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết slider:</span>
@@ -42,13 +45,11 @@ const AdminEditSliderPage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-slider-title" class="block text-sm font-medium text-gray-700">Tên slider</label>
                                         <input type="text" name="form__edit-slider-title" id="form__edit-slider-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên slide" value="${sliderDetail.title}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__edit-slider-url" class="block text-sm font-medium text-gray-700">Url slider</label>
                                         <input type="text" name="form__edit-slider-url" id="form__edit-slider-url" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập url slide" value="${sliderDetail.url}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -58,7 +59,6 @@ const AdminEditSliderPage = {
                                             <option value="0" ${!sliderDetail.status ? "selected" : ""}>Ẩn</option>
                                             <option value="1" ${sliderDetail.status ? "selected" : ""}>Hiển thị</option>
                                         </select>
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -78,14 +78,14 @@ const AdminEditSliderPage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__edit-slider-img" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__edit-slider-img" name="form__edit-slider-img" type="file" class="sr-only">
+                                                        <input id="form__edit-slider-img" data-error=".error-image" name="form__edit-slider-img" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -102,73 +102,65 @@ const AdminEditSliderPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-slider");
-        const title = formEdit.querySelector("#form__edit-slider-title");
-        const url = formEdit.querySelector("#form__edit-slider-url");
-        const status = formEdit.querySelector("#form__edit-slider-stt");
-        const imgSlider = formEdit.querySelector("#form__edit-slider-img");
-        const imgPreview = formEdit.querySelector("#form__edit-slider-preview");
+        const title = $("#form__edit-slider-title");
+        const url = $("#form__edit-slider-url");
+        const status = $("#form__edit-slider-stt");
+        const imgSlider = document.querySelector("#form__edit-slider-img");
+        const imgPreview = $("#form__edit-slider-preview");
 
-        // validate
-        const validate = () => {
-            let isValid = true;
-
-            if (!title.value) {
-                title.nextElementSibling.innerText = "Vui lòng nhập tên slider";
-                isValid = false;
-            } else {
-                title.nextElementSibling.innerText = "";
-            }
-
-            if (!url.value) {
-                url.nextElementSibling.innerText = "Vui lòng nhập url slider";
-                isValid = false;
-            } else {
-                url.nextElementSibling.innerText = "";
-            }
-
-            if (!status.value) {
-                status.nextElementSibling.innerText = "Vui lòng chọn trạng thái slider";
-                isValid = false;
-            } else {
-                status.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
-
-            if (isValid) {
-                const sliderData = {
-                    title: title.value,
-                    url: url.value,
-                    status: +status.value,
-                };
-
-                if (imgSlider.files.length) {
-                    const response = await uploadFile(imgSlider.files[0]);
-                    sliderData.image = response.data.url;
+        $("#form__edit-slider").validate({
+            rules: {
+                "form__edit-slider-title": "required",
+                "form__edit-slider-url": {
+                    required: true,
+                    url: true,
+                },
+                "form__edit-slider-stt": "required",
+            },
+            messages: {
+                "form__edit-slider-title": "Vui lòng nhập tên slide",
+                "form__edit-slider-url": {
+                    required: "Vui lòng nhập url slide",
+                    url: "Url không đúng định dạng",
+                },
+                "form__edit-slider-stt": "Vui lòng chọn trạng thái bài viết",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
                 }
+            },
+            submitHandler() {
+                (async () => {
+                    const sliderData = {
+                        title: title.val(),
+                        url: url.val(),
+                        status: +status.val(),
+                    };
 
-                update(id, sliderData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/slider"; })
-                    .then(() => reRender(AdminSliderListPage, "#app"));
-            }
+                    if (imgSlider.files.length) {
+                        const response = await uploadFile(imgSlider.files[0]);
+                        sliderData.image = response.data.url;
+                    }
+
+                    update(id, sliderData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/slider"; })
+                        .then(() => reRender(AdminSliderListPage, "#app"));
+                })();
+            },
         });
 
         // bắt sự kiện chọn ảnh => preview
         imgSlider.addEventListener("change", (e) => {
-            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+            imgPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };
