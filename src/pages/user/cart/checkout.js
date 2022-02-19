@@ -1,5 +1,8 @@
 import toastr from "toastr";
-import { getAllProvince, getDistrict, getWard } from "../../../api/location";
+import $ from "jquery";
+import {
+    getAllProvince, getDistrict, getDistrictById, getProvinceById, getWard, getWardById,
+} from "../../../api/location";
 import CartNav from "../../../components/user/cartNav";
 import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
@@ -10,6 +13,9 @@ import {
 import { add } from "../../../api/order";
 import { update as updateVoucher, get } from "../../../api/voucher";
 import { add as addOrderDetail } from "../../../api/orderDetail";
+import {
+    add as addAddress, getByUserId, get as getAdd, checkAddExits,
+} from "../../../api/address";
 
 const CheckoutPage = {
     async render() {
@@ -40,7 +46,10 @@ const CheckoutPage = {
 
             <form action="" id="cart__checkout-form" method="POST" class="container max-w-6xl mx-auto px-3 mt-10 mb-9 grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-8 border-t-2 pt-3">
-                    <h3 class="uppercase text-gray-500 font-semibold mb-2 text-lg">Thông tin thanh toán</h3>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="uppercase text-gray-500 font-semibold text-lg">Thông tin thanh toán</h3>
+                        <button type="button" id="btn-choose-address" class="px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Sử dụng địa chỉ khác</button>
+                    </div>
                     
                     <div class="grid grid-cols-12 gap-x-4">
                         <div class="col-span-6 mb-3">
@@ -114,6 +123,13 @@ const CheckoutPage = {
                             <input type="text" id="cart__checkout-form-add" value="${userLogged ? userLogged.address : ""}" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] w-full border px-2 h-10 text-sm outline-none" placeholder="VD: Số xx, Ngõ xx, Phú Kiều">
                             <div class="text-sm mt-0.5 text-red-500"></div>
                         </div>
+
+                        ${userLogged ? /* html */`
+                        <div class="col-span-12 mb-3 flex items-center">
+                            <input type="checkbox" id="cart__checkout-save-address">
+                            <label for="cart__checkout-save-address" class="ml-1 block text-md">Lưu thông tin thanh toán?</label>
+                        </div>
+                        ` : ""}
                     </div>
 
                     <h3 class="uppercase text-gray-500 font-semibold my-2 text-lg">Thông tin bổ sung</h3>
@@ -184,12 +200,33 @@ const CheckoutPage = {
         </main>
         <!-- end content -->
 
+        <div id="modal" class="invisible fixed top-0 right-0 bottom-0 left-0 z-20 flex justify-center items-start">
+            <div id="modal__overlay" class="opacity-0 transition-all duration-400 ease-linear absolute top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.6)]"></div>
+
+            <div id="modal__body" class="min-w-[500px] transition-all ease-out duration-500 -translate-y-[calc(100%+56px)] bg-white rounded shadow mt-14 z-20">
+                <header class="px-3 py-2 flex justify-between items-center text-lg font-semibold border-b">
+                    <h1>Danh sách địa chỉ</h1>
+
+                    <div class="cursor-pointer" id="modal-btn-close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </header>
+
+                <div class="px-3 py-2">
+                    <table class="w-full text-left">
+                        <tbody class="grid grid-cols-1 divide-y" id="list-address"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         ${Footer.render()}
         `;
     },
     afterRender() {
         Header.afterRender();
         Footer.afterRender();
+        const userLogged = getUser();
 
         const provinceElement = document.querySelector("#cart__checkout-province");
         const districtElement = document.querySelector("#cart__checkout-district");
@@ -307,7 +344,7 @@ const CheckoutPage = {
                     // eslint-disable-next-line no-plusplus
                     curentVoucher.quantity--;
 
-                    updateVoucher(id, curentVoucher);
+                    await updateVoucher(id, curentVoucher);
                 });
 
                 // lưu thông tin cart
@@ -317,7 +354,7 @@ const CheckoutPage = {
                 // lưu cart detail
                 const cartList = JSON.parse(localStorage.getItem("cart")) || [];
                 cartList.forEach(async (cart) => {
-                    addOrderDetail({
+                    await addOrderDetail({
                         orderId,
                         productId: cart.productId,
                         productPrice: cart.productPrice,
@@ -330,6 +367,25 @@ const CheckoutPage = {
                         toppingPrice: cart.toppingPrice,
                     });
                 });
+
+                // lưu thông tin thanh toán
+                const isSaveAdd = document.querySelector("#cart__checkout-save-address:checked");
+                if (isSaveAdd) {
+                    const currentAddress = {
+                        userId: userLogged.id,
+                        fullName: fullName.value,
+                        phone: phone.value,
+                        email: email.value,
+                        provinceCode: +provinceElement.value,
+                        districtCode: +districtElement.value,
+                        wardCode: +wardElement.value,
+                        address: address.value,
+                    };
+
+                    // check duplicate
+                    const isExits = await checkAddExits(currentAddress);
+                    if (!isExits) await addAddress(currentAddress);
+                }
 
                 // xóa cart khỏi local storage
                 finishOrder(() => {
@@ -368,6 +424,73 @@ const CheckoutPage = {
                 wardElement.innerHTML = htmlWard;
             }
         });
+
+        // xử lý sự kiện chọn địa chỉ
+        const renderAddress = async (wardCode, districtCode, provinceCode) => {
+            const ward = await getWardById(wardCode);
+            const district = await getDistrictById(districtCode);
+            const province = await getProvinceById(provinceCode);
+            return `${ward.name}, ${district.name}, ${province.name}`;
+        };
+
+        const btnAddress = document.querySelector("#btn-choose-address");
+        const modal = document.querySelector("#modal");
+        const listAddress = document.querySelector("#list-address");
+        btnAddress.addEventListener("click", async () => {
+            const { data: listAdd } = await getByUserId(userLogged.id);
+            if (listAdd.length) {
+                let html = "";
+
+                // eslint-disable-next-line no-restricted-syntax
+                for await (const addressItem of listAdd) {
+                    html += `
+                    <tr class="hover:bg-gray-100 cursor-pointer address-item" data-id="${addressItem.id}">
+                        <td class="p-2">${addressItem.fullName}</td>
+                        <td class="p-2">${addressItem.phone}</td>
+                        <td class="p-2">${addressItem.address}, ${await renderAddress(addressItem.wardCode, addressItem.districtCode, addressItem.provinceCode)}</td>
+                    </tr>
+                    `;
+                }
+                listAddress.innerHTML = html;
+
+                // handle sự kiện click chọn địa chỉ
+                const addressItem = document.querySelectorAll(".address-item");
+                addressItem.forEach(async (row) => {
+                    const { id } = row.dataset;
+
+                    row.addEventListener("click", async () => {
+                        const { data: addressData } = await getAdd(id);
+
+                        // get ds quận/huyện
+                        const listDistrict = await getDistrict(addressData.provinceCode);
+                        districtElement.innerHTML = listDistrict.map((item) => `
+                            <option value="${item.code}">${item.name}</option>
+                            `).join("");
+
+                        // get ds xã/phường
+                        const listWard = await getWard(addressData.districtCode);
+                        wardElement.innerHTML = listWard.map((item) => `
+                            <option value="${item.code}">${item.name}</option>
+                            `).join("");
+
+                        fullName.value = addressData.fullName;
+                        phone.value = addressData.phone;
+                        email.value = addressData.email;
+                        address.value = addressData.address;
+                        provinceElement.value = addressData.provinceCode;
+                        districtElement.value = addressData.districtCode;
+                        wardElement.value = addressData.wardCode;
+
+                        modal.classList.remove("active");
+                    });
+                });
+            }
+            modal.classList.add("active");
+        });
+
+        // đóng modal
+        $("#modal__overlay").on("click", () => modal.classList.remove("active"));
+        $("#modal-btn-close").on("click", () => modal.classList.remove("active"));
     },
 };
 
