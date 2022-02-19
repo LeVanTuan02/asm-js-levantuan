@@ -65,6 +65,8 @@ import ProductByCatePage from "./pages/user/productByCate";
 import NewsByCatePage from "./pages/user/newsByCate";
 import AdminCartListPage from "./pages/admin/cart";
 import AdminCartDetailPage from "./pages/admin/cart/detail";
+import MyAccAddressPage from "./pages/user/my-account/address";
+import MyAccEditAddressPage from "./pages/user/my-account/addressEdit";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -196,6 +198,15 @@ router.on({
     },
     "/my-account/cart/:id/detail": ({ data }) => {
         print(MyAccCartDetailsPage, data.id);
+    },
+    "/my-account/address": () => {
+        print(MyAccAddressPage);
+    },
+    "/my-account/address/page/:page": ({ data }) => {
+        print(MyAccAddressPage, data.page);
+    },
+    "/my-account/address/:id/edit": ({ data }) => {
+        print(MyAccEditAddressPage, data.id);
     },
     "/admin/dashboard": () => {
         print(DashboardPage);
