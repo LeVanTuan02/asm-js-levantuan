@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminUserListPage from ".";
 import { getAllProvince, getDistrict, getWard } from "../../../api/location";
 import { update, get } from "../../../api/user";
@@ -73,7 +76,7 @@ const AdminEditUserPage = {
                                             <option value="0" ${!userDetail.role ? "selected" : ""}>Khách hàng</option>
                                             <option value="1" ${userDetail.role ? "selected" : ""}>Admin</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -83,7 +86,7 @@ const AdminEditUserPage = {
                                             <option value="0" ${!userDetail.active ? "selected" : ""}>Khóa</option>
                                             <option value="1" ${userDetail.active ? "selected" : ""}>Kích hoạt</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
@@ -99,7 +102,7 @@ const AdminEditUserPage = {
                                             <option value="">-- Chọn Tỉnh/TP --</option>
                                             ${listProvince.map((item) => `<option value="${item.code}" ${userDetail.provinceCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -108,7 +111,7 @@ const AdminEditUserPage = {
                                             <option value="">-- Chọn Quận/Huyện --</option>
                                             ${listDistrict.map((item) => `<option value="${item.code}" ${userDetail.districtCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -117,7 +120,7 @@ const AdminEditUserPage = {
                                             <option value="">-- Chọn Xã/Phường --</option>
                                             ${listWard.map((item) => `<option value="${item.code}" ${userDetail.wardsCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                     ` : /* html */`
                                     <div class="col-span-6 md:col-span-2">
@@ -126,7 +129,7 @@ const AdminEditUserPage = {
                                             <option value="">-- Chọn Tỉnh/TP --</option>
                                             ${listProvince.map((item) => `<option value="${item.code}">${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -134,7 +137,7 @@ const AdminEditUserPage = {
                                         <select id="form__edit-user-district" name="form__edit-user-district" class="form-control mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn Quận/Huyện --</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -142,7 +145,7 @@ const AdminEditUserPage = {
                                         <select id="form__edit-user-ward" name="form__edit-user-ward" class="form-control mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">-- Chọn Xã/Phường --</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                     `}
 
@@ -188,7 +191,7 @@ const AdminEditUserPage = {
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -209,174 +212,126 @@ const AdminEditUserPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__edit-user");
-        const fullName = formAdd.querySelector("#form__edit-user-fullname");
-        const username = formAdd.querySelector("#form__edit-user-username");
-        const phone = formAdd.querySelector("#form__edit-user-phone");
-        const email = formAdd.querySelector("#form__edit-user-email");
-        const role = formAdd.querySelector("#form__edit-user-role");
-        const status = formAdd.querySelector("#form__edit-user-stt");
-        const password = formAdd.querySelector("#form__edit-user-password");
-        const confirmPass = formAdd.querySelector("#form__edit-user-confirm");
-        const avatar = formAdd.querySelector("#form__edit-user-avatar");
-        const avatarPreview = formAdd.querySelector("#form__edit-user-preview");
-        const provinceElement = formAdd.querySelector("#form__edit-user-province");
-        const districtElement = formAdd.querySelector("#form__edit-user-district");
-        const wardElement = formAdd.querySelector("#form__edit-user-ward");
-        const address = formAdd.querySelector("#form__edit-user-address");
+        const fullName = $("#form__edit-user-fullname");
+        const username = $("#form__edit-user-username");
+        const phone = $("#form__edit-user-phone");
+        const email = $("#form__edit-user-email");
+        const role = $("#form__edit-user-role");
+        const status = $("#form__edit-user-stt");
+        const password = $("#form__edit-user-password");
+        const avatar = document.querySelector("#form__edit-user-avatar");
+        const avatarPreview = $("#form__edit-user-preview");
+        const provinceElement = $("#form__edit-user-province");
+        const districtElement = $("#form__edit-user-district");
+        const wardElement = $("#form__edit-user-ward");
+        const address = $("#form__edit-user-address");
 
         const { data: userDetail } = await get(id);
 
         // validate
-        const validate = () => {
-            let isValid = true;
+        $("#form__edit-user").validate({
+            rules: {
+                "form__edit-user-fullname": "required",
+                "form__edit-user-username": {
+                    required: true,
+                },
+                "form__edit-user-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "form__edit-user-email": {
+                    required: true,
+                    email: true,
+                },
+                "form__edit-user-role": "required",
+                "form__edit-user-stt": "required",
+                "form__edit-user-password": {
+                    required: true,
+                    minlength: 4,
+                },
+                "form__edit-user-confirm": {
+                    required: true,
+                    equalTo: "#form__edit-user-password",
+                },
+                "form__edit-user-province": "required",
+                "form__edit-user-district": "required",
+                "form__edit-user-ward": "required",
+                "form__edit-user-address": "required",
+            },
+            messages: {
+                "form__edit-user-fullname": "Vui lòng nhập họ tên",
+                "form__edit-user-username": {
+                    required: "Vui lòng nhập tên đăng nhập",
+                },
+                "form__edit-user-phone": {
+                    required: "Vui lòng nhập số điện thoại",
+                    valid_phone: "Số điện thoại không đúng định dạng",
+                },
+                "form__edit-user-email": {
+                    required: "Vui lòng nhập email",
+                    email: "Email không đúng định dạng",
+                },
+                "form__edit-user-role": "Vui lòng chọn vai trò",
+                "form__edit-user-stt": "Vui lòng chọn trạng thái tài khoản",
+                "form__edit-user-password": {
+                    required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu tối thiểu 4 ký tự",
+                },
+                "form__edit-user-confirm": {
+                    required: "Vui lòng nhập mật khẩu xác nhận",
+                    equalTo: "Mật khẩu xác nhận không chính xác",
+                },
+                "form__edit-user-province": "Vui lòng chọn Tỉnh/TP",
+                "form__edit-user-district": "Vui lòng chọn Quận/Huyện",
+                "form__edit-user-ward": "Vui lòng chọn Xã/Phường",
+                "form__edit-user-address": "Trường này không thể bỏ trống",
+            },
+            submitHandler() {
+                (async () => {
+                    const userData = {
+                        email: email.val(),
+                        username: username.val(),
+                        fullName: fullName.val(),
+                        phone: phone.val(),
+                        wardsCode: +wardElement.val(),
+                        districtCode: +districtElement.val(),
+                        provinceCode: +provinceElement.val(),
+                        address: address.val(),
+                        role: +role.val(),
+                        active: +status.val(),
+                    };
 
-            if (!fullName.value) {
-                fullName.nextElementSibling.innerText = "Vui lòng nhập họ tên";
-                isValid = false;
-            } else {
-                fullName.nextElementSibling.innerText = "";
-            }
+                    // nếu cập nhật avatar
+                    if (avatar.files.length) {
+                        const { data } = await uploadFile(avatar.files[0]);
+                        userData.avatar = data.url;
+                    }
 
-            const regexUsername = /[\s*]/;
-            if (!username.value) {
-                username.nextElementSibling.innerText = "Vui lòng nhập username";
-                isValid = false;
-            } else if (regexUsername.test(username.value)) {
-                username.nextElementSibling.innerText = "Username không được chứa khoảng trắng";
-                isValid = false;
-            } else {
-                username.nextElementSibling.innerText = "";
-            }
+                    // nếu cập nhật mật khẩu
+                    if (password.val() !== userDetail.password) {
+                        userData.password = password.val();
+                    }
 
+                    update(id, userData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/user"; })
+                        .then(() => reRender(AdminUserListPage, "#app"));
+                })();
+            },
+        });
+
+        $.validator.addMethod("valid_phone", (value) => {
             const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!phone.value) {
-                phone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(phone.value)) {
-                phone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                phone.nextElementSibling.innerText = "";
-            }
-
-            const regexEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            if (!email.value) {
-                email.nextElementSibling.innerText = "Vui lòng nhập email";
-                isValid = false;
-            } else if (!regexEmail.test(email.value)) {
-                email.nextElementSibling.innerText = "Email không đúng định dạng";
-                isValid = false;
-            } else {
-                email.nextElementSibling.innerText = "";
-            }
-
-            if (!role.value) {
-                role.nextElementSibling.innerText = "Vui lòng chọn vai trò";
-                isValid = false;
-            } else {
-                role.nextElementSibling.innerText = "";
-            }
-
-            if (!status.value) {
-                status.nextElementSibling.innerText = "Vui lòng chọn trạng thái tài khoản";
-                isValid = false;
-            } else {
-                status.nextElementSibling.innerText = "";
-            }
-
-            if (!password.value) {
-                password.nextElementSibling.innerText = "Vui lòng nhập mật khẩu";
-                isValid = false;
-            } else {
-                password.nextElementSibling.innerText = "";
-            }
-
-            if (!confirmPass.value) {
-                confirmPass.nextElementSibling.innerText = "Vui lòng xác nhận mật khẩu";
-                isValid = false;
-            } else if (confirmPass.value !== password.value) {
-                confirmPass.nextElementSibling.innerText = "Mật khẩu xác nhận không chính xác";
-                isValid = false;
-            } else {
-                confirmPass.nextElementSibling.innerText = "";
-            }
-
-            if (!address.value) {
-                address.nextElementSibling.innerText = "Vui lòng nhập địa chỉ";
-                isValid = false;
-            } else {
-                address.nextElementSibling.innerText = "";
-            }
-
-            if (!provinceElement.value) {
-                provinceElement.nextElementSibling.innerText = "Vui lòng chọn Tỉnh/TP";
-                isValid = false;
-            } else {
-                provinceElement.nextElementSibling.innerText = "";
-            }
-
-            if (!districtElement.value) {
-                districtElement.nextElementSibling.innerText = "Vui lòng chọn Quận/Huyện";
-                isValid = false;
-            } else {
-                districtElement.nextElementSibling.innerText = "";
-            }
-
-            if (!wardElement.value) {
-                wardElement.nextElementSibling.innerText = "Vui lòng chọn Xã/Phường";
-                isValid = false;
-            } else {
-                wardElement.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                const userData = {
-                    email: email.value,
-                    username: username.value,
-                    fullName: fullName.value,
-                    phone: phone.value,
-                    wardsCode: +wardElement.value,
-                    districtCode: +districtElement.value,
-                    provinceCode: +provinceElement.value,
-                    address: address.value,
-                    role: +role.value,
-                    active: +status.value,
-                };
-
-                // nếu cập nhật avatar
-                if (avatar.files.length) {
-                    const { data } = await uploadFile(avatar.files[0]);
-                    userData.avatar = data.url;
-                }
-
-                // nếu cập nhật mật khẩu
-                if (password.value !== userDetail.password) {
-                    userData.password = password.value;
-                }
-
-                update(id, userData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/user"; })
-                    .then(() => reRender(AdminUserListPage, "#app"));
-            }
+            return regexPhone.test(value);
         });
 
         // bắt sự kiện đổi avatar
         avatar.addEventListener("change", (e) => {
-            avatarPreview.src = URL.createObjectURL(e.target.files[0]);
+            avatarPreview.attr("src", URL.createObjectURL(e.target.files[0]));
         });
 
         // bắt sự kiện chọn tỉnh/tp
-        provinceElement.addEventListener("change", async (e) => {
+        provinceElement.on("change", async (e) => {
             const provinceCode = e.target.value;
             const districtList = await getDistrict(provinceCode);
             let htmlDistrict = `<option value="">-- Chọn Tỉnh/TP --</option>`;
@@ -384,12 +339,12 @@ const AdminEditUserPage = {
                 htmlDistrict += `<option value="${item.code}">${item.name}</option>`;
             });
 
-            districtElement.removeAttribute("disabled");
-            districtElement.innerHTML = htmlDistrict;
+            districtElement.removeAttr("disabled");
+            districtElement.html(htmlDistrict);
         });
 
         // bắt sự kiện chọn quận/huyện
-        districtElement.addEventListener("change", async (e) => {
+        districtElement.on("change", async (e) => {
             const districtCode = e.target.value;
             const wardList = await getWard(districtCode);
             let htmlWard = `<option value="">-- Chọn Xã/Phường --</option>`;
@@ -397,8 +352,8 @@ const AdminEditUserPage = {
                 htmlWard += `<option value="${item.code}">${item.name}</option>`;
             });
 
-            wardElement.removeAttribute("disabled");
-            wardElement.innerHTML = htmlWard;
+            wardElement.removeAttr("disabled");
+            wardElement.html(htmlWard);
         });
     },
 };

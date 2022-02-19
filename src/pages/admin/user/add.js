@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { getAllProvince, getDistrict, getWard } from "../../../api/location";
 import { add } from "../../../api/user";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -42,19 +45,16 @@ const AdminAddUserPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-user-fullname" class="block text-sm font-medium text-gray-700">Họ và tên</label>
                                         <input type="text" name="form__add-user-fullname" id="form__add-user-fullname" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên đầy đủ">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-user-username" class="block text-sm font-medium text-gray-700">Username</label>
                                         <input type="text" name="form__add-user-username" id="form__add-user-username" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập username">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-user-phone" class="block text-sm font-medium text-gray-700">Số điện thoại</label>
                                         <input type="text" name="form__add-user-phone" id="form__add-user-phone" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập sdt">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -80,7 +80,6 @@ const AdminAddUserPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-user-email" class="block text-sm font-medium text-gray-700">Email</label>
                                         <input type="text" name="form__add-user-email" id="form__add-user-email" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập email">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                     
                                     <div class="col-span-6 md:col-span-2">
@@ -111,19 +110,16 @@ const AdminAddUserPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-user-address" class="block text-sm font-medium text-gray-700">Địa chỉ hiện tại</label>
                                         <input type="text" name="form__add-user-address" id="form__add-user-address" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập thôn/xóm/TDP">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-user-password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
                                         <input type="password" name="form__add-user-password" id="form__add-user-password" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập mật khẩu">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-user-confirm" class="block text-sm font-medium text-gray-700">Xác nhận mật khẩu</label>
                                         <input type="password" name="form__add-user-confirm" id="form__add-user-confirm" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Xác nhận mật khẩu">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -171,170 +167,122 @@ const AdminAddUserPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-user");
-        const fullName = formAdd.querySelector("#form__add-user-fullname");
-        const username = formAdd.querySelector("#form__add-user-username");
-        const phone = formAdd.querySelector("#form__add-user-phone");
-        const email = formAdd.querySelector("#form__add-user-email");
-        const role = formAdd.querySelector("#form__add-user-role");
-        const status = formAdd.querySelector("#form__add-user-stt");
-        const password = formAdd.querySelector("#form__add-user-password");
-        const confirmPass = formAdd.querySelector("#form__add-user-confirm");
-        const avatar = formAdd.querySelector("#form__add-user-avatar");
-        const avatarPreview = formAdd.querySelector("#form__add-user-preview");
-        const provinceElement = formAdd.querySelector("#form__add-user-province");
-        const districtElement = formAdd.querySelector("#form__add-user-district");
-        const wardElement = formAdd.querySelector("#form__add-user-ward");
-        const address = formAdd.querySelector("#form__add-user-address");
+        const fullName = $("#form__add-user-fullname");
+        const username = $("#form__add-user-username");
+        const phone = $("#form__add-user-phone");
+        const email = $("#form__add-user-email");
+        const role = $("#form__add-user-role");
+        const status = $("#form__add-user-stt");
+        const password = $("#form__add-user-password");
+        const avatar = document.querySelector("#form__add-user-avatar");
+        const avatarPreview = $("#form__add-user-preview");
+        const provinceElement = $("#form__add-user-province");
+        const districtElement = $("#form__add-user-district");
+        const wardElement = $("#form__add-user-ward");
+        const address = $("#form__add-user-address");
 
         // validate
-        const validate = () => {
-            let isValid = true;
+        $("#form__add-user").validate({
+            rules: {
+                "form__add-user-fullname": "required",
+                "form__add-user-username": {
+                    required: true,
+                },
+                "form__add-user-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "form__add-user-email": {
+                    required: true,
+                    email: true,
+                },
+                "form__add-user-role": "required",
+                "form__add-user-stt": "required",
+                "form__add-user-password": {
+                    required: true,
+                    minlength: 4,
+                },
+                "form__add-user-confirm": {
+                    required: true,
+                    equalTo: "#form__add-user-password",
+                },
+                "form__add-user-province": "required",
+                "form__add-user-district": "required",
+                "form__add-user-ward": "required",
+                "form__add-user-address": "required",
+            },
+            messages: {
+                "form__add-user-fullname": "Vui lòng nhập họ tên",
+                "form__add-user-username": {
+                    required: "Vui lòng nhập tên đăng nhập",
+                },
+                "form__add-user-phone": {
+                    required: "Vui lòng nhập số điện thoại",
+                    valid_phone: "Số điện thoại không đúng định dạng",
+                },
+                "form__add-user-email": {
+                    required: "Vui lòng nhập email",
+                    email: "Email không đúng định dạng",
+                },
+                "form__add-user-role": "Vui lòng chọn vai trò",
+                "form__add-user-stt": "Vui lòng chọn trạng thái tài khoản",
+                "form__add-user-password": {
+                    required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu tối thiểu 4 ký tự",
+                },
+                "form__add-user-confirm": {
+                    required: "Vui lòng nhập mật khẩu xác nhận",
+                    equalTo: "Mật khẩu xác nhận không chính xác",
+                },
+                "form__add-user-province": "Vui lòng chọn Tỉnh/TP",
+                "form__add-user-district": "Vui lòng chọn Quận/Huyện",
+                "form__add-user-ward": "Vui lòng chọn Xã/Phường",
+                "form__add-user-address": "Trường này không thể bỏ trống",
+            },
+            submitHandler() {
+                (async () => {
+                    let avatarUrl = "https://res.cloudinary.com/levantuan/image/upload/v1644302455/assignment-js/thumbnail-image-vector-graphic-vector-id1147544807_ochvyr.jpg";
+                    if (avatar.files.length) {
+                        const { data } = await uploadFile(avatar.files[0]);
+                        avatarUrl = data.url;
+                    }
+                    const date = new Date();
 
-            if (!fullName.value) {
-                fullName.nextElementSibling.innerText = "Vui lòng nhập họ tên";
-                isValid = false;
-            } else {
-                fullName.nextElementSibling.innerText = "";
-            }
+                    const userData = {
+                        email: email.val(),
+                        password: password.val(),
+                        username: username.val(),
+                        fullName: fullName.val(),
+                        phone: phone.val(),
+                        wardsCode: +wardElement.val(),
+                        districtCode: +districtElement.val(),
+                        provinceCode: +provinceElement.val(),
+                        address: address.val(),
+                        avatar: avatarUrl,
+                        role: +role.val(),
+                        active: +status.val(),
+                        createdAt: date.toISOString(),
+                    };
 
-            const regexUsername = /[\s*]/;
-            if (!username.value) {
-                username.nextElementSibling.innerText = "Vui lòng nhập username";
-                isValid = false;
-            } else if (regexUsername.test(username.value)) {
-                username.nextElementSibling.innerText = "Username không được chứa khoảng trắng";
-                isValid = false;
-            } else {
-                username.nextElementSibling.innerText = "";
-            }
+                    add(userData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddUserPage, "#app"));
+                })();
+            },
+        });
 
+        $.validator.addMethod("valid_phone", (value) => {
             const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!phone.value) {
-                phone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(phone.value)) {
-                phone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                phone.nextElementSibling.innerText = "";
-            }
-
-            const regexEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            if (!email.value) {
-                email.nextElementSibling.innerText = "Vui lòng nhập email";
-                isValid = false;
-            } else if (!regexEmail.test(email.value)) {
-                email.nextElementSibling.innerText = "Email không đúng định dạng";
-                isValid = false;
-            } else {
-                email.nextElementSibling.innerText = "";
-            }
-
-            if (!role.value) {
-                role.nextElementSibling.innerText = "Vui lòng chọn vai trò";
-                isValid = false;
-            } else {
-                role.nextElementSibling.innerText = "";
-            }
-
-            if (!status.value) {
-                status.nextElementSibling.innerText = "Vui lòng chọn trạng thái tài khoản";
-                isValid = false;
-            } else {
-                status.nextElementSibling.innerText = "";
-            }
-
-            if (!password.value) {
-                password.nextElementSibling.innerText = "Vui lòng nhập mật khẩu";
-                isValid = false;
-            } else {
-                password.nextElementSibling.innerText = "";
-            }
-
-            if (!confirmPass.value) {
-                confirmPass.nextElementSibling.innerText = "Vui lòng xác nhận mật khẩu";
-                isValid = false;
-            } else if (confirmPass.value !== password.value) {
-                confirmPass.nextElementSibling.innerText = "Mật khẩu xác nhận không chính xác";
-                isValid = false;
-            } else {
-                confirmPass.nextElementSibling.innerText = "";
-            }
-
-            if (!address.value) {
-                address.nextElementSibling.innerText = "Vui lòng nhập địa chỉ";
-                isValid = false;
-            } else {
-                address.nextElementSibling.innerText = "";
-            }
-
-            if (!provinceElement.value) {
-                provinceElement.nextElementSibling.innerText = "Vui lòng chọn Tỉnh/TP";
-                isValid = false;
-            } else {
-                provinceElement.nextElementSibling.innerText = "";
-            }
-
-            if (!districtElement.value) {
-                districtElement.nextElementSibling.innerText = "Vui lòng chọn Quận/Huyện";
-                isValid = false;
-            } else {
-                districtElement.nextElementSibling.innerText = "";
-            }
-
-            if (!wardElement.value) {
-                wardElement.nextElementSibling.innerText = "Vui lòng chọn Xã/Phường";
-                isValid = false;
-            } else {
-                wardElement.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-            const date = new Date();
-
-            if (isValid) {
-                let avatarUrl = "https://res.cloudinary.com/levantuan/image/upload/v1644302455/assignment-js/thumbnail-image-vector-graphic-vector-id1147544807_ochvyr.jpg";
-                if (avatar.files.length) {
-                    const { data } = await uploadFile(avatar.files[0]);
-                    avatarUrl = data.url;
-                }
-
-                const userData = {
-                    email: email.value,
-                    password: password.value,
-                    username: username.value,
-                    fullName: fullName.value,
-                    phone: phone.value,
-                    wardsCode: +wardElement.value,
-                    districtCode: +districtElement.value,
-                    provinceCode: +provinceElement.value,
-                    address: address.value,
-                    avatar: avatarUrl,
-                    role: +role.value,
-                    active: +status.value,
-                    createdAt: date.toISOString(),
-                };
-
-                add(userData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddUserPage, "#app"));
-            }
+            return regexPhone.test(value);
         });
 
         // bắt sự kiện đổi avatar
         avatar.addEventListener("change", (e) => {
-            avatarPreview.src = URL.createObjectURL(e.target.files[0]);
+            avatarPreview.attr("src", URL.createObjectURL(e.target.files[0]));
         });
 
         // bắt sự kiện chọn tỉnh/tp
-        provinceElement.addEventListener("change", async (e) => {
+        provinceElement.on("change", async (e) => {
             const provinceCode = e.target.value;
             const districtList = await getDistrict(provinceCode);
             let htmlDistrict = `<option value="">-- Chọn Tỉnh/TP --</option>`;
@@ -342,12 +290,12 @@ const AdminAddUserPage = {
                 htmlDistrict += `<option value="${item.code}">${item.name}</option>`;
             });
 
-            districtElement.removeAttribute("disabled");
-            districtElement.innerHTML = htmlDistrict;
+            districtElement.removeAttr("disabled");
+            districtElement.html(htmlDistrict);
         });
 
         // bắt sự kiện chọn quận/huyện
-        districtElement.addEventListener("change", async (e) => {
+        districtElement.on("change", async (e) => {
             const districtCode = e.target.value;
             const wardList = await getWard(districtCode);
             let htmlWard = `<option value="">-- Chọn Xã/Phường --</option>`;
@@ -355,8 +303,8 @@ const AdminAddUserPage = {
                 htmlWard += `<option value="${item.code}">${item.name}</option>`;
             });
 
-            wardElement.removeAttribute("disabled");
-            wardElement.innerHTML = htmlWard;
+            wardElement.removeAttr("disabled");
+            wardElement.html(htmlWard);
         });
     },
 };
