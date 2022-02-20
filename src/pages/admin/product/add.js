@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { getAll as getAllCate } from "../../../api/category";
 import { add } from "../../../api/product";
@@ -43,19 +46,17 @@ const AdminAddProductPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-product-name" class="block text-sm font-medium text-gray-700">Tên sản phẩm</label>
                                         <input type="text" name="form__add-product-name" id="form__add-product-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên sản phẩm">
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-product-price" class="block text-sm font-medium text-gray-700">Giá sản phẩm</label>
                                         <input type="number" name="form__add-product-price" id="form__add-product-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá sản phẩm">
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6">
                                         <label for="form__add-product-description" class="mb-1 block text-sm font-medium text-gray-700">Mô tả</label>
-                                        <textarea id="form__add-product-description" name="form__add-product-description" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả sản phẩm"></textarea>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <textarea id="form__add-product-description" data-error=".error-desc" name="form__add-product-description" rows="3" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập mô tả sản phẩm"></textarea>
+                                        <div class="error-desc text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6 md:col-span-3">
@@ -66,7 +67,6 @@ const AdminAddProductPage = {
                                                 <option value="${cate.id}">${cate.name}</option>
                                                 `)}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6 md:col-span-3">
@@ -76,7 +76,6 @@ const AdminAddProductPage = {
                                             <option value="0" selected="">Ẩn</option>
                                             <option value="1">Hiển thị</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -96,14 +95,14 @@ const AdminAddProductPage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__add-product-image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__add-product-image" name="form__add-product-image" type="file" class="sr-only">
+                                                        <input id="form__add-product-image" data-error=".error-image" name="form__add-product-image" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -124,64 +123,13 @@ const AdminAddProductPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAddProduct = document.querySelector("#form__add-product");
-        const proName = formAddProduct.querySelector("#form__add-product-name");
-        const proPrice = formAddProduct.querySelector("#form__add-product-price");
-        const proDesc = formAddProduct.querySelector("#form__add-product-description");
-        const proCate = formAddProduct.querySelector("#form__add-product-cate");
-        const proStt = formAddProduct.querySelector("#form__add-product-stt");
-        const proImage = formAddProduct.querySelector("#form__add-product-image");
-        const proPreview = formAddProduct.querySelector("#form__add-product-preview");
-
-        // validate
-        const validate = () => {
-            let isValid = true;
-
-            if (!proName.value) {
-                proName.nextElementSibling.innerText = "Vui lòng nhập tên sản phẩm";
-                isValid = false;
-            } else {
-                proName.nextElementSibling.innerText = "";
-            }
-
-            if (!proPrice.value) {
-                proPrice.nextElementSibling.innerText = "Vui lòng nhập giá sản phẩm";
-                isValid = false;
-            } else {
-                proPrice.nextElementSibling.innerText = "";
-            }
-
-            if (!proDesc.value) {
-                proDesc.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
-                isValid = false;
-            } else {
-                proDesc.nextElementSibling.nextElementSibling.innerText = "";
-            }
-
-            if (!proCate.value) {
-                proCate.nextElementSibling.innerText = "Vui lòng chọn loại sản phẩm";
-                isValid = false;
-            } else {
-                proCate.nextElementSibling.innerText = "";
-            }
-
-            if (!proStt.value) {
-                proStt.nextElementSibling.innerText = "Vui lòng chọn trạng thái sản phẩm";
-                isValid = false;
-            } else {
-                proStt.nextElementSibling.innerText = "";
-            }
-
-            const parent = proImage.parentElement.parentElement.parentElement.parentElement;
-            if (!proImage.files.length) {
-                parent.nextElementSibling.innerText = "Vui lòng chọn ảnh sản phẩm";
-                isValid = false;
-            } else {
-                parent.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
+        const proName = $("#form__add-product-name");
+        const proPrice = $("#form__add-product-price");
+        const proDesc = document.querySelector("#form__add-product-description");
+        const proCate = $("#form__add-product-cate");
+        const proStt = $("#form__add-product-stt");
+        const proImage = document.querySelector("#form__add-product-image");
+        const proPreview = $("#form__add-product-preview");
 
         // ck editor
         let productDesc;
@@ -190,35 +138,69 @@ const AdminAddProductPage = {
             .then((newEditor) => { productDesc = newEditor; })
             .catch((error) => toastr.error(error));
 
-        // bắt sự kiện submit form
-        formAddProduct.addEventListener("submit", async (e) => {
-            e.preventDefault();
+        $("#form__add-product").validate({
+            ignore: [],
+            rules: {
+                "form__add-product-name": "required",
+                "form__add-product-price": {
+                    required: true,
+                    number: true,
+                },
+                "form__add-product-description": "valid_desc",
+                "form__add-product-cate": "required",
+                "form__add-product-stt": "required",
+                "form__add-product-image": "required",
+            },
+            messages: {
+                "form__add-product-name": "Vui lòng nhập tên sản phẩm",
+                "form__add-product-price": {
+                    required: "Vui lòng nhập giá sản phẩm",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__add-product-description": "Vui lòng nhập mô tả sản phẩm",
+                "form__add-product-cate": "Vui lòng chọn loại sản phẩm",
+                "form__add-product-stt": "Vui lòng chọn trạng thái",
+                "form__add-product-image": "Vui lòng chọn ảnh sản phẩm",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
+                }
+            },
+            submitHandler() {
+                (async () => {
+                    const response = await uploadFile(proImage.files[0]);
+                    const date = new Date();
 
-            const isValid = validate();
-            if (isValid) {
-                const response = await uploadFile(proImage.files[0]);
-                const date = new Date();
+                    add({
+                        name: proName.val(),
+                        image: response.data.url,
+                        price: +proPrice.val(),
+                        description: productDesc.getData(),
+                        categoryId: +proCate.val(),
+                        status: +proStt.val(),
+                        view: 0,
+                        favorites: 0,
+                        createdAt: date.toISOString(),
+                        updatedAt: date.toISOString(),
+                    })
+                        .then(() => toastr.success("Thêm sản phẩm thành công"))
+                        .then(() => reRender(AdminAddProductPage, "#app"));
+                })();
+            },
+        });
 
-                add({
-                    name: proName.value,
-                    image: response.data.url,
-                    price: +proPrice.value,
-                    description: productDesc.getData(),
-                    categoryId: +proCate.value,
-                    status: +proStt.value,
-                    view: 0,
-                    favorites: 0,
-                    createdAt: date.toISOString(),
-                    updatedAt: date.toISOString(),
-                })
-                    .then(() => toastr.success("Thêm sản phẩm thành công"))
-                    .then(() => reRender(AdminAddProductPage, "#app"));
-            }
+        $.validator.addMethod("valid_desc", () => {
+            const contentLength = productDesc.getData().trim().length;
+            return contentLength > 0;
         });
 
         // preview iamge
         proImage.addEventListener("change", () => {
-            proPreview.src = URL.createObjectURL(proImage.files[0]);
+            proPreview.prop("src", URL.createObjectURL(proImage.files[0]));
         });
     },
 };

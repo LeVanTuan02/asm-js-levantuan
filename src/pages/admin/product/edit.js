@@ -1,5 +1,8 @@
 import toastr from "toastr";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminProductListPage from ".";
 import { getAll } from "../../../api/category";
 import { get, update } from "../../../api/product";
@@ -36,7 +39,7 @@ const AdminEditProductPage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" id="form__edit-product" method="POST" data-id="${productDetail.id}">
+                    <form action="" id="form__edit-product" method="POST">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết sản phẩm:</span>
@@ -45,13 +48,11 @@ const AdminEditProductPage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-product-name" class="block text-sm font-medium text-gray-700">Tên sản phẩm</label>
                                         <input type="text" name="form__edit-product-name" id="form__edit-product-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên sản phẩm" value="${productDetail.name}">
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__edit-product-price" class="block text-sm font-medium text-gray-700">Giá sản phẩm</label>
                                         <input type="number" name="form__edit-product-price" id="form__edit-product-price" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập giá sản phẩm" value="${productDetail.price}">
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6">
@@ -68,7 +69,6 @@ const AdminEditProductPage = {
                                                 <option value="${cate.id}" ${cate.id === productDetail.categoryId ? "selected" : ""}>${cate.name}</option>
                                                 `)}
                                         </select>
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
         
                                     <div class="col-span-6 md:col-span-3">
@@ -78,7 +78,6 @@ const AdminEditProductPage = {
                                             <option value="0" ${!productDetail.status ? "selected" : ""}>Ẩn</option>
                                             <option value="1" ${productDetail.status ? "selected" : ""}>Hiển thị</option>
                                         </select>
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -98,14 +97,14 @@ const AdminEditProductPage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__edit-product-image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__edit-product-image" name="form__edit-product-image" type="file" class="sr-only">
+                                                        <input id="form__edit-product-image" data-error=".error-image" name="form__edit-product-image" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -122,60 +121,17 @@ const AdminEditProductPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAddProduct = document.querySelector("#form__edit-product");
-        const proName = formAddProduct.querySelector("#form__edit-product-name");
-        const proPrice = formAddProduct.querySelector("#form__edit-product-price");
-        const proDesc = formAddProduct.querySelector("#form__edit-product-description");
-        const proCate = formAddProduct.querySelector("#form__edit-product-cate");
-        const proStt = formAddProduct.querySelector("#form__edit-product-stt");
-        const proImage = formAddProduct.querySelector("#form__edit-product-image");
-        const proPreview = formAddProduct.querySelector("#form__edit-product-preview");
-
-        // validate
-        const validate = () => {
-            let isValid = true;
-
-            if (!proName.value) {
-                proName.nextElementSibling.innerText = "Vui lòng nhập tên sản phẩm";
-                isValid = false;
-            } else {
-                proName.nextElementSibling.innerText = "";
-            }
-
-            if (!proPrice.value) {
-                proPrice.nextElementSibling.innerText = "Vui lòng nhập giá sản phẩm";
-                isValid = false;
-            } else {
-                proPrice.nextElementSibling.innerText = "";
-            }
-
-            if (!proDesc.value) {
-                proDesc.nextElementSibling.nextElementSibling.innerText = "Vui lòng nhập mô tả sản phẩm";
-                isValid = false;
-            } else {
-                proDesc.nextElementSibling.nextElementSibling.innerText = "";
-            }
-
-            if (!proCate.value) {
-                proCate.nextElementSibling.innerText = "Vui lòng chọn loại sản phẩm";
-                isValid = false;
-            } else {
-                proCate.nextElementSibling.innerText = "";
-            }
-
-            if (!proStt.value) {
-                proStt.nextElementSibling.innerText = "Vui lòng chọn trạng thái sản phẩm";
-                isValid = false;
-            } else {
-                proStt.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
+        const proName = $("#form__edit-product-name");
+        const proPrice = $("#form__edit-product-price");
+        const proDesc = document.querySelector("#form__edit-product-description");
+        const proCate = $("#form__edit-product-cate");
+        const proStt = $("#form__edit-product-stt");
+        const proImage = document.querySelector("#form__edit-product-image");
+        const proPreview = $("#form__edit-product-preview");
 
         // ck editor
         let productDesc;
@@ -184,39 +140,69 @@ const AdminEditProductPage = {
             .then((newEditor) => { productDesc = newEditor; })
             .catch((error) => toastr.error(error));
 
-        // bắt sự kiện submit form
-        formAddProduct.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const { id } = e.target.dataset;
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-                const productData = {
-                    name: proName.value,
-                    price: +proPrice.value,
-                    description: productDesc.getData(),
-                    categoryId: +proCate.value,
-                    status: +proStt.value,
-                    updatedAt: date.toISOString(),
-                };
-
-                if (proImage.files.length) {
-                    const response = await uploadFile(proImage.files[0]);
-                    productData.image = response.data.url;
+        $("#form__edit-product").validate({
+            ignore: [],
+            rules: {
+                "form__edit-product-name": "required",
+                "form__edit-product-price": {
+                    required: true,
+                    number: true,
+                },
+                "form__edit-product-description": "valid_desc",
+                "form__edit-product-cate": "required",
+                "form__edit-product-stt": "required",
+            },
+            messages: {
+                "form__edit-product-name": "Vui lòng nhập tên sản phẩm",
+                "form__edit-product-price": {
+                    required: "Vui lòng nhập giá sản phẩm",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__edit-product-description": "Vui lòng nhập mô tả sản phẩm",
+                "form__edit-product-cate": "Vui lòng chọn loại sản phẩm",
+                "form__edit-product-stt": "Vui lòng chọn trạng thái",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
                 }
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
+                    const productData = {
+                        name: proName.val(),
+                        price: +proPrice.val(),
+                        description: productDesc.getData(),
+                        categoryId: +proCate.val(),
+                        status: +proStt.val(),
+                        updatedAt: date.toISOString(),
+                    };
 
-                update(id, productData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/product"; })
-                    .then(() => reRender(AdminProductListPage, "#app"));
-            }
+                    if (proImage.files.length) {
+                        const response = await uploadFile(proImage.files[0]);
+                        productData.image = response.data.url;
+                    }
+
+                    update(id, productData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/product"; })
+                        .then(() => reRender(AdminProductListPage, "#app"));
+                })();
+            },
+        });
+
+        $.validator.addMethod("valid_desc", () => {
+            const contentLength = productDesc.getData().trim().length;
+            return contentLength > 0;
         });
 
         // preview iamge
         proImage.addEventListener("change", () => {
-            proPreview.src = URL.createObjectURL(proImage.files[0]);
+            proPreview.prop("src", URL.createObjectURL(proImage.files[0]));
         });
     },
 };
