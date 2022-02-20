@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminCateNewsListPage from ".";
 import { get, update } from "../../../api/cateNews";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -25,7 +28,7 @@ const AdminEditCateNewsPage = {
                             <span>Cập nhật danh mục</span>
                         </div>
 
-                        <a href="/#/admin/category">
+                        <a href="/#/admin/category-news">
                             <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 DS danh mục
                             </button>
@@ -33,7 +36,7 @@ const AdminEditCateNewsPage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" method="POST" id="form__edit-cate" data-id="${cateDetail.id}">
+                    <form action="" method="POST" id="form__edit-cate">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết danh mục:</span>
@@ -59,45 +62,33 @@ const AdminEditCateNewsPage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-cate");
-        const cateName = formEdit.querySelector("#form__edit-cate-title");
+        const cateName = $("#form__edit-cate-title");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__edit-cate").validate({
+            rules: {
+                "form__edit-cate-title": "required",
+            },
+            messages: {
+                "form__edit-cate-title": "Vui lòng nhập tên danh mục",
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
+                    const cateData = {
+                        name: cateName.value,
+                        updatedAt: date.toISOString(),
+                    };
 
-            if (!cateName.value) {
-                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
-                isValid = false;
-            } else {
-                cateName.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
-            const date = new Date();
-
-            if (isValid) {
-                const cateData = {
-                    name: cateName.value,
-                    updatedAt: date.toISOString(),
-                };
-
-                update(id, cateData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/category-news"; })
-                    .then(() => reRender(AdminCateNewsListPage, "#app"));
-            }
+                    update(id, cateData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/category-news"; })
+                        .then(() => reRender(AdminCateNewsListPage, "#app"));
+                })();
+            },
         });
     },
 };

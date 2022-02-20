@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/cateNews";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,7 +42,6 @@ const AdminAddCateNewsPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-cate-title" class="block text-sm font-medium text-gray-700">Tên danh mục</label>
                                         <input type="text" name="form__add-cate-title" id="form__add-cate-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tiêu đề bài viết">
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -60,41 +62,30 @@ const AdminAddCateNewsPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-cate");
-        const cateName = formAdd.querySelector("#form__add-cate-title");
+        const cateName = $("#form__add-cate-title");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__add-cate").validate({
+            rules: {
+                "form__add-cate-title": "required",
+            },
+            messages: {
+                "form__add-cate-title": "Vui lòng nhập tên danh mục",
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
 
-            if (!cateName.value) {
-                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
-                isValid = false;
-            } else {
-                cateName.nextElementSibling.innerText = "";
-            }
+                    const cateData = {
+                        name: cateName.val(),
+                        createdAt: date.toISOString(),
+                        updatedAt: date.toISOString(),
+                    };
 
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-
-                const cateData = {
-                    name: cateName.value,
-                    createdAt: date.toISOString(),
-                    updatedAt: date.toISOString(),
-                };
-
-                add(cateData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddCateNewsPage, "#app"));
-            }
+                    add(cateData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddCateNewsPage, "#app"));
+                })();
+            },
         });
     },
 };
