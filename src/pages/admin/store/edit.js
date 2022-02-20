@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { get, update } from "../../../api/store";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -120,102 +123,86 @@ const AdminEditStorePage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-store");
-        const storeName = formEdit.querySelector("#form__edit-store-name");
-        const storeAdd = formEdit.querySelector("#form__edit-store-address");
-        const storePhone = formEdit.querySelector("#form__edit-store-phone");
-        const storeTimeStart = formEdit.querySelector("#form__edit-store-start");
-        const storeTimeEnd = formEdit.querySelector("#form__edit-store-end");
-        const storeMap = formEdit.querySelector("#form__edit-store-map");
-        const storeImg = formEdit.querySelector("#form__edit-store-image");
-        const preview = formEdit.querySelector("#form__edit-store-preview");
+        const storeName = $("#form__edit-store-name");
+        const storeAdd = $("#form__edit-store-address");
+        const storePhone = $("#form__edit-store-phone");
+        const storeTimeStart = $("#form__edit-store-start");
+        const storeTimeEnd = $("#form__edit-store-end");
+        const storeMap = $("#form__edit-store-map");
+        const storeImg = document.querySelector("#form__edit-store-image");
+        const preview = $("#form__edit-store-preview");
 
-        // validate
-        const validate = () => {
-            let isValid = true;
-
-            if (!storeName.value) {
-                storeName.nextElementSibling.innerText = "Vui lòng nhập tên chi nhánh";
-                isValid = false;
-            } else {
-                storeName.nextElementSibling.innerText = "";
-            }
-
-            if (!storeAdd.value) {
-                storeAdd.nextElementSibling.innerText = "Vui lòng nhập địa chỉ";
-                isValid = false;
-            } else {
-                storeAdd.nextElementSibling.innerText = "";
-            }
-
-            if (!storeTimeStart.value) {
-                storeTimeStart.nextElementSibling.innerText = "Vui lòng nhập giờ mở cửa";
-                isValid = false;
-            } else {
-                storeTimeStart.nextElementSibling.innerText = "";
-            }
-
-            if (!storeTimeEnd.value) {
-                storeTimeEnd.nextElementSibling.innerText = "Vui lòng nhập giờ đóng cửa";
-                isValid = false;
-            } else if (storeTimeEnd.value <= storeTimeStart.value) {
-                storeTimeEnd.nextElementSibling.innerText = "Vui lòng nhập lại thời gian";
-                isValid = false;
-            } else {
-                storeTimeEnd.nextElementSibling.innerText = "";
-            }
-
-            if (!storeMap.value) {
-                storeMap.nextElementSibling.innerText = "Vui lòng nhập iframe google map";
-                isValid = false;
-            } else {
-                storeMap.nextElementSibling.innerText = "";
-            }
-
-            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!storePhone.value) {
-                storePhone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(storePhone.value)) {
-                storePhone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                storePhone.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const isValid = validate();
-            if (isValid) {
-                const storeData = {
-                    name: storeName.value,
-                    address: storeAdd.value,
-                    phone: storePhone.value,
-                    timeStart: storeTimeStart.value,
-                    timeEnd: storeTimeEnd.value,
-                    map: storeMap.value,
-                };
-
-                if (storeImg.files.length) {
-                    const { data } = await uploadFile(storeImg.files[0]);
-                    storeData.image = data.url;
+        $("#form__edit-store").validate({
+            rules: {
+                "form__edit-store-name": "required",
+                "form__edit-store-address": "required",
+                "form__edit-store-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "form__edit-store-start": "required",
+                "form__edit-store-end": {
+                    required: true,
+                    valid_time: true,
+                },
+                "form__edit-store-map": "required",
+            },
+            messages: {
+                "form__edit-store-name": "Vui lòng nhập tên chi nhánh",
+                "form__edit-store-address": "Vui lòng nhập địa chỉ chi nhánh",
+                "form__edit-store-phone": {
+                    required: "Vui lòng nhập sdt chi nhánh",
+                    valid_phone: "Sdt không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__edit-store-start": "Vui lòng nhập thời gian mở cửa",
+                "form__edit-store-end": {
+                    required: "Vui lòng nhập thời gian đóng cửa",
+                    valid_time: "Vui lòng nhập lại",
+                },
+                "form__edit-store-map": "Trường này không thể bỏ trống",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
                 }
+            },
+            submitHandler() {
+                (async () => {
+                    const storeData = {
+                        name: storeName.val(),
+                        address: storeAdd.val(),
+                        phone: storePhone.val(),
+                        timeStart: storeTimeStart.val(),
+                        timeEnd: storeTimeEnd.val(),
+                        map: storeMap.val(),
+                    };
 
-                update(id, storeData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/store"; })
-                    .then(() => reRender(AdminStoreListPage, "#app"));
-            }
+                    if (storeImg.files.length) {
+                        const { data } = await uploadFile(storeImg.files[0]);
+                        storeData.image = data.url;
+                    }
+
+                    update(id, storeData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/store"; })
+                        .then(() => reRender(AdminStoreListPage, "#app"));
+                })();
+            },
         });
+
+        $.validator.addMethod("valid_phone", (value) => {
+            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+            return regexPhone.test(value);
+        });
+
+        $.validator.addMethod("valid_time", () => storeTimeEnd.val() > storeTimeStart.val());
 
         // bắt sự kiện chọn ảnh => preview
         storeImg.addEventListener("change", (e) => {
-            preview.src = URL.createObjectURL(e.target.files[0]);
+            preview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };

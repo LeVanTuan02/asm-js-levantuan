@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/store";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,37 +42,31 @@ const AdminAddStorePage = {
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-store-name" class="block text-sm font-medium text-gray-700">Tên chi nhánh</label>
                                         <input type="text" name="form__add-store-name" id="form__add-store-name" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên chi nhánh">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-store-phone" class="block text-sm font-medium text-gray-700">Sdt</label>
                                         <input type="text" name="form__add-store-phone" id="form__add-store-phone" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập sdt chi nhánh">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-store-address" class="block text-sm font-medium text-gray-700">Địa chỉ</label>
                                         <input type="text" name="form__add-store-address" id="form__add-store-address" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập địa chỉ chi nhánh">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-store-start" class="block text-sm font-medium text-gray-700">Giờ mở cửa</label>
                                         <input type="time" name="form__add-store-start" id="form__add-store-start" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-store-end" class="block text-sm font-medium text-gray-700">Giờ đóng cửa</label>
                                         <input type="time" name="form__add-store-end" id="form__add-store-end" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-store-map" class="block text-sm font-medium text-gray-700">Iframe Map</label>
                                         <textarea id="form__add-store-map" name="form__add-store-map" rows="5" class="py-2 px-3 focus:outline-none shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Nhập iframe google map"></textarea>
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -89,14 +86,14 @@ const AdminAddStorePage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__add-store-image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__add-store-image" name="form__add-store-image" type="file" class="sr-only">
+                                                        <input id="form__add-store-image" data-error=".error-image" name="form__add-store-image" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-store-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -117,107 +114,85 @@ const AdminAddStorePage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-store");
-        const storeName = formAdd.querySelector("#form__add-store-name");
-        const storeAdd = formAdd.querySelector("#form__add-store-address");
-        const storePhone = formAdd.querySelector("#form__add-store-phone");
-        const storeTimeStart = formAdd.querySelector("#form__add-store-start");
-        const storeTimeEnd = formAdd.querySelector("#form__add-store-end");
-        const storeMap = formAdd.querySelector("#form__add-store-map");
-        const storeImg = formAdd.querySelector("#form__add-store-image");
-        const preview = formAdd.querySelector("#form__add-store-preview");
+        const storeName = $("#form__add-store-name");
+        const storeAdd = $("#form__add-store-address");
+        const storePhone = $("#form__add-store-phone");
+        const storeTimeStart = $("#form__add-store-start");
+        const storeTimeEnd = $("#form__add-store-end");
+        const storeMap = $("#form__add-store-map");
+        const storeImg = document.querySelector("#form__add-store-image");
+        const preview = $("#form__add-store-preview");
 
-        // validate
-        const validate = () => {
-            let isValid = true;
+        $("#form__add-store").validate({
+            rules: {
+                "form__add-store-name": "required",
+                "form__add-store-address": "required",
+                "form__add-store-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "form__add-store-start": "required",
+                "form__add-store-end": {
+                    required: true,
+                    valid_time: true,
+                },
+                "form__add-store-map": "required",
+                "form__add-store-image": "required",
+            },
+            messages: {
+                "form__add-store-name": "Vui lòng nhập tên chi nhánh",
+                "form__add-store-address": "Vui lòng nhập địa chỉ chi nhánh",
+                "form__add-store-phone": {
+                    required: "Vui lòng nhập sdt chi nhánh",
+                    valid_phone: "Sdt không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__add-store-start": "Vui lòng nhập thời gian mở cửa",
+                "form__add-store-end": {
+                    required: "Vui lòng nhập thời gian đóng cửa",
+                    valid_time: "Vui lòng nhập lại",
+                },
+                "form__add-store-map": "Trường này không thể bỏ trống",
+                "form__add-store-image": "Vui lòng chọn ảnh chi nhánh",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
+                }
+            },
+            submitHandler() {
+                (async () => {
+                    const { data } = await uploadFile(storeImg.files[0]);
 
-            if (!storeName.value) {
-                storeName.nextElementSibling.innerText = "Vui lòng nhập tên chi nhánh";
-                isValid = false;
-            } else {
-                storeName.nextElementSibling.innerText = "";
-            }
+                    const storeData = {
+                        name: storeName.val(),
+                        image: data.url,
+                        address: storeAdd.val(),
+                        phone: storePhone.val(),
+                        timeStart: storeTimeStart.val(),
+                        timeEnd: storeTimeEnd.val(),
+                        map: storeMap.val(),
+                    };
 
-            if (!storeAdd.value) {
-                storeAdd.nextElementSibling.innerText = "Vui lòng nhập địa chỉ";
-                isValid = false;
-            } else {
-                storeAdd.nextElementSibling.innerText = "";
-            }
-
-            if (!storeTimeStart.value) {
-                storeTimeStart.nextElementSibling.innerText = "Vui lòng nhập giờ mở cửa";
-                isValid = false;
-            } else {
-                storeTimeStart.nextElementSibling.innerText = "";
-            }
-
-            if (!storeTimeEnd.value) {
-                storeTimeEnd.nextElementSibling.innerText = "Vui lòng nhập giờ đóng cửa";
-                isValid = false;
-            } else if (storeTimeEnd.value <= storeTimeStart.value) {
-                storeTimeEnd.nextElementSibling.innerText = "Vui lòng nhập lại thời gian";
-                isValid = false;
-            } else {
-                storeTimeEnd.nextElementSibling.innerText = "";
-            }
-
-            if (!storeMap.value) {
-                storeMap.nextElementSibling.innerText = "Vui lòng nhập iframe google map";
-                isValid = false;
-            } else {
-                storeMap.nextElementSibling.innerText = "";
-            }
-
-            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!storePhone.value) {
-                storePhone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(storePhone.value)) {
-                storePhone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                storePhone.nextElementSibling.innerText = "";
-            }
-
-            const parent = storeImg.parentElement.parentElement.parentElement.parentElement;
-            if (!storeImg.files.length) {
-                parent.nextElementSibling.innerText = "Vui lòng chọn ảnh chi nhánh";
-                isValid = false;
-            } else {
-                parent.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const isValid = validate();
-            if (isValid) {
-                const { data } = await uploadFile(storeImg.files[0]);
-
-                const storeData = {
-                    name: storeName.value,
-                    image: data.url,
-                    address: storeAdd.value,
-                    phone: storePhone.value,
-                    timeStart: storeTimeStart.value,
-                    timeEnd: storeTimeEnd.value,
-                    map: storeMap.value,
-                };
-
-                add(storeData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddStorePage, "#app"));
-            }
+                    add(storeData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddStorePage, "#app"));
+                })();
+            },
         });
+
+        $.validator.addMethod("valid_phone", (value) => {
+            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+            return regexPhone.test(value);
+        });
+
+        $.validator.addMethod("valid_time", () => storeTimeEnd.val() > storeTimeStart.val());
 
         // bắt sự kiện chọn ảnh => preview
         storeImg.addEventListener("change", (e) => {
-            preview.src = URL.createObjectURL(e.target.files[0]);
+            preview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };
