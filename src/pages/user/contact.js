@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import { getAll } from "../../api/store";
@@ -23,40 +26,35 @@ const ContactPage = {
                 <form action="" class="container max-w-6xl mx-auto px-3" id="contact__form">
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 md:col-span-6">
-                            <input type="text" placeholder="Họ và tên" id="contact__form-name" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
+                            <input type="text" placeholder="Họ và tên" name="contact__form-name" id="contact__form-name" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <input type="text" placeholder="Email" id="contact__form-email" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
+                            <input type="text" placeholder="Email" id="contact__form-email" name="contact__form-email" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <input type="text" placeholder="Số điện thoại" id="contact__form-phone" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
+                            <input type="text" placeholder="Số điện thoại" id="contact__form-phone" name="contact__form-phone" class="w-full rounded-full outline-none h-10 px-4 shadow-sm">
                         </div>
 
                         <div class="col-span-12 md:col-span-6">
-                            <select name="" id="contact__form-store" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
+                            <select name="contact__form-store" id="contact__form-store" class="outline-none w-full rounded-full h-10 px-4 shadow-sm">
                                 <option value="">Cửa hàng phản hồi</option>
                                 ${storeList.map((store) => `<option value="${store.id}">${store.name}</option>`).join("")}
                             </select>
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
 
                         <div class="col-span-12">
                             <label for="contact__form-content" class="text-[#D9A953] font-semibold mb-1 text-lg block">Nội dung phản hồi</label>
-                            <textarea name="" id="contact__form-content" cols="30" rows="10" placeholder="Nội dung phản hồi" class="w-full rounded-xl outline-none py-2 px-3 shadow-sm"></textarea>
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
+                            <textarea name="contact__form-content" id="contact__form-content" cols="30" rows="10" placeholder="Nội dung phản hồi" class="w-full rounded-xl outline-none py-2 px-3 shadow-sm"></textarea>
                         </div>
 
                         <div class="col-span-12">
                             <div class="flex items-center">
-                                <input type="checkbox" name="" id="contact__form-checkbox">
+                                <input type="checkbox" data-error=".error-checkbox" name="contact__form-checkbox" id="contact__form-checkbox">
                                 <label for="contact__form-checkbox" class="ml-2">Tôi xác nhận các thông tin cá nhân cung cấp ở trên là hoàn toàn chính xác và đồng ý để Yotea sử dụng các thông tin đó cho mục đích giải quyết phản hồi.</label>
                             </div>
-                            <div class="pl-3 text-sm mt-0.5 text-red-500"></div>
+                            <div class="error-checkbox pl-3 text-sm mt-0.5 text-red-500"></div>
                         </div>
                     </div>
 
@@ -129,89 +127,70 @@ const ContactPage = {
         Header.afterRender();
         Footer.afterRender();
 
-        const formContact = document.querySelector("#contact__form");
-        const fullName = formContact.querySelector("#contact__form-name");
-        const phone = formContact.querySelector("#contact__form-phone");
-        const email = formContact.querySelector("#contact__form-email");
-        const storeId = formContact.querySelector("#contact__form-store");
-        const content = formContact.querySelector("#contact__form-content");
-        const checkbox = formContact.querySelector("#contact__form-checkbox");
+        const fullName = $("#contact__form-name");
+        const phone = $("#contact__form-phone");
+        const email = $("#contact__form-email");
+        const storeId = $("#contact__form-store");
+        const content = $("#contact__form-content");
 
-        const validate = () => {
-            let isValid = true;
+        $("#contact__form").validate({
+            rules: {
+                "contact__form-name": "required",
+                "contact__form-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "contact__form-email": {
+                    required: true,
+                    email: true,
+                },
+                "contact__form-store": "required",
+                "contact__form-content": "required",
+                "contact__form-checkbox": "required",
+            },
+            messages: {
+                "contact__form-name": "Vui lòng nhập họ tên",
+                "contact__form-phone": {
+                    required: "Vui lòng nhập số điện thoại",
+                    valid_phone: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "contact__form-email": {
+                    required: "Vui lòng nhập địa chỉ email",
+                    email: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "contact__form-store": "Vui lòng chọn chi nhánh feedback",
+                "contact__form-content": "Vui lòng nhập nội dung feedback",
+                "contact__form-checkbox": "Vui lòng đồng ý với các điều khoản của chúng tôi",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
+                }
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
 
-            if (!fullName.value) {
-                fullName.nextElementSibling.innerText = "Vui lòng nhập tên";
-                isValid = false;
-            } else {
-                fullName.nextElementSibling.innerText = "";
-            }
+                    add({
+                        content: content.val(),
+                        name: fullName.val(),
+                        email: email.val(),
+                        phone: phone.val(),
+                        storeId: +storeId.val(),
+                        createdAt: date.toISOString(),
+                    })
+                        .then(() => toastr.success("Gửi thành công"))
+                        .then(() => reRender(ContactPage, "#app"));
+                })();
+            },
+        });
 
+        $.validator.addMethod("valid_phone", (value) => {
             const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!phone.value) {
-                phone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(phone.value)) {
-                phone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                phone.nextElementSibling.innerText = "";
-            }
-
-            const regexEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            if (!email.value) {
-                email.nextElementSibling.innerText = "Vui lòng nhập email";
-                isValid = false;
-            } else if (!regexEmail.test(email.value)) {
-                email.nextElementSibling.innerText = "Email không đúng định dạng";
-                isValid = false;
-            } else {
-                email.nextElementSibling.innerText = "";
-            }
-
-            if (!storeId.value) {
-                storeId.nextElementSibling.innerText = "Vui lòng chọn cửa hàng phản hồi";
-                isValid = false;
-            } else {
-                storeId.nextElementSibling.innerText = "";
-            }
-
-            if (!content.value) {
-                content.nextElementSibling.innerText = "Vui lòng nhập nội dung feedback";
-                isValid = false;
-            } else {
-                content.nextElementSibling.innerText = "";
-            }
-
-            if (!checkbox.checked) {
-                checkbox.parentElement.nextElementSibling.innerText = "Vui lòng đồng ý với điều khoản của chúng tôi";
-                isValid = false;
-            } else {
-                checkbox.parentElement.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        formContact.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-
-                add({
-                    content: content.value,
-                    name: fullName.value,
-                    email: email.value,
-                    phone: phone.value,
-                    storeId: +storeId.value,
-                    createdAt: date.toISOString(),
-                })
-                    .then(() => toastr.success("Gửi thành công"))
-                    .then(() => reRender(ContactPage, "#app"));
-            }
+            return regexPhone.test(value);
         });
     },
 };
