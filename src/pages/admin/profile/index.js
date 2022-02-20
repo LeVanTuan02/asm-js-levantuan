@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import {
@@ -48,19 +51,16 @@ const AdminProfilePage = {
                                     <div class="col-span-6">
                                         <label for="form__update-account-fullname" class="block text-sm font-medium text-gray-700">Họ và tên</label>
                                         <input type="text" name="form__update-account-fullname" id="form__update-account-fullname" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tên đầy đủ" value="${userInfo.fullName}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__update-account-username" class="block text-sm font-medium text-gray-700">Username</label>
                                         <input type="text" name="form__update-account-username" id="form__update-account-username" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập username" value="${userInfo.username}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__update-account-phone" class="block text-sm font-medium text-gray-700">Số điện thoại</label>
                                         <input type="text" name="form__update-account-phone" id="form__update-account-phone" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập sdt" value="${userInfo.phone}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -70,7 +70,6 @@ const AdminProfilePage = {
                                             <option value="0" ${!userInfo.role ? "selected" : ""}>Khách hàng</option>
                                             <option value="1" ${userInfo.role ? "selected" : ""}>Admin</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -80,13 +79,11 @@ const AdminProfilePage = {
                                             <option value="0" ${!userInfo.active ? "selected" : ""}>Khóa</option>
                                             <option value="1" ${userInfo.active ? "selected" : ""}>Kích hoạt</option>
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__update-account-email" class="block text-sm font-medium text-gray-700">Email</label>
                                         <input type="text" name="form__update-account-email" id="form__update-account-email" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập email" value="${userInfo.email}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                     
                                     <div class="col-span-6 md:col-span-2">
@@ -95,7 +92,6 @@ const AdminProfilePage = {
                                             <option value="">-- Chọn Tỉnh/TP --</option>
                                             ${listProvince.map((item) => `<option value="${item.code}" ${userInfo.provinceCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -104,7 +100,6 @@ const AdminProfilePage = {
                                             <option value="">-- Chọn Quận/Huyện --</option>
                                             ${listDistrict.map((item) => `<option value="${item.code}" ${userInfo.districtCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-2">
@@ -113,13 +108,11 @@ const AdminProfilePage = {
                                             <option value="">-- Chọn Xã/Phường --</option>
                                             ${listWard.map((item) => `<option value="${item.code}" ${userInfo.wardsCode === item.code ? "selected" : ""}>${item.name}</option>`).join("")}
                                         </select>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__update-account-address" class="block text-sm font-medium text-gray-700">Địa chỉ hiện tại</label>
                                         <input type="text" name="form__update-account-address" id="form__update-account-address" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập thôn/xóm/TDP" value="${userInfo.address}">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -146,7 +139,6 @@ const AdminProfilePage = {
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -169,171 +161,125 @@ const AdminProfilePage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__update-account");
-        const fullName = formAdd.querySelector("#form__update-account-fullname");
-        const username = formAdd.querySelector("#form__update-account-username");
-        const phone = formAdd.querySelector("#form__update-account-phone");
-        const email = formAdd.querySelector("#form__update-account-email");
-        const role = formAdd.querySelector("#form__update-account-role");
-        const status = formAdd.querySelector("#form__update-account-stt");
-        const avatar = formAdd.querySelector("#form__update-account-avatar");
-        const avatarPreview = formAdd.querySelector("#form__update-account-preview");
-        const provinceElement = formAdd.querySelector("#form__update-account-province");
-        const districtElement = formAdd.querySelector("#form__update-account-district");
-        const wardElement = formAdd.querySelector("#form__update-account-ward");
-        const address = formAdd.querySelector("#form__update-account-address");
+        const fullName = $("#form__update-account-fullname");
+        const username = $("#form__update-account-username");
+        const phone = $("#form__update-account-phone");
+        const email = $("#form__update-account-email");
+        const role = $("#form__update-account-role");
+        const status = $("#form__update-account-stt");
+        const avatar = document.querySelector("#form__update-account-avatar");
+        const avatarPreview = $("#form__update-account-preview");
+        const provinceElement = $("#form__update-account-province");
+        const districtElement = $("#form__update-account-district");
+        const wardElement = $("#form__update-account-ward");
+        const address = $("#form__update-account-address");
 
-        // validate
-        const validate = () => {
-            let isValid = true;
+        $("#form__update-account").validate({
+            rules: {
+                "form__update-account-fullname": "required",
+                "form__update-account-username": "required",
+                "form__update-account-phone": {
+                    required: true,
+                    valid_phone: true,
+                },
+                "form__update-account-email": {
+                    required: true,
+                    email: true,
+                },
+                "form__update-account-role": "required",
+                "form__update-account-stt": "required",
+                "form__update-account-province": "required",
+                "form__update-account-district": "required",
+                "form__update-account-ward": "required",
+                "form__update-account-address": "required",
+            },
+            messages: {
+                "form__update-account-fullname": "Vui lòng nhập họ tên",
+                "form__update-account-username": "Vui lòng nhập tên đăng nhập",
+                "form__update-account-phone": {
+                    required: "Vui lòng nhập số điện thoại",
+                    valid_phone: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__update-account-email": {
+                    required: "Vui lòng nhập email",
+                    email: "Không đúng định dạng, vui lòng nhập lại",
+                },
+                "form__update-account-role": "Vui lòng chọn vai trò",
+                "form__update-account-stt": "Vui lòng chọn trạng thái",
+                "form__update-account-province": "Vui lòng chọn Tỉnh/Tp",
+                "form__update-account-district": "Vui lòng chọn Quận/Huyện",
+                "form__update-account-ward": "Vui lòng chọn Xã/Phường",
+                "form__update-account-address": "Trường này không thể bỏ trống",
+            },
+            submitHandler() {
+                (async () => {
+                    // get user info
+                    const userInfo = getUser();
+                    let userAvatar = userInfo.avatar;
 
-            if (!fullName.value) {
-                fullName.nextElementSibling.innerText = "Vui lòng nhập họ tên";
-                isValid = false;
-            } else {
-                fullName.nextElementSibling.innerText = "";
-            }
+                    // nếu cập nhật avatar
+                    if (avatar.files.length) {
+                        const { data } = await uploadFile(avatar.files[0]);
+                        userAvatar = data.url;
+                    }
 
-            const regexUsername = /[\s*]/;
-            if (!username.value) {
-                username.nextElementSibling.innerText = "Vui lòng nhập username";
-                isValid = false;
-            } else if (regexUsername.test(username.value)) {
-                username.nextElementSibling.innerText = "Username không được chứa khoảng trắng";
-                isValid = false;
-            } else {
-                username.nextElementSibling.innerText = "";
-            }
+                    userInfo.email = email.val();
+                    userInfo.username = username.val();
+                    userInfo.fullName = fullName.val();
+                    userInfo.phone = phone.val();
+                    userInfo.avatar = userAvatar;
+                    userInfo.wardsCode = +wardElement.val();
+                    userInfo.districtCode = +districtElement.val();
+                    userInfo.provinceCode = +provinceElement.val();
+                    userInfo.address = address.val();
+                    userInfo.role = +role.val();
+                    userInfo.active = +status.val();
 
-            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-            if (!phone.value) {
-                phone.nextElementSibling.innerText = "Vui lòng nhập số điện thoại";
-                isValid = false;
-            } else if (!regexPhone.test(phone.value)) {
-                phone.nextElementSibling.innerText = "Số điện thoại không đúng định dạng";
-                isValid = false;
-            } else {
-                phone.nextElementSibling.innerText = "";
-            }
-
-            const regexEmail = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-            if (!email.value) {
-                email.nextElementSibling.innerText = "Vui lòng nhập email";
-                isValid = false;
-            } else if (!regexEmail.test(email.value)) {
-                email.nextElementSibling.innerText = "Email không đúng định dạng";
-                isValid = false;
-            } else {
-                email.nextElementSibling.innerText = "";
-            }
-
-            if (!role.value) {
-                role.nextElementSibling.innerText = "Vui lòng chọn vai trò";
-                isValid = false;
-            } else {
-                role.nextElementSibling.innerText = "";
-            }
-
-            if (!status.value) {
-                status.nextElementSibling.innerText = "Vui lòng chọn trạng thái tài khoản";
-                isValid = false;
-            } else {
-                status.nextElementSibling.innerText = "";
-            }
-
-            if (!address.value) {
-                address.nextElementSibling.innerText = "Vui lòng nhập địa chỉ";
-                isValid = false;
-            } else {
-                address.nextElementSibling.innerText = "";
-            }
-
-            if (!provinceElement.value) {
-                provinceElement.nextElementSibling.innerText = "Vui lòng chọn Tỉnh/TP";
-                isValid = false;
-            } else {
-                provinceElement.nextElementSibling.innerText = "";
-            }
-
-            if (!districtElement.value) {
-                districtElement.nextElementSibling.innerText = "Vui lòng chọn Quận/Huyện";
-                isValid = false;
-            } else {
-                districtElement.nextElementSibling.innerText = "";
-            }
-
-            if (!wardElement.value) {
-                wardElement.nextElementSibling.innerText = "Vui lòng chọn Xã/Phường";
-                isValid = false;
-            } else {
-                wardElement.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                // get user info
-                const userInfo = getUser();
-                let userAvatar = userInfo.avatar;
-
-                // nếu cập nhật avatar
-                if (avatar.files.length) {
-                    const { data } = await uploadFile(avatar.files[0]);
-                    userAvatar = data.url;
-                }
-
-                userInfo.email = email.value;
-                userInfo.username = username.value;
-                userInfo.fullName = fullName.value;
-                userInfo.phone = phone.value;
-                userInfo.avatar = userAvatar;
-                userInfo.wardsCode = +wardElement.value;
-                userInfo.districtCode = +districtElement.value;
-                userInfo.provinceCode = +provinceElement.value;
-                userInfo.address = address.value;
-                userInfo.role = +role.value;
-                userInfo.active = +status.value;
-
-                update(userInfo.id, userInfo)
-                    .then(() => saveUser(userInfo))
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => reRender(AdminProfilePage, "#app"));
-            }
+                    update(userInfo.id, userInfo)
+                        .then(() => saveUser(userInfo))
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => reRender(AdminProfilePage, "#app"));
+                })();
+            },
         });
 
+        $.validator.addMethod("valid_phone", (value) => {
+            const regexPhone = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+            return regexPhone.test(value);
+        });
         // bắt sự kiện đổi avatar
         avatar.addEventListener("change", (e) => {
-            avatarPreview.src = URL.createObjectURL(e.target.files[0]);
+            avatarPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
 
         // bắt sự kiện chọn tỉnh/tp
-        provinceElement.addEventListener("change", async (e) => {
+        provinceElement.on("change", async (e) => {
             const provinceCode = e.target.value;
-            const districtList = await getDistrict(provinceCode);
-            let htmlDistrict = `<option value="">-- Chọn Tỉnh/TP --</option>`;
-            districtList.forEach((item) => {
-                htmlDistrict += `<option value="${item.code}">${item.name}</option>`;
-            });
 
-            districtElement.innerHTML = htmlDistrict;
+            if (provinceCode) {
+                const districtList = await getDistrict(provinceCode);
+                let htmlDistrict = `<option value="">-- Chọn Tỉnh/TP --</option>`;
+                districtList.forEach((item) => {
+                    htmlDistrict += `<option value="${item.code}">${item.name}</option>`;
+                });
+
+                districtElement.html(htmlDistrict);
+            }
         });
 
         // bắt sự kiện chọn quận/huyện
-        districtElement.addEventListener("change", async (e) => {
+        districtElement.on("change", async (e) => {
             const districtCode = e.target.value;
-            const wardList = await getWard(districtCode);
-            let htmlWard = `<option value="">-- Chọn Xã/Phường --</option>`;
-            wardList.forEach((item) => {
-                htmlWard += `<option value="${item.code}">${item.name}</option>`;
-            });
 
-            wardElement.innerHTML = htmlWard;
+            if (districtCode) {
+                const wardList = await getWard(districtCode);
+                let htmlWard = `<option value="">-- Chọn Xã/Phường --</option>`;
+                wardList.forEach((item) => {
+                    htmlWard += `<option value="${item.code}">${item.name}</option>`;
+                });
+
+                wardElement.html(htmlWard);
+            }
         });
     },
 };
