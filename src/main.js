@@ -119,6 +119,9 @@ router.on({
     "/product/:id": ({ data }) => {
         print(ProductDetailPage, data.id);
     },
+    "/product/:id/page/:page": ({ data }) => {
+        print(ProductDetailPage, data.id, data.page);
+    },
     "/product/search/:keyword": ({ data }) => {
         print(SearchProductPage, data.keyword);
     },

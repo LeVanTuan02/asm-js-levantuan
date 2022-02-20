@@ -6,8 +6,16 @@ import { get as getComment, remove as removeCmt } from "../../../api/comment";
 import { getUser, reRender } from "../../../utils";
 
 const CommentList = {
-    async render(productId) {
-        const { data: dataComment } = await getComment(productId);
+    async render(productId, currentPage) {
+        // phân trang
+        const page = currentPage ?? 1;
+        const { data } = await getComment(productId);
+        const limit = 5;
+        const totalPage = Math.ceil(data.length / limit);
+
+        // ds cmt theo limit
+        const { data: dataComment } = await getComment(productId, page, limit);
+
         const { data: dataRating } = await getRating(productId);
 
         const formatDate = (dateString) => {
@@ -39,6 +47,16 @@ const CommentList = {
 
         // get info current user
         const userLogged = getUser();
+
+        let htmlPagination = "";
+        // eslint-disable-next-line no-plusplus
+        for (let i = 1; i <= totalPage; i++) {
+            htmlPagination += `
+            <li class="">
+                <a href="/#/product/${productId}/page/${i}"class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white ${+currentPage === i ? "border-[#D9A953] bg-[#D9A953] text-white" : "border-gray-500 text-gray-500"}">${i}</a>
+            </li>
+            `;
+        }
 
         // render star
         const renderStar = (ratingNumber) => {
@@ -86,6 +104,30 @@ const CommentList = {
                     </div>
                 </li>
                 `).join("")}
+        </ul>
+
+        <!-- pagination -->
+        <ul class="flex justify-center mt-5">
+            ${currentPage > 1 ? `
+            <li>
+                <a href="/#/product/${productId}/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                    <button>
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                </a>
+            </li>
+            ` : ""}
+            ${htmlPagination}
+            
+            ${currentPage <= totalPage - 1 ? `
+            <li>
+                <a href="/#/product/${productId}/page/${+currentPage + 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
+                    <button>
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </a>
+            </li>
+            ` : ""}
         </ul>
         `;
     },

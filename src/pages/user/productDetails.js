@@ -18,7 +18,7 @@ const ProductDetailPage = {
         const { data: productDetail } = await get(id);
         return `${productDetail.name} - Trà sữa Yotea`;
     },
-    async render(id) {
+    async render(id, currentPage) {
         // update view
         const { data: productDetail } = await get(id);
         updateView(id, {
@@ -278,10 +278,8 @@ const ProductDetailPage = {
                 `}
 
                 <div id="list-comment">
-                    ${await CommentList.render(id)}
+                    ${await CommentList.render(id, currentPage)}
                 </div>
-
-                <button class="bg-[#D9A953] px-2 py-0.5 rounded text-white text-sm font-semibold block mx-auto transition duration-200 ease-linear hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Xem tất cả</button>
             </section>
 
             <section class="container max-w-6xl px-3 mx-auto my-6">
