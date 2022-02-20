@@ -1,8 +1,6 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let voucher = JSON.parse(localStorage.getItem("voucher")) || [];
-
 // thêm
 export const addToCart = (newProduct, next) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     // eslint-disable-next-line max-len
     const exitsProduct = cart.find((item) => item.productId === newProduct.productId && item.sizeId === newProduct.sizeId && item.toppingId === newProduct.toppingId && item.ice === newProduct.ice && item.sugar === newProduct.sugar);
 
@@ -19,6 +17,7 @@ export const addToCart = (newProduct, next) => {
 
 // xóa sp khỏi giỏ hàng
 export const removeItemInCart = (cartId, next) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.filter((item) => item.id !== cartId);
     localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -27,6 +26,7 @@ export const removeItemInCart = (cartId, next) => {
 
 // cập nhật số lượng
 export const updateQuantity = (listQuantity, next) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     listQuantity.forEach((cartItem) => {
         if (!cartItem.quantity) {
             cart = cart.filter((item) => item.id !== cartItem.id);
@@ -43,6 +43,7 @@ export const updateQuantity = (listQuantity, next) => {
 
 // tính tổng tiền
 export const getTotalPrice = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalPrice = 0;
 
     if (cart.length) {
@@ -58,6 +59,8 @@ export const getTotalPrice = () => {
 
 // add voucher
 export const addVoucher = (voucherItem, next) => {
+    const voucher = JSON.parse(localStorage.getItem("voucher")) || [];
+
     const isExits = voucher.some((item) => item.id === voucherItem.id);
 
     if (!isExits) {
@@ -70,6 +73,8 @@ export const addVoucher = (voucherItem, next) => {
 
 // xóa voucher
 export const removeVoucher = (id, next) => {
+    let voucher = JSON.parse(localStorage.getItem("voucher")) || [];
+
     voucher = voucher.filter((item) => item.id !== id);
     localStorage.setItem("voucher", JSON.stringify(voucher));
 
@@ -78,6 +83,8 @@ export const removeVoucher = (id, next) => {
 
 // tính tổng tiền giảm bởi voucher
 export const totalPriceDerease = () => {
+    const voucher = JSON.parse(localStorage.getItem("voucher")) || [];
+
     const totalCartPrice = getTotalPrice();
 
     let totalDecrease = 0;
@@ -94,6 +101,8 @@ export const totalPriceDerease = () => {
 
 // lấy ds id voucher
 export const getIdsVoucher = () => {
+    const voucher = JSON.parse(localStorage.getItem("voucher")) || [];
+
     let voucherIds = [];
 
     if (voucher.length) {

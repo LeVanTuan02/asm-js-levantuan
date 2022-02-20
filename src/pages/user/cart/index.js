@@ -116,7 +116,7 @@ const CartPage = {
                                     </td>
                                     <td class="py-2 text-right font-semibold">- ${item.condition ? formatCurrency(item.conditionNumber) : `${item.conditionNumber}%`}</td>
                                 </tr>
-                                `)}
+                                `).join("")}
                             
                             <tr class="border-b">
                                 <td >Tổng</td>

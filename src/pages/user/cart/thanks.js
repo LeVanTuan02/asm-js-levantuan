@@ -23,13 +23,13 @@ const ThanksPage = {
                 </p>
 
                 <div class="flex items-center justify-center mt-2">
-                    <a href="">
+                    <a href="/#/products">
                         <button class="uppercase h-8 text-[#D9A953] font-semibold text-sm border-[#D9A953] border-2 px-3 transition ease-linear duration-300 hover:bg-[#D9A953] hover:text-white">
                             <i class="fas fa-long-arrow-alt-left"></i>
                             Tiếp tục mua hàng
                         </button>
                     </a>
-                    <a href="" class="ml-2">
+                    <a href="/#/my-account/cart" class="ml-2">
                         <button class="uppercase h-8 text-[#D9A953] font-semibold text-sm border-[#D9A953] border-2 px-3 transition ease-linear duration-300 hover:bg-[#D9A953] hover:text-white">
                             Kiểm tra đơn hàng
                             <i class="fas fa-long-arrow-alt-right"></i>
