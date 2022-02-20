@@ -1,10 +1,9 @@
 import Swal from "sweetalert2";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
-import { remove } from "../../../api/size";
+import { remove, getAll } from "../../../api/voucher";
 import { reRender } from "../../../utils";
 import AdminVoucherList from "../../../components/admin/voucherList";
-import { getAll } from "../../../api/voucher";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminVoucherListPage = {

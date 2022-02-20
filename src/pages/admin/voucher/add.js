@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/voucher";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,13 +42,11 @@ const AdminAddVoucherPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-voucher-code" class="block text-sm font-medium text-gray-700">Mã voucher</label>
                                         <input type="text" name="form__add-voucher-code" id="form__add-voucher-code" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập mã voucher">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6">
                                         <label for="form__add-voucher-quantity" class="block text-sm font-medium text-gray-700">Số lượng voucher</label>
                                         <input type="number" name="form__add-voucher-quantity" id="form__add-voucher-quantity" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập số lượng voucher">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
@@ -71,19 +72,16 @@ const AdminAddVoucherPage = {
                                     <div class="col-span-6">
                                         <label for="form__add-voucher-number" class="block text-sm font-medium text-gray-700">Số lượng giảm</label>
                                         <input type="number" name="form__add-voucher-number" id="form__add-voucher-number" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập % giảm/tiền giảm">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-voucher-start" class="block text-sm font-medium text-gray-700">Bắt đầu lúc</label>
                                         <input type="datetime-local" name="form__add-voucher-start" id="form__add-voucher-start" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập % giảm/tiền giảm">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-6 md:col-span-3">
                                         <label for="form__add-voucher-end" class="block text-sm font-medium text-gray-700">Kết thúc lúc</label>
                                         <input type="datetime-local" name="form__add-voucher-end" id="form__add-voucher-end" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập % giảm/tiền giảm">
-                                        <div class="text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -104,102 +102,83 @@ const AdminAddVoucherPage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-voucher");
-        const voucherCode = formAdd.querySelector("#form__add-voucher-code");
-        const voucherQuantity = formAdd.querySelector("#form__add-voucher-quantity");
-        const voucherCondition = formAdd.querySelector("#form__add-voucher-condition");
-        const voucherStt = formAdd.querySelector("#form__add-voucher-stt");
-        const voucherNumber = formAdd.querySelector("#form__add-voucher-number");
-        const voucherTimeStart = formAdd.querySelector("#form__add-voucher-start");
-        const voucherTimeEnd = formAdd.querySelector("#form__add-voucher-end");
+        const voucherCode = $("#form__add-voucher-code");
+        const voucherQuantity = $("#form__add-voucher-quantity");
+        const voucherCondition = $("#form__add-voucher-condition");
+        const voucherStt = $("#form__add-voucher-stt");
+        const voucherNumber = $("#form__add-voucher-number");
+        const voucherTimeStart = $("#form__add-voucher-start");
+        const voucherTimeEnd = $("#form__add-voucher-end");
 
-        // validate
-        const validate = () => {
-            let isValid = true;
+        $("#form__add-voucher").validate({
+            rules: {
+                "form__add-voucher-code": {
+                    required: true,
+                },
+                "form__add-voucher-quantity": {
+                    required: true,
+                },
+                "form__add-voucher-condition": "required",
+                "form__add-voucher-stt": "required",
+                "form__add-voucher-number": {
+                    required: true,
+                    number: true,
+                    valid_percent: true,
+                },
+                "form__add-voucher-start": "required",
+                "form__add-voucher-end": {
+                    required: true,
+                    valid_time: true,
+                },
+            },
+            messages: {
+                "form__add-voucher-code": {
+                    required: "Vui lòng nhập mã Voucher",
+                },
+                "form__add-voucher-quantity": {
+                    required: "Vui lòng nhập số lượng Voucher",
+                },
+                "form__add-voucher-condition": "Vui lòng chọn loại giảm",
+                "form__add-voucher-stt": "Vui lòng chọn trạng thái Voucher",
+                "form__add-voucher-number": {
+                    required: "Vui lòng nhập số lượng giảm",
+                    number: "Không đúng định dạng, vui lòng nhập lại",
+                    valid_percent: "Vui lòng nhập lại % giảm giá",
+                },
+                "form__add-voucher-start": "Vui lòng nhập thời gian hiệu lực voucher",
+                "form__add-voucher-end": {
+                    required: "Vui lòng nhập thời gian hết hiệu lực voucher",
+                    valid_time: "Vui lòng nhập lại",
+                },
+            },
+            submitHandler() {
+                (async () => {
+                    const date = new Date();
 
-            if (!voucherCode.value) {
-                voucherCode.nextElementSibling.innerText = "Vui lòng nhập mã voucher";
-                isValid = false;
-            } else {
-                voucherCode.nextElementSibling.innerText = "";
-            }
+                    const voucherData = {
+                        code: voucherCode.val().toUpperCase(),
+                        quantity: +voucherQuantity.val(),
+                        condition: +voucherCondition.val(),
+                        conditionNumber: +voucherNumber.val(),
+                        status: +voucherStt.val(),
+                        timeStart: voucherTimeStart.val(),
+                        timeEnd: voucherTimeEnd.val(),
+                        user_ids: [],
+                        createdAt: date.toISOString(),
+                        updatedAt: date.toISOString(),
+                    };
 
-            if (!voucherQuantity.value) {
-                voucherQuantity.nextElementSibling.innerText = "Vui lòng nhập số lượng voucher";
-                isValid = false;
-            } else {
-                voucherQuantity.nextElementSibling.innerText = "";
-            }
+                    add(voucherData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddVoucherPage, "#app"));
+                })();
+            },
+        });
 
-            if (!voucherCondition.value) {
-                voucherCondition.nextElementSibling.innerText = "Vui lòng chọn loại giảm";
-                isValid = false;
-            } else {
-                voucherCondition.nextElementSibling.innerText = "";
-            }
-
-            if (!voucherStt.value) {
-                voucherStt.nextElementSibling.innerText = "Vui lòng chọn trạng thái voucher";
-                isValid = false;
-            } else {
-                voucherStt.nextElementSibling.innerText = "";
-            }
-
-            if (!voucherNumber.value) {
-                voucherNumber.nextElementSibling.innerText = "Vui lòng nhập số lượng giảm";
-                isValid = false;
-            } else if (voucherCondition.value === "0" && voucherNumber.value > 100) {
-                voucherNumber.nextElementSibling.innerText = "Vui lòng nhập lại phần trăm giảm giá";
-                isValid = false;
-            } else {
-                voucherNumber.nextElementSibling.innerText = "";
-            }
-
-            if (!voucherTimeStart.value) {
-                voucherTimeStart.nextElementSibling.innerText = "Vui lòng nhập thời gian hiệu lực voucher";
-                isValid = false;
-            } else {
-                voucherTimeStart.nextElementSibling.innerText = "";
-            }
-
-            if (!voucherTimeEnd.value) {
-                voucherTimeEnd.nextElementSibling.innerText = "Vui lòng nhập thời gian hết hiệu lực voucher";
-                isValid = false;
-            } else if (voucherTimeEnd.value <= voucherTimeStart.value) {
-                voucherTimeEnd.nextElementSibling.innerText = "Vui lòng nhập lại thời gian";
-                isValid = false;
-            } else {
-                voucherTimeEnd.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        };
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const isValid = validate();
-
-            if (isValid) {
-                const date = new Date();
-
-                const voucherData = {
-                    code: voucherCode.value.toUpperCase(),
-                    quantity: +voucherQuantity.value,
-                    condition: +voucherCondition.value,
-                    conditionNumber: +voucherNumber.value,
-                    status: +voucherStt.value,
-                    timeStart: voucherTimeStart.value,
-                    timeEnd: voucherTimeEnd.value,
-                    user_ids: "",
-                    createdAt: date.toISOString(),
-                    updatedAt: date.toISOString(),
-                };
-
-                add(voucherData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddVoucherPage, "#app"));
-            }
+        $.validator.addMethod("valid_time", () => voucherTimeEnd.val() > voucherTimeStart.val());
+        $.validator.addMethod("valid_percent", () => {
+            if (voucherCondition.val() === "0" && voucherNumber.val() > 100) return false;
+            return true;
         });
     },
 };
