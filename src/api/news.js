@@ -43,7 +43,7 @@ export const update = (id, data) => {
 
 // tin tức theo danh mục
 export const getAllByCate = (cateId, start, limit = 0) => {
-    let url = `/${TABLE_NAME}/?cateNewId=${cateId}`;
+    let url = `/${TABLE_NAME}/?cateNewId=${cateId}&status_ne=0`;
     if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
