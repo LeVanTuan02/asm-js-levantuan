@@ -5,6 +5,10 @@ import Nav from "../../components/user/news/nav";
 import Related from "../../components/user/news/related";
 
 const NewsDetailsPage = {
+    async getTitle(newsId) {
+        const { data: newsDetails } = await get(newsId);
+        return `${newsDetails.title} - Trà sữa Yotea`;
+    },
     async render(newsId) {
         const { data: newsDetails } = await get(newsId);
         const formatDate = (dateString) => {

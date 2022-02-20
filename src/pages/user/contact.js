@@ -9,6 +9,9 @@ import { add } from "../../api/contact";
 import { reRender } from "../../utils";
 
 const ContactPage = {
+    getTitle() {
+        return "Liên hệ - Trà Sữa Yotea";
+    },
     async render() {
         const { data: storeList } = await getAll();
 

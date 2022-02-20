@@ -6,6 +6,9 @@ import Header from "../../../components/user/header";
 import MyAccNav from "../../../components/user/myAccNav";
 
 const MyAccEditAddressPage = {
+    getTitle() {
+        return `Cập nhật thông tin thanh toán - Trà Sữa Yotea`;
+    },
     async render(id) {
         // get address detail
         const { data: addressDetail } = await get(id);

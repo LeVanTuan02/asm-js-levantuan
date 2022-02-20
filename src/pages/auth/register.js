@@ -4,6 +4,9 @@ import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 
 const RegisterPage = {
+    getTitle() {
+        return "Đăng ký - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render()}

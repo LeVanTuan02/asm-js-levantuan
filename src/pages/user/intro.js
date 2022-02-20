@@ -2,6 +2,9 @@ import Header from "../../components/user/header";
 import Footer from "../../components/user/footer";
 
 const IntroPage = {
+    getTitle() {
+        return "Về chúng tôi - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render("intro")}

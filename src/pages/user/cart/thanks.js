@@ -3,6 +3,9 @@ import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
 
 const ThanksPage = {
+    getTitle() {
+        return "Thank you - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render()}

@@ -5,6 +5,9 @@ import ProductContent from "../../components/user/products/productContent";
 import Sidebar from "../../components/user/products/sidebar";
 
 const ProductsPage = {
+    getTitle() {
+        return "Thực đơn - Trà Sữa Yotea";
+    },
     async render(pageNumber) {
         let currentPage = pageNumber;
         const { data } = await getAllJoinCategory();

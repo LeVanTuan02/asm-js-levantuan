@@ -9,6 +9,9 @@ import { getAllProvince, getDistrict, getWard } from "../../../api/location";
 import { update } from "../../../api/user";
 
 const UpdateInfoPage = {
+    getTitle() {
+        return "Cập nhật tài khoản - Trà Sữa Yotea";
+    },
     async render() {
         const userInfo = getUser();
         const { data: listProvince } = await getAllProvince();

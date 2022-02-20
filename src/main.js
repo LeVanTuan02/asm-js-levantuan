@@ -74,10 +74,9 @@ const print = async (content, id, pageNumber) => {
     document.querySelector("#app").innerHTML = await content.render(id, pageNumber);
 
     if (content.afterRender) content.afterRender(id);
-};
 
-const changeTitle = (title) => {
-    document.title = title;
+    // change title
+    if (content.getTitle) document.title = await content.getTitle(id);
 };
 
 router.on("/admin/*", () => {}, {
@@ -106,15 +105,12 @@ router.on("/my-account/*", () => {}, {
 
 router.on({
     "/": () => {
-        changeTitle("Trang chủ - Trà Sữa Yotea");
         print(HomePage);
     },
     "/intro": () => {
-        changeTitle("Về chúng tôi - Trà Sữa Yotea");
         print(IntroPage);
     },
     "/products": () => {
-        changeTitle("Thực đơn - Trà Sữa Yotea");
         print(ProductsPage);
     },
     "/products/page/:page": ({ data }) => {
@@ -136,11 +132,9 @@ router.on({
         print(ProductByCatePage, data.id, data.page);
     },
     "/news": () => {
-        changeTitle("Tin tức - Trà Sữa Yotea");
         print(NewsPage);
     },
     "/news/page/:page": ({ data }) => {
-        changeTitle("Tin tức - Trà Sữa Yotea");
         print(NewsPage, data.page);
     },
     "/news/:id": ({ data }) => {
@@ -153,35 +147,27 @@ router.on({
         print(NewsByCatePage, data.id, data.page);
     },
     "/contact": () => {
-        changeTitle("Liên hệ - Trà Sữa Yotea");
         print(ContactPage);
     },
     "/store": () => {
-        changeTitle("Hệ thống cửa hàng - Trà Sữa Yotea");
         print(StorePage);
     },
     "/login": () => {
-        changeTitle("Đăng nhập - Trà Sữa Yotea");
         print(LoginPage);
     },
     "/register": () => {
-        changeTitle("Đăng ký - Trà Sữa Yotea");
         print(RegisterPage);
     },
     "/forgot": () => {
-        changeTitle("Quên mật khẩu - Trà Sữa Yotea");
         print(FortgotPage);
     },
     "/cart": () => {
-        changeTitle("Giỏ hàng - Trà Sữa Yotea");
         print(CartPage);
     },
     "/cart-checkout": () => {
-        changeTitle("Thanh toán - Trà Sữa Yotea");
         print(CheckoutPage);
     },
     "/cart-thanks": () => {
-        changeTitle("Thank you - Trà Sữa Yotea");
         print(ThanksPage);
     },
     "/my-account": () => {
@@ -355,7 +341,6 @@ router.on({
 });
 
 router.notFound(() => {
-    changeTitle("Trang này không tồn tại");
     print(NotFoundPage);
 });
 

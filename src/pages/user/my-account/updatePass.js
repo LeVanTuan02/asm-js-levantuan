@@ -7,6 +7,9 @@ import { get, update } from "../../../api/user";
 import { getUser, reRender } from "../../../utils";
 
 const MyAccUpdatePass = {
+    getTitle() {
+        return "Đổi mật khẩu - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render()}

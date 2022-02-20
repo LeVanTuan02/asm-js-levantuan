@@ -8,6 +8,9 @@ import MyAccNav from "../../../components/user/myAccNav";
 import { getUser, reRender } from "../../../utils";
 
 const MyAccAddressPage = {
+    getTitle() {
+        return "Thông tin thanh toán - Trà Sữa Yotea";
+    },
     async render(pageNumber) {
         const userLogged = getUser();
         const { data } = await getByUserId(userLogged.id);

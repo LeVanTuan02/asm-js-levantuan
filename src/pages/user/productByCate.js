@@ -6,6 +6,10 @@ import Sidebar from "../../components/user/products/sidebar";
 import ProductContent from "../../components/user/products/productContent";
 
 const ProductByCatePage = {
+    async getTitle(cateId) {
+        const { data: categoryData } = await getCate(cateId);
+        return `${categoryData.name} - Trà sữa Yotea`;
+    },
     async render(cateId, pageNumber) {
         // thông tin danh mục
         const { data: categoryData } = await getCate(cateId);

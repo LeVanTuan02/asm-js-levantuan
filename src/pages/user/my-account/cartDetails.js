@@ -9,6 +9,9 @@ import { get as getCartDetail } from "../../../api/orderDetail";
 import { get as getVoucher } from "../../../api/voucher";
 
 const MyAccCartDetailsPage = {
+    getTitle(id) {
+        return `Chi tiết đơn hàng #${id} - Trà Sữa Yotea`;
+    },
     async render(id) {
         const { data: cartData } = await get(id);
         const { data: cartDetails } = await getCartDetail(id);

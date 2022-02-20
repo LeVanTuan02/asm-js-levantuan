@@ -11,6 +11,9 @@ import Show from "../../components/user/home/show";
 import Why from "../../components/user/home/why";
 
 const HomePage = {
+    getTitle() {
+        return "Trang chủ - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render("home")}

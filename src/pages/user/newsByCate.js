@@ -2,8 +2,14 @@ import Footer from "../../components/user/footer";
 import Header from "../../components/user/header";
 import { getAllByCate } from "../../api/news";
 import NewsHeader from "../../components/user/news/newsHeader";
+import { get } from "../../api/cateNews";
 
 const NewsByCatePage = {
+    async getTitle(cateId) {
+        const { data: cateData } = await get(cateId);
+
+        return `${cateData.name} - Trà sữa Yotea`;
+    },
     async render(cateId, pageNumber) {
         // format date
         const formatDate = (dateString) => {

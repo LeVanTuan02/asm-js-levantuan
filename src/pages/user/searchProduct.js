@@ -5,6 +5,9 @@ import Sidebar from "../../components/user/products/sidebar";
 import ProductContent from "../../components/user/products/productContent";
 
 const SearchProductPage = {
+    getTitle(keyword) {
+        return `Kết quả tìm kiếm cho "${keyword}" - Trà sữa Yotea`;
+    },
     async render(keyword, pageNumber) {
         const { data } = await search(keyword);
 

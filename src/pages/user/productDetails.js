@@ -10,10 +10,14 @@ import { getAll as getAllSize, get as getSize } from "../../api/size";
 import { addToCart } from "../../utils/cart";
 import CartLabel from "../../components/user/cartLabel";
 import CommentList from "../../components/user/products/commentList";
-
+// eslint-disable-next-line import/no-cycle
 import FormComment from "../../components/user/products/formComment";
 
 const ProductDetailPage = {
+    async getTitle(id) {
+        const { data: productDetail } = await get(id);
+        return `${productDetail.name} - Trà sữa Yotea`;
+    },
     async render(id) {
         // update view
         const { data: productDetail } = await get(id);

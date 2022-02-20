@@ -18,6 +18,9 @@ import {
 } from "../../../api/address";
 
 const CheckoutPage = {
+    getTitle() {
+        return "Thanh toán - Trà Sữa Yotea";
+    },
     async render() {
         const userLogged = getUser();
         const { data: listProvince } = await getAllProvince();

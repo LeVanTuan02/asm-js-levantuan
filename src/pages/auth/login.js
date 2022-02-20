@@ -5,6 +5,9 @@ import Header from "../../components/user/header";
 import { checkLogin, saveUser } from "../../utils";
 
 const LoginPage = {
+    getTitle() {
+        return "Đăng nhập - Trà Sữa Yotea";
+    },
     async render() {
         return /* html */ `
         ${await Header.render()}

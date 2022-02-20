@@ -10,6 +10,9 @@ import {
 } from "../../../utils/cart";
 
 const CartPage = {
+    getTitle() {
+        return "Giỏ hàng - Trà Sữa Yotea";
+    },
     async render() {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
         const voucher = JSON.parse(localStorage.getItem("voucher")) || [];

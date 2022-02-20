@@ -3,6 +3,9 @@ import Header from "../../components/user/header";
 import { get, getAll, search } from "../../api/store";
 
 const StorePage = {
+    getTitle() {
+        return "Hệ thống cửa hàng - Trà Sữa Yotea";
+    },
     async render() {
         const { data: storeList } = await getAll();
 

@@ -4,6 +4,9 @@ import { getAllShow } from "../../api/news";
 import NewsHeader from "../../components/user/news/newsHeader";
 
 const NewsPage = {
+    getTitle() {
+        return "Tin tức - Trà Sữa Yotea";
+    },
     async render(pageNumber) {
         // format date
         const formatDate = (dateString) => {
