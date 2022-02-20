@@ -67,6 +67,8 @@ import AdminCartListPage from "./pages/admin/cart";
 import AdminCartDetailPage from "./pages/admin/cart/detail";
 import MyAccAddressPage from "./pages/user/my-account/address";
 import MyAccEditAddressPage from "./pages/user/my-account/addressEdit";
+import AdminCmtListPage from "./pages/admin/comments";
+import AdminDetailCmtPage from "./pages/admin/comments/detail";
 
 const router = new Navigo("/", { linksSelector: "a", hash: true });
 
@@ -340,6 +342,12 @@ router.on({
     },
     "/admin/cart/page/:page": ({ data }) => {
         print(AdminCartListPage, data.page);
+    },
+    "/admin/comment": () => {
+        print(AdminCmtListPage);
+    },
+    "/admin/comment/:id/detail": ({ data }) => {
+        print(AdminDetailCmtPage, data.id);
     },
 });
 

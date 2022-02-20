@@ -117,3 +117,8 @@ export const getPrice = async (productId, toppingId, sizeId, qnt) => {
 
     return totalPrice;
 };
+
+export const getAllCmt = () => {
+    const url = `/${TABLE_NAME}/?_embed=comments&_sort=id&_order=desc`;
+    return instance.get(url);
+};
