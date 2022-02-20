@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import { add } from "../../../api/category";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
@@ -39,7 +42,6 @@ const AdminAddCatePage = {
                                     <div class="col-span-6">
                                         <label for="form__add-cate-title" class="block text-sm font-medium text-gray-700">Tên danh mục</label>
                                         <input type="text" name="form__add-cate-title" id="form__add-cate-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tiêu đề bài viết">
-                                        <div class="form__add-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -59,14 +61,14 @@ const AdminAddCatePage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__add-cate-img" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__add-cate-img" name="form__add-cate-img" type="file" class="sr-only">
+                                                        <input id="form__add-cate-img" data-error=".error-image" name="form__add-cate-img" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__add-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -87,57 +89,48 @@ const AdminAddCatePage = {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formAdd = document.querySelector("#form__add-cate");
-        const cateName = formAdd.querySelector("#form__add-cate-title");
-        const cateImg = formAdd.querySelector("#form__add-cate-img");
-        const imgPreview = formAdd.querySelector("#form__add-cate-preview");
+        const cateName = $("#form__add-cate-title");
+        const cateImg = document.querySelector("#form__add-cate-img");
+        const imgPreview = $("#form__add-cate-preview");
 
-        // validate
-        function validate() {
-            let isValid = true;
+        $("#form__add-cate").validate({
+            rules: {
+                "form__add-cate-title": "required",
+                "form__add-cate-img": "required",
+            },
+            messages: {
+                "form__add-cate-title": "Vui lòng nhập tên danh mục",
+                "form__add-cate-img": "Vui lòng chọn ảnh danh mục",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
+                }
+            },
+            submitHandler() {
+                (async () => {
+                    const response = await uploadFile(cateImg.files[0]);
+                    const date = new Date();
 
-            if (!cateName.value) {
-                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
-                isValid = false;
-            } else {
-                cateName.nextElementSibling.innerText = "";
-            }
+                    const cateData = {
+                        name: cateName.val(),
+                        image: response.data.url,
+                        createdAt: date.toISOString(),
+                    };
 
-            const parent = cateImg.parentElement.parentElement.parentElement.parentElement;
-            if (!cateImg.files.length) {
-                parent.nextElementSibling.innerText = "Vui lòng chọn ảnh danh mục";
-                isValid = false;
-            } else {
-                parent.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formAdd.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const isValid = validate();
-            if (isValid) {
-                const response = await uploadFile(cateImg.files[0]);
-                const date = new Date();
-
-                const cateData = {
-                    name: cateName.value,
-                    image: response.data.url,
-                    createdAt: date.toISOString(),
-                };
-
-                add(cateData)
-                    .then(() => toastr.success("Thêm thành công"))
-                    .then(() => reRender(AdminAddCatePage, "#app"));
-            }
+                    add(cateData)
+                        .then(() => toastr.success("Thêm thành công"))
+                        .then(() => reRender(AdminAddCatePage, "#app"));
+                })();
+            },
         });
 
         // bắt sự kiện chọn ảnh => preview
         cateImg.addEventListener("change", (e) => {
-            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+            imgPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };

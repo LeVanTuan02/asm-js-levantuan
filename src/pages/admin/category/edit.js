@@ -1,4 +1,7 @@
 import toastr from "toastr";
+import $ from "jquery";
+// eslint-disable-next-line no-unused-vars
+import validate from "jquery-validation";
 import AdminCateListPage from ".";
 import { get, update } from "../../../api/category";
 import HeaderTop from "../../../components/admin/headerTop";
@@ -33,7 +36,7 @@ const AdminEditCatePage = {
                     </div>
                 </header>
                 <div class="p-6 mt-24">
-                    <form action="" method="POST" id="form__edit-cate" data-id="${cateDetail.id}">
+                    <form action="" method="POST" id="form__edit-cate">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <span class="font-semibold mb-4 block text-xl">Thông tin chi tiết danh mục:</span>
@@ -42,7 +45,6 @@ const AdminEditCatePage = {
                                     <div class="col-span-6">
                                         <label for="form__edit-cate-title" class="block text-sm font-medium text-gray-700">Tên danh mục</label>
                                         <input type="text" name="form__edit-cate-title" id="form__edit-cate-title" class="py-2 px-3 mt-1 border focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Nhập tiêu đề bài viết" value="${cateDetail.name}">
-                                        <div class="form__edit-cate-error-title text-sm mt-0.5 text-red-500"></div>
                                     </div>
 
                                     <div class="col-span-3">
@@ -62,14 +64,14 @@ const AdminEditCatePage = {
                                                 <div class="flex text-sm text-gray-600">
                                                     <label for="form__edit-cate-img" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                         <span>Upload a file</span>
-                                                        <input id="form__edit-cate-img" name="form__edit-cate-img" type="file" class="sr-only">
+                                                        <input id="form__edit-cate-img" data-error=".error-image" name="form__edit-cate-img" type="file" class="sr-only">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        <div class="form__edit-cate-error-img text-sm mt-0.5 text-red-500"></div>
+                                        <div class="error-image text-sm mt-0.5 text-red-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -86,55 +88,51 @@ const AdminEditCatePage = {
         </section>
         `;
     },
-    afterRender() {
+    afterRender(id) {
         HeaderTop.afterRender();
         AdminNav.afterRender();
 
-        const formEdit = document.querySelector("#form__edit-cate");
-        const cateName = formEdit.querySelector("#form__edit-cate-title");
-        const cateImg = formEdit.querySelector("#form__edit-cate-img");
-        const imgPreview = formEdit.querySelector("#form__edit-cate-preview");
+        const cateName = $("#form__edit-cate-title");
+        const cateImg = document.querySelector("#form__edit-cate-img");
+        const imgPreview = $("#form__edit-cate-preview");
 
-        // validate
-        function validate() {
-            let isValid = true;
-
-            if (!cateName.value) {
-                cateName.nextElementSibling.innerText = "Vui lòng nhập tên danh mục";
-                isValid = false;
-            } else {
-                cateName.nextElementSibling.innerText = "";
-            }
-
-            return isValid;
-        }
-
-        // bắt sự kiện submit form
-        formEdit.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const { id } = e.target.dataset;
-            const isValid = validate();
-
-            if (isValid) {
-                const cateData = {
-                    name: cateName.value,
-                };
-
-                if (cateImg.files.length) {
-                    const response = await uploadFile(cateImg.files[0]);
-                    cateData.image = response.data.url;
+        $("#form__edit-cate").validate({
+            rules: {
+                "form__edit-cate-title": "required",
+            },
+            messages: {
+                "form__edit-cate-title": "Vui lòng nhập tên danh mục",
+            },
+            errorPlacement: (error, element) => {
+                const placement = $(element).data("error");
+                if (placement) {
+                    $(placement).html(error);
+                } else {
+                    $(error).insertAfter(element);
                 }
+            },
+            submitHandler() {
+                (async () => {
+                    const cateData = {
+                        name: cateName.val(),
+                    };
 
-                update(id, cateData)
-                    .then(() => toastr.success("Cập nhật thành công"))
-                    .then(() => { window.location.href = "/#/admin/category"; })
-                    .then(() => reRender(AdminCateListPage, "#app"));
-            }
+                    if (cateImg.files.length) {
+                        const response = await uploadFile(cateImg.files[0]);
+                        cateData.image = response.data.url;
+                    }
+
+                    update(id, cateData)
+                        .then(() => toastr.success("Cập nhật thành công"))
+                        .then(() => { window.location.href = "/#/admin/category"; })
+                        .then(() => reRender(AdminCateListPage, "#app"));
+                })();
+            },
         });
 
         // bắt sự kiện chọn ảnh => preview
         cateImg.addEventListener("change", (e) => {
-            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+            imgPreview.prop("src", URL.createObjectURL(e.target.files[0]));
         });
     },
 };
