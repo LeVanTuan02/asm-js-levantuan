@@ -7,6 +7,9 @@ import Pagination from "../../../components/admin/pagination";
 import { reRender } from "../../../utils";
 
 const AdminNewsListPage = {
+    getTitle() {
+        return "News List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số bài viết

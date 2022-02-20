@@ -6,6 +6,9 @@ import { reRender } from "../../../utils";
 import AdminSizeList from "../../../components/admin/sizeList";
 
 const AdminSizeListPage = {
+    getTitle() {
+        return "Size List | Administrator";
+    },
     async render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

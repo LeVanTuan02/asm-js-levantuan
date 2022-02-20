@@ -10,6 +10,9 @@ import AdminNewsListPage from ".";
 import { getAll } from "../../../api/cateNews";
 
 const AdminEditNewsPage = {
+    getTitle() {
+        return "Update News | Administrator";
+    },
     async render(id) {
         const { data: newsData } = await get(id);
         const { data: cateData } = await getAll();

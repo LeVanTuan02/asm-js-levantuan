@@ -10,6 +10,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminEditUserPage = {
+    getTitle() {
+        return "Update Voucher | Administrator";
+    },
     async render(id) {
         const { data: userDetail } = await get(id);
         const { data: listProvince } = await getAllProvince();

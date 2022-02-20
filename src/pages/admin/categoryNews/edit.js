@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminEditCateNewsPage = {
+    getTitle() {
+        return "Update Category News | Administrator";
+    },
     async render(id) {
         const { data: cateDetail } = await get(id);
 

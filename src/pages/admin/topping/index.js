@@ -7,6 +7,9 @@ import AdminToppingList from "../../../components/admin/toppingList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminToppingListPage = {
+    getTitle() {
+        return "Topping List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

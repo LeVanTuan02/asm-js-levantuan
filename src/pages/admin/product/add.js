@@ -10,6 +10,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminAddProductPage = {
+    getTitle() {
+        return "Add Product | Administrator";
+    },
     async render() {
         const { data: cateList } = await getAllCate();
 

@@ -7,6 +7,9 @@ import AdminCategoryNewsList from "../../../components/admin/categoryNewsList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminCateNewsListPage = {
+    getTitle() {
+        return "Category News | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

@@ -8,6 +8,9 @@ import { getAll } from "../../../api/order";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminCartListPage = {
+    getTitle() {
+        return "Cart List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

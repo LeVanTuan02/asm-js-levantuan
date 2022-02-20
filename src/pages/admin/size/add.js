@@ -8,6 +8,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminAddSizePage = {
+    getTitle() {
+        return "Add Size | Administrator";
+    },
     render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

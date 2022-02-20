@@ -2,6 +2,9 @@ import HeaderTop from "../../components/admin/headerTop";
 import AdminNav from "../../components/admin/nav";
 
 const DashboardPage = {
+    getTitle() {
+        return "Dashboard | Administrator";
+    },
     render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

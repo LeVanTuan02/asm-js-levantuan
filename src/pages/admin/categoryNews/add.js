@@ -8,6 +8,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminAddCateNewsPage = {
+    getTitle() {
+        return "Add Category News | Administrator";
+    },
     render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

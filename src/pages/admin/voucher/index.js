@@ -7,6 +7,9 @@ import AdminVoucherList from "../../../components/admin/voucherList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminVoucherListPage = {
+    getTitle() {
+        return "Voucher List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

@@ -8,6 +8,9 @@ import { get as getCart, update } from "../../../api/order";
 import { get as getVoucher } from "../../../api/voucher";
 
 const AdminCartDetailPage = {
+    getTitle() {
+        return "Cart Detail | Administrator";
+    },
     async render(id) {
         const { data: cartDetails } = await get(id);
         const { data: cartData } = await getCart(id);

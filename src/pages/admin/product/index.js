@@ -7,6 +7,9 @@ import AdminProductList from "../../../components/admin/productList";
 import { reRender } from "../../../utils";
 
 const AdminProductListPage = {
+    getTitle() {
+        return "Product List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số sp

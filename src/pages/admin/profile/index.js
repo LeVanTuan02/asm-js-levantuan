@@ -11,6 +11,9 @@ import { getAllProvince, getDistrict, getWard } from "../../../api/location";
 import { update } from "../../../api/user";
 
 const AdminProfilePage = {
+    getTitle() {
+        return "Update Profile | Administrator";
+    },
     async render() {
         const userInfo = getUser();
         const { data: listProvince } = await getAllProvince();

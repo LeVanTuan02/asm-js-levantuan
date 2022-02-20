@@ -8,6 +8,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminAddSliderPage = {
+    getTitle() {
+        return "Add Slider | Administrator";
+    },
     render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

@@ -7,6 +7,9 @@ import AdminStoreList from "../../../components/admin/storeList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminStoreListPage = {
+    getTitle() {
+        return "Store List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

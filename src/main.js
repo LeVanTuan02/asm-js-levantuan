@@ -194,7 +194,7 @@ router.on({
     "/my-account/address/:id/edit": ({ data }) => {
         print(MyAccEditAddressPage, data.id);
     },
-    "/admin/dashboard": () => {
+    "/admin": () => {
         print(DashboardPage);
     },
     "/admin/news": () => {

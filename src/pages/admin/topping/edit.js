@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminEditToppingPage = {
+    getTitle() {
+        return "Update Topping | Administrator";
+    },
     async render(id) {
         const { data: toppingDetail } = await get(id);
 

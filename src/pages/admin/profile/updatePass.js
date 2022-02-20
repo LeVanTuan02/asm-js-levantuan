@@ -6,6 +6,9 @@ import AdminNav from "../../../components/admin/nav";
 import { getUser, reRender } from "../../../utils";
 
 const AdminUpdatePassPage = {
+    getTitle() {
+        return "Update Password | Administrator";
+    },
     async render() {
         return /* html */ `
         <section class="min-h-screen bg-gray-50 dashboard">

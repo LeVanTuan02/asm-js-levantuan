@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminEditVoucherPage = {
+    getTitle() {
+        return "Update Voucher | Administrator";
+    },
     async render(id) {
         const { data: voucherDetail } = await get(id);
 

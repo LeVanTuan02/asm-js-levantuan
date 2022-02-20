@@ -4,6 +4,9 @@ import AdminNav from "../../../components/admin/nav";
 import { formatDate } from "../../../utils";
 
 const AdminDetailContactPage = {
+    getTitle() {
+        return "Contact Detail | Administrator";
+    },
     async render(id) {
         const { data: contactDetail } = await get(id);
 

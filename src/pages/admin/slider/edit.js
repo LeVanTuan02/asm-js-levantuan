@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminEditSliderPage = {
+    getTitle() {
+        return "Update Slider | Administrator";
+    },
     async render(id) {
         const { data: sliderDetail } = await get(id);
 

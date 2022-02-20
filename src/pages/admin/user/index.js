@@ -7,6 +7,9 @@ import AdminUserList from "../../../components/admin/userList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminUserListPage = {
+    getTitle() {
+        return "User List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số user

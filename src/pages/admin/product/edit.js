@@ -11,6 +11,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminEditProductPage = {
+    getTitle() {
+        return "Update Product | Administrator";
+    },
     async render(id) {
         const { data: cateList } = await getAll();
         const { data: productDetail } = await get(id);

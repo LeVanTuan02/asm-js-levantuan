@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender } from "../../../utils";
 
 const AdminEditSizePage = {
+    getTitle() {
+        return "Update Size | Administrator";
+    },
     async render(id) {
         const { data: sizeDetail } = await get(id);
 

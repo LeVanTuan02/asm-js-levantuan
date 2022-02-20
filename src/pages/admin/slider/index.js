@@ -7,6 +7,9 @@ import AdminSliderList from "../../../components/admin/sliderList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminSliderListPage = {
+    getTitle() {
+        return "Slider List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

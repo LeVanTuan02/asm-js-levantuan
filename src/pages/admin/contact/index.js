@@ -7,6 +7,9 @@ import AdminContactList from "../../../components/admin/contactList";
 import Pagination from "../../../components/admin/pagination";
 
 const AdminContactListPage = {
+    getTitle() {
+        return "Contact List | Administrator";
+    },
     async render(pageNumber) {
         const { data } = await getAll();
         const total = data.length; // tổng số

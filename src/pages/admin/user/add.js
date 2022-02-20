@@ -9,6 +9,9 @@ import AdminNav from "../../../components/admin/nav";
 import { reRender, uploadFile } from "../../../utils";
 
 const AdminAddUserPage = {
+    getTitle() {
+        return "Add User | Administrator";
+    },
     async render() {
         const { data: listProvince } = await getAllProvince();
 

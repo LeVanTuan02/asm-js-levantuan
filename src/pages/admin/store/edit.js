@@ -9,6 +9,9 @@ import { reRender, uploadFile } from "../../../utils";
 import AdminStoreListPage from ".";
 
 const AdminEditStorePage = {
+    getTitle() {
+        return "Update Store | Administrator";
+    },
     async render(id) {
         const { data: storeDetail } = await get(id);
 
