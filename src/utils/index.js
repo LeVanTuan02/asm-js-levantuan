@@ -34,7 +34,7 @@ export const checkLogin = (role) => {
     if (!user || user.role !== 1 || user.role !== role) {
         window.location.href = "/#/";
     } else {
-        window.location.href = "/#/admin/dashboard";
+        window.location.href = "/#/admin";
     }
 };
 
