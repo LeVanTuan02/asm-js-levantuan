@@ -34,15 +34,13 @@ export const getByUserId = (userId, page, limit = 0) => {
     return instance.get(url);
 };
 
-export const search = (key, stt) => {
+export const search = (key, stt, userId = 0) => {
     let url = `/${TABLE_NAME}/?_sort=id&_order=desc`;
-    if (key) {
-        url += `&q=${key}`;
-    }
+    if (key) url += `&q=${key}`;
 
-    if (stt) {
-        url += `&status=${stt}`;
-    }
+    if (stt) url += `&status=${stt}`;
+
+    if (userId) url += `&userId=${userId}`;
 
     return instance.get(url);
 };

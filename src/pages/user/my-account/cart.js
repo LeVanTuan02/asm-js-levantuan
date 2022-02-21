@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import { getByUserId } from "../../../api/order";
+import $ from "jquery";
+import { getByUserId, search } from "../../../api/order";
 import Footer from "../../../components/user/footer";
 import Header from "../../../components/user/header";
 import MyAccNav from "../../../components/user/myAccNav";
@@ -50,16 +51,17 @@ const MyAccCartPage = {
 
                 <div class="col-span-12 lg:col-span-9">
                     <!-- search -->
-                    <div class="flex">
-                        <input type="text" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] flex-1 border px-2 h-10 text-sm outline-none" placeholder="Nhập mã đơn hàng hoặc tên khách hàng">
-                        <select name="" id="" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] border px-2 h-10 text-sm outline-none">
+                    <form action="" class="flex" id="cart__form-search">
+                        <input type="text" id="cart__form-search-key" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] flex-1 border px-2 h-10 text-sm outline-none" placeholder="Nhập mã đơn hàng hoặc tên khách hàng">
+                        <select name="" id="cart__form-search-stt" class="shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] hover:shadow-none focus:shadow-[0_0_5px_#ccc] border px-2 h-10 text-sm outline-none">
                             <option value="">-- Trạng thái --</option>
-                            <option value="">Đã xác nhận</option>
-                            <option value="">Đã xác nhận</option>
-                            <option value="">Đã xác nhận</option>
-                            <option value="">Đã xác nhận</option>
+                            <option value="0">Chờ xác nhận </option>
+                            <option value="1">Đã xác nhận</option>
+                            <option value="2">Đang giao hàng</option>
+                            <option value="3">Đã giao hoàng</option>
+                            <option value="4">Đã hủy</option>
                         </select>
-                    </div>
+                    </form>
                     <!-- end search -->
 
                     <!-- table -->
@@ -75,7 +77,7 @@ const MyAccCartPage = {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="cart__list">
                             ${cartList.map((item) => /* html */`
                                 <tr class="border-b">
                                     <td>#${item.id}</td>
@@ -97,7 +99,7 @@ const MyAccCartPage = {
                     <!-- end table -->
 
                     <!-- pagination -->
-                    <ul class="flex justify-center mt-5">
+                    <ul class="flex justify-center mt-5" id="cart__list-pagination">
                         ${currentPage > 1 ? `
                         <li>
                             <a href="/#/my-account/cart/page/${currentPage - 1}" class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-semibold border-gray-500 text-gray-500 mx-0.5 cursor-pointer transition ease-linear duration-200 hover:bg-[#D9A953] hover:border-[#D9A953] hover:text-white">
@@ -131,6 +133,34 @@ const MyAccCartPage = {
         Header.afterRender();
         Footer.afterRender();
         MyAccNav.afterRender();
+
+        const userLogged = getUser();
+
+        $("#cart__form-search").on("input", async () => {
+            const keyword = $("#cart__form-search-key").val();
+            const stt = $("#cart__form-search-stt").val();
+
+            const { data: cartList } = await search(keyword, stt, userLogged.id);
+            $("#cart__list").html(cartList.map((item) => `
+                <tr class="border-b">
+                    <td>#${item.id}</td>
+                    <td class="py-2">${item.customer_name}</td>
+                    <td class="py-2">${formatDate(item.createdAt)}</td>
+                    <td class="py-2">${formatCurrency(item.total_price - item.price_decrease)}</td>
+                    <td class="py-2">
+                        <label for="" class="px-1 py-0.5 text-sm rounded-[4px] font-medium  ${item.status === 4 ? "bg-[#FFE2E5] text-[#F64E60]" : "bg-[#E1F0FF] text-[#3699FF]"}">${item.status === 0 ? "Chờ xác nhận" : item.status === 1 ? "Đã xác nhận" : item.status === 2 ? "Đang giao hàng" : item.status === 3 ? "Đã giao hàng" : item.status === 4 ? "Đã hủy" : ""}</label>
+                    </td>
+                    <td class="py-2 text-right">
+                        <a href="/#/my-account/cart/${item.id}/detail">
+                            <button class="px-3 py-1.5 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">View</button>
+                        </a>
+                    </td>
+                </tr>
+                `).join(""));
+
+            // ẩn phân trang
+            $("#cart__list-pagination").hide();
+        });
     },
 };
 
