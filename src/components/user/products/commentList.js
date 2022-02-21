@@ -6,15 +6,15 @@ import { get as getComment, remove as removeCmt } from "../../../api/comment";
 import { getUser, reRender } from "../../../utils";
 
 const CommentList = {
-    async render(productId, currentPage) {
+    async render(productId, pageNumber) {
         // phân trang
-        const page = currentPage ?? 1;
+        const currentPage = pageNumber ?? 1;
         const { data } = await getComment(productId);
         const limit = 5;
         const totalPage = Math.ceil(data.length / limit);
 
         // ds cmt theo limit
-        const { data: dataComment } = await getComment(productId, page, limit);
+        const { data: dataComment } = await getComment(productId, currentPage, limit);
 
         const { data: dataRating } = await getRating(productId);
 

@@ -18,7 +18,7 @@ const ProductDetailPage = {
         const { data: productDetail } = await get(id);
         return `${productDetail.name} - Trà sữa Yotea`;
     },
-    async render(id, currentPage) {
+    async render(id, pageNumber) {
         // update view
         const { data: productDetail } = await get(id);
         updateView(id, {
@@ -278,7 +278,7 @@ const ProductDetailPage = {
                 `}
 
                 <div id="list-comment">
-                    ${await CommentList.render(id, currentPage)}
+                    ${await CommentList.render(id, pageNumber)}
                 </div>
             </section>
 
