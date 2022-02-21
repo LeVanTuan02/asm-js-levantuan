@@ -42,7 +42,7 @@ const AdminCartList = {
                 </th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-gray-200" id="cart__list">
             ${cartList.map((item) => /* html */`
                 <tr class="item__list-item-${item.id}">
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
