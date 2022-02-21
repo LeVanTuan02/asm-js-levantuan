@@ -51,7 +51,9 @@ const CheckoutPage = {
                 <div class="col-span-12 lg:col-span-8 border-t-2 pt-3">
                     <div class="flex items-center justify-between mb-2">
                         <h3 class="uppercase text-gray-500 font-semibold text-lg">Thông tin thanh toán</h3>
+                        ${userLogged ? /* html */`
                         <button type="button" id="btn-choose-address" class="px-3 py-2 bg-orange-400 font-semibold uppercase text-white text-sm transition ease-linear duration-300 hover:shadow-[inset_0_0_100px_rgba(0,0,0,0.2)]">Sử dụng địa chỉ khác</button>
+                        ` : ""}
                     </div>
                     
                     <div class="grid grid-cols-12 gap-x-4">
@@ -439,57 +441,59 @@ const CheckoutPage = {
         const btnAddress = document.querySelector("#btn-choose-address");
         const modal = document.querySelector("#modal");
         const listAddress = document.querySelector("#list-address");
-        btnAddress.addEventListener("click", async () => {
-            const { data: listAdd } = await getByUserId(userLogged.id);
-            if (listAdd.length) {
-                let html = "";
+        if (btnAddress) {
+            btnAddress.addEventListener("click", async () => {
+                const { data: listAdd } = await getByUserId(userLogged.id);
+                if (listAdd.length) {
+                    let html = "";
 
-                // eslint-disable-next-line no-restricted-syntax
-                for await (const addressItem of listAdd) {
-                    html += `
-                    <tr class="hover:bg-gray-100 cursor-pointer address-item" data-id="${addressItem.id}">
-                        <td class="p-2">${addressItem.fullName}</td>
-                        <td class="p-2">${addressItem.phone}</td>
-                        <td class="p-2">${addressItem.address}, ${await renderAddress(addressItem.wardCode, addressItem.districtCode, addressItem.provinceCode)}</td>
-                    </tr>
-                    `;
-                }
-                listAddress.innerHTML = html;
+                    // eslint-disable-next-line no-restricted-syntax
+                    for await (const addressItem of listAdd) {
+                        html += `
+                        <tr class="hover:bg-gray-100 cursor-pointer address-item" data-id="${addressItem.id}">
+                            <td class="p-2">${addressItem.fullName}</td>
+                            <td class="p-2">${addressItem.phone}</td>
+                            <td class="p-2">${addressItem.address}, ${await renderAddress(addressItem.wardCode, addressItem.districtCode, addressItem.provinceCode)}</td>
+                        </tr>
+                        `;
+                    }
+                    listAddress.innerHTML = html;
 
-                // handle sự kiện click chọn địa chỉ
-                const addressItem = document.querySelectorAll(".address-item");
-                addressItem.forEach(async (row) => {
-                    const { id } = row.dataset;
+                    // handle sự kiện click chọn địa chỉ
+                    const addressItem = document.querySelectorAll(".address-item");
+                    addressItem.forEach(async (row) => {
+                        const { id } = row.dataset;
 
-                    row.addEventListener("click", async () => {
-                        const { data: addressData } = await getAdd(id);
+                        row.addEventListener("click", async () => {
+                            const { data: addressData } = await getAdd(id);
 
-                        // get ds quận/huyện
-                        const listDistrict = await getDistrict(addressData.provinceCode);
-                        districtElement.innerHTML = listDistrict.map((item) => `
-                            <option value="${item.code}">${item.name}</option>
-                            `).join("");
+                            // get ds quận/huyện
+                            const listDistrict = await getDistrict(addressData.provinceCode);
+                            districtElement.innerHTML = listDistrict.map((item) => `
+                                <option value="${item.code}">${item.name}</option>
+                                `).join("");
 
-                        // get ds xã/phường
-                        const listWard = await getWard(addressData.districtCode);
-                        wardElement.innerHTML = listWard.map((item) => `
-                            <option value="${item.code}">${item.name}</option>
-                            `).join("");
+                            // get ds xã/phường
+                            const listWard = await getWard(addressData.districtCode);
+                            wardElement.innerHTML = listWard.map((item) => `
+                                <option value="${item.code}">${item.name}</option>
+                                `).join("");
 
-                        fullName.value = addressData.fullName;
-                        phone.value = addressData.phone;
-                        email.value = addressData.email;
-                        address.value = addressData.address;
-                        provinceElement.value = addressData.provinceCode;
-                        districtElement.value = addressData.districtCode;
-                        wardElement.value = addressData.wardCode;
+                            fullName.value = addressData.fullName;
+                            phone.value = addressData.phone;
+                            email.value = addressData.email;
+                            address.value = addressData.address;
+                            provinceElement.value = addressData.provinceCode;
+                            districtElement.value = addressData.districtCode;
+                            wardElement.value = addressData.wardCode;
 
-                        modal.classList.remove("active");
+                            modal.classList.remove("active");
+                        });
                     });
-                });
-            }
-            modal.classList.add("active");
-        });
+                }
+                modal.classList.add("active");
+            });
+        }
 
         // đóng modal
         $("#modal__overlay").on("click", () => modal.classList.remove("active"));
