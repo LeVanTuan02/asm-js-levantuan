@@ -139,7 +139,7 @@ const AdminCartListPage = {
                 `).join(""));
 
             // ẩn phân trang
-            $("#cart__list-pagination").hide();
+            $("#pagination").hide();
         });
     },
 };

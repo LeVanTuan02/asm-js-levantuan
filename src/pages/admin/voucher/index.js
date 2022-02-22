@@ -150,7 +150,7 @@ const AdminVoucherListPage = {
                 `).join(""));
 
             // ẩn phân trang
-            $("#voucher__list-pagination").hide();
+            $("#pagination").hide();
         });
     },
 };
