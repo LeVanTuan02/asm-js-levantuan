@@ -33,3 +33,8 @@ export const getByCode = (voucher) => {
     const url = `/${TABLE_NAME}/?code=${voucher}`;
     return instance.get(url);
 };
+
+export const search = (keyword) => {
+    const url = `/${TABLE_NAME}/?code_like=${keyword}`;
+    return instance.get(url);
+};

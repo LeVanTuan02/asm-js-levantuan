@@ -12,7 +12,7 @@ const Pagination = {
         }
 
         return /* html */`
-        <div class="border-t px-5 bg-white py-3 flex flex-col xs:flex-row items-center xs:justify-between" id="cart__list-pagination">
+        <div class="border-t px-5 bg-white py-3 flex flex-col xs:flex-row items-center xs:justify-between" id="voucher__list-pagination">
             <div class="flex items-center">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
 
