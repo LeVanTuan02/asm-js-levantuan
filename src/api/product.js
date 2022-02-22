@@ -122,3 +122,10 @@ export const getAllCmt = () => {
     const url = `/${TABLE_NAME}/?_embed=comments&_sort=id&_order=desc`;
     return instance.get(url);
 };
+
+export const adminSearch = (key, stt = 0) => {
+    let url = `/${TABLE_NAME}/?q=${key}&_sort=id&_order=desc`;
+
+    if (stt) url += `&status=${stt}`;
+    return instance.get(url);
+};
