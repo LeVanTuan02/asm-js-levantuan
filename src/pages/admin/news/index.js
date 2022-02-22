@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
-import { getAll, remove } from "../../../api/news";
+import $ from "jquery";
+import { getAll, remove, search } from "../../../api/news";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
 import AdminNewsList from "../../../components/admin/newsList";
 import Pagination from "../../../components/admin/pagination";
-import { reRender } from "../../../utils";
+import { formatDate, reRender } from "../../../utils";
 
 const AdminNewsListPage = {
     getTitle() {
@@ -44,9 +45,14 @@ const AdminNewsListPage = {
                 </header>
 
                 <div class="p-6 mt-24 overflow-hidden">
-                <!-- search -->
-                    <form action="" class="flex rounded-md shadow-sm mb-5" method="POST">
-                        <input type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 px-4 py-2 border outline-none" placeholder="Nhập tiêu đề bài viết...">
+                    <!-- search -->
+                    <form action="" class="flex rounded-md shadow-sm mb-5" method="POST" id="news__search-form">
+                        <input type="text" name="company-website" id="news__search-form-key" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 px-4 py-2 border outline-none" placeholder="Nhập tiêu đề bài viết...">
+                        <select class="border-gray-300 border outline-none px-2 text-sm" id="news__search-form-stt">
+                            <option value="">-- Trạng thái --</option>
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
+                        </select>
                         <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm cursor-pointer hover:bg-gray-200">
                             <i class="fas fa-search"></i>
                         </span>
@@ -78,7 +84,7 @@ const AdminNewsListPage = {
 
         const btnsDelete = document.querySelectorAll(".post__list-btn-delete");
 
-        // xóa danh mục
+        // xóa bài viết
         btnsDelete.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 const { id } = e.target.dataset;
@@ -107,6 +113,39 @@ const AdminNewsListPage = {
                     }
                 });
             });
+        });
+
+        // search
+        $("#news__search-form").on("input", async () => {
+            const key = $("#news__search-form-key").val();
+            const stt = $("#news__search-form-stt").val();
+
+            const { data: newsList } = await search(key, stt);
+
+            $("#news__list").html(newsList.map((post) => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${post.id}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <a href="/#/news/${post.id}" class="hover:underline">${post.title}</a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                        ${formatDate(post.createdAt)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.status ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">
+                        ${post.status ? "Hiện" : "Ẩn"}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="/#/admin/news/${post.id}/edit" class="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Edit</a>
+                        <button data-id="${post.id}" class="post__list-btn-delete h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3">Delete</button>
+                    </td>
+                </tr>
+                `).join(""));
+
+            $("#pagination").hide();
         });
     },
 };

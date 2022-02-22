@@ -47,3 +47,10 @@ export const getAllByCate = (cateId, start, limit = 0) => {
     if (limit) url += `&_start=${start}&_limit=${limit}`;
     return instance.get(url);
 };
+
+export const search = (key, stt = 0) => {
+    let url = `/${TABLE_NAME}/?title_like=${key}&_sort=id&_order=desc`;
+
+    if (stt) url += `&status=${stt}`;
+    return instance.get(url);
+};
