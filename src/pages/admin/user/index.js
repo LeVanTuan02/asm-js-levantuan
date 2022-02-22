@@ -1,8 +1,9 @@
 import Swal from "sweetalert2";
+import $ from "jquery";
 import HeaderTop from "../../../components/admin/headerTop";
 import AdminNav from "../../../components/admin/nav";
-import { getAll, remove } from "../../../api/user";
-import { reRender } from "../../../utils";
+import { getAll, remove, search } from "../../../api/user";
+import { formatDate, reRender } from "../../../utils";
 import AdminUserList from "../../../components/admin/userList";
 import Pagination from "../../../components/admin/pagination";
 
@@ -45,8 +46,13 @@ const AdminUserListPage = {
 
                 <div class="p-6 mt-24 overflow-hidden">
                     <!-- search -->
-                    <form action="" class="flex rounded-md shadow-sm mb-5" method="POST">
-                        <input type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 px-4 py-2 border outline-none" placeholder="Nhập tiêu đề bài viết...">
+                    <form action="" class="flex rounded-md shadow-sm mb-5" method="POST" id="user__search-form">
+                        <input type="text" name="company-website" id="user__search-form-key" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 px-4 py-2 border outline-none" placeholder="Nhập tên user">
+                        <select class="border-gray-300 border outline-none px-2 text-sm" id="user__search-form-stt">
+                            <option value="">-- Trạng thái --</option>
+                            <option value="1">Kích hoạt</option>
+                            <option value="0">Khóa</option>
+                        </select>
                         <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm cursor-pointer hover:bg-gray-200">
                             <i class="fas fa-search"></i>
                         </span>
@@ -78,7 +84,7 @@ const AdminUserListPage = {
 
         const btnsDelete = document.querySelectorAll(".user__list-btn-delete");
 
-        // xóa danh mục
+        // xóa user
         btnsDelete.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 const { id } = e.target.dataset;
@@ -107,6 +113,51 @@ const AdminUserListPage = {
                     }
                 });
             });
+        });
+
+        // search
+        $("#user__search-form").on("input", async () => {
+            const keyword = $("#user__search-form-key").val();
+            const stt = $("#user__search-form-stt").val();
+
+            const { data: userList } = await search(keyword, stt);
+
+            $("#user__list").html(userList.map((user) => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${user.id}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <img class="h-10 w-10 rounded-full object-cover" src="${user.avatar}" alt="">
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">${user.fullName}</div>
+                                <div class="text-sm text-gray-500">${user.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        ${user.role ? "Admin" : "Khách hàng"}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.active ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}">
+                        ${user.active ? "Kích hoạt" : "Khóa"}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-500">
+                        ${formatDate(user.createdAt)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="/#/admin/user/${user.id}/edit" class="h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Edit</a>
+                        <button data-id="${user.id}" class="user__list-btn-delete h-8 inline-flex items-center px-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-3">Delete</button>
+                    </td>
+                </tr>
+                `).join(""));
+
+            // ẩn phân trang
+            $("#pagination").hide();
         });
     },
 };
