@@ -171,6 +171,7 @@ const MyAccCartDetailsPage = {
     afterRender(id) {
         Header.afterRender();
         Footer.afterRender();
+        MyAccNav.afterRender();
 
         const btnCartCancel = document.querySelector("#btn-cancel");
 

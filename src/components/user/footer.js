@@ -71,11 +71,7 @@ const Footer = {
 
                     <div class="overflow-hidden">
                         <h3 class="text-white text-xl uppercase font-semibold mb-3">Kết nối với chúng tôi</h3>
-                        <div class="fb-page" data-href="https://www.facebook.com/PolyQuiz/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="https://www.facebook.com/PolyQuiz/" class="fb-xfbml-parse-ignore">
-                                <a href="https://www.facebook.com/PolyQuiz/">Ở Đây Có Đáp Án Quiz - Fpoly</a>
-                            </blockquote>
-                        </div>
+                        <div class="fb-page" data-href="https://www.facebook.com/fpt.poly" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/fpt.poly" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/fpt.poly">Cao đẳng FPT Polytechnic</a></blockquote></div>
                     </div>
                 </div>
 
